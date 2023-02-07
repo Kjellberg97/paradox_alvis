@@ -5,7 +5,7 @@ os.system("bash scripts/5_train_bert.bash \
  /mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/RP/BERT/ \
  --num_train_epochs 20.0 \
  --gradient_accumulation_steps 8 --per_gpu_train_batch_size=2 \
- --local_rank 0 \
+ --local_rank -1 \
  --per_gpu_train_batch_size 8\
  --train_file_path /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all.txt_train \
  --val_file_path /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all.txt_val"

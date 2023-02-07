@@ -64,7 +64,7 @@ def train(args, train_dataset, model, tokenizer, eval_dataset=None):
 
     train_sampler = RandomSampler(train_dataset) if args.local_rank == -1 else DistributedSampler(train_dataset)
     train_dataloader = DataLoader(train_dataset, collate_fn = train_dataset.collate_fn, sampler=train_sampler, batch_size=args.train_batch_size, num_workers = args.num_workers)
-
+    
     if args.max_steps > 0:
         t_total = args.max_steps
         args.num_train_epochs = args.max_steps // (len(train_dataloader) // args.gradient_accumulation_steps) + 1
@@ -80,6 +80,7 @@ def train(args, train_dataset, model, tokenizer, eval_dataset=None):
         },
         {"params": [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], "weight_decay": 0.0},
     ]
+
 
     # resume_dir
     if args.resume_dir is not None:
@@ -163,7 +164,9 @@ def train(args, train_dataset, model, tokenizer, eval_dataset=None):
                 continue
 
             model.train()
+           
             batch = tuple(t.to(args.device) for t in batch)
+        
             inputs = {"input_ids": batch[0], "attention_mask": batch[1], "labels": batch[3]}
             if args.model_type != "distilbert" and args.model_type != "t5":
                 inputs["token_type_ids"] = (
@@ -173,12 +176,11 @@ def train(args, train_dataset, model, tokenizer, eval_dataset=None):
             with torch.cuda.amp.autocast(enabled=args.use_autocast):
                 outputs = model(**inputs)
                 loss = outputs[0]  # model outputs are always tuple in transformers (see doc)
-
                 if args.n_gpu > 1:
                     loss = loss.mean()  # mean() to average on multi-gpu parallel training
                 if args.gradient_accumulation_steps > 1:
                     loss = loss / args.gradient_accumulation_steps
-
+            
             if args.fp16:
                 with amp.scale_loss(loss, optimizer) as scaled_loss:
                     scaled_loss.backward()
@@ -244,10 +246,10 @@ def train(args, train_dataset, model, tokenizer, eval_dataset=None):
             if args.max_steps > 0 and global_step > args.max_steps:
                 epoch_iterator.close()
                 break
+
         if args.max_steps > 0 and global_step > args.max_steps:
             train_iterator.close()
             break
-
         if args.local_rank <= 0:
             output_dir = os.path.join(args.output_dir, "checkpoint-{}".format(epoch_num))
             print("Saving model checkpoint to ", output_dir)
@@ -267,7 +269,6 @@ def train(args, train_dataset, model, tokenizer, eval_dataset=None):
         evaluate(args, model, tokenizer, eval_dataset=eval_dataset)
 
         epoch_num += 1
-
     return global_step, tr_loss / global_step
 
 def evaluate(args, model, tokenizer, prefix="", eval_dataset = None):

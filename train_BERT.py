@@ -35,7 +35,7 @@ os.system("bash scripts/5_train_bert.bash \
 # For LP
 os.system("bash scripts/5_train_bert.bash \
 0 4 9602 \
- /mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/LP/BERT/ \
+ /mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/LP/Test/ \
  --num_train_epochs 20.0 \
  --gradient_accumulation_steps 8 --per_gpu_train_batch_size=2 \
  --local_rank 0 \
