@@ -756,7 +756,10 @@ def main():
         pprint.pprint(all_results)
 
         with open("eval_result.txt", "a+") as f:
-            f.write(args.custom_weight)
+            if args.custom_weight != None:
+                f.write(args.custom_weight)
+            else:
+                f.write("custom_weight: None")
             f.write("\n\n")
             f.write(results_string_final)
             f.write("\n\n\n\n\n")
