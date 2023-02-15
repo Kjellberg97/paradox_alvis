@@ -1,0 +1,216 @@
+custom_weight: None
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all.txt_val
+
+{0: 'Acc: 0.9979909593169262 ; Percentage 0.1422142857142857',
+ 1: 'Acc: 0.9985397907033341 ; Percentage 0.14675',
+ 2: 'Acc: 0.9994972347913524 ; Percentage 0.14207142857142857',
+ 3: 'Acc: 0.9945826151194287 ; Percentage 0.1450357142857143',
+ 4: 'Acc: 0.9892360199527435 ; Percentage 0.1360357142857143',
+ 5: 'Acc: 0.9656124497991968 ; Percentage 0.1422857142857143',
+ 6: 'Acc: 0.9531518273240127 ; Percentage 0.14560714285714285'}
+
+
+
+
+
+
+
+custom_weight: None
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all.txt_val
+
+{0: 'Acc: 0.997504367357125 ; Percentage 0.14310714285714285',
+ 1: 'Acc: 0.99949924887331 ; Percentage 0.14264285714285715',
+ 2: 'Acc: 0.9936612576064908 ; Percentage 0.14085714285714285',
+ 3: 'Acc: 0.9884711779448622 ; Percentage 0.1425',
+ 4: 'Acc: 0.9816398390342053 ; Percentage 0.142',
+ 5: 'Acc: 0.9745347698334965 ; Percentage 0.14585714285714285',
+ 6: 'Acc: 0.9533083645443196 ; Percentage 0.1430357142857143'}
+
+
+
+
+
+
+
+custom_weight: None
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all.txt.balanced_rulenum_val
+
+{0: 'Acc: 0.9952707495861906 ; Percentage 0.15103571428571427',
+ 1: 'Acc: 0.9960278053624627 ; Percentage 0.14385714285714285',
+ 2: 'Acc: 0.9930106135128138 ; Percentage 0.1379642857142857',
+ 3: 'Acc: 0.98342689120556 ; Percentage 0.13360714285714287',
+ 4: 'Acc: 0.9748688207677437 ; Percentage 0.12932142857142856',
+ 5: 'Acc: 0.9651778955336866 ; Percentage 0.1415357142857143',
+ 6: 'Acc: 0.9451152579582875 ; Percentage 0.16267857142857142'}
+
+
+
+
+
+
+
+/mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/LP/BERT/checkpoint-19/pytorch_model.bin
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all.txt_test
+
+{0: 'Acc: 0.9979721166032953 ; Percentage 0.14089285714285715',
+ 1: 'Acc: 0.9977799703996053 ; Percentage 0.1447857142857143',
+ 2: 'Acc: 0.9984898061917946 ; Percentage 0.14189285714285715',
+ 3: 'Acc: 0.9957941613062841 ; Percentage 0.14435714285714285',
+ 4: 'Acc: 0.9877714000499127 ; Percentage 0.14310714285714285',
+ 5: 'Acc: 0.9717100277847941 ; Percentage 0.14139285714285715',
+ 6: 'Acc: 0.9544776119402985 ; Percentage 0.14357142857142857'}
+
+
+
+
+
+
+
+/mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/LP/BERT/checkpoint-19/pytorch_model.bin
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all.txt_test
+
+{0: 'Acc: 0.9739042310615658 ; Percentage 0.1409642857142857',
+ 1: 'Acc: 0.9250871080139372 ; Percentage 0.1435',
+ 2: 'Acc: 0.6450075263421977 ; Percentage 0.14235714285714285',
+ 3: 'Acc: 0.6022140221402214 ; Percentage 0.14517857142857143',
+ 4: 'Acc: 0.6759145592929044 ; Percentage 0.1454642857142857',
+ 5: 'Acc: 0.7258805513016845 ; Percentage 0.13992857142857143',
+ 6: 'Acc: 0.6994740796393689 ; Percentage 0.14260714285714285'}
+
+
+
+
+
+
+
+/mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/RP/BERT/checkpoint-19/pytorch_model.bin
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all.txt_test
+
+{0: 'Acc: 0.9992395437262357 ; Percentage 0.14089285714285715',
+ 1: 'Acc: 0.9990133201776024 ; Percentage 0.1447857142857143',
+ 2: 'Acc: 0.9896803423105965 ; Percentage 0.14189285714285715',
+ 3: 'Acc: 0.9430974764967838 ; Percentage 0.14435714285714285',
+ 4: 'Acc: 0.838283004741702 ; Percentage 0.14310714285714285',
+ 5: 'Acc: 0.6564789088153574 ; Percentage 0.14139285714285715',
+ 6: 'Acc: 0.5004975124378109 ; Percentage 0.14357142857142857'}
+
+
+
+
+
+
+
+/mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/PR_10X/BERT/checkpoint-19/pytorch_model.bin
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all.txt_test
+
+{0: 'Acc: 0.996958174904943 ; Percentage 0.14089285714285715',
+ 1: 'Acc: 0.9943265910212136 ; Percentage 0.1447857142857143',
+ 2: 'Acc: 0.9929524288950415 ; Percentage 0.14189285714285715',
+ 3: 'Acc: 0.9638792676892627 ; Percentage 0.14435714285714285',
+ 4: 'Acc: 0.8757174943848266 ; Percentage 0.14310714285714285',
+ 5: 'Acc: 0.7256883051275574 ; Percentage 0.14139285714285715',
+ 6: 'Acc: 0.5718905472636816 ; Percentage 0.14357142857142857'}
+
+
+
+
+
+
+
+/mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/PR_10X/BERT/checkpoint-19/pytorch_model.bin
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all.txt_test
+
+{0: 'Acc: 0.9977197871801368 ; Percentage 0.1409642857142857',
+ 1: 'Acc: 0.9992533598805375 ; Percentage 0.1435',
+ 2: 'Acc: 0.9947315604616157 ; Percentage 0.14235714285714285',
+ 3: 'Acc: 0.988929889298893 ; Percentage 0.14517857142857143',
+ 4: 'Acc: 0.9864964399705377 ; Percentage 0.1454642857142857',
+ 5: 'Acc: 0.9788157223072996 ; Percentage 0.13992857142857143',
+ 6: 'Acc: 0.968695216629101 ; Percentage 0.14260714285714285'}
+
+
+
+
+
+
+
+/mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/LP/BERT/checkpoint-19/pytorch_model.bin
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all.txt.balanced_rulenum_test
+
+{0: 'Acc: 0.9767986876025311 ; Percentage 0.15239285714285714',
+ 1: 'Acc: 0.9328977129932143 ; Percentage 0.14210714285714285',
+ 2: 'Acc: 0.6021287379624937 ; Percentage 0.14092857142857143',
+ 3: 'Acc: 0.5673206127385112 ; Percentage 0.13289285714285715',
+ 4: 'Acc: 0.6391917043339538 ; Percentage 0.13432142857142856',
+ 5: 'Acc: 0.6873391662377767 ; Percentage 0.1387857142857143',
+ 6: 'Acc: 0.68490990990991 ; Percentage 0.15857142857142856'}
+
+
+
+
+
+
+
+/mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/RP/BERT/checkpoint-19/pytorch_model.bin
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all.txt_test
+
+{0: 'Acc: 0.9982265011401064 ; Percentage 0.1409642857142857',
+ 1: 'Acc: 0.9997511199601792 ; Percentage 0.1435',
+ 2: 'Acc: 0.9937280481685901 ; Percentage 0.14235714285714285',
+ 3: 'Acc: 0.988929889298893 ; Percentage 0.14517857142857143',
+ 4: 'Acc: 0.9862509206972747 ; Percentage 0.1454642857142857',
+ 5: 'Acc: 0.9691168963757019 ; Percentage 0.13992857142857143',
+ 6: 'Acc: 0.9586776859504132 ; Percentage 0.14260714285714285'}
+
+
+
+
+
+
+
+/mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/RP/BERT/checkpoint-19/pytorch_model.bin
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all.txt.balanced_rulenum_test
+
+{0: 'Acc: 0.9922662292008437 ; Percentage 0.15239285714285714',
+ 1: 'Acc: 0.9924604171902488 ; Percentage 0.14210714285714285',
+ 2: 'Acc: 0.9860618347693867 ; Percentage 0.14092857142857143',
+ 3: 'Acc: 0.9795753829615694 ; Percentage 0.13289285714285715',
+ 4: 'Acc: 0.9664982717362404 ; Percentage 0.13432142857142856',
+ 5: 'Acc: 0.939269171384457 ; Percentage 0.1387857142857143',
+ 6: 'Acc: 0.8914414414414414 ; Percentage 0.15857142857142856'}
+
+
+
+
+
+
+
+/mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/PR_10X/BERT/checkpoint-19/pytorch_model.bin
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all.txt.balanced_rulenum_test
+
+{0: 'Acc: 0.9957815795640965 ; Percentage 0.15239285714285714',
+ 1: 'Acc: 0.9954762503141493 ; Percentage 0.14210714285714285',
+ 2: 'Acc: 0.9898631525595539 ; Percentage 0.14092857142857143',
+ 3: 'Acc: 0.9838753023380812 ; Percentage 0.13289285714285715',
+ 4: 'Acc: 0.9803243818133475 ; Percentage 0.13432142857142856',
+ 5: 'Acc: 0.9665465774575399 ; Percentage 0.1387857142857143',
+ 6: 'Acc: 0.940990990990991 ; Percentage 0.15857142857142856'}
+
+
+
+
+
+
+
