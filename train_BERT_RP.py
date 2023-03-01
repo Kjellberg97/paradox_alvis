@@ -7,6 +7,6 @@ os.system("bash scripts/5_train_bert.bash \
  --num_train_epochs 20.0 \
  --gradient_accumulation_steps 8 --per_gpu_train_batch_size=2 \
  --per_gpu_train_batch_size 8\
- --train_file_path /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all.txt_train \
- --val_file_path /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all.txt_val"
+ --train_file_path /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_train.txt \
+ --val_file_path /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_val.txt"
 )

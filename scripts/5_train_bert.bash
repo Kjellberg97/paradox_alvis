@@ -18,7 +18,7 @@ CUDA_VISIBLE_DEVICES=$1 python -m torch.distributed.launch --master_port=$3 --np
     --num_workers 1 \
     --warmup_steps 0.05 \
     --max_length 1000 \
-    --seed 10 \
+    --seed 1 \
     --output_dir $4 \
     --change_positional_embedding_after_loading \
     ${@:5}
