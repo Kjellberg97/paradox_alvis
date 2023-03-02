@@ -54,8 +54,7 @@ if __name__ == "__main__":
     # Define the path to the data
     path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA"
 
-    paths_to_train = [["TESTING_LABELS_DATA", "prop_examples_train"], ["TESTING_LABELS_DATA", "prop_examples_test"], ["TESTING_LABELS_DATA", "prop_examples_val"],
-                      ["LP", "prop_examples_all_train"], ["LP", "prop_examples_all_test"], ["LP", "prop_examples_all_val"],
+    paths_to_train = [["LP", "prop_examples_all_train"], ["LP", "prop_examples_all_test"], ["LP", "prop_examples_all_val"],
                       ["RP", "prop_examples_all_train"], ["RP", "prop_examples_all_test"], ["RP", "prop_examples_all_val"],
                       ["RP_10X", "prop_examples_all_balanced_rulenum_train"], ["RP_10X", "prop_examples_all_balanced_rulenum_test"], ["RP_10X", "prop_examples_all_balanced_rulenum_val"]]
 
