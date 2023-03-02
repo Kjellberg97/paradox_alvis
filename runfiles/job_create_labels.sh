@@ -12,4 +12,4 @@ module purge
 
 CONTAINER=~/container/paradox.sif
 
-apptainer exec $CONTAINER python ~/paradox_alvis/scripts/generate_labels/run_label_gen.py
+apptainer exec $CONTAINER python ~/paradox_alvis/code/generate_labels/run_label_gen.py

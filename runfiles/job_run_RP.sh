@@ -13,4 +13,4 @@ module purge
 
 CONTAINER=~/container/paradox.sif
 
-apptainer exec $CONTAINER python ~/paradox_alvis/train_BERT_RP.py
+apptainer exec $CONTAINER python ~/paradox_alvis/code/classification_models/train_BERT_RP.py
