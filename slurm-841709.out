@@ -1,0 +1,35 @@
+This job can be monitored from: https://scruffy.c3se.chalmers.se/d/alvis-job/alvis-job?var-jobid=841709&from=1677773152000
+INFO:    underlay of /etc/localtime required more than 50 (94) bind mounts
+INFO:    underlay of /usr/bin/nvidia-smi required more than 50 (470) bind mounts
+INFO:    underlay of /usr/share/lmod/lmod required more than 50 (59) bind mounts
+/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py:1383: UserWarning: positional arguments and argument "destination" are deprecated. nn.Module.state_dict will not accept them in the future. Refer to https://pytorch.org/docs/master/generated/torch.nn.Module.html#torch.nn.Module.state_dict for details.
+  warnings.warn(
+Loading data...
+Formatting complete.
+
+Map:   0%|          | 0/5636 [00:00<?, ? examples/s]Map:  18%|█▊        | 1000/5636 [00:00<00:02, 1907.64 examples/s]Map:  35%|███▌      | 2000/5636 [00:00<00:01, 2290.81 examples/s]Map:  53%|█████▎    | 3000/5636 [00:01<00:01, 2427.69 examples/s]Map:  71%|███████   | 4000/5636 [00:01<00:00, 2459.02 examples/s]Map:  89%|████████▊ | 5000/5636 [00:02<00:00, 2591.75 examples/s]Map: 100%|██████████| 5636/5636 [00:02<00:00, 2711.57 examples/s]                                                                 Mapping complete.
+Formatting complete.
+
+Map:   0%|          | 0/730 [00:00<?, ? examples/s]Map: 100%|██████████| 730/730 [00:00<00:00, 3137.76 examples/s]                                                               Mapping complete.
+Formatting complete.
+
+Map:   0%|          | 0/634 [00:00<?, ? examples/s]Map: 100%|██████████| 634/634 [00:00<00:00, 2735.35 examples/s]                                                               Mapping complete.
+Converting to dictionary.
+Data loading complete.
+Running inference...
+Inputs
+Dataset({
+    features: ['input', 'target', 'labels', 'input_ids', 'attention_mask'],
+    num_rows: 634
+})
+<class 'torch.Tensor'>
+tensor([[    0, 45152,   108,  ...,     1,     1,     1],
+        [    0, 45152,   108,  ...,     1,     1,     1],
+        [    0, 45152,   108,  ...,     1,     1,     1],
+        ...,
+        [    0, 45152,   108,  ...,  7479,   128,     2],
+        [    0, 45152,   108,  ...,     1,     1,     1],
+        [    0, 45152,   108,  ...,     1,     1,     1]])
+torch.Size([634, 1024])
+Generating output...
+  0%|          | 0/40 [00:00<?, ?it/s]  2%|▎         | 1/40 [00:22<14:34, 22.43s/it]  5%|▌         | 2/40 [00:44<14:04, 22.22s/it]  8%|▊         | 3/40 [01:02<12:25, 20.14s/it] 10%|█         | 4/40 [01:28<13:32, 22.58s/it] 12%|█▎        | 5/40 [01:46<12:10, 20.88s/it] 15%|█▌        | 6/40 [02:04<11:15, 19.88s/it] 18%|█▊        | 7/40 [02:27<11:29, 20.89s/it] 20%|██        | 8/40 [02:48<11:10, 20.96s/it] 22%|██▎       | 9/40 [03:12<11:24, 22.09s/it]

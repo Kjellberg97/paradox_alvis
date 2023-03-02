@@ -1,5 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, DataCollatorForSeq2Seq, Seq2SeqTrainingArguments, Seq2SeqTrainer
 from datasets import DatasetDict, Dataset
+from tqdm import tqdm
 import torch
 import json
 import ast
@@ -71,7 +72,10 @@ class ProofGenerationModel():
     
 
     def tokenize(self, dset):
-        return self.tokenizer(text=dset["input"], text_target=dset["target"], truncation=True,)
+        return self.tokenizer(text=dset["input"], text_target=dset["target"], truncation=True)
+
+    def tokenize_inference(self, dset):
+        return self.tokenizer(dset["input"], truncation=True, padding=True, return_tensors="pt")
 
 
     def tokenize_data(self, raw_inputs_path, raw_labels_path):
@@ -87,12 +91,14 @@ class ProofGenerationModel():
             object of the tokenize data
         """
         raw_ds = self.format_data(raw_inputs_path, raw_labels_path)
-        tokenized_ds = raw_ds.map(self.tokenize, batched=True)
+        print("Formatting complete.\n")
+        tokenized_ds = raw_ds.map(self.tokenize, batched=True, writer_batch_size=500)
+        print("Mapping complete.")
 
         return tokenized_ds
 
 
-    def load_data(self, data_path):
+    def load_all_data(self, data_path):
         """Loads and tokenizes data from the given file paths, and returns a Hugging Face DatasetDict object.
 
         ARGS:
@@ -105,25 +111,34 @@ class ProofGenerationModel():
         """
         # self.data_path in ex format "LP/prop_exampels_all"
         train_data = self.tokenize_data(data_path + '_train.txt',  data_path + '_train_labels.txt')
-        test_data = self.tokenize_data(data_path + '_test.txt',  data_path + '_test_labels.txt')
         val_data = self.tokenize_data(data_path + '_val.txt',  data_path + '_val_labels.txt')
+        test_data = self.tokenize_data(data_path + '_test.txt',  data_path + '_test_labels.txt')
 
+        print("Converting to dictionary.")
         ds = DatasetDict({
             'train': train_data,
             'test': test_data,
             'valid': val_data})
+        
+        print("Data loading complete.")
 
         return ds
+
+    def load_one_data(self, data_path):
+        data = self.tokenize_data(data_path + '.txt',  data_path + '_labels.txt')
+        return data
+        
 
     
     def load_checkpoint(self):
         pass
 
 
-    def save_output(self, save_folder):
+    def save_output(self, save_folder, output):
         save_path = save_folder + '/output.txt'
+        print("Saving to ", save_path, "...", sep="")
         with open(save_path, 'w') as file:
-            json.dump(save_path, file)
+            json.dump(output, file)
 
 
     def run_training(self, ds):
@@ -143,12 +158,52 @@ class ProofGenerationModel():
 
     def run_inference(self, test_data):
         # Generate outputs
-        inputs = self.tokenizer(test_data["input"], truncation=True, padding=True, return_tensors="pt").input_ids
-        outputs = self.model.generate(inputs, max_new_tokens=100, do_sample=False)
+        print("Inputs")
+        try:
+            print(test_data.keys())
+        except:
+            print(test_data)
 
+        # Without batching
+        inputs = self.tokenizer(test_data["input"], truncation=True, padding=True, return_tensors="pt").input_ids
+
+        # With batching STILL NOT WORKING
+        # ds = test_data.map(
+        #     self.tokenize_inference, batched=True, writer_batch_size=500,
+        #     batch_size=16, keep_in_memory=False, #drop_last_batch=True
+        #     )
+        # inputs = torch.tensor(ds["input_ids"])
+
+        
+
+        print(type(inputs))
+        print(inputs)
+        print(inputs.shape)
+
+        print("Generating output...")
+        outputs = []
+        BATCH_SIZE = 16
+        break_flag = False
+        for i in tqdm(range(inputs.shape[0] // BATCH_SIZE + 1)):
+            # Set the left and right slice
+            idx_slice_left = i * BATCH_SIZE
+            idx_slice_right = idx_slice_left + BATCH_SIZE
+            if idx_slice_right > inputs.shape[0]:
+                idx_slice_right = inputs.shape[0]
+                break_flag = True
+            
+            # Generate batch and add to list
+            generated_batch = self.model.generate(inputs[idx_slice_left:idx_slice_right], max_new_tokens=500, do_sample=False)
+            outputs.append(generated_batch)
+            if break_flag == True:
+                break
+
+        print(outputs)
         # Decode into text
-        raw_output_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        return raw_output_text
+        print("Decoding")
+        raw_output_text_list = [ self.tokenizer.decode(out, skip_special_tokens=True) for out in outputs ] 
+        print(raw_output_text_list)
+        return raw_output_text_list
         
         # Converted the list of raw string generated labels into a list of dictionaries
         #text_dict_list = [ ast.literal_eval(sample) for sample in raw_output_text ]
@@ -161,9 +216,8 @@ class ProofGenerationModel():
 if __name__ == "__main__":
     model_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/EXAMPLE/"
     model_name = "pretrained_BART/"
-
     data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/prop_examples"
 
     PGM = ProofGenerationModel(model_path, model_name)
-    ds = PGM.load_data(data_path)
+    ds = PGM.load_all_data(data_path)
     PGM.run_training(ds)
