@@ -1,0 +1,36 @@
+custom_weight: None
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_val.txt
+
+{0: 'Acc: 0.997504367357125 ; Percentage 0.14310714285714285',
+ 1: 'Acc: 0.9992488733099649 ; Percentage 0.14264285714285715',
+ 2: 'Acc: 0.9951825557809331 ; Percentage 0.14085714285714285',
+ 3: 'Acc: 0.9862155388471178 ; Percentage 0.1425',
+ 4: 'Acc: 0.9811368209255533 ; Percentage 0.142',
+ 5: 'Acc: 0.9713516160626836 ; Percentage 0.14585714285714285',
+ 6: 'Acc: 0.9508114856429463 ; Percentage 0.1430357142857143'}
+
+
+
+
+
+
+
+custom_weight: None
+
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_val.txt
+
+{0: 'Acc: 0.9964530621896429 ; Percentage 0.15103571428571427',
+ 1: 'Acc: 0.9962760675273088 ; Percentage 0.14385714285714285',
+ 2: 'Acc: 0.9919751488480456 ; Percentage 0.1379642857142857',
+ 3: 'Acc: 0.9810211173483026 ; Percentage 0.13360714285714287',
+ 4: 'Acc: 0.9696216514774924 ; Percentage 0.12932142857142856',
+ 5: 'Acc: 0.9598788796366389 ; Percentage 0.1415357142857143',
+ 6: 'Acc: 0.9358946212952799 ; Percentage 0.16267857142857142'}
+
+
+
+
+
+
+
