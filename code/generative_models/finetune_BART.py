@@ -124,11 +124,11 @@ class ProofGenerationModel():
 
         return ds
 
+
     def load_one_data(self, data_path):
         data = self.tokenize_data(data_path + '.txt',  data_path + '_labels.txt')
         return data
         
-
     
     def load_checkpoint(self):
         pass
@@ -137,8 +137,8 @@ class ProofGenerationModel():
     def save_output(self, save_folder, output):
         save_path = save_folder + '/output.txt'
         print("Saving to ", save_path, "...", sep="")
-        with open(save_path, 'w') as file:
-            json.dump(output, file)
+        with open(save_path, 'a') as file:
+            (json.dump(str(item) + '\n', file) for item in output)
 
 
     def run_training(self, ds):
@@ -153,7 +153,6 @@ class ProofGenerationModel():
             
         )
         trainer.train()
-
 
 
     def run_inference(self, test_data):
@@ -174,8 +173,6 @@ class ProofGenerationModel():
         #     )
         # inputs = torch.tensor(ds["input_ids"])
 
-        
-
         print(type(inputs))
         print(inputs)
         print(inputs.shape)
@@ -183,25 +180,23 @@ class ProofGenerationModel():
         print("Generating output...")
         outputs = []
         BATCH_SIZE = 16
-        break_flag = False
         for i in tqdm(range(inputs.shape[0] // BATCH_SIZE + 1)):
             # Set the left and right slice
             idx_slice_left = i * BATCH_SIZE
             idx_slice_right = idx_slice_left + BATCH_SIZE
             if idx_slice_right > inputs.shape[0]:
                 idx_slice_right = inputs.shape[0]
-                break_flag = True
             
             # Generate batch and add to list
-            generated_batch = self.model.generate(inputs[idx_slice_left:idx_slice_right], max_new_tokens=500, do_sample=False)
+            generated_batch = self.model.generate(inputs[idx_slice_left:idx_slice_right], max_new_tokens=500, do_sample=True)
             outputs.append(generated_batch)
-            if break_flag == True:
+            if idx_slice_right == inputs.shape[0]: # break when we've generated last batch
                 break
 
         print(outputs)
         # Decode into text
         print("Decoding")
-        raw_output_text_list = [ self.tokenizer.decode(out, skip_special_tokens=True) for out in outputs ] 
+        raw_output_text_list = [ self.tokenizer.batch_decode(out, skip_special_tokens=True) for out in outputs ] 
         print(raw_output_text_list)
         return raw_output_text_list
         
