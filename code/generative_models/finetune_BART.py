@@ -135,10 +135,25 @@ class ProofGenerationModel():
 
 
     def save_output(self, save_folder, output):
+        # Get correct path
         save_path = save_folder + '/output.txt'
         print("Saving to ", save_path, "...", sep="")
+
+        # Remove any previous file¨
+        open(save_path, 'w').close()
+
+        print("Output length", len(output))
+
+        # Save output
         with open(save_path, 'a') as file:
-            (json.dump(str(item) + '\n', file) for item in output)
+            file.write("[")
+            for i, item in tqdm(enumerate(output)):
+                print("Item length", len(item))
+                json.dump(item, file)
+                if i < len(output) - 1:
+                    file.write(",\n")
+            file.write("]")
+            
 
 
     def run_training(self, ds):
@@ -192,11 +207,13 @@ class ProofGenerationModel():
             outputs.append(generated_batch)
             if idx_slice_right == inputs.shape[0]: # break when we've generated last batch
                 break
+        
+        outputs = [item for sublist in outputs for item in sublist]
 
         print(outputs)
         # Decode into text
         print("Decoding")
-        raw_output_text_list = [ self.tokenizer.batch_decode(out, skip_special_tokens=True) for out in outputs ] 
+        raw_output_text_list = [ self.tokenizer.decode(out, skip_special_tokens=True) for out in outputs ] 
         print(raw_output_text_list)
         return raw_output_text_list
         
