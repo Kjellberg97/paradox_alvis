@@ -103,7 +103,9 @@ class Proof_Checker():
             
 
     def halluzination_rules_fact(self, gen_proof, rules, facts):
-        """INPUT
+        """ Checks if the rules and facts are in the input list over rules and facts.
+        
+        ARGS
         step: 
             {dict} the first step in the proof
         rules:
@@ -140,7 +142,7 @@ class Proof_Checker():
 
     def run_proof_check(self, indata, gen_anw):
         """
-        INPUT
+        ARGS:
             indata:
                 a list of the input data of the model where each
                 item is a [rules, facts, query, label] 
