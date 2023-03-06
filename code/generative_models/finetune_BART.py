@@ -4,17 +4,23 @@ from tqdm import tqdm
 import torch
 import json
 import ast
+import os
+import torch.multiprocessing as mp
+import torch.distributed as dist
+#from accelerate import Accelerator
 
 
 
 
 class ProofGenerationModel():
     def __init__(self, model_path, model_name):
+        #self.world_size = torch.cuda.device_count()
+        #self.rank = list(range(self.world_size))
+        #setup(self.rank, self.world_size)
         self.model_path= model_path
         self.model_name = model_name
         self.load_from_checkpoint = self.load_checkpoint(model_name)
         self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + "pretrained_BART") # download bart to local and change path here self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart") # download bart to local and change path here 
-        #self.model = torch.nn.DataParallel(self.model)
         self.tokenizer = AutoTokenizer.from_pretrained(model_path + model_name) # download bart to local and change path here 
         self.data_collator = DataCollatorForSeq2Seq(tokenizer=self.tokenizer, model=self.model)
 
@@ -24,13 +30,17 @@ class ProofGenerationModel():
                 learning_rate=2e-5,
                 per_device_train_batch_size=2,
                 per_device_eval_batch_size=2,
-                logging_steps="epoch",
-                save_strategy="epoch",
+                gradient_accumulation_steps=16,
+                gradient_checkpointing=True,
+                fp16=True,
+                #logging_steps=5000,
+                #save_strategy="epoch",
                 weight_decay=0.01,
                 save_total_limit=3,
                 num_train_epochs=20,
             ) # download bart to local and change path here
-
+    
+    
 
     def read_file_lines(self, path):
         """ARGS:
@@ -181,6 +191,8 @@ class ProofGenerationModel():
             trainer.train(self.model_path + self.model_name)
         else:
             trainer.train()
+
+
 
 
     def run_inference(self, test_data):
