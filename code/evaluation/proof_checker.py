@@ -1,9 +1,11 @@
+import numpy as np
 from tqdm import tqdm
 class Proof_Checker():
 
     def __init__(self, flat=False):
 
-        self.corr_labels = [0,0,0,0] # True Positive, False Positive, True Negative, False Negative
+        self.confusion_matrix = [0,0,0,0] # True Positive, False Positive, True Negative, False Negative
+        self.accuracy = 0
         self.corr_proofs = 0
         self.num_ex = 0 
         self.syntax_err = 0
@@ -18,30 +20,47 @@ class Proof_Checker():
         pass 
 
 
-    def check_acc(self, true_label, gen_label):
-        """INPUT
-            true_label: 
-                the ground truth label either 1 or 0
-            gen_label:
-                the generated label either True or False
-        """
-        if true_label==1:
-            if gen_label==1:
-                # True Positive
-                self.corr_labels[0] +=1
-            else:
-                # False Negative
-                self.corr_labels[3] +=1
-        
-        else:
-            if gen_label==1:
-                # False Positive
-                self.corr_labels[1] +=1
-            else:
-                # True Negative
-                self.corr_labels[2] +=1
+def create_confusion_matrix(predictions, ground_truth):
+    """
+    Creates a confusion matrix based on predicted and ground truth labels.
+    
+    Args:
+    predictions (list): A list of strings representing the predicted labels, containing a substring "'label': " followed by "0" or "1".
+    ground_truth (list): A list of integers representing the true labels, where 0 indicates a negative example and 1 indicates a positive example.
+    
+    Returns:
+    numpy.ndarray: A confusion matrix of shape (n_samples, 4) with columns for True Positive, False Positive, True Negative, and False Negative.
+    """
+    confusion_matrix = np.empty(shape=(len(ground_truth), 4), dtype=int) # True Positive, False Positive, True Negative, False Negative
+    for i, (out, truth) in enumerate(zip(predictions, ground_truth)):
+        # Find 0s and 1s with regex
+        match = re.search(r"(?<='label': )(0|1)", out) # Find any 0s and 1s that come after "'label': "
+        guess = int(match.group()) if match else None # Convert into int if a 0 or 1 is returned
 
-            
+        # Fill the confusion matrix
+        confusion_matrix[i, 0] = 1 if guess == 1 and truth == 1 else 0 # True Positive
+        confusion_matrix[i, 1] = 1 if guess == 1 and truth == 0 else 0 # False Positive
+        confusion_matrix[i, 2] = 1 if guess == 0 and truth == 0 else 0 # True Negative
+        confusion_matrix[i, 3] = 1 if guess == 0 and truth == 1 else 0 # False Negative
+    self.confusion_matrix = confusion_matrix
+    return confusion_matrix 
+
+
+def label_accuracy(confusion_matrix):
+    """
+    Calculates the label accuracy based on a given confusion matrix.
+    
+    Args:
+    confusion_matrix (numpy.ndarray): A confusion matrix of shape (n_samples, 4) with columns for True Positive, False Positive, True Negative, and False Negative.
+    
+    Returns:
+    float: The proportion of correctly labeled examples, as a decimal between 0 and 1.
+    """
+    correct_count = confusion_matrix[:, 0].sum() + confusion_matrix[:, 2].sum() # Sum True Positives and True Negatives
+    accuracy = correct_count / confusion_matrix.shape[0] # count divided by number or rows
+    self.accuracy = accuracy
+    return accuracy
+
 
 
     def check_correctness(self, gen_proof):
