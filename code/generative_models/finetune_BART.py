@@ -10,19 +10,25 @@ import ast
 
 class ProofGenerationModel():
     def __init__(self, model_path, model_name):
-        self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + model_name) # download bart to local and change path here self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart") # download bart to local and change path here 
+        self.model_path= model_path
+        self.model_name = model_name
+        self.load_from_checkpoint = self.load_checkpoint(model_name)
+        self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + "pretrained_BART") # download bart to local and change path here self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart") # download bart to local and change path here 
+        #self.model = torch.nn.DataParallel(self.model)
         self.tokenizer = AutoTokenizer.from_pretrained(model_path + model_name) # download bart to local and change path here 
         self.data_collator = DataCollatorForSeq2Seq(tokenizer=self.tokenizer, model=self.model)
 
         self.training_args = Seq2SeqTrainingArguments(
-            output_dir=model_path + model_name + 'OUTPUT',
+            output_dir=model_path + "pretrained_BART/" + 'OUTPUT',
                 evaluation_strategy="epoch",
                 learning_rate=2e-5,
-                per_device_train_batch_size=4,
-                per_device_eval_batch_size=4,
+                per_device_train_batch_size=2,
+                per_device_eval_batch_size=2,
+                logging_steps="epoch",
+                save_strategy="epoch",
                 weight_decay=0.01,
                 save_total_limit=3,
-                num_train_epochs=4,
+                num_train_epochs=20,
             ) # download bart to local and change path here
 
 
@@ -130,8 +136,12 @@ class ProofGenerationModel():
         return data
         
     
-    def load_checkpoint(self):
-        pass
+    def load_checkpoint(self, model):
+        if model == "pretrained_BART":
+            return False
+
+        else:
+            return True
 
 
     def save_output(self, save_folder, output):
@@ -167,7 +177,10 @@ class ProofGenerationModel():
             tokenizer=self.tokenizer,
             
         )
-        trainer.train()
+        if self.load_from_checkpoint:
+            trainer.train(self.model_path + self.model_name)
+        else:
+            trainer.train()
 
 
     def run_inference(self, test_data):
