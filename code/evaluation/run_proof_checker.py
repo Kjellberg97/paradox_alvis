@@ -1,49 +1,34 @@
 # Runs the proof checker
 from proof_checker import Proof_Checker
 import json
+import numpy as np
+
+def read_file_lines(file_path):
+    """
+    ARG: path (str) in the form of /mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/prop_examples_train.txt
+    RETURN: list of dicts or strings dependring on the formmating of the file
+    """
+    with open(file_path) as f:
+        return json.load(f)
 
 
-def read_input_data(path):
-    dictionaries=[]
-    with open(path) as f:
-        dictionaries = json.load(f)
+def main(pred_path, target_path):
     
-    return dictionaries
 
-
-
-def read_gen_data(path):
-    dictionaries=[]
-    with open(path) as f:
-        dictionaries = json.load(f)
-    
-    return dictionaries
-
-
-
-def read_data(path, file):
-
-    input_path = path + file +".txt"
-    input_data = read_input_data(input_path)
-
-    gen_path = path + file +"_labels.txt"
-    output_data = read_gen_data(gen_path)
-
-    return input_data, output_data
-
-
-
-def main(path, file_name):
-
-    input_data, output_data = read_data(path, file_name)
-
+    predicted_strings = read_file_lines(pred_path)
+    target_dicts = read_file_lines(target_path)
     pf = Proof_Checker()
-    pf.run_proof_check(input_data, output_data)
+
+    ground_truth_bools = [ target_d['label'] for target_d in target_dicts ]
+
+    confusion_matrix = pf.create_confusion_matrix(predicted_strings, ground_truth_bools)
+    accuracy = pf.label_accuracy(confusion_matrix)
+    print("Rates: TP, FP, TN, FN\n", np.sum(confusion_matrix, axis=0) / confusion_matrix.shape[0])
+    print(accuracy)
 
 
 
 if __name__ == "__main__":
-
-    path = "/Users/vikto/OneDrive/Dokument/kurser/MASTERTHESIS/LLMforReasoning/reasoning-language-models/data/simple_logic/LP/"
-    file = "prop_examples_3"
-    main(path, file)
+    pred_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/pretrained_BART/evaluation/checkpoint-24880_output.txt"
+    target_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/prop_examples_test_labels.txt"
+    main(pred_path, target_path)

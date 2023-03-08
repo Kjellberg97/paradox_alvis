@@ -13,14 +13,16 @@ import torch.distributed as dist
 
 
 class ProofGenerationModel():
-    def __init__(self, model_path, model_name):
-        #self.world_size = torch.cuda.device_count()
-        #self.rank = list(range(self.world_size))
-        #setup(self.rank, self.world_size)
+    def __init__(self, model_path, model_name, checkpoint=None):
+
+        self.checkpoint = checkpoint
+        self.load_from_checkpoint = self.load_checkpoint(checkpoint)
         self.model_path= model_path
-        self.model_name = model_name
-        self.load_from_checkpoint = self.load_checkpoint(model_name)
-        self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + "pretrained_BART") # download bart to local and change path here self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart") # download bart to local and change path here 
+        self.model_name = model_name 
+        if checkpoint:
+            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + model_name +"/OUTPUT/" + checkpoint + "/") # download bart to local and change path here self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart") # download bart to local and change path here 
+        else:
+            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + model_name)
         self.tokenizer = AutoTokenizer.from_pretrained(model_path + model_name) # download bart to local and change path here 
         self.data_collator = DataCollatorForSeq2Seq(tokenizer=self.tokenizer, model=self.model)
 
@@ -40,9 +42,10 @@ class ProofGenerationModel():
                 weight_decay=0.01,
                 save_total_limit=3,
                 num_train_epochs=20,
+                predict_with_generate=True,
             ) # download bart to local and change path here
     
-    
+
 
     def read_file_lines(self, path):
         """ARGS:
@@ -135,8 +138,9 @@ class ProofGenerationModel():
         print("Converting to dictionary.")
         ds = DatasetDict({
             'train': train_data,
-            'test': test_data,
-            'valid': val_data})
+            'valid': val_data,
+            'test': test_data
+            })
         
         print("Data loading complete.")
 
@@ -148,17 +152,17 @@ class ProofGenerationModel():
         return data
         
     
-    def load_checkpoint(self, model):
-        if model == "pretrained_BART":
+    def load_checkpoint(self, checkpoint):
+        if checkpoint == None:
             return False
-
         else:
             return True
 
 
-    def save_output(self, save_folder, output):
+    def save_output(self, output):
         # Get correct path
-        save_path = save_folder + '/output.txt'
+        print(self.model_path, "evaluation/", self.checkpoint, '_output.txt')
+        save_path = self.model_path + self.model_name + "/evaluation/" + self.checkpoint + '_output.txt'
         print("Saving to ", save_path, "...", sep="")
 
         # Remove any previous file¨
@@ -196,17 +200,34 @@ class ProofGenerationModel():
 
 
 
+    # def run_inference2(self, ds):
+    #     trainer = Seq2SeqTrainer(
+    #         model=self.model,
+    #         args=self.training_args,
+    #         train_dataset=ds["train"],
+    #         eval_dataset=ds["valid"],
+    #         data_collator=self.data_collator,
+    #         tokenizer=self.tokenizer,
+    #     )
+    #     test = ds["test"].map(
+    #         self.tokenize_inference, batched=True, # writer_batch_size=500,
+    #         batch_size=16, keep_in_memory=False, #drop_last_batch=True
+    #         )
+    #     #print(test["input"])
+    #     #test["input"] = self.tokenizer(test["input"], truncation=True, padding=True, return_tensors="pt").input_ids
+        
+    #     predictions, label_ids, metrics = trainer.predict(test)
+    #     return predictions, label_ids, metrics
+
 
     def run_inference(self, test_data):
+
         # Generate outputs
         print("Inputs")
-        try:
-            print(test_data.keys())
-        except:
-            print(test_data)
-
+        device = torch.device("cuda")
         # Without batching
-        inputs = self.tokenizer(test_data["input"], truncation=True, padding=True, return_tensors="pt").input_ids
+        
+        inputs = self.tokenizer(test_data["input"], truncation=True, padding=True, return_tensors="pt").input_ids.to(device)
 
         # With batching STILL NOT WORKING
         # ds = test_data.map(
@@ -215,12 +236,17 @@ class ProofGenerationModel():
         #     )
         # inputs = torch.tensor(ds["input_ids"])
 
-        print(type(inputs))
-        print(inputs)
-        print(inputs.shape)
+        #print(type(inputs))
+        #print(inputs)
+        #print(inputs.shape)
 
         print("Generating output...")
         outputs = []
+        
+        # ONLY RUNS ON ONE GPU!!!!!!!!!
+
+        self.model = self.model.to(device)
+        
         BATCH_SIZE = 16
         for i in tqdm(range(inputs.shape[0] // BATCH_SIZE + 1)):
             # Set the left and right slice
@@ -237,11 +263,10 @@ class ProofGenerationModel():
         
         outputs = [item for sublist in outputs for item in sublist]
 
-        print(outputs)
+        #print(outputs)
         # Decode into text
         print("Decoding")
         raw_output_text_list = [ self.tokenizer.decode(out, skip_special_tokens=True) for out in outputs ] 
-        print(raw_output_text_list)
         return raw_output_text_list
         
         # Converted the list of raw string generated labels into a list of dictionaries
