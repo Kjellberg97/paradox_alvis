@@ -20,6 +20,36 @@ class Proof_Checker():
         # save the result of one of the functions in a file
         pass 
 
+    def divide_data_into_depths(self,input_data, predictions, ground_truth):
+
+        data_depths = [[],[],[],[],[],[],[]] 
+        preds_depths = [[],[],[],[],[],[],[]] 
+        ground_truth_depths = [[],[],[],[],[],[],[]] 
+
+        for i,data in enumerate(input_data):
+
+            depths = int(data["depth"])
+
+            data_depths[depths].append(data)
+            preds_depths[depths].append(predictions[i])
+            ground_truth_depths[depths].append(ground_truth[i])
+
+        for depth in range(7):
+            print()
+            print("DEPTH: ",depth)
+            ground_truth_bools = [ target_d['label'] for target_d in ground_truth_depths[depth] ]
+            confusion_matrix = self.create_confusion_matrix(preds_depths[depth], ground_truth_bools)
+            accuracy = self.label_accuracy(confusion_matrix)
+            self.stat_over_generated_data(preds_depths[depth] ,ground_truth_depths[depth] ,data_depths[depth])
+            print("Rates: TP, FP, TN, FN\n", np.sum(confusion_matrix, axis=0) / confusion_matrix.shape[0])
+            print(accuracy)
+
+        
+
+
+        #ground_truth_labels = [ target_d['label'] for target_d in ground_truth ]  
+
+
 
     def create_confusion_matrix(self, predictions, ground_truth):
         """
@@ -46,6 +76,72 @@ class Proof_Checker():
         self.confusion_matrix = confusion_matrix
         return confusion_matrix 
 
+    
+    def get_index_matrix(self, confusion_matrix):
+        index_TP = np.argwhere((confusion_matrix == [1,0,0,0]).all(axis=1))
+        index_FP = np.argwhere((confusion_matrix == [0,1,0,0]).all(axis=1))
+        index_TN = np.argwhere((confusion_matrix == [0,0,1,0]).all(axis=1))
+        index_FN = np.argwhere((confusion_matrix == [0,0,0,1]).all(axis=1))
+    
+        return index_TP, index_FP, index_TN, index_FN
+        
+        
+    def stat_over_generated_data(self, predictions, ground_truth, input_dicts):
+        """Check the stats over the different values in the conf. matrix.
+        e.g. how many rules that exixst in each input to see any scatistical
+        correlations between the different label values
+
+        ARGS:
+
+        RETURN:
+
+        """
+        ground_truth_labels = [ target_d['label'] for target_d in ground_truth ]
+        confusion_matrix = self.create_confusion_matrix(predictions, ground_truth_labels)
+        index_TP, index_FP, index_TN, index_FN = self.get_index_matrix(confusion_matrix)
+
+
+        self.len_rules(input_dicts, index_TP)
+
+        print("TP: ", self.len_rules(input_dicts, index_TP))
+        print("FP: ", self.len_rules(input_dicts, index_FP))
+        print("TN: ", self.len_rules(input_dicts, index_TN))
+        print("FN: ", self.len_rules(input_dicts, index_FN))
+
+        
+
+    
+    def len_rules(self, data, indexes):
+        """Statsisticls about the features of the datasets based on their value in the 
+        confucion matrix.
+        """
+        nr_ex = len(indexes)
+        tot_len_rules = 0
+        min_len=np.inf
+        max_len=0
+        for i in indexes:
+            d = data[int(i)]
+            depth = d["depth"]
+            
+            len_d = len(d["rules"])
+            tot_len_rules +=len_d
+            if len_d < min_len:
+                min_len = len_d
+            if len_d > max_len:
+                max_len = len_d
+
+        mean_len = round(tot_len_rules / nr_ex, 2)
+
+        return mean_len, min_len, max_len
+
+
+
+        
+            
+            
+
+
+
 
     def label_accuracy(self, confusion_matrix):
         """
@@ -58,6 +154,7 @@ class Proof_Checker():
         float: The proportion of correctly labeled examples, as a decimal between 0 and 1.
         """
         correct_count = confusion_matrix[:, 0].sum() + confusion_matrix[:, 2].sum() # Sum True Positives and True Negatives
+
         accuracy = correct_count / confusion_matrix.shape[0] # count divided by number or rows
         self.accuracy = accuracy
         return accuracy
