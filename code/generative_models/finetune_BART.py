@@ -1,6 +1,8 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, DataCollatorForSeq2Seq, Seq2SeqTrainingArguments, Seq2SeqTrainer
-from datasets import DatasetDict, Dataset
+from datasets import DatasetDict, Dataset, load_metric
 from tqdm import tqdm
+import numpy as np
+import re
 import torch
 import json
 import ast
@@ -9,8 +11,7 @@ import torch.multiprocessing as mp
 import torch.distributed as dist
 #from accelerate import Accelerator
 
-
-
+                
 
 class ProofGenerationModel():
     def __init__(self, model_path, model_name, checkpoint=None):
@@ -25,7 +26,8 @@ class ProofGenerationModel():
             self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + model_name)
         self.tokenizer = AutoTokenizer.from_pretrained(model_path + model_name) # download bart to local and change path here 
         self.data_collator = DataCollatorForSeq2Seq(tokenizer=self.tokenizer, model=self.model)
-
+        self.metric_acc = load_metric("accuracy")
+        self.metric_f1 = load_metric("f1")
         self.training_args = Seq2SeqTrainingArguments(
             output_dir=model_path + "pretrained_BART/" + 'OUTPUT',
                 evaluation_strategy="epoch",
@@ -33,16 +35,17 @@ class ProofGenerationModel():
                 per_device_train_batch_size=10,
                 per_device_eval_batch_size=10, # 10 innan
                 gradient_accumulation_steps=6, # 32 innan och ingen prediction_loss_only
-                prediction_loss_only=True, # Saving less information during evaluation, perhaps less memory usage
+                prediction_loss_only=False, # Saving less information during evaluation, perhaps less memory usage
                 fp16=True, # Less accurace floats when training
                 #logging_steps=500,
                 save_strategy="epoch",
                 load_best_model_at_end=True,
                 warmup_steps =200,
                 weight_decay=0.01,
-                save_total_limit=3,
-                num_train_epochs=20,
+                save_total_limit=5,
+                num_train_epochs=2,
                 predict_with_generate=True,
+                generation_max_length=1024, # generated tokens if predict_with_generate=True
             ) # download bart to local and change path here
     
 
@@ -161,8 +164,12 @@ class ProofGenerationModel():
 
     def save_output(self, output):
         # Get correct path
-        print(self.model_path, "evaluation/", self.checkpoint, '_output.txt')
-        save_path = self.model_path + self.model_name + "/evaluation/" + self.checkpoint + '_output.txt'
+        if self.checkpoint:
+            save_path = self.model_path + self.model_name + "/evaluation/" + self.checkpoint + '_output.txt'
+        else:
+            # checkpoint_0 is when we dont use any checkpoint
+            save_path = self.model_path + self.model_name + "/evaluation/checkpoint_0_output.txt"
+           
         print("Saving to ", save_path, "...", sep="")
 
         # Remove any previous file¨
@@ -178,12 +185,37 @@ class ProofGenerationModel():
                 json.dump(item, file)
                 if i < len(output) - 1:
                     file.write(",\n")
-            file.write("]")
-            
+            file.write("]")
 
+    def find_binary_label(self, string):
+        match = re.search(r"(?<='label': )(0|1)", string) # Find any 0s and 1s that come after "'label': "
+        binary_digit = int(match.group()) if match else None # Convert into int if a 0 or 1 is returned
+        return binary_digit
+
+    def compute_metrics(self, eval_pred):
+        """
+        Computes the accuracy and F1 score for binary classification based on the predictions and labels.
+            Args: eval_pred: an EvalPrediction object that contains the model predictions and labels.
+            Returns: A dictionary with the keys "accuracy" and "f1" and their corresponding values.
+        """
+        predictions, label_ids = eval_pred
+        label_ids = np.where(label_ids != -100,  label_ids, self.tokenizer.pad_token_id) # remove padding
+
+        # Decode
+        decoded_preds = self.tokenizer.batch_decode(predictions, skip_special_tokens=True)
+        decoded_label_ids = self.tokenizer.batch_decode(label_ids, skip_special_tokens=True)
+
+        # Extract the binary digit labels
+        preds = [ self.find_binary_label(pred_str) for pred_str in decoded_preds ]
+        truths = [ self.find_binary_label(pred_str) for pred_str in decoded_label_ids ]
+
+        # Compute the results
+        acc = self.metric_acc.compute(predictions=preds, references=truths)["accuracy"]
+        f1 = self.metric_f1.compute(predictions=preds, references=truths)["f1"]
+        result = {"accuracy": acc, "f1": f1}
+        return result
 
     def run_training(self, ds):
-
         trainer = Seq2SeqTrainer(
             model=self.model,
             args=self.training_args,
@@ -191,6 +223,7 @@ class ProofGenerationModel():
             eval_dataset=ds["valid"],
             data_collator=self.data_collator,
             tokenizer=self.tokenizer,
+            compute_metrics=self.compute_metrics,
             
         )
         if self.load_from_checkpoint:
