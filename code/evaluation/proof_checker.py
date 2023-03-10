@@ -3,7 +3,7 @@ import numpy as np
 from tqdm import tqdm
 class Proof_Checker():
 
-    def __init__(self, flat=False):
+    def __init__(self):
 
         self.confusion_matrix = [0,0,0,0] # True Positive, False Positive, True Negative, False Negative
         self.accuracy = 0
@@ -21,6 +21,18 @@ class Proof_Checker():
         pass 
 
     def divide_data_into_depths(self,input_data, predictions, ground_truth):
+        """Divides the input data dependeing on the depths of each input data and 
+        creates the confucion matrix and calculate basic stats about the lenght 
+        of the rules in each group.
+
+        ARGS:
+            input_data (list) : all input data
+            predictions (list) : the generated proofs and labels 
+            ground_truth (list) : the true labels for each input
+        
+        RETURN:
+            None
+        """
 
         data_depths = [[],[],[],[],[],[],[]] 
         preds_depths = [[],[],[],[],[],[],[]] 
@@ -77,6 +89,7 @@ class Proof_Checker():
         return confusion_matrix 
 
     
+
     def get_index_matrix(self, confusion_matrix):
         index_TP = np.argwhere((confusion_matrix == [1,0,0,0]).all(axis=1))
         index_FP = np.argwhere((confusion_matrix == [0,1,0,0]).all(axis=1))
@@ -85,15 +98,20 @@ class Proof_Checker():
     
         return index_TP, index_FP, index_TN, index_FN
         
-        
+    
+
     def stat_over_generated_data(self, predictions, ground_truth, input_dicts):
         """Check the stats over the different values in the conf. matrix.
         e.g. how many rules that exixst in each input to see any scatistical
-        correlations between the different label values
+        correlations between the different label values. And print the calculated stats
 
         ARGS:
+            predictions (list) : a list where all element are dicts. Each dict is a generated proof and label
+            ground_truth (list) : the true lable value
+            input_dicts (list) : a list of all input values
 
         RETURN:
+            None
 
         """
         ground_truth_labels = [ target_d['label'] for target_d in ground_truth ]
@@ -112,8 +130,15 @@ class Proof_Checker():
 
     
     def len_rules(self, data, indexes):
-        """Statsisticls about the features of the datasets based on their value in the 
-        confucion matrix.
+        """Calculates mean lenght, minimum and maximum lenght of the rules of the input data.
+
+        ARGS:
+            data (list) : a list of dict where each dict is a data point. Should be the input data
+            indexes (numpy.array) : a array over the indexes of data input that are relevant
+
+        RETURN:
+            (list) : the mean lenght, min lenght and max lenght of the number of rules for rules 
+                     in the data.
         """
         nr_ex = len(indexes)
         tot_len_rules = 0
@@ -133,13 +158,6 @@ class Proof_Checker():
         mean_len = round(tot_len_rules / nr_ex, 2)
 
         return mean_len, min_len, max_len
-
-
-
-        
-            
-            
-
 
 
 
@@ -169,10 +187,16 @@ class Proof_Checker():
         pass
     
 
-    def check_syntax():
+    def check_syntax(self, proof):
         # Check if the syntax of the generated proof is correct
-        # output the wrong part or none 
-        pass
+        # output the wrong part or none
+        try:
+            proof_d = dict(proof)
+        except:
+            # 
+            pass    
+
+        
 
 
     def check_order(self, gen_proof):
@@ -181,7 +205,7 @@ class Proof_Checker():
         pass
 
     
-    def rule_fact_in_list(self, step, rules, facts):
+    def rule_fact_in_list(self,step, rules, facts):
         """INPUT
         step: 
             {dict} the step that will be taken with the condition for this step
@@ -197,6 +221,15 @@ class Proof_Checker():
 
         !Does NOT look at facts that are generated as not existing!
         """
+
+        ground_truth_labels = [dict, dict]
+        generated_labels = [str, str]
+
+        try:
+            gen = dict(gen)
+        except:
+            self.syntax_err +=1
+            # maybe save the proofs with syntax error in a file!!
         
         for key in step.keys():
             rule_exist = False
@@ -216,6 +249,8 @@ class Proof_Checker():
             if not (rule_exist or fact_exist) and not (step[key] == 0):
                     self.temp_hal.append(key)
                     self.hallucination +=1
+
+        pass
 
             
 
