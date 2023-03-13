@@ -81,13 +81,11 @@ class ProofGenerationModel():
 
         dict_list = []
         for input, target, in zip(raw_inputs, raw_labels):
-            del input['depth']
-            del input['label']
 
             d = {
-                    "input": str(input),
+                    "input": str(input["input"]),
                     "target": str(target),
-                    "labels": target['label']
+                    "labels": input["label"]
                 }
             dict_list.append(d)
 
@@ -185,7 +183,7 @@ class ProofGenerationModel():
                 json.dump(item, file)
                 if i < len(output) - 1:
                     file.write(",\n")
-            file.write("]")
+            file.write("]")
 
     def find_binary_label(self, string):
         match = re.search(r"(?<='label': )(0|1)", string) # Find any 0s and 1s that come after "'label': "
