@@ -79,7 +79,7 @@ class Proof_Checker():
             # Find 0s and 1s with regex
             match = re.search(r"(?<='label': )(0|1)", out) # Find any 0s and 1s that come after "'label': "
             guess = int(match.group()) if match else None # Convert into int if a 0 or 1 is returned
-
+            
             # Fill the confusion matrix
             confusion_matrix[i, 0] = 1 if guess == 1 and truth == 1 else 0 # True Positive
             confusion_matrix[i, 1] = 1 if guess == 1 and truth == 0 else 0 # False Positive

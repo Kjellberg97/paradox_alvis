@@ -63,7 +63,15 @@ class ProofGenerationModel():
         with open(path) as f:
             dicts = json.load(f)
         return dicts
-    
+  
+        
+    # Define a function that takes a file name as an argument
+    # def read_info(file_name):
+    #     # Use list comprehension to read and process each line in the file
+    #     info_list = [line.strip().split(",") for line in open(file_name, "r")]
+    #     # Return the info list
+    #     return info_list
+        
 
     def format_data(self, raw_inputs_path, raw_labels_path):
         """ARGS:
@@ -76,7 +84,9 @@ class ProofGenerationModel():
         raw_ds:
             a dataset with the input together with the related generated labels
         """
+        print(raw_inputs_path)
         raw_inputs = self.read_file_lines(raw_inputs_path)
+        print(raw_labels_path)
         raw_labels = self.read_file_lines(raw_labels_path)
 
         dict_list = []
@@ -132,6 +142,7 @@ class ProofGenerationModel():
             A Hugging Face DatasetDict object containing the tokenized train, test, and validation data.
         """
         # self.data_path in ex format "LP/prop_exampels_all"
+    
         train_data = self.tokenize_data(data_path + '_train.txt',  data_path + '_train_labels.txt')
         val_data = self.tokenize_data(data_path + '_val.txt',  data_path + '_val_labels.txt')
         test_data = self.tokenize_data(data_path + '_test.txt',  data_path + '_test_labels.txt')
@@ -186,8 +197,9 @@ class ProofGenerationModel():
             file.write("]")
 
     def find_binary_label(self, string):
-        match = re.search(r"(?<='label': )(0|1)", string) # Find any 0s and 1s that come after "'label': "
-        binary_digit = int(match.group()) if match else None # Convert into int if a 0 or 1 is returned
+        # Find the last occurence of False or True in the string, convert into corresponding int 0 or 1
+        match = re.search(r"True|False(?!.*True|False)", string) # Not followed by any characters (.* , and not followed by True|False
+        binary_digit = int(eval(match.group())) if match else 0 # Convert into int if a False or True is returned else convert to 0
         return binary_digit
 
     def compute_metrics(self, eval_pred):
@@ -205,8 +217,8 @@ class ProofGenerationModel():
 
         # Extract the binary digit labels
         preds = [ self.find_binary_label(pred_str) for pred_str in decoded_preds ]
-        truths = [ self.find_binary_label(pred_str) for pred_str in decoded_label_ids ]
-
+        truths = [ self.find_binary_label(truth_str) for truth_str in decoded_label_ids ]
+        
         # Compute the results
         acc = self.metric_acc.compute(predictions=preds, references=truths)["accuracy"]
         f1 = self.metric_f1.compute(predictions=preds, references=truths)["f1"]
@@ -229,26 +241,6 @@ class ProofGenerationModel():
         else:
             trainer.train()
 
-
-
-    # def run_inference2(self, ds):
-    #     trainer = Seq2SeqTrainer(
-    #         model=self.model,
-    #         args=self.training_args,
-    #         train_dataset=ds["train"],
-    #         eval_dataset=ds["valid"],
-    #         data_collator=self.data_collator,
-    #         tokenizer=self.tokenizer,
-    #     )
-    #     test = ds["test"].map(
-    #         self.tokenize_inference, batched=True, # writer_batch_size=500,
-    #         batch_size=16, keep_in_memory=False, #drop_last_batch=True
-    #         )
-    #     #print(test["input"])
-    #     #test["input"] = self.tokenizer(test["input"], truncation=True, padding=True, return_tensors="pt").input_ids
-        
-    #     predictions, label_ids, metrics = trainer.predict(test)
-    #     return predictions, label_ids, metrics
 
 
     def run_inference(self, test_data):
