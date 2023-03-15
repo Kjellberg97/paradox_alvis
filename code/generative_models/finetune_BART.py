@@ -43,7 +43,7 @@ class ProofGenerationModel():
                 warmup_steps =200,
                 weight_decay=0.01,
                 save_total_limit=5,
-                num_train_epochs=2,
+                num_train_epochs=20,
                 predict_with_generate=True,
                 generation_max_length=1024, # generated tokens if predict_with_generate=True
             ) # download bart to local and change path here

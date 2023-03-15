@@ -12,13 +12,14 @@ def read_file_lines(file_path):
         return json.load(f)
 
 
-def main(pred_path, target_path, input_path):
+def main(pred_path, target_path, input_path, save_stats_file):
     
+    print("predicted data: ",pred_path )
 
     predicted_strings = read_file_lines(pred_path)
     target_dicts = read_file_lines(target_path)
     input_dicts = read_file_lines(input_path)
-    pf = Proof_Checker()
+    pf = Proof_Checker(save_stats_file)
 
 
     pf.divide_data_into_depths(input_dicts,predicted_strings, target_dicts)
@@ -34,7 +35,8 @@ def main(pred_path, target_path, input_path):
 
 
 if __name__ == "__main__":
-    pred_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/pretrained_BART/evaluation/checkpoint-24880_output_RP_test.txt"
-    target_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_test_labels.txt"
-    input_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_test.txt"
-    main(pred_path, target_path, input_path)
+    pred_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/pretrained_BART/evaluation/checkpoint-22392_output_RP_test.txt"
+    target_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_labels.txt"
+    input_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt"
+    save_stats_file = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/pretrained_BART/evaluation/checkpoint-22392_TLP_RRP.txt"
+    main(pred_path, target_path, input_path, save_stats_file)

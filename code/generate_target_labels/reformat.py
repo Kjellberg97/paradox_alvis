@@ -74,15 +74,17 @@ def run_reformat(input_path, output_path, reformat_function):
 
 
 #THIS IS TO REFORMAT THE TARGET LABELS 
-#input_path_labels =  "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small_val_labels.txt"
-#output_path_labels = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small_cleaned_val_labels.txt"
-
-input_path_inputs =  "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small_test.txt"
-output_path_inputs = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small_cleaned_test.txt"
+input_path_labels =  "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_brackets_test_labels.txt"
+output_path_labels = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test_labels.txt"
 
 # For target labels
-#run_reformat(input_path_labels, output_path_labels, reformat_labels)
+run_reformat(input_path_labels, output_path_labels, reformat_labels)
+
+
+
+#input_path_inputs =  "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_brackets_val.txt"
+#output_path_inputs = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_val.txt"
 
 # For input
-run_reformat(input_path_inputs, output_path_inputs, reformat_input)
+#run_reformat(input_path_inputs, output_path_inputs, reformat_input)
     

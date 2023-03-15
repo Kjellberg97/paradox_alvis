@@ -1,9 +1,14 @@
 import re
 import numpy as np
 from tqdm import tqdm
+import json
+import random
+
+
+
 class Proof_Checker():
 
-    def __init__(self):
+    def __init__(self, save_stats_file, seed=10):
 
         self.confusion_matrix = [0,0,0,0] # True Positive, False Positive, True Negative, False Negative
         self.accuracy = 0
@@ -13,12 +18,22 @@ class Proof_Checker():
         self.hallucination = 0
         self.temp_hal = []
         self.hallucination_list = []
-        self.flat = flat
+        self.save_stats_file = save_stats_file
+        open(self.save_stats_file, 'w').close()
+        random.seed(seed)
 
 
     def save_result(self):
         # save the result of one of the functions in a file
         pass 
+
+
+    def find_binary_label(self, string):
+        # Find the last occurence of False or True in the string, convert into corresponding int 0 or 1
+        match = re.search(r"True|False(?!.*True|False)", string) # Not followed by any characters (.* , and not followed by True|False
+        binary_digit = int(eval(match.group())) if match else 0 # Convert into int if a False or True is returned else convert to 0
+        return binary_digit
+
 
     def divide_data_into_depths(self,input_data, predictions, ground_truth):
         """Divides the input data dependeing on the depths of each input data and 
@@ -33,28 +48,34 @@ class Proof_Checker():
         RETURN:
             None
         """
-
         data_depths = [[],[],[],[],[],[],[]] 
         preds_depths = [[],[],[],[],[],[],[]] 
         ground_truth_depths = [[],[],[],[],[],[],[]] 
+        pred_proof = [[],[],[],[],[],[],[]] 
 
         for i,data in enumerate(input_data):
 
             depths = int(data["depth"])
 
+            pred = self.find_binary_label(predictions[i])
+
             data_depths[depths].append(data)
-            preds_depths[depths].append(predictions[i])
+            preds_depths[depths].append(pred)
             ground_truth_depths[depths].append(ground_truth[i])
+            pred_proof[depths].append(predictions[i])
 
         for depth in range(7):
             print()
             print("DEPTH: ",depth)
-            ground_truth_bools = [ target_d['label'] for target_d in ground_truth_depths[depth] ]
+            ground_truth_bools = [ self.find_binary_label(target_d) for target_d in ground_truth_depths[depth] ]
             confusion_matrix = self.create_confusion_matrix(preds_depths[depth], ground_truth_bools)
             accuracy = self.label_accuracy(confusion_matrix)
-            self.stat_over_generated_data(preds_depths[depth] ,ground_truth_depths[depth] ,data_depths[depth])
-            print("Rates: TP, FP, TN, FN\n", np.sum(confusion_matrix, axis=0) / confusion_matrix.shape[0])
-            print(accuracy)
+            with open(self.save_stats_file, "a") as file:
+                file.write("\n#############################################################################")
+                file.write("\nDEPTH: " + str(depth))
+            self.stat_over_generated_data(preds_depths[depth] ,ground_truth_depths[depth] ,data_depths[depth],pred_proof[depth])
+            print("Rates: TP, FP, TN, FN\n", np.round(np.sum(confusion_matrix, axis=0) / confusion_matrix.shape[0], 3))
+            print("acc", accuracy)
 
         
 
@@ -75,11 +96,7 @@ class Proof_Checker():
         numpy.ndarray: A confusion matrix of shape (n_samples, 4) with columns for True Positive, False Positive, True Negative, and False Negative.
         """
         confusion_matrix = np.empty(shape=(len(ground_truth), 4), dtype=int) # True Positive, False Positive, True Negative, False Negative
-        for i, (out, truth) in enumerate(zip(predictions, ground_truth)):
-            # Find 0s and 1s with regex
-            match = re.search(r"(?<='label': )(0|1)", out) # Find any 0s and 1s that come after "'label': "
-            guess = int(match.group()) if match else None # Convert into int if a 0 or 1 is returned
-            
+        for i, (guess, truth) in enumerate(zip(predictions, ground_truth)):
             # Fill the confusion matrix
             confusion_matrix[i, 0] = 1 if guess == 1 and truth == 1 else 0 # True Positive
             confusion_matrix[i, 1] = 1 if guess == 1 and truth == 0 else 0 # False Positive
@@ -100,7 +117,7 @@ class Proof_Checker():
         
     
 
-    def stat_over_generated_data(self, predictions, ground_truth, input_dicts):
+    def stat_over_generated_data(self, predictions, ground_truth, input_dicts,pred_proof):
         """Check the stats over the different values in the conf. matrix.
         e.g. how many rules that exixst in each input to see any scatistical
         correlations between the different label values. And print the calculated stats
@@ -114,19 +131,50 @@ class Proof_Checker():
             None
 
         """
-        ground_truth_labels = [ target_d['label'] for target_d in ground_truth ]
+        #preds = [self.find_binary_label(p) for p in predictions ]
+        ground_truth_labels = [ self.find_binary_label(target_d) for target_d in ground_truth ]
         confusion_matrix = self.create_confusion_matrix(predictions, ground_truth_labels)
         index_TP, index_FP, index_TN, index_FN = self.get_index_matrix(confusion_matrix)
-
-
-        self.len_rules(input_dicts, index_TP)
 
         print("TP: ", self.len_rules(input_dicts, index_TP))
         print("FP: ", self.len_rules(input_dicts, index_FP))
         print("TN: ", self.len_rules(input_dicts, index_TN))
         print("FN: ", self.len_rules(input_dicts, index_FN))
 
+        indexes = [index_TP, index_FP, index_TN, index_FN]
         
+
+        self.save_proofs(pred_proof, ground_truth, indexes, input_dicts)
+                
+
+    def save_proofs(self, preds, ground_truth, index, input_dicts):
+        sample_size = 10
+
+        samples_idx = [None, None, None, None]
+        
+        for i, list_idx in enumerate(index):
+            if len(list_idx)>= sample_size:
+                nr_s = sample_size
+                samples_idx[i] = random.sample(list(list_idx), nr_s)
+            elif len(list_idx) > 0:
+                samples_idx[i] = random.sample(list(list_idx), len(list_idx))
+
+        cf_m = ["TP", "FP", "TN", "FN"]
+        with open(self.save_stats_file, 'a') as file:
+            for j, cf in enumerate(cf_m):
+                file.write("\n\n"+str(cf)+ "-------------------")
+                if samples_idx[j] == None:
+                    file.write("\n\nNone\nNone")
+                else:     
+                    for x in samples_idx[j]:
+                        x = x[0]
+                        in_data = input_dicts[x]
+                        file.write("\n\nIndex: " + str(x))
+                        file.write("\nPREDICTED:    " + str(preds[x]))
+                        file.write("\nGROUND TRUTH: " + str(ground_truth[x]))
+                        file.write("\nINPUT:        " + str(in_data["input"]))
+                
+
 
     
     def len_rules(self, data, indexes):
@@ -140,6 +188,7 @@ class Proof_Checker():
             (list) : the mean lenght, min lenght and max lenght of the number of rules for rules 
                      in the data.
         """
+
         nr_ex = len(indexes)
         tot_len_rules = 0
         min_len=np.inf
@@ -155,9 +204,16 @@ class Proof_Checker():
             if len_d > max_len:
                 max_len = len_d
 
-        mean_len = round(tot_len_rules / nr_ex, 2)
+        if nr_ex > 0:
+            mean_len = round(tot_len_rules / nr_ex, 2)
+            return mean_len, min_len, max_len
+        
+        else:
+            return nr_ex, min_len, max_len
 
-        return mean_len, min_len, max_len
+
+
+
 
 
 
@@ -247,8 +303,8 @@ class Proof_Checker():
                         fact_exist=True
 
             if not (rule_exist or fact_exist) and not (step[key] == 0):
-                    self.temp_hal.append(key)
-                    self.hallucination +=1
+                self.temp_hal.append(key)
+                self.hallucination +=1
 
         pass
 
