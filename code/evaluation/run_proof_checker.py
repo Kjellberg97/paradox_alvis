@@ -35,8 +35,9 @@ def main(pred_path, target_path, input_path, save_stats_file):
 
 
 if __name__ == "__main__":
-    pred_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/pretrained_BART/evaluation/checkpoint-22392_output_RP_test.txt"
+    pred_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/pretrained_BART/evaluation/checkpoint-22392_output_RP_greedy.txt"
     target_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_labels.txt"
     input_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt"
-    save_stats_file = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/pretrained_BART/evaluation/checkpoint-22392_TLP_RRP.txt"
+    save_stats_file = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/pretrained_BART/evaluation/checkpoint-22392_TLP_RRP_greedy.txt"
     main(pred_path, target_path, input_path, save_stats_file)
+

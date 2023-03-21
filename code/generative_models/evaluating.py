@@ -15,6 +15,24 @@ print("Loading data...")
 data = PGM.load_all_data(data_path)
 print(data)
 print("Running inference...")
+
+
+
+# BEAM SEARCH: beams > 1
+# GREEDY SEARCH: only data 
+# SAMPLE: sample = True
+
+"""
+THE ARGS FOR GENERATE
+greedy decoding by calling greedy_search() if num_beams=1 and do_sample=False
+contrastive search by calling contrastive_search() if penalty_alpha>0. and top_k>1
+multinomial sampling by calling sample() if num_beams=1 and do_sample=True
+beam-search decoding by calling beam_search() if num_beams>1 and do_sample=False
+beam-search multinomial sampling by calling beam_sample() if num_beams>1 and do_sample=True
+diverse beam-search decoding by calling group_beam_search(), if num_beams>1 and num_beam_groups>1
+constrained beam-search decoding by calling constrained_beam_search(), if constraints!=None or force_words_ids!=None
+"""
+
 predictions = PGM.run_inference(data["test"])
 print("Saving output...")
 PGM.save_output(predictions)

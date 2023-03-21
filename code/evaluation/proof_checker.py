@@ -8,7 +8,7 @@ import random
 
 class Proof_Checker():
 
-    def __init__(self, save_stats_file, seed=10):
+    def __init__(self, save_stats_file, seed=1):
 
         self.confusion_matrix = [0,0,0,0] # True Positive, False Positive, True Negative, False Negative
         self.accuracy = 0
@@ -67,6 +67,7 @@ class Proof_Checker():
         for depth in range(7):
             print()
             print("DEPTH: ",depth)
+            print("NR. SAMPLES: ", len(ground_truth_depths[depth]))
             ground_truth_bools = [ self.find_binary_label(target_d) for target_d in ground_truth_depths[depth] ]
             confusion_matrix = self.create_confusion_matrix(preds_depths[depth], ground_truth_bools)
             accuracy = self.label_accuracy(confusion_matrix)

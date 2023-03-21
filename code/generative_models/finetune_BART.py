@@ -21,6 +21,9 @@ class ProofGenerationModel():
         self.model_path= model_path
         self.model_name = model_name 
         if checkpoint:
+            print()
+            print("LOAD PRETRAINED MODEL WITH CHECKPOINT")
+            print()
             self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + model_name +"/OUTPUT/" + checkpoint + "/") # download bart to local and change path here self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart") # download bart to local and change path here 
         else:
             self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + model_name)
@@ -32,9 +35,9 @@ class ProofGenerationModel():
             output_dir=model_path + "pretrained_BART/" + 'OUTPUT',
                 evaluation_strategy="epoch",
                 learning_rate=2e-5,
-                per_device_train_batch_size=10,
-                per_device_eval_batch_size=10, # 10 innan
-                gradient_accumulation_steps=6, # 32 innan och ingen prediction_loss_only
+                per_device_train_batch_size=8,
+                per_device_eval_batch_size=8, # 10 innan
+                gradient_accumulation_steps=4, # 32 innan och ingen prediction_loss_only
                 prediction_loss_only=False, # Saving less information during evaluation, perhaps less memory usage
                 fp16=True, # Less accurace floats when training
                 #logging_steps=500,
@@ -43,7 +46,7 @@ class ProofGenerationModel():
                 warmup_steps =200,
                 weight_decay=0.01,
                 save_total_limit=5,
-                num_train_epochs=20,
+                num_train_epochs=5,
                 predict_with_generate=True,
                 generation_max_length=1024, # generated tokens if predict_with_generate=True
             ) # download bart to local and change path here
@@ -234,16 +237,32 @@ class ProofGenerationModel():
             data_collator=self.data_collator,
             tokenizer=self.tokenizer,
             compute_metrics=self.compute_metrics,
-            
         )
+
         if self.load_from_checkpoint:
-            trainer.train(self.model_path + self.model_name)
+            print("LOAD CHECKPOINT")
+            trainer.train(resume_from_checkpoint=self.model_path + self.model_name +"/OUTPUT/" + self.checkpoint + "/")
         else:
             trainer.train()
 
 
 
-    def run_inference(self, test_data):
+    def run_inference(self, test_data, beams=1, sample=False, 
+                      penalty_alpha=0, top_k=1,num_beam_groups=1, 
+                      constraints=None, force_words_ids=None  ):
+
+
+        """
+        THE ARGS FOR GENERATE
+        greedy decoding by calling greedy_search() if num_beams=1 and do_sample=False
+        contrastive search by calling contrastive_search() if penalty_alpha>0. and top_k>1
+        multinomial sampling by calling sample() if num_beams=1 and do_sample=True
+        beam-search decoding by calling beam_search() if num_beams>1 and do_sample=False
+        beam-search multinomial sampling by calling beam_sample() if num_beams>1 and do_sample=True
+        diverse beam-search decoding by calling group_beam_search(), if num_beams>1 and num_beam_groups>1
+        constrained beam-search decoding by calling constrained_beam_search(), if constraints!=None or force_words_ids!=None
+        """
+
 
         # Generate outputs
         print("Inputs")
@@ -252,24 +271,11 @@ class ProofGenerationModel():
         
         inputs = self.tokenizer(test_data["input"], truncation=True, padding=True, return_tensors="pt").input_ids.to(device)
 
-        # With batching STILL NOT WORKING
-        # ds = test_data.map(
-        #     self.tokenize_inference, batched=True, writer_batch_size=500,
-        #     batch_size=16, keep_in_memory=False, #drop_last_batch=True
-        #     )
-        # inputs = torch.tensor(ds["input_ids"])
-
-        #print(type(inputs))
-        #print(inputs)
-        #print(inputs.shape)
+        self.model = self.model.to(device)
 
         print("Generating output...")
         outputs = []
-        
-        # ONLY RUNS ON ONE GPU!!!!!!!!!
-
-        self.model = self.model.to(device)
-        
+        7
         BATCH_SIZE = 16
         for i in tqdm(range(inputs.shape[0] // BATCH_SIZE + 1)):
             # Set the left and right slice
@@ -278,8 +284,13 @@ class ProofGenerationModel():
             if idx_slice_right > inputs.shape[0]:
                 idx_slice_right = inputs.shape[0]
             
-            # Generate batch and add to list
-            generated_batch = self.model.generate(inputs[idx_slice_left:idx_slice_right], max_new_tokens=500, do_sample=True)
+            # Generate batch and add to list            
+            
+            generated_batch = self.model.generate(inputs[idx_slice_left:idx_slice_right], max_new_tokens=500, 
+                                                  do_sample=sample, num_beams=beams, penalty_alpha=penalty_alpha, 
+                                                  top_k=top_k, num_beam_groups=num_beam_groups, constraints=constraints, 
+                                                  force_words_ids=force_words_ids)
+            
             outputs.append(generated_batch)
             if idx_slice_right == inputs.shape[0]: # break when we've generated last batch
                 break
