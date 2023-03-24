@@ -150,7 +150,6 @@ class ProofGenerationModel():
     
         train_data = self.tokenize_data(data_path + '_train.txt',  data_path + '_train_labels.txt')
         val_data = self.tokenize_data(data_path + '_val.txt',  data_path + '_val_labels.txt')
-        self.use_divide_step_by_step = False
         test_data = self.tokenize_data(data_path + '_test.txt',  data_path + '_test_labels.txt')
 
         print("Converting to dictionary.")

@@ -2,6 +2,8 @@ from finetune_BART import ProofGenerationModel
 from datasets import Dataset, DatasetDict
 import numpy as np
 from time import time
+import torch
+from tqdm import tqdm
 
 
 class StepsGenerationModel(ProofGenerationModel):
@@ -85,6 +87,7 @@ class StepsGenerationModel(ProofGenerationModel):
     
         train_data = self.tokenize_data(data_path + '_train.txt',  data_path + '_train_step_labels.txt')
         val_data = self.tokenize_data(data_path + '_val.txt',  data_path + '_val_step_labels.txt')
+        self.use_divide_step_by_step = False
         test_data = self.tokenize_data(data_path + '_test.txt',  data_path + '_test_step_labels.txt')
 
         print("Converting to dictionary.")
@@ -153,13 +156,14 @@ class StepsGenerationModel(ProofGenerationModel):
         times_tok_gen=[]
         times_tok_input=[]
         
-        for i in tqdm(range(inputs.shape[0])):
-            inp = inputs[i]
+        for i in tqdm(range(1, inputs.shape[0]+1)):
+            inp = inputs[i-1:i]
             gen_steps = []
             # Generate batch and add to list
             ite = 0
-            n_rules = inp.count(tok_colon)
-            while not complete_proof and ite < n_rules + 10:
+            complete_proof = False
+            #n_rules = inp.count(tok_colon)
+            while complete_proof is False and ite < 100:
 
                 # Time for generating output
                 tgs = time()
@@ -171,29 +175,35 @@ class StepsGenerationModel(ProofGenerationModel):
 
                 # Take time for decoding output
                 tgd = time()
-                decoded_gen_step = self.tokenizer.decode(gen_step, skip_special_tokens=True)
+                decoded_gen_step = self.tokenizer.batch_decode(gen_step, skip_special_tokens=True)
                 times_tok_gen.append(time()-tgd)
 
-                if decoded_gen_step == "True" or decoded_gen_step == "False":
+                gen_steps.append(decoded_gen_step)
+                print("GEN_STEPS:", gen_steps)
+
+                if decoded_gen_step[0] == "True" or decoded_gen_step[0] == "False":
                     complete_proof = True
+
+                else:    
                 
-                fact = decoded_gen_step.split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
-                tdc_inp = time()
-                decoded_inp = self.tokenizer.decode(inp, skip_special_tokens=True)
-                decoded_inp = decoded_inp.replace(gen_step, '')
-                decoded_inp = decoded_inp + ' ' + fact + '1'
-                inp = self.tokenizer(decoded_inp)
-                times_tok_input.append(time()- tdc_inp)
+                    fact = decoded_gen_step[0].split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
+                    tdc_inp = time()
+
+                    # Removes the generated rule and adds the fact to the input
+                    decoded_inp = self.tokenizer.batch_decode(inp, skip_special_tokens=True)
+                    decoded_inp[0] = decoded_inp[0].replace(decoded_gen_step[0], '')
+                    decoded_inp[0] = decoded_inp[0] + ' ' + fact + '1'
+
+                    inp = self.tokenizer.encode(decoded_inp[0], return_tensors="pt").to(device)
+                    times_tok_input.append(time()- tdc_inp)
                 
-                gen_steps.append(gen_step)
+                ite+=1
+            
             
             outputs.append(gen_steps)
-
-
-            if idx_slice_right == inputs.shape[0]: # break when we've generated last batch
-                break
+            print("ALL OUTPUT:", outputs)
         
-        outputs = [item for sublist in outputs for item in sublist]
+        #outputs = [item for sublist in outputs for item in sublist]
         
         print("Avg times:")
         print("\ttime generate output:          ", np.mean(times_gen))
@@ -201,5 +211,8 @@ class StepsGenerationModel(ProofGenerationModel):
         print("\ttimes to decode and code input:", np.mean(times_tok_input))
         
         print("Decoding")
-        raw_output_text_list = [ self.tokenizer.decode(out, skip_special_tokens=True) for out in outputs ] 
-        return raw_output_text_list
+        #raw_output_text_list = [ self.tokenizer.decode(out, skip_special_tokens=True) for out in outputs ] 
+        print(outputs)
+        return outputs
+
+   
