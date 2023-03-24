@@ -98,28 +98,32 @@ class StepsGenerationModel(ProofGenerationModel):
 
         return ds
 
-
     def compute_metrics(self, eval_pred):
         """
-        Computes the accuracy and F1 score for binary classification based on the predictions and labels.
-            Args: eval_pred: an EvalPrediction object that contains the model predictions and labels.
-            Returns: A dictionary with the keys "accuracy" and "f1" and their corresponding values.
+        Computes the accuracy for binary classification based on the predictions and labels.
+
+        Args:
+            eval_pred (EvalPrediction): An EvalPrediction object that contains the model predictions and labels.
+
+        Returns:
+            A dictionary with the key "accuracy" and its corresponding value.
         """
         preds, label_ids = eval_pred
-        truths = np.where(label_ids != -100,  label_ids, self.tokenizer.pad_token_id) # remove padding
 
-        print(preds)
-        print(truths)
+        # Replace padding tokens with the pad_token_id and remove last token
+        truths = np.where(label_ids != -100, label_ids, self.tokenizer.pad_token_id)[:, :-1]
 
-        # Calculate accruacy by counting perfect matches
-        acc = np.mean([ 1 if (p == t).all() else 0 for p, t in zip(preds, truths)])
-        #ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+        # Remove the start-of-sequence token
+        preds = preds[:, 1:]
 
-        #preds = self.tokenizer.batch_decode(preds, skip_special_tokens=True)
-        #truths = self.tokenizer.batch_decode(truths, skip_special_tokens=True)
-        #acc = self.metric_acc.compute(predictions=preds, references=truths)["accuracy"]
-        #f1 = self.metric_f1.compute(predictions=preds, references=truths)["f1"]
-        result = {"accuracy": acc} #, "f1": f1}
+        # Replace end-of-sequence tokens with the pad_token_id
+        preds = np.where(preds != self.tokenizer.eos_token, preds, self.tokenizer.pad_token_id)
+
+        # Calculate accuracy by checking if each row of preds matches the corresponding row of truths
+        acc = np.mean(np.all(preds == truths, axis=1))
+
+        # Return a dictionary with the accuracy value
+        result = {"accuracy": acc}
         return result
 
 
