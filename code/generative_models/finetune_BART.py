@@ -14,12 +14,13 @@ import torch.distributed as dist
                 
 
 class ProofGenerationModel():
-    def __init__(self, model_path, model_name, checkpoint=None):
+    def __init__(self, model_path, model_name, checkpoint=None, batch_size=8, num_epochs=3, evaluation_strategy="epoch", save_strategy="epoch", logging_steps=500):
 
         self.checkpoint = checkpoint
         self.load_from_checkpoint = self.load_checkpoint(checkpoint)
         self.model_path= model_path
         self.model_name = model_name 
+        self.use_divide_step_by_step = True
         if checkpoint:
             print()
             print("LOAD PRETRAINED MODEL WITH CHECKPOINT")
@@ -32,21 +33,21 @@ class ProofGenerationModel():
         self.metric_acc = load_metric("accuracy")
         self.metric_f1 = load_metric("f1")
         self.training_args = Seq2SeqTrainingArguments(
-            output_dir=model_path + "pretrained_BART/" + 'OUTPUT',
-                evaluation_strategy="epoch",
+            output_dir=model_path + model_name + '/OUTPUT',
+                evaluation_strategy=evaluation_strategy,
                 learning_rate=2e-5,
-                per_device_train_batch_size=8,
-                per_device_eval_batch_size=8, # 10 innan
+                per_device_train_batch_size=batch_size,
+                per_device_eval_batch_size=batch_size, # 10 innan
                 gradient_accumulation_steps=4, # 32 innan och ingen prediction_loss_only
                 prediction_loss_only=False, # Saving less information during evaluation, perhaps less memory usage
                 fp16=True, # Less accurace floats when training
-                #logging_steps=500,
-                save_strategy="epoch",
-                load_best_model_at_end=True,
+                logging_steps=logging_steps,
+                save_strategy=save_strategy,
+                #load_best_model_at_end=True,
                 warmup_steps =200,
                 weight_decay=0.01,
-                save_total_limit=5,
-                num_train_epochs=5,
+                save_total_limit=10,
+                num_train_epochs=num_epochs,
                 predict_with_generate=True,
                 generation_max_length=1024, # generated tokens if predict_with_generate=True
             ) # download bart to local and change path here
@@ -125,6 +126,7 @@ class ProofGenerationModel():
         tokenized_ds:
             object of the tokenize data
         """
+        
         raw_ds = self.format_data(raw_inputs_path, raw_labels_path)
         print("Formatting complete.\n")
         tokenized_ds = raw_ds.map(self.tokenize, batched=True, writer_batch_size=500)
@@ -148,6 +150,7 @@ class ProofGenerationModel():
     
         train_data = self.tokenize_data(data_path + '_train.txt',  data_path + '_train_labels.txt')
         val_data = self.tokenize_data(data_path + '_val.txt',  data_path + '_val_labels.txt')
+        self.use_divide_step_by_step = False
         test_data = self.tokenize_data(data_path + '_test.txt',  data_path + '_test_labels.txt')
 
         print("Converting to dictionary.")
@@ -263,7 +266,6 @@ class ProofGenerationModel():
         constrained beam-search decoding by calling constrained_beam_search(), if constraints!=None or force_words_ids!=None
         """
 
-
         # Generate outputs
         print("Inputs")
         device = torch.device("cuda")
@@ -275,7 +277,7 @@ class ProofGenerationModel():
 
         print("Generating output...")
         outputs = []
-        7
+        
         BATCH_SIZE = 16
         for i in tqdm(range(inputs.shape[0] // BATCH_SIZE + 1)):
             # Set the left and right slice
