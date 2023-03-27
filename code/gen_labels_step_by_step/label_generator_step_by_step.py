@@ -35,11 +35,6 @@ class Find_next_rule():
 
         # Loop until end flag is set
         while not end_flag: 
-
-            # Print current state
-            print("\n\nRULES:", rules)
-            print("FACTS:", facts)
-            print("QUERY:", query)
             
             # Check if query is already in facts
             if query in facts:
@@ -66,9 +61,6 @@ class Find_next_rule():
                     # Add False to the list of steps taken
                     steps.append("[False")
                     end_flag = True
-            
-            # Print steps taken so far
-            print("STEPS:", steps)
 
         # Reformat steps taken and return
         steps = self.reformat(steps)    

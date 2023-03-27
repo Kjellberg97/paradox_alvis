@@ -10,26 +10,31 @@ class StepsGenerationModel(ProofGenerationModel):
 
     def divide_step_by_step(self, inputs, labels):
         # Divide the input and labels into steps
+        flat_list = []
         new_inputs, new_labels = [], []
         for inp, step_labels in zip(inputs, labels):
             inp = '1'.join(inp.split('1')[:-1]) + '1' # Remove everything after last '1'.
             new_inputs.append(inp)
-        
-            for lab in step_labels:
-                new_labels.append(lab)            
 
-                # The last lab is True/False which does not exist in the input
-                if lab != step_labels[-1]:
-                    # Remove the fulfilled rule from next input
-                    inp = inp.replace(lab, "")
-                    # Remove leading and trailing whitespaces along with never having more than one ' ' in a row.
-                    inp = ' '.join(inp.strip().split())
-                    
-                    # Split on comma to retrieve the fact, but not the last character which is a ':'
-                    fact = lab.split(", ")[-1][:-1]
+            if self.use_divide_step_by_step:
+                for lab in step_labels:
+                    new_labels.append(lab)            
 
-                    inp = inp + ' ' + fact + '1'
-                    new_inputs.append(inp)
+                    # The last lab is True/False which does not exist in the input
+                    if lab != step_labels[-1]:
+                        # Remove the fulfilled rule from next input
+                        inp = inp.replace(lab, "")
+                        # Remove leading and trailing whitespaces along with never having more than one ' ' in a row.
+                        inp = ' '.join(inp.strip().split())
+                        
+                        # Split on comma to retrieve the fact, but not the last character which is a ':'
+                        fact = lab.split(", ")[-1][:-1]
+
+                        inp = inp + ' ' + fact + '1'
+                        new_inputs.append(inp)
+            
+            else:
+                new_labels.append(str(step_labels))
 
         return new_inputs, new_labels
 
@@ -48,14 +53,14 @@ class StepsGenerationModel(ProofGenerationModel):
         print(raw_inputs_path)
         raw_inputs = self.read_file_lines(raw_inputs_path)
         print(raw_labels_path)
-        raw_labels = self.read_file_lines(raw_labels_path)
+        step_labels = self.read_file_lines(raw_labels_path)
 
         # Create list of strings
-        strlist_input =  [ str(input["input"]) for input in raw_inputs ]
+        step_inputs =  [ str(input["input"]) for input in raw_inputs ]
 
         # Process so that each step is one input, target pair
-        if self.use_divide_step_by_step:
-            step_inputs, step_labels = self.divide_step_by_step(strlist_input, raw_labels)
+       
+        step_inputs, step_labels = self.divide_step_by_step(step_inputs, step_labels)
 
         # Create Dataset from a list of dictionaries
         dict_list = []
@@ -90,6 +95,7 @@ class StepsGenerationModel(ProofGenerationModel):
         self.use_divide_step_by_step = False
         test_data = self.tokenize_data(data_path + '_test.txt',  data_path + '_test_step_labels.txt')
 
+
         print("Converting to dictionary.")
         ds = DatasetDict({
             'train': train_data,
@@ -104,25 +110,30 @@ class StepsGenerationModel(ProofGenerationModel):
 
     def compute_metrics(self, eval_pred):
         """
-        Computes the accuracy and F1 score for binary classification based on the predictions and labels.
-            Args: eval_pred: an EvalPrediction object that contains the model predictions and labels.
-            Returns: A dictionary with the keys "accuracy" and "f1" and their corresponding values.
+        Computes the accuracy for binary classification based on the predictions and labels.
+
+        Args:
+            eval_pred (EvalPrediction): An EvalPrediction object that contains the model predictions and labels.
+
+        Returns:
+            A dictionary with the key "accuracy" and its corresponding value.
         """
         preds, label_ids = eval_pred
-        truths = np.where(label_ids != -100,  label_ids, self.tokenizer.pad_token_id) # remove padding
 
-        print(preds)
-        print(truths)
+        # Replace padding tokens with the pad_token_id and remove last token
+        truths = np.where(label_ids != -100, label_ids, self.tokenizer.pad_token_id)[:, :-1]
 
-        # Calculate accruacy by counting perfect matches
-        acc = np.mean([ 1 if (p == t).all() else 0 for p, t in zip(preds, truths)])
-        #ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+        # Remove the start-of-sequence token
+        preds = preds[:, 1:]
 
-        #preds = self.tokenizer.batch_decode(preds, skip_special_tokens=True)
-        #truths = self.tokenizer.batch_decode(truths, skip_special_tokens=True)
-        #acc = self.metric_acc.compute(predictions=preds, references=truths)["accuracy"]
-        #f1 = self.metric_f1.compute(predictions=preds, references=truths)["f1"]
-        result = {"accuracy": acc} #, "f1": f1}
+        # Replace end-of-sequence tokens with the pad_token_id
+        preds = np.where(preds != self.tokenizer.eos_token, preds, self.tokenizer.pad_token_id)
+
+        # Calculate accuracy by checking if each row of preds matches the corresponding row of truths
+        acc = np.mean(np.all(preds == truths, axis=1))
+
+        # Return a dictionary with the accuracy value
+        result = {"accuracy": acc}
         return result
 
 
@@ -163,7 +174,7 @@ class StepsGenerationModel(ProofGenerationModel):
             ite = 0
             complete_proof = False
             #n_rules = inp.count(tok_colon)
-            while complete_proof is False and ite < 100:
+            while not complete_proof and ite < 100:
 
                 # Time for generating output
                 tgs = time()
@@ -178,30 +189,27 @@ class StepsGenerationModel(ProofGenerationModel):
                 decoded_gen_step = self.tokenizer.batch_decode(gen_step, skip_special_tokens=True)
                 times_tok_gen.append(time()-tgd)
 
-                gen_steps.append(decoded_gen_step)
-                print("GEN_STEPS:", gen_steps)
+                gen_steps.append(decoded_gen_step[0])
 
                 if decoded_gen_step[0] == "True" or decoded_gen_step[0] == "False":
                     complete_proof = True
 
-                else:    
+                   
                 
-                    fact = decoded_gen_step[0].split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
-                    tdc_inp = time()
+                fact = decoded_gen_step[0].split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
+                tdc_inp = time()
 
-                    # Removes the generated rule and adds the fact to the input
-                    decoded_inp = self.tokenizer.batch_decode(inp, skip_special_tokens=True)
-                    decoded_inp[0] = decoded_inp[0].replace(decoded_gen_step[0], '')
-                    decoded_inp[0] = decoded_inp[0] + ' ' + fact + '1'
+                # Removes the generated rule and adds the fact to the input
+                decoded_inp = self.tokenizer.batch_decode(inp, skip_special_tokens=True)
+                decoded_inp[0] = decoded_inp[0].replace(decoded_gen_step[0], '')
+                decoded_inp[0] = decoded_inp[0] + ' ' + fact + '1'
 
-                    inp = self.tokenizer.encode(decoded_inp[0], return_tensors="pt").to(device)
-                    times_tok_input.append(time()- tdc_inp)
+                inp = self.tokenizer.encode(decoded_inp[0], return_tensors="pt").to(device)
+                times_tok_input.append(time()- tdc_inp)
                 
                 ite+=1
             
-            
             outputs.append(gen_steps)
-            print("ALL OUTPUT:", outputs)
         
         #outputs = [item for sublist in outputs for item in sublist]
         
@@ -212,7 +220,6 @@ class StepsGenerationModel(ProofGenerationModel):
         
         print("Decoding")
         #raw_output_text_list = [ self.tokenizer.decode(out, skip_special_tokens=True) for out in outputs ] 
-        print(outputs)
         return outputs
 
    

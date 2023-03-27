@@ -8,7 +8,8 @@ from finetune_BART_step_by_step import StepsGenerationModel
 model_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/"
 model_name = "gen_step_by_step"
 checkpoint = "checkpoint-8500"
-data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small_cleaned"
+#data_path="/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small_cleaned"
+data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned"
 
 SGM = StepsGenerationModel(model_path, model_name, checkpoint)
 print("Loading data...")

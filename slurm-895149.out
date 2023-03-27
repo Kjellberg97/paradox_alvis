@@ -1,0 +1,22 @@
+This job can be monitored from: https://scruffy.c3se.chalmers.se/d/alvis-job/alvis-job?var-jobid=895149&from=1679909292000
+INFO:    underlay of /etc/localtime required more than 50 (94) bind mounts
+INFO:    underlay of /usr/bin/nvidia-smi required more than 50 (470) bind mounts
+INFO:    underlay of /usr/share/lmod/lmod required more than 50 (59) bind mounts
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_train.txt /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_train_step_labels.txt
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/all_small_cleaned_reduced_train.txt /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/all_small_cleaned_reduced_train_step_labels.txt
+  0%|          | 0/2240 [00:00<?, ?it/s]  4%|▍         | 90/2240 [00:00<00:02, 896.68it/s]  8%|▊         | 180/2240 [00:00<00:02, 882.07it/s] 12%|█▏        | 275/2240 [00:00<00:02, 911.29it/s] 17%|█▋        | 370/2240 [00:00<00:02, 923.11it/s] 21%|██        | 463/2240 [00:00<00:01, 915.62it/s] 25%|██▍       | 559/2240 [00:00<00:01, 929.78it/s] 29%|██▉       | 659/2240 [00:00<00:01, 949.99it/s] 34%|███▍      | 759/2240 [00:00<00:01, 962.38it/s] 38%|███▊      | 856/2240 [00:00<00:01, 955.93it/s] 43%|████▎     | 953/2240 [00:01<00:01, 958.11it/s] 47%|████▋     | 1050/2240 [00:01<00:01, 960.74it/s] 51%|█████▏    | 1148/2240 [00:01<00:01, 959.49it/s] 56%|█████▌    | 1247/2240 [00:01<00:01, 968.56it/s] 60%|██████    | 1347/2240 [00:01<00:00, 977.33it/s] 65%|██████▍   | 1445/2240 [00:01<00:00, 954.88it/s] 69%|██████▉   | 1547/2240 [00:01<00:00, 972.72it/s] 74%|███████▎  | 1648/2240 [00:01<00:00, 982.36it/s] 78%|███████▊  | 1747/2240 [00:01<00:00, 978.96it/s] 82%|████████▏ | 1845/2240 [00:01<00:00, 978.87it/s] 87%|████████▋ | 1943/2240 [00:02<00:00, 973.11it/s] 91%|█████████ | 2041/2240 [00:02<00:00, 969.54it/s] 95%|█████████▌| 2138/2240 [00:02<00:00, 960.60it/s]100%|█████████▉| 2235/2240 [00:02<00:00, 921.36it/s]100%|██████████| 2240/2240 [00:02<00:00, 950.64it/s]
+  0%|          | 0/2240 [00:00<?, ?it/s]  5%|▌         | 121/2240 [00:00<00:01, 1203.36it/s] 13%|█▎        | 293/2240 [00:00<00:01, 1504.33it/s] 21%|██        | 462/2240 [00:00<00:01, 1587.57it/s] 29%|██▊       | 641/2240 [00:00<00:00, 1665.42it/s] 36%|███▌      | 810/2240 [00:00<00:00, 1661.33it/s] 44%|████▍     | 988/2240 [00:00<00:00, 1700.22it/s] 52%|█████▏    | 1159/2240 [00:00<00:00, 1697.83it/s] 60%|█████▉    | 1338/2240 [00:00<00:00, 1725.98it/s] 68%|██████▊   | 1518/2240 [00:00<00:00, 1748.23it/s] 76%|███████▌  | 1695/2240 [00:01<00:00, 1754.46it/s] 84%|████████▎ | 1871/2240 [00:01<00:00, 1755.72it/s] 91%|█████████▏| 2047/2240 [00:01<00:00, 1736.36it/s] 99%|█████████▉| 2225/2240 [00:01<00:00, 1748.19it/s]100%|██████████| 2240/2240 [00:01<00:00, 1697.49it/s]
+Labels TRUE/FALSE:      0.53 0.47
+Num ex for each depth:  [298, 328, 312, 324, 325, 339, 314]
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_val.txt /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_val_step_labels.txt
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/all_small_cleaned_reduced_val.txt /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/all_small_cleaned_reduced_val_step_labels.txt
+  0%|          | 0/280 [00:00<?, ?it/s] 41%|████      | 114/280 [00:00<00:00, 1132.64it/s] 81%|████████▏ | 228/280 [00:00<00:00, 1091.39it/s]100%|██████████| 280/280 [00:00<00:00, 1118.83it/s]
+  0%|          | 0/280 [00:00<?, ?it/s] 64%|██████▎   | 178/280 [00:00<00:00, 1771.80it/s]100%|██████████| 280/280 [00:00<00:00, 1750.05it/s]
+Labels TRUE/FALSE:      0.49 0.51
+Num ex for each depth:  [38, 37, 42, 39, 40, 46, 38]
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_step_labels.txt
+/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/all_small_cleaned_reduced_test.txt /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/all_small_cleaned_reduced_test_step_labels.txt
+  0%|          | 0/280 [00:00<?, ?it/s] 40%|████      | 113/280 [00:00<00:00, 1126.59it/s] 86%|████████▋ | 242/280 [00:00<00:00, 1218.95it/s]100%|██████████| 280/280 [00:00<00:00, 1204.76it/s]
+  0%|          | 0/280 [00:00<?, ?it/s] 61%|██████    | 170/280 [00:00<00:00, 1699.26it/s]100%|██████████| 280/280 [00:00<00:00, 1753.70it/s]
+Labels TRUE/FALSE:      0.57 0.43
+Num ex for each depth:  [33, 38, 51, 44, 47, 28, 39]

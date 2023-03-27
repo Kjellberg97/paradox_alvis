@@ -129,7 +129,9 @@ class ProofGenerationModel():
         
         raw_ds = self.format_data(raw_inputs_path, raw_labels_path)
         print("Formatting complete.\n")
-        tokenized_ds = raw_ds.map(self.tokenize, batched=True, writer_batch_size=500)
+        
+        tokenized_ds = raw_ds.map(self.tokenize, batched=True, writer_batch_size=500) 
+
         print("Mapping complete.")
 
         return tokenized_ds
