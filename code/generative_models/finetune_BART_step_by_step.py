@@ -139,7 +139,33 @@ class StepsGenerationModel(ProofGenerationModel):
     def run_inference(self, test_data, beams=1, sample=False, 
                       penalty_alpha=0, top_k=1,num_beam_groups=1, 
                       constraints=None, force_words_ids=None  ):
+        """Generates output of in testing data. The generation is done in fully based on 
+        the input. The generation will loop through the input until a True or False label is generated.
+        The function will also remove whatever the model genrates each step from the input and add the 
+        new fact to the input
 
+        ARGS: 
+            test_data (list):
+                the data that should be generated on
+            beams (int):
+                number of beams that are used in the generation should be 1 if not intended to use beam search
+            sample (bool):
+                True if you want to use smaple to generate
+            penalty_alpha (float):
+                used for contrastive search
+            top_k (int):
+                >1 if contrastive search
+            num_beams_groups (int):
+                >1 if group beam search should be used
+            constrains (str):
+                used for constrained beam search
+            force_words_ids (str):
+                used for constrained beam search
+        
+        RETURN:
+            outputs(list):
+                a list over the completed proofs for each input
+        """
 
         """
         THE ARGS FOR GENERATE
