@@ -107,7 +107,6 @@ class StepsGenerationModel(ProofGenerationModel):
 
         return ds
 
-
     def compute_metrics(self, eval_pred):
         """
         Computes the accuracy for binary classification based on the predictions and labels.
