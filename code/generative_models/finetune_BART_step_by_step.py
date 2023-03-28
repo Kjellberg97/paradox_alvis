@@ -183,7 +183,7 @@ class StepsGenerationModel(ProofGenerationModel):
         constrained beam-search decoding by calling constrained_beam_search(), if constraints!=None or force_words_ids!=None
         """
 
-        data = SGM.load_all_data(data_path, generate_on)
+        data = self.load_all_data(data_path, generate_on)
 
         if generate_on == "test":
             test_data = data["test"]

@@ -138,7 +138,7 @@ class ProofGenerationModel():
         return tokenized_ds
 
 
-    def load_all_data(self, data_path):
+    def load_all_data(self, data_path, generate_on="test"):
         """Loads and tokenizes data from the given file paths, and returns a Hugging Face DatasetDict object.
 
         ARGS:
@@ -261,7 +261,7 @@ class ProofGenerationModel():
 
 
 
-    def run_inference(self, test_data, beams=1, sample=False, 
+    def run_inference(self, data_path, generate_on="test", beams=1, sample=False, 
                       penalty_alpha=0, top_k=1,num_beam_groups=1, 
                       constraints=None, force_words_ids=None  ):
 
@@ -276,6 +276,12 @@ class ProofGenerationModel():
         diverse beam-search decoding by calling group_beam_search(), if num_beams>1 and num_beam_groups>1
         constrained beam-search decoding by calling constrained_beam_search(), if constraints!=None or force_words_ids!=None
         """
+        data = self.load_all_data(data_path, generate_on)
+
+        if generate_on == "test":
+            test_data = data["test"]
+        elif generate_on == "val":
+            test_data = data["val"]
 
         # Generate outputs
         print("Inputs")
