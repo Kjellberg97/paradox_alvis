@@ -21,6 +21,7 @@ class ProofGenerationModel():
         self.model_path= model_path
         self.model_name = model_name 
         self.use_divide_step_by_step = True
+        self.gen_on = None
         self.data_path = None
         if checkpoint:
             print()
@@ -188,7 +189,7 @@ class ProofGenerationModel():
 
         print(self.model_path, m_n)
 
-        name_model_data = "_"+str(m_n) + "_"+str(d_n)
+        name_model_data = "_"+str(m_n) + "_"+str(d_n) + "_" +str(self.gen_on)
 
         if self.checkpoint:
             save_path = self.model_path + self.model_name + "/evaluation/" + self.checkpoint + name_model_data + '_output.txt'
@@ -280,8 +281,10 @@ class ProofGenerationModel():
 
         if generate_on == "test":
             test_data = data["test"]
+            self.gen_on = "TEST"
         elif generate_on == "val":
-            test_data = data["val"]
+            test_data = data["valid"]
+            self.gen_on = "VAL"
 
         # Generate outputs
         print("Inputs")

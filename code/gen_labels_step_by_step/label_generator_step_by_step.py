@@ -44,7 +44,6 @@ class Find_next_rule():
             # If query is not in facts, try to find a new fact through fulfilling a rule
             else: 
                 new_rule = self.find_rule(rules, facts)
-                print("Step:", new_rule)
                 
                 # If a new rule is found
                 if new_rule != None:

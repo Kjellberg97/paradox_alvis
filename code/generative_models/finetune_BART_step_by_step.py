@@ -187,8 +187,10 @@ class StepsGenerationModel(ProofGenerationModel):
 
         if generate_on == "test":
             test_data = data["test"]
+            self.gen_on = "TEST"
         elif generate_on == "val":
-            test_data = data["val"]
+            test_data = data["valid"]
+            self.gen_on = "VAL"
 
         # Generate outputs
         print("Inputs")
@@ -231,8 +233,6 @@ class StepsGenerationModel(ProofGenerationModel):
                 if decoded_gen_step[0] == "True" or decoded_gen_step[0] == "False":
                     complete_proof = True
 
-                   
-                
                 fact = decoded_gen_step[0].split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
                 tdc_inp = time()
 

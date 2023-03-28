@@ -33,7 +33,7 @@ diverse beam-search decoding by calling group_beam_search(), if num_beams>1 and 
 constrained beam-search decoding by calling constrained_beam_search(), if constraints!=None or force_words_ids!=None
 """
 
-predictions = PGM.run_inference(data["test"])
+predictions = PGM.run_inference(data_path, generate_on="test")
 print("Saving output...")
 PGM.save_output(predictions)
 

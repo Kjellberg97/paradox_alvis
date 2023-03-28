@@ -12,10 +12,13 @@ class Proof_Checker():
 
         self.confusion_matrix = [0,0,0,0] # True Positive, False Positive, True Negative, False Negative
         self.accuracy = 0
+        self.num_ex = 0
+
         self.corr_proofs = 0
-        self.num_ex = 0 
-        self.syntax_err = 0
-        self.hallucination = 0
+        self.hall_rule = 0
+        self.hall_fact = 0
+        self.ended_too_early = 0
+
         self.temp_hal = []
         self.hallucination_list = []
         self.save_stats_file = save_stats_file
