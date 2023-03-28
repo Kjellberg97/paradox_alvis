@@ -13,11 +13,9 @@ data_path="/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small_cleaned"
 
 SGM = StepsGenerationModel(model_path, model_name, checkpoint)
 print("Loading data...")
-data = SGM.load_all_data(data_path)
+#data = SGM.load_all_data(data_path)
 print(data)
 print("Running inference...")
-
-
 
 # BEAM SEARCH: beams > 1
 # GREEDY SEARCH: only data 
@@ -34,6 +32,6 @@ diverse beam-search decoding by calling group_beam_search(), if num_beams>1 and 
 constrained beam-search decoding by calling constrained_beam_search(), if constraints!=None or force_words_ids!=None
 """
 
-predictions = SGM.run_inference(data["test"])
+predictions = SGM.run_inference(data_path)
 print("Saving output...")
 SGM.save_output(predictions)

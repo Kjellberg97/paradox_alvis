@@ -77,7 +77,7 @@ class StepsGenerationModel(ProofGenerationModel):
 
 
 
-    def load_all_data(self, data_path):
+    def load_all_data(self, data_path, generate_on="test"):
         """Loads and tokenizes data from the given file paths, and returns a Hugging Face DatasetDict object.
 
         ARGS:
@@ -93,8 +93,11 @@ class StepsGenerationModel(ProofGenerationModel):
         self.data_path = data_path
     
         train_data = self.tokenize_data(data_path + '_train.txt',  data_path + '_train_step_labels.txt')
+        if generate_on == "val":
+            self.use_divide_step_by_step = False
         val_data = self.tokenize_data(data_path + '_val.txt',  data_path + '_val_step_labels.txt')
-        self.use_divide_step_by_step = False
+        if generate_on == "test":
+            self.use_divide_step_by_step = False
         test_data = self.tokenize_data(data_path + '_test.txt',  data_path + '_test_step_labels.txt')
 
 
@@ -138,7 +141,7 @@ class StepsGenerationModel(ProofGenerationModel):
         return result
 
 
-    def run_inference(self, test_data, beams=1, sample=False, 
+    def run_inference(self, data_path, generate_on="test",  beams=1, sample=False, 
                       penalty_alpha=0, top_k=1,num_beam_groups=1, 
                       constraints=None, force_words_ids=None  ):
         """Generates output of in testing data. The generation is done in fully based on 
@@ -179,6 +182,13 @@ class StepsGenerationModel(ProofGenerationModel):
         diverse beam-search decoding by calling group_beam_search(), if num_beams>1 and num_beam_groups>1
         constrained beam-search decoding by calling constrained_beam_search(), if constraints!=None or force_words_ids!=None
         """
+
+        data = SGM.load_all_data(data_path, generate_on)
+
+        if generate_on == "test":
+            test_data = data["test"]
+        elif generate_on == "val":
+            test_data = data["val"]
 
         # Generate outputs
         print("Inputs")
