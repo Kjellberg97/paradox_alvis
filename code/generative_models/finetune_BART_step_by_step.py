@@ -89,6 +89,8 @@ class StepsGenerationModel(ProofGenerationModel):
             A Hugging Face DatasetDict object containing the tokenized train, test, and validation data.
         """
         # self.data_path in ex format "LP/prop_exampels_all"
+
+        self.data_path = data_path
     
         train_data = self.tokenize_data(data_path + '_train.txt',  data_path + '_train_step_labels.txt')
         val_data = self.tokenize_data(data_path + '_val.txt',  data_path + '_val_step_labels.txt')

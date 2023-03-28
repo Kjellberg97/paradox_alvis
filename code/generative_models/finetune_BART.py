@@ -21,6 +21,7 @@ class ProofGenerationModel():
         self.model_path= model_path
         self.model_name = model_name 
         self.use_divide_step_by_step = True
+        self.data_path = None
         if checkpoint:
             print()
             print("LOAD PRETRAINED MODEL WITH CHECKPOINT")
@@ -148,6 +149,7 @@ class ProofGenerationModel():
         ds (DatasetDict): 
             A Hugging Face DatasetDict object containing the tokenized train, test, and validation data.
         """
+        self.data_path = data_path
         # self.data_path in ex format "LP/prop_exampels_all"
     
         train_data = self.tokenize_data(data_path + '_train.txt',  data_path + '_train_labels.txt')
@@ -180,8 +182,16 @@ class ProofGenerationModel():
 
     def save_output(self, output):
         # Get correct path
+
+        d_n = self.data_path.split("/")[-2]
+        m_n = self.model_path.split("/")[-2]
+
+        print(self.model_path, m_n)
+
+        name_model_data = "_"+str(m_n) + "_"+str(d_n)
+
         if self.checkpoint:
-            save_path = self.model_path + self.model_name + "/evaluation/" + self.checkpoint + '_output.txt'
+            save_path = self.model_path + self.model_name + "/evaluation/" + self.checkpoint + name_model_data + '_output.txt'
         else:
             # checkpoint_0 is when we dont use any checkpoint
             save_path = self.model_path + self.model_name + "/evaluation/checkpoint_0_output.txt"
