@@ -102,26 +102,38 @@ class Proof_Checker_Step(Proof_Checker):
 
     def correctness_of_proof(self, pred_proof, input_string):
         # Check the correctness of the generated proofs
-
+        inp = input_string.copy()
         # Loop through the predicted proof to see if the rules exist
         for i, pred_step in enumerate(pred_proof):
-            
             if pred_step == "True" or pred_step == "False":
                 return True, i
 
+            # Find fact
             fact = pred_step.split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
 
-            input_string = input_string.replace(pred_step, '')
-            input_string = input_string + ' ' + fact + '1'
+            # Remove rule from input and add fact
+            if pred_step in inp: 
+                inp = inp.replace(pred_step, '')
+                inp = inp + ' ' + fact + '1'
+            else: # KONTROLLERA SÅ ATT DEN HAR TAGIT BORT NÅNTING??
+                return False, i
+
+
+            
+
+
+
+
+
 
             # find pred_step in rules_facts
-            if pred_step in input_string:
-                next_pred_step = input_string.replace(pred_step, '')
-            else:
-                return False, i
+            # if pred_step in inp:
+            #     next_pred_step = inp.replace(pred_step, '')
+            # else:
+            #     return False, i
 
-            if i > 0 and i < len(pred_proof) - 1 and next_pred_step not in input_string:
-                return False, i
+            # if i > 0 and i < len(pred_proof) - 1 and next_pred_step not in inp:
+            #     return False, i
 
 
 
