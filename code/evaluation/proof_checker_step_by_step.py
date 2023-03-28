@@ -7,7 +7,7 @@ import numpy as np
 test_preds_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step/evaluation/checkpoint-8500_output_LP_RPall.txt"
 test_truth_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_step_labels.txt"
 input_data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt"
-save_stats_file = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step/evaluation/checkpoint-8500_TLP_RRP.txt"
+save_stats_file = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step/evaluation/proof_cheker_stats/proof_checker_checkpoint-8500_LP_RP.txt"
 
 class Proof_Checker_Step(Proof_Checker):
  
@@ -105,7 +105,7 @@ def main():
     print("F1-score:", f1)
         
     PC.divide_data_into_depths(input_data, preds_data, truth_data)
-    find_non_bools(preds_data)
+    PC.find_non_bools(preds_data)
 
 if __name__ == "__main__":
     main()
