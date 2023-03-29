@@ -1,0 +1,81 @@
+This job can be monitored from: https://scruffy.c3se.chalmers.se/d/alvis-job/alvis-job?var-jobid=898803&from=1679989689000
+INFO:    underlay of /etc/localtime required more than 50 (94) bind mounts
+INFO:    underlay of /usr/bin/nvidia-smi required more than 50 (470) bind mounts
+INFO:    underlay of /usr/share/lmod/lmod required more than 50 (59) bind mounts
+
+Confusion matrix:
+ [[14215     7]
+ [   58 13720]]
+
+Accuracy: 0.9976785714285714
+F1-score: 0.9976367933103071
+
+DEPTH:  0
+NR. SAMPLES:  3945
+TP:  (28.66, 0, 113)
+FP:  (0, inf, 0)
+TN:  (17.49, 0, 95)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [0.79 0.   0.21 0.  ]
+acc 1.0
+
+DEPTH:  1
+NR. SAMPLES:  4054
+TP:  (37.09, 3, 112)
+FP:  (0, inf, 0)
+TN:  (17.79, 1, 89)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [0.775 0.    0.225 0.   ]
+acc 1.0
+
+DEPTH:  2
+NR. SAMPLES:  3973
+TP:  (43.81, 4, 118)
+FP:  (0, inf, 0)
+TN:  (19.19, 2, 72)
+FN:  (42.43, 15, 117)
+Rates: TP, FP, TN, FN
+ [0.598 0.    0.4   0.002]
+acc 0.9982381072237604
+
+DEPTH:  3
+NR. SAMPLES:  4042
+TP:  (47.88, 6, 116)
+FP:  (0, inf, 0)
+TN:  (22.27, 4, 86)
+FN:  (35.0, 19, 68)
+Rates: TP, FP, TN, FN
+ [0.44  0.    0.558 0.002]
+acc 0.9977733795150915
+
+DEPTH:  4
+NR. SAMPLES:  4007
+TP:  (51.75, 8, 118)
+FP:  (26.0, 26, 26)
+TN:  (29.21, 5, 95)
+FN:  (43.6, 20, 80)
+Rates: TP, FP, TN, FN
+ [0.355 0.    0.641 0.004]
+acc 0.9960069877714001
+
+DEPTH:  5
+NR. SAMPLES:  3959
+TP:  (53.54, 12, 118)
+FP:  (37.0, 27, 51)
+TN:  (36.0, 9, 93)
+FN:  (49.0, 21, 116)
+Rates: TP, FP, TN, FN
+ [0.271 0.001 0.725 0.003]
+acc 0.9959585753978277
+
+DEPTH:  6
+NR. SAMPLES:  4020
+TP:  (55.18, 13, 118)
+FP:  (35.67, 24, 46)
+TN:  (42.81, 12, 103)
+FN:  (53.64, 23, 103)
+Rates: TP, FP, TN, FN
+ [0.203 0.001 0.793 0.003]
+acc 0.9957711442786069
