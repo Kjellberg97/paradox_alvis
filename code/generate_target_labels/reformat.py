@@ -1,4 +1,5 @@
 import json
+import re
 
 def reformat_input(dict_in, include_non_facts=False):
     non_facts_list = [pred for pred in dict_in["preds"] if pred not in dict_in["facts"]]
@@ -26,6 +27,9 @@ def reformat_input(dict_in, include_non_facts=False):
         dict_in["input"] = new_query + ' ' + new_rules + ' ' + facts + ' ' + non_facts
     else:
         dict_in["input"] = new_query + ' ' + new_rules + ' ' + facts
+
+    # Remove all 1s that stand alone
+    dict_in["input"] = re.sub(r'(?<!\S)1(?!\S)', '', dict_in["input"])
 
     return dict_in
 
