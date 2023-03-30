@@ -14,15 +14,21 @@ import torch.distributed as dist
                 
 
 class ProofGenerationModel():
-    def __init__(self, model_path, model_name, checkpoint=None, batch_size=8, num_epochs=3, evaluation_strategy="epoch", save_strategy="epoch", logging_steps=500):
+    def __init__(self, model_path, model_name, checkpoint=None, batch_size=8, num_epochs=3, evaluation_strategy="epoch", save_strategy="epoch", logging_steps=500, random_sampling=False):
 
         self.checkpoint = checkpoint
         self.load_from_checkpoint = self.load_checkpoint(checkpoint)
         self.model_path= model_path
-        self.model_name = model_name 
+
+        if self.random_sampling:
+            self.model_name = model_name+"_random_sampling"
+        else:
+            self.model_name = model_name 
+
         self.use_divide_step_by_step = True
         self.gen_on = None
         self.data_path = None
+        self.mirror_data = False
         if checkpoint:
             print()
             print("LOAD PRETRAINED MODEL WITH CHECKPOINT")
@@ -34,6 +40,7 @@ class ProofGenerationModel():
         self.data_collator = DataCollatorForSeq2Seq(tokenizer=self.tokenizer, model=self.model)
         self.metric_acc = load_metric("accuracy")
         self.metric_f1 = load_metric("f1")
+
         self.training_args = Seq2SeqTrainingArguments(
             output_dir=model_path + model_name + '/OUTPUT',
                 evaluation_strategy=evaluation_strategy,

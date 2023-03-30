@@ -91,15 +91,21 @@ class StepsGenerationModel(ProofGenerationModel):
         # self.data_path in ex format "LP/prop_exampels_all"
 
         self.data_path = data_path
+
+        # If you want to use random sampling for the training 
+        if self.random_sampling:
+            suffix_file = "_step_random_labels.txt"
+        else:
+            suffix_file = "_step_labels.txt"
     
-        train_data = self.tokenize_data(data_path + '_train.txt',  data_path + '_train_step_labels.txt')
+        train_data = self.tokenize_data(data_path + '_train.txt',  data_path + '_train' + suffix_file )
         if generate_on == "val":
             self.use_divide_step_by_step = False
-        val_data = self.tokenize_data(data_path + '_val.txt',  data_path + '_val_step_labels.txt')
+        val_data = self.tokenize_data(data_path + '_val.txt',  data_path + '_val' + suffix_file)
         if generate_on == "test":
             self.use_divide_step_by_step = False
-        test_data = self.tokenize_data(data_path + '_test.txt',  data_path + '_test_step_labels.txt')
-
+        test_data = self.tokenize_data(data_path + '_test.txt',  data_path + '_test' +suffix_file)
+            
 
         print("Converting to dictionary.")
         ds = DatasetDict({
