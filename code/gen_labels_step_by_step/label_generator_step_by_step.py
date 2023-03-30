@@ -1,4 +1,5 @@
-
+import random
+random.seed(10) 
 
 class Find_next_rule():
 
@@ -90,14 +91,33 @@ class Find_next_rule():
         # Create a set of the known facts for faster lookups
         known_facts = set(facts)
 
-        for conditions, conclusion in rules:
-            # Check if the conclusion is already known
-            if conclusion in known_facts:
-                continue
+        if not self.random:
+            for conditions, conclusion in rules:
+                # Check if the conclusion is already known
+                if conclusion in known_facts:
+                    continue
 
-            # Check if all the conditions are already known
-            if all(condition in known_facts for condition in conditions):
-                return [conditions, conclusion]
+                # Check if all the conditions are already known
+                if all(condition in known_facts for condition in conditions):
+                    return [conditions, conclusion]
 
         # If no new rule has been fulfilled and query has not been found
-        return None
+            return None
+        
+        else:
+            
+            possible_rules = []
+
+            for conditions, conclusion in rules:
+                # Check if the conclusion is already known
+                if conclusion in known_facts:
+                    continue
+
+                # Check if all the conditions are already known
+                if all(condition in known_facts for condition in conditions):
+                    possible_rules.append([conditions, conclusion])
+
+            if possible_rules:
+                return random.choice(possible_rules)
+            # If no new rule has been fulfilled and query has not been found
+            return None

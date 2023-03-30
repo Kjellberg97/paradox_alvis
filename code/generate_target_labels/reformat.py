@@ -1,36 +1,30 @@
 import json
-import re
 
 def reformat_input(dict_in, include_non_facts=False):
-    non_facts_list = [pred for pred in dict_in["preds"] if pred not in dict_in["facts"]]
-
-    # Within the key 'facts':
-        # Remove the following symbols ["]
-        # Replace , with 1
-    facts = "".join(str(dict_in["facts"])).replace('[', '').replace('"', '').replace(']', '1').replace(', ', '1 ').replace("'", "")
-
-    # Within the key 'non-facts':
-        # Remove the following symbols ["]
-        # Replace , with 0
-    non_facts = "".join(str(non_facts_list)).replace('[', '').replace('"', '').replace(']', '0').replace(', ', '0 ').replace("'", "")
-
-    # Within the key 'query':
-        # Create a new string variable called new_query with the value of query followed by the symbol ?
+    # Create list with the preds which are not facts
+    non_facts_list = [ pred for pred in dict_in["preds"] if pred not in dict_in["facts"] ]
+    
+    # From list to string and add 1s at end
+    facts = ' '.join([ f + '1' for f in dict_in["facts"] ])
+    
+    # From list to string and add 0s at end
+    non_facts = ' '.join([ nf + '0' for nf in non_facts_list ])
+    
+    # Create a new string variable called new_query with the value of query followed by the symbol ?
     new_query = dict_in["query"] + "?"
 
-    # Within the key 'rules':
-        # Convert '], [["' and '"], "' and ']], ' into ': '
-    new_rules = str(dict_in["rules"]).replace("'], [['", "': '").replace("'], '", ', ').replace("']]", ':').replace("'", '').replace("[", '')
-    
+    # From [["a", "b"], ["c"]] to a, b, c:
+    new_rules = []
+    for conditions, conclusion in dict_in["rules"]:
+        new_rules.append(' '.join([ cond + ',' for cond in conditions ]) + ' ' + conclusion + ':')
+    new_rules = ' '.join(new_rules)
+
     # Read the variable "new_query", and the keys "rules" and "facts" and "non-facts" as strings, combine them into one string and save it as a value with the key "input"
-    if include_non_facts:
-        dict_in["input"] = new_query + ' ' + new_rules + ' ' + facts + ' ' + non_facts
-    else:
-        dict_in["input"] = new_query + ' ' + new_rules + ' ' + facts
-
-    # Remove all 1s that stand alone
-    dict_in["input"] = re.sub(r'(?<!\S)1(?!\S)', '', dict_in["input"])
-
+    dict_in["input"] = new_query 
+    dict_in["input"] += ' ' + new_rules if new_rules else ''
+    dict_in["input"] += ' ' + facts if facts else ''
+    dict_in["input"] += ' ' + non_facts if include_non_facts and non_facts else ''
+    
     return dict_in
 
 
@@ -90,9 +84,32 @@ def run_reformat(input_path, output_path, reformat_function):
 
 
 
-input_path_inputs =  "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_brackets_train.txt"
-output_path_inputs = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_train.txt"
+# input_path_inputs =  ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt",
+#                       "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_train.txt",
+#                       "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_val.txt"]
 
+# output_path_inputs = ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt",
+#                       "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_train.txt",
+#                       "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_val.txt"]
+
+
+# input_path_inputs = ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt",
+#                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_train.txt",
+#                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_val.txt"]
+
+# output_path_inputs = ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt",
+#                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_train.txt",
+#                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_val.txt"]
+
+input_path_inputs = ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_test.txt",
+                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_train.txt",
+                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_val.txt"]
+
+output_path_inputs = ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_test.txt",
+                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_train.txt",
+                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_val.txt"]
 # For input
-run_reformat(input_path_inputs, output_path_inputs, reformat_input)
+
+for inp, outp in zip(input_path_inputs, output_path_inputs):
+    run_reformat(inp, outp, reformat_input)
     

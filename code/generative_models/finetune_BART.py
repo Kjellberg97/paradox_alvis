@@ -18,10 +18,11 @@ class ProofGenerationModel():
 
         self.checkpoint = checkpoint
         self.load_from_checkpoint = self.load_checkpoint(checkpoint)
-        self.model_path= model_path
+        self.model_path = model_path
+        self.random_sampling =random_sampling
 
         if self.random_sampling:
-            self.model_name = model_name+"_random_sampling"
+            self.model_name = model_name + "_random_sampling"
         else:
             self.model_name = model_name 
 
@@ -33,16 +34,17 @@ class ProofGenerationModel():
             print()
             print("LOAD PRETRAINED MODEL WITH CHECKPOINT")
             print()
-            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + model_name +"/OUTPUT/" + checkpoint + "/") # download bart to local and change path here self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart") # download bart to local and change path here 
+            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + self.model_name +"/OUTPUT/" + checkpoint + "/") # download bart to local and change path here self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart") # download bart to local and change path here 
         else:
-            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + model_name)
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path + model_name) # download bart to local and change path here 
+            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + self.model_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_path + self.model_name) # download bart to local and change path here 
         self.data_collator = DataCollatorForSeq2Seq(tokenizer=self.tokenizer, model=self.model)
         self.metric_acc = load_metric("accuracy")
         self.metric_f1 = load_metric("f1")
+        print("SAVE OUTPUT:" , model_path + self.model_name + '/OUTPUT')
 
         self.training_args = Seq2SeqTrainingArguments(
-            output_dir=model_path + model_name + '/OUTPUT',
+            output_dir = model_path + self.model_name + '/OUTPUT',
                 evaluation_strategy=evaluation_strategy,
                 learning_rate=2e-5,
                 per_device_train_batch_size=batch_size,
@@ -336,15 +338,3 @@ class ProofGenerationModel():
         #text_dict_list = [ ast.literal_eval(sample) for sample in raw_output_text ]
         #return text_dict_list
         
-
-
-
-
-if __name__ == "__main__":
-    model_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/EXAMPLE/"
-    model_name = "pretrained_BART/"
-    data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/prop_examples"
-
-    PGM = ProofGenerationModel(model_path, model_name)
-    ds = PGM.load_all_data(data_path)
-    PGM.run_training(ds)

@@ -10,22 +10,18 @@ class StepsGenerationModel(ProofGenerationModel):
 
     def divide_step_by_step(self, inputs, labels):
         # Divide the input and labels into steps
-        flat_list = []
         new_inputs, new_labels = [], []
         for inp, step_labels in zip(inputs, labels):
-            inp = '1'.join(inp.split('1')[:-1]) + '1' # Remove everything after last '1'.
             new_inputs.append(inp)
-
             if self.use_divide_step_by_step:
                 for lab in step_labels:
                     new_labels.append(lab)            
-
                     # The last lab is True/False which does not exist in the input
                     if lab != step_labels[-1]:
                         # Remove the fulfilled rule from next input
                         inp = inp.replace(lab, "")
                         # Remove leading and trailing whitespaces along with never having more than one ' ' in a row.
-                        inp = ' '.join(inp.strip().split())
+                        inp = ' '.join(inp.split())
                         
                         # Split on comma to retrieve the fact, but not the last character which is a ':'
                         fact = lab.split(", ")[-1][:-1]
@@ -234,10 +230,14 @@ class StepsGenerationModel(ProofGenerationModel):
                 decoded_gen_step = self.tokenizer.batch_decode(gen_step, skip_special_tokens=True)
                 times_tok_gen.append(time()-tgd)
 
+                # Remove leading and trailing whitespaces and multiple whitespaces in a row
+                decoded_gen_step[0] = ' '.join(decoded_gen_step[0].split())
+
                 gen_steps.append(decoded_gen_step[0])
 
                 if decoded_gen_step[0] == "True" or decoded_gen_step[0] == "False":
                     complete_proof = True
+                
 
                 fact = decoded_gen_step[0].split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
                 tdc_inp = time()
