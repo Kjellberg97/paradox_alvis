@@ -5,12 +5,15 @@ from finetune_BART_step_by_step import StepsGenerationModel
 # checkpoint = "checkpoint-22392"
 # data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all"
 
-model_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/"
+model_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/EXAMPLE/"
 model_name = "gen_step_by_step"
-checkpoint = "checkpoint-8500"
+rule_sampling = True
+model_name += "_rule_sampling" if rule_sampling else ""
+checkpoint = "checkpoint-9000"
 #data_path ="/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small_cleaned"
-#data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned"
-data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned"
+data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned"
+#data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned"
+#data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced"
 
 SGM = StepsGenerationModel(model_path, model_name, checkpoint)
 print("Loading data...")

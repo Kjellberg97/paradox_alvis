@@ -89,7 +89,7 @@ class StepsGenerationModel(ProofGenerationModel):
         self.data_path = data_path
 
         # If you want to use random sampling for the training 
-        if self.random_sampling:
+        if self.rule_sampling:
             suffix_file = "_step_random_labels.txt"
         else:
             suffix_file = "_step_labels.txt"

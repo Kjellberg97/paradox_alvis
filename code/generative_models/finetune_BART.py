@@ -14,37 +14,38 @@ import torch.distributed as dist
                 
 
 class ProofGenerationModel():
-    def __init__(self, model_path, model_name, checkpoint=None, batch_size=8, num_epochs=3, evaluation_strategy="epoch", save_strategy="epoch", logging_steps=500, random_sampling=False):
+    def __init__(self, model_path, model_name, checkpoint=None, batch_size=8, num_epochs=3, evaluation_strategy="epoch", save_strategy="epoch", logging_steps=500, rule_sampling=False):
 
         self.checkpoint = checkpoint
         self.load_from_checkpoint = self.load_checkpoint(checkpoint)
         self.model_path = model_path
-        self.random_sampling =random_sampling
+        self.rule_sampling = rule_sampling
 
-        if self.random_sampling:
-            self.model_name = model_name + "_random_sampling"
-        else:
-            self.model_name = model_name 
+        self.model_name = model_name + "_rule_sampling" if self.rule_sampling else model_name
 
         self.use_divide_step_by_step = True
         self.gen_on = None
         self.data_path = None
         self.mirror_data = False
+        print()
         if checkpoint:
-            print()
-            print("LOAD PRETRAINED MODEL WITH CHECKPOINT")
-            print()
-            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + self.model_name +"/OUTPUT/" + checkpoint + "/") # download bart to local and change path here self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart") # download bart to local and change path here 
+            load_model_path = model_path + self.model_name + "/OUTPUT/" + checkpoint + "/"
+            print("LOAD PRETRAINED MODEL WITH CHECKPOINT:", load_model_path, sep='\n')
         else:
-            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_path + self.model_name)
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path + self.model_name) # download bart to local and change path here 
+            load_model_path = model_path + self.model_name
+            print("LOAD PRETRAINED MODEL, NO CHECKPOINT:", load_model_path, sep='\n')
+        
+        self.model = AutoModelForSeq2SeqLM.from_pretrained(load_model_path)
+        self.tokenizer = AutoTokenizer.from_pretrained(load_model_path) # download bart to local and change path here 
         self.data_collator = DataCollatorForSeq2Seq(tokenizer=self.tokenizer, model=self.model)
         self.metric_acc = load_metric("accuracy")
         self.metric_f1 = load_metric("f1")
-        print("SAVE OUTPUT:" , model_path + self.model_name + '/OUTPUT')
+        
+        self.output_path = model_path + self.model_name + '/OUTPUT'
+        print("SAVE OUTPUT:" , self.output_path)
 
         self.training_args = Seq2SeqTrainingArguments(
-            output_dir = model_path + self.model_name + '/OUTPUT',
+            output_dir = self.output_path,
                 evaluation_strategy=evaluation_strategy,
                 learning_rate=2e-5,
                 per_device_train_batch_size=batch_size,
