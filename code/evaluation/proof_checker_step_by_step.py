@@ -2,12 +2,13 @@ from proof_checker import Proof_Checker
 from sklearn.metrics import confusion_matrix, accuracy_score, f1_score
 import json
 import numpy as np
+import re
 
 #test_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step/evaluation/checkpoint-8500_output_SMALL_DATA.txt"
-test_preds_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step/evaluation/checkpoint-8500_output_LP_RPall.txt"
+test_preds_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step/evaluation/checkpoint-8500_output_LP_RPall_test.txt"
 test_truth_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_step_labels.txt"
 input_data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt"
-save_stats_file = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step/evaluation/proof_cheker_stats/proof_checker_checkpoint-8500_LP_RP.txt"
+save_stats_file = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step/evaluation/proof_cheker_stats/proof_checker_checkpoint-8500_LP_RP_temp.txt"
 
 class Proof_Checker_Step(Proof_Checker):
  
@@ -84,76 +85,91 @@ class Proof_Checker_Step(Proof_Checker):
 
 
     def check_proof_for_errors(self, predicted_proofs, input_data):
-        for pred_proof, in_data in zip(predicted_proofs, input_data):
-            # From X-input remove everything after last '1'
-            in_data["input"] = '1'.join(in_data["input"].split('1')[:-1]) + '1'
-     
-            label_is_correct = int(eval(pred_proof[-1])) == in_data["label"]
-            proof_is_correct, inx, updated_input = self.correctness_of_proof(pred_proof, in_data["input"])
-            
+        matrix_error = [[0,0], # X proof correct True False
+                        [0,0]] # Y label correct True False
+        pred_true_but_q_not_in_fact = 0
         
-        print("Num of halluzinated rules:", self.hall_rule)
-        print("Num of unfufilled rules:", self.hall_rule)
-        print("Num of proofs ended too early:", self.ended_too_early)
+        for pred_proof, in_data in zip(predicted_proofs, input_data):
+            self.input = in_data["input"]
+            # Remove all words that end with 0 and remove leading and trailing blanks.
+            in_data["input"] = ' '.join(re.sub(r'\b\S+0\b', '', in_data["input"]).split())         
 
+            try:
+                pred_label = eval(pred_proof[-1])
+            except SyntaxError:
+                print("True/false not existing on", pred_proof[-1])
+                pred_label = True if not in_data["label"] else False
+            label_is_correct = int(pred_label) == in_data["label"]
+            proof_is_correct, inx, updated_input = self.coherence_of_proof(pred_proof, in_data["input"])
+            query_exists = self.query_in_facts(updated_input)
+            
+            pred_true_but_q_not_in_fact += 1 if pred_label and not query_exists else 0
                 
-            # If proof or and label incorrect analyze error
+
+            if label_is_correct and proof_is_correct:
+                matrix_error[0][0] += 1
+            elif label_is_correct and not proof_is_correct:
+                matrix_error[0][1] += 1
+            elif not label_is_correct and proof_is_correct:
+                matrix_error[1][0] += 1
+            elif not label_is_correct and not proof_is_correct:
+                matrix_error[1][1] += 1
+        
+        n_samples = len(input_data)
+        print("Errors in proof/label")
+        print("Correct label, coherent proof:", round(matrix_error[0][0] / n_samples, 6) * 100, "%")
+        print("Correct label, incoherent proof:", round(matrix_error[0][1] / n_samples, 6) * 100, "%")
+        print("Incorrect label, correct proof:", round(matrix_error[1][0] / n_samples, 6) * 100, "%")
+        print("Incorrect label, incoherent proof:", round(matrix_error[1][1] / n_samples, 6) * 100, "%")
+
+        print("Share of True predictions where query is not in list of facts: ",
+            round(pred_true_but_q_not_in_fact / n_samples, 6) * 100, "%")
+        #print("Num of halluzinated rules:", self.hall_rule)
+        #print("Num of unfufilled rules:", self.hall_rule)
+        #print("Num of proofs ended too early:", self.ended_too_early)
 
 
-    def correctness_of_proof(self, pred_proof, input_string):
-        # Check the correctness of the generated proofs
-        inp = input_string.copy()
+    def coherence_of_proof(self, pred_proof, inp):
+        """Check the coherence of the generated proofs"""
         # Loop through the predicted proof to see if the rules exist
         for i, pred_step in enumerate(pred_proof):
             if pred_step == "True" or pred_step == "False":
-                return True, i
+                return True, i, inp
 
             # Find fact
             fact = pred_step.split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
-
             # Remove rule from input and add fact
+            self.last_fact = 'None'
             if pred_step in inp: 
                 inp = inp.replace(pred_step, '')
                 inp = inp + ' ' + fact + '1'
+                self.last_fact = fact
             else: # KONTROLLERA SÅ ATT DEN HAR TAGIT BORT NÅNTING??
-                return False, i
+                print("Pred step not in input:", pred_step)
+                return False, i, inp
 
 
             
+    def query_in_facts(self, string):
+        # Find query in string
+        match = re.search(r"\b\w+\?", string)
+        query = match.group(0)[:-1] + '1'
+        # Take out a string of all facts and then divide it into a list with individual facts
+        #facts_string = re.search(r'\b\w*1\w*\b', string).group(0)
+        #facts_list = string[string.index(facts_string):].split('1 ')
 
+        facts_list = re.findall(r'\b\S*1\b', string) # finds all words that end with '1'
 
-
-
-
-
-            # find pred_step in rules_facts
-            # if pred_step in inp:
-            #     next_pred_step = inp.replace(pred_step, '')
-            # else:
-            #     return False, i
-
-            # if i > 0 and i < len(pred_proof) - 1 and next_pred_step not in inp:
-            #     return False, i
-
-
-
-            # find if rule can be solved with known facts
-            # if not correct send to function for evaluation of why 
-
-
-            # if found rule and fact remove rule add fact 
-
-            # Check so that the query is solved
-
-                
-            # 1. label rätt, proof rätt -> kommer gå igenom
-            # 2. label rätt, proof fel -> cansat och tatt fel (slutat för tidigt?)
-            # 3. label fel, proof "rätt" -> Har hittat på regler?
-            # 4. label fel, proof fel -> 
-
-            # Solve the proof by generating the next rule and remove it from the input and add the fact
-            # Do until the proof is solved or until it does wrong.
-    
+        # Return bool depending on existence
+        if query in facts_list:
+            return True
+        else:
+            print(query)
+            print(string)
+            print(facts_list)
+            print("Last fact", self.last_fact)
+            print("Original input", self.input)
+            return False
         
     def find_fact(self, rule, input_d):
         # Check if rule can be solved with facts
@@ -195,8 +211,10 @@ def main():
     print("\nAccuracy:", acc)
     print("F1-score:", f1)
         
-    PC.divide_data_into_depths(input_data, preds_data, truth_data)
-    PC.find_non_bools(preds_data)
+    #PC.divide_data_into_depths(input_data, preds_data, truth_data)
+    #PC.find_non_bools(preds_data)
+    
+    PC.check_proof_for_errors(preds_data, input_data)
 
 if __name__ == "__main__":
     main()
