@@ -1,6 +1,6 @@
 import json
 
-def reformat_input(dict_in):
+def reformat_input(dict_in, include_non_facts=False):
     non_facts_list = [pred for pred in dict_in["preds"] if pred not in dict_in["facts"]]
 
     # Within the key 'facts':
@@ -20,8 +20,12 @@ def reformat_input(dict_in):
     # Within the key 'rules':
         # Convert '], [["' and '"], "' and ']], ' into ': '
     new_rules = str(dict_in["rules"]).replace("'], [['", "': '").replace("'], '", ', ').replace("']]", ':').replace("'", '').replace("[", '')
+    
     # Read the variable "new_query", and the keys "rules" and "facts" and "non-facts" as strings, combine them into one string and save it as a value with the key "input"
-    dict_in["input"] = new_query + ' ' + new_rules + ' ' + facts + ' ' + non_facts
+    if include_non_facts:
+        dict_in["input"] = new_query + ' ' + new_rules + ' ' + facts + ' ' + non_facts
+    else:
+        dict_in["input"] = new_query + ' ' + new_rules + ' ' + facts
 
     return dict_in
 

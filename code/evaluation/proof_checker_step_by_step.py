@@ -91,8 +91,10 @@ class Proof_Checker_Step(Proof_Checker):
         
         for pred_proof, in_data in zip(predicted_proofs, input_data):
             self.input = in_data["input"]
+            # Remove all 1s that stands alone
+            
             # Remove all words that end with 0 and remove leading and trailing blanks.
-            in_data["input"] = ' '.join(re.sub(r'\b\S+0\b', '', in_data["input"]).split())         
+            in_data["input"] = ' '.join(re.sub(r'\b\S*0\b', '', in_data["input"]).split())         
 
             try:
                 pred_label = eval(pred_proof[-1])
@@ -101,9 +103,8 @@ class Proof_Checker_Step(Proof_Checker):
                 pred_label = True if not in_data["label"] else False
             label_is_correct = int(pred_label) == in_data["label"]
             proof_is_correct, inx, updated_input = self.coherence_of_proof(pred_proof, in_data["input"])
-            query_exists = self.query_in_facts(updated_input)
-            
-            pred_true_but_q_not_in_fact += 1 if pred_label and not query_exists else 0
+                      
+            pred_true_but_q_not_in_fact += 1 if pred_label and not self.query_in_facts(updated_input) else 0
                 
 
             if label_is_correct and proof_is_correct:
@@ -152,12 +153,10 @@ class Proof_Checker_Step(Proof_Checker):
             
     def query_in_facts(self, string):
         # Find query in string
-        match = re.search(r"\b\w+\?", string)
+        match = re.search(r"\b\S*\?", string)
         query = match.group(0)[:-1] + '1'
-        # Take out a string of all facts and then divide it into a list with individual facts
-        #facts_string = re.search(r'\b\w*1\w*\b', string).group(0)
-        #facts_list = string[string.index(facts_string):].split('1 ')
-
+        
+        # Take out a string of all facts into a list
         facts_list = re.findall(r'\b\S*1\b', string) # finds all words that end with '1'
 
         # Return bool depending on existence
@@ -167,8 +166,8 @@ class Proof_Checker_Step(Proof_Checker):
             print(query)
             print(string)
             print(facts_list)
-            print("Last fact", self.last_fact)
-            print("Original input", self.input)
+            #print("Last fact", self.last_fact)
+            #print("Original input", self.input)
             return False
         
     def find_fact(self, rule, input_d):
