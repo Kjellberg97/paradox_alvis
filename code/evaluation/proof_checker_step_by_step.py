@@ -4,11 +4,15 @@ import json
 import numpy as np
 import re
 
+
+
+
+
 #test_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step/evaluation/checkpoint-8500_output_SMALL_DATA.txt"
-test_preds_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step/evaluation/checkpoint-8500_output_LP_RPall_test.txt"
-test_truth_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_step_labels.txt"
-input_data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt"
-save_stats_file = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step/evaluation/proof_cheker_stats/proof_checker_checkpoint-8500_LP_RP_temp.txt"
+# test_preds_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_RP_10X_VAL_output.txt"
+# test_truth_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_val_step_labels.txt"
+# input_data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_val.txt"
+# save_stats_file = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/gen_step_by_step_rule_sampling/evaluation/proof_checker_stats/proof_checker_checkpoint-7500_RP_RP_10X_VAL.txt"
 
 class Proof_Checker_Step(Proof_Checker):
  
@@ -187,17 +191,61 @@ class Proof_Checker_Step(Proof_Checker):
         pass
 
 
-        
-        
 
+def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=False):
+
+    path = "/mimer/NOBACKUP/groups/snic2022-22-744/"
+
+    if rule_sampling:
+        type_of_model = "/gen_step_by_step_rule_sampling/evaluation/"
+    else:
+        type_of_model = "/gen_step_by_step/evaluation/" 
+
+    checkpoint = checkpoint+ "_" + model + "_" + test_on 
+
+    if type_of_data == "val":
+        t_checkpoint = checkpoint + "_VAL_output.txt"
+    elif type_of_data == "test":
+        t_checkpoint = checkpoint +  "_TEST_output.txt"
+
+    test_preds_path = path + "MODELS/" + model + type_of_model + t_checkpoint
+
+    if test_on == "RP_10X":
+        labels_path = test_on + "/prop_examples_all_balanced_rulenum_cleaned_" + type_of_data + "_step_labels.txt"
+        input_path = test_on + "/prop_examples_all_balanced_rulenum_cleaned_" + type_of_data + ".txt"
+    else:
+        labels_path = test_on + "/prop_examples_all_cleaned_" + type_of_data + "_step_labels.txt"
+        input_path = test_on + "/prop_examples_all_cleaned_" + type_of_data + ".txt"
+
+    test_truth_path = path + "DATA/" + labels_path
+    input_data_path = path + "DATA/" + input_path
+
+    save_stats_file = path + "MODELS/" + model + type_of_model + "proof_checker_stats/proof_checker_" + checkpoint  + "_" + type_of_data + ".txt"
+
+
+    return test_preds_path, test_truth_path, input_data_path, save_stats_file        
+        
         
 def main():
+
+
+    rule_sampling = True
+    checkpoint = "checkpoint-7500"
+    model = "RP"
+    test_on = "RP"
+    type_of_data = "val"
+
+    test_preds_path, test_truth_path, input_data_path, save_stats_file = reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling)
+
+
     PC = Proof_Checker_Step(save_stats_file)
     input_data = PC.read_file_lines(input_data_path)
     preds_data = PC.read_file_lines(test_preds_path)
     truth_data = PC.read_file_lines(test_truth_path)
     pred_bools = PC.create_list_of_bool_labels(preds_data)
     truth_bools = PC.create_list_of_bool_labels(truth_data)
+
+    print("\nPROOF CHECKED DATA: ",  test_preds_path)
 
     cm_indices = PC.get_index_matrix(PC.create_confusion_matrix(pred_bools, truth_bools))
 
@@ -210,10 +258,10 @@ def main():
     print("\nAccuracy:", acc)
     print("F1-score:", f1)
         
-    #PC.divide_data_into_depths(input_data, preds_data, truth_data)
+    PC.divide_data_into_depths(input_data, preds_data, truth_data)
     #PC.find_non_bools(preds_data)
     
-    PC.check_proof_for_errors(preds_data, input_data)
+    #PC.check_proof_for_errors(preds_data, input_data)
 
 if __name__ == "__main__":
     main()
