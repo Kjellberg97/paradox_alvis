@@ -4,7 +4,7 @@
 #SBATCH -p alvis               # what partition to use (usually not necessary)
 #SBATCH -t 1-10:00:00          # how long time it will take to run
 #SBATCH --gpus-per-node=A40:4  # choosing no. GPUs and their type
-#SBATCH -J BART TRAINING       # the jobname (not necessary)
+#SBATCH -J BART_TRAINING       # the jobname (not necessary)
 
 # Load PyTorch using the module tree
 module purge

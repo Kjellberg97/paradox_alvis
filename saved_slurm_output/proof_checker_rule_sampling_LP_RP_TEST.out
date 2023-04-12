@@ -1,0 +1,89 @@
+This job can be monitored from: https://scruffy.c3se.chalmers.se/d/alvis-job/alvis-job?var-jobid=907617&from=1680267791000
+INFO:    underlay of /etc/localtime required more than 50 (94) bind mounts
+INFO:    underlay of /usr/share/lmod/lmod required more than 50 (59) bind mounts
+
+Confusion matrix:
+ [[13263    25]
+ [  140 14572]]
+
+Accuracy: 0.9941071428571429
+F1-score: 0.9943703299327851
+
+DEPTH:  0
+NR. SAMPLES:  3947
+TP:  (35.15, 0, 120)
+FP:  (2.0, 2, 2)
+TN:  (15.41, 0, 105)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [0.795 0.    0.204 0.   ]
+acc 0.9997466430200151
+
+DEPTH:  1
+NR. SAMPLES:  4018
+TP:  (45.13, 1, 120)
+FP:  (27.0, 27, 27)
+TN:  (18.54, 1, 78)
+FN:  (39.0, 14, 89)
+Rates: TP, FP, TN, FN
+ [0.753 0.    0.246 0.001]
+acc 0.998755599800896
+
+DEPTH:  2
+NR. SAMPLES:  3986
+TP:  (48.61, 2, 120)
+FP:  (0, inf, 0)
+TN:  (21.09, 2, 94)
+FN:  (33.08, 11, 90)
+Rates: TP, FP, TN, FN
+ [0.649 0.    0.348 0.003]
+acc 0.9969894631209232
+
+DEPTH:  3
+NR. SAMPLES:  4065
+TP:  (53.2, 4, 120)
+FP:  (52.0, 52, 52)
+TN:  (25.08, 4, 100)
+FN:  (41.03, 10, 119)
+Rates: TP, FP, TN, FN
+ [0.531 0.    0.462 0.007]
+acc 0.9923739237392374
+
+DEPTH:  4
+NR. SAMPLES:  4073
+TP:  (56.72, 6, 118)
+FP:  (32.33, 23, 39)
+TN:  (29.09, 5, 107)
+FN:  (39.03, 14, 120)
+Rates: TP, FP, TN, FN
+ [0.392 0.001 0.599 0.008]
+acc 0.9909157868892708
+
+DEPTH:  5
+NR. SAMPLES:  3918
+TP:  (60.67, 10, 119)
+FP:  (49.67, 46, 56)
+TN:  (34.94, 8, 100)
+FN:  (51.92, 16, 119)
+Rates: TP, FP, TN, FN
+ [0.292 0.001 0.701 0.006]
+acc 0.9931087289433385
+
+DEPTH:  6
+NR. SAMPLES:  3993
+TP:  (64.31, 9, 118)
+FP:  (57.31, 29, 88)
+TN:  (42.11, 11, 110)
+FN:  (52.89, 15, 115)
+Rates: TP, FP, TN, FN
+ [0.231 0.004 0.756 0.009]
+acc 0.986977210117706
+True/false not existing on:
+ ['unpleasant, glamorous:', 'unpleasant, frightened:', 'unpleasant, frightened, tense:', 'unpleasant, frightened, thoughtless:', 'thoughtless, grumpy:', 'tense, cute:', 'thoughtless, tense, cute, modern:', 'modern, scared:', 'witty, attractive:', 'thoughtless, stormy:', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''] 
+
+Errors in proof/label
+Correct label, coherent proof: 98.96430000000001 %
+Correct label, incoherent proof: 0.4464 %
+Incorrect label, correct proof: 0.5786 %
+Incorrect label, incoherent proof: 0.0107 %
+Share of True predictions where query is not in list of facts:  0.3929 %
