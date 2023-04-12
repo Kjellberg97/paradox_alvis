@@ -1,0 +1,82 @@
+This job can be monitored from: https://scruffy.c3se.chalmers.se/d/alvis-job/alvis-job?var-jobid=929716&from=1681285527000
+INFO:    underlay of /etc/localtime required more than 50 (94) bind mounts
+INFO:    underlay of /usr/share/lmod/lmod required more than 50 (59) bind mounts
+
+PROOF CHECKED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_LP_VAL_output.txt
+
+Confusion matrix:
+ [[14130    20]
+ [  159 13691]]
+
+Accuracy: 0.9936071428571429
+F1-score: 0.9935053154820218
+
+DEPTH:  0
+NR. SAMPLES:  3982
+TP:  (28.53, 0, 116)
+FP:  (0, inf, 0)
+TN:  (17.81, 0, 109)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [0.78 0.   0.22 0.  ]
+acc 1.0
+
+DEPTH:  1
+NR. SAMPLES:  4109
+TP:  (36.96, 3, 118)
+FP:  (0, inf, 0)
+TN:  (17.85, 1, 88)
+FN:  (18.8, 8, 40)
+Rates: TP, FP, TN, FN
+ [0.777 0.    0.221 0.001]
+acc 0.9987831589194451
+
+DEPTH:  2
+NR. SAMPLES:  3978
+TP:  (42.99, 4, 117)
+FP:  (17.0, 17, 17)
+TN:  (18.61, 2, 87)
+FN:  (26.73, 7, 66)
+Rates: TP, FP, TN, FN
+ [0.594 0.    0.402 0.004]
+acc 0.9959778783308195
+
+DEPTH:  3
+NR. SAMPLES:  4061
+TP:  (49.05, 6, 118)
+FP:  (20.0, 14, 24)
+TN:  (22.48, 4, 87)
+FN:  (38.75, 12, 88)
+Rates: TP, FP, TN, FN
+ [0.437 0.001 0.557 0.006]
+acc 0.9933513912829353
+
+DEPTH:  4
+NR. SAMPLES:  3809
+TP:  (53.4, 10, 117)
+FP:  (27.2, 23, 32)
+TN:  (29.38, 7, 98)
+FN:  (40.27, 12, 90)
+Rates: TP, FP, TN, FN
+ [0.345 0.001 0.646 0.007]
+acc 0.9918613809398792
+
+DEPTH:  5
+NR. SAMPLES:  3984
+TP:  (52.82, 12, 116)
+FP:  (29.5, 23, 36)
+TN:  (35.79, 10, 93)
+FN:  (38.52, 15, 78)
+Rates: TP, FP, TN, FN
+ [0.273 0.002 0.717 0.008]
+acc 0.990210843373494
+
+DEPTH:  6
+NR. SAMPLES:  4077
+TP:  (55.42, 12, 117)
+FP:  (42.4, 33, 51)
+TN:  (43.1, 11, 107)
+FN:  (36.96, 12, 96)
+Rates: TP, FP, TN, FN
+ [0.209 0.001 0.776 0.014]
+acc 0.9850380181506009

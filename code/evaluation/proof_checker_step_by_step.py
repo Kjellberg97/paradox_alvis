@@ -231,8 +231,8 @@ def main():
 
     rule_sampling = True
     checkpoint = "checkpoint-7500"
-    model = "RP"
-    test_on = "RP"
+    model = "RP_10X"
+    test_on = "RP_10X"
     type_of_data = "val"
 
     test_preds_path, test_truth_path, input_data_path, save_stats_file = reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling)
