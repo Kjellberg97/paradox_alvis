@@ -35,7 +35,48 @@ class Proof_Checker_Step(Proof_Checker):
         [ print(out) for out in non_bools ]
         return non_bools
 
+    def divide_data_into_rules(self,input_data, predictions, ground_truth):
+        """Divides the input data dependeing on the rules of each input data and 
+        creates the confucion matrix and calculate basic stats about the lenght 
+        of the rules in each group.
 
+        ARGS:
+            input_data (list) : all input data
+            predictions (list) : the generated proofs and labels 
+            ground_truth (list) : the true labels for each input
+        
+        RETURN:
+            None
+        """
+        data_rules = [ text["input"].count(":") for text in input_data ]
+        max_rules = max(data_rules)
+        preds_rules = [ [] * max_rules ]
+        ground_truth_rules = [ [] * max_rules ]
+        pred_proof = [ [] * max_rules ]
+
+        for n_rules in data_rules:
+            pred = self.find_binary_label(predictions[i])
+            preds_rules[n_rules].append(pred)
+            ground_truth_rules[n_rules].append(ground_truth[i])
+            pred_proof[n_rules].append(predictions[i])
+
+
+        '
+        ## FORTSÄTT HÄR
+        
+        for n_rules in range(7):
+            print()
+            print("RULES: ", n_rules)
+            print("NR. SAMPLES: ", len(ground_truth_rules[n_rules]))
+            ground_truth_bools = [ self.find_binary_label(target_d) for target_d in ground_truth_rules[n_rules] ]
+            confusion_matrix = self.create_confusion_matrix(preds_rules[n_rules], ground_truth_bools)
+            accuracy = self.label_accuracy(confusion_matrix)
+            with open(self.save_stats_file, "a") as file:
+                file.write("\n#############################################################################")
+                file.write("\nRULES: " + str(n_rules))
+            self.stat_over_generated_data(preds_rules[n_rules] ,ground_truth_rules[n_rules] ,data_rules[n_rules],pred_proof[n_rules])
+            print("Rates: TP, FP, TN, FN\n", np.round(np.sum(confusion_matrix, axis=0) / confusion_matrix.shape[0], 3))
+            print("acc", accuracy)
 
     def divide_data_into_depths(self,input_data, predictions, ground_truth):
         """Divides the input data dependeing on the depths of each input data and 
