@@ -13,14 +13,20 @@ class Proof_Checker():
         self.confusion_matrix = [0,0,0,0] # True Positive, False Positive, True Negative, False Negative
         self.accuracy = 0
         self.num_ex = 0
+        self.used_path = []
+        self.not_coherent=[]
+        self.coherent = []
+        self.halluzinations =0
 
-        self.corr_proofs = 0
-        self.hall_rule = 0
-        self.hall_fact = 0
-        self.ended_too_early = 0
 
-        self.temp_hal = []
-        self.hallucination_list = []
+        # self.corr_proofs = 0
+        # self.hall_rule = 0
+        # self.hall_fact = 0
+        # self.ended_too_early = 0
+        # self.temp_hal = []
+        # self.hallucination_list = []
+
+        
         self.save_stats_file = save_stats_file
         open(self.save_stats_file, 'w').close()
         random.seed(seed)
@@ -239,13 +245,92 @@ class Proof_Checker():
 
 
 
-    def check_correctness(self, gen_proof):
+    def check_correctness(self, gen_proof, input_data):
         """INPUT
             gen_proof:
                 list of the generated proof 
         """
+
+        # Go through the proof and check for the rules and facts in the input
+        # Count all imagined rules and facts
+        # See if the proof accually solves the query
+
+        gen_proof_divided = self.divide_into_steps(gen_proof)
+
+        for step in gen_proof_divided:
+
+            if not step in input_data:
+                
+
+
+
         pass
     
+
+    def divide_into_steps(self, gen_proof):
+
+        divided_proof =[]
+        step = ""
+        
+        for char in str(gen_proof):
+            step = step+char
+            if char == ":":
+                if step[0] == " ":
+                    step = step[1:]
+                divided_proof.append(step)
+                step =""
+            elif char =="1" or char =="0":
+                split_step = step.split(",")
+                last_part = ''.join(str(x) for x in split_step[-1])
+                first_part = ''.join(str(x) for x in split_step[:-1])
+                if last_part[0] == " ":
+                    last_part = last_part[1:]
+
+                if first_part:
+                    if first_part[0] == " ":
+                        first_part = first_part[1:]
+                    divided_proof.append(first_part)
+                divided_proof.append(last_part)
+                step =""
+            
+        return divided_proof
+
+
+
+    def count_hallucinations(self, gen_proof, input_data):
+        """INPUT
+            gen_proof:
+                list of the generated proof 
+        """
+
+        corr = 0
+        hall = 0
+
+        gen_proof_divided = divide_into_steps(gen_proof)
+
+        for step in gen_proof_divided:
+
+            if step in input_data:
+                corr +=1
+            else:
+                hall +=1
+        
+        return corr, hall
+
+
+
+    def hallucination_total(self,all_input, all_proofs):
+
+        rules_facts_exist=0
+        rules_facts_NOT_exist=0
+
+        for inp, proof in zip(all_input, all_proofs):
+            corr, hall = self.count_hallucinations(inp, proof)
+            rules_facts_exist += corr
+            rules_facts_NOT_exist += hall
+
+        print("Fraction hallucinated:",rules_facts_NOT_exist/rules_facts_exist)
+
 
     def check_syntax(self, proof):
         # Check if the syntax of the generated proof is correct
@@ -312,27 +397,6 @@ class Proof_Checker():
 
         pass
 
-            
-
-    def hallucination_rules_fact(self, gen_proof, rules, facts):
-        """ Checks if the rules and facts are in the input list over rules and facts.
-        
-        ARGS
-        step: 
-            {dict} the first step in the proof
-        rules:
-            [list] over the existing rules 
-        facts:
-            [list] over all the existing facts
-
-        Saves the result from rule_fact_in_list()
-        """
-        self.temp_hal = []
-        self.rule_fact_in_list(gen_proof,rules, facts)
-        if self.temp_hal:
-            self.hallucination_list.append({self.num_ex: self.temp_hal})
-
-        # save the list of hallucinations in a file
 
 
 
@@ -349,6 +413,108 @@ class Proof_Checker():
         print("Accuracy: ",acc)
         print("Nr hallucinations:", self.hallucination)
         print("hallucinations: ", self.hallucination_list)
+
+
+
+
+
+
+    def check_rules(self, pred, rules):
+        # return the rules which the predicate we're looking for can be derived from
+        pred=pred +":"
+        rule_list = [ r for r in rules if pred == r[-1]]
+        return rule_list
+    
+    def check_facts(self, pred, facts):
+        # return the rules which the predicate we're looking for can be derived from
+        fact = [ r for r in facts if pred == r[0][:-1]]
+        return fact 
+
+
+    def check_correctness(self, gen_proof, input_data, index):
+        """Solves the proof by calling solve_rule(). Adds the 
+        result to a raviable in the class 
+        """
+        query = input_data.split("?")[0]
+        query = query
+
+        proof_divided_steps = self.divide_into_steps(gen_proof)
+
+        solved_rules = []
+
+        rules=[]
+        facts=[]
+
+        for step in proof_divided_steps:
+            r_f = step.split(",")
+            r_f =[x.strip() for x in r_f] 
+
+            if len(r_f) >1:
+                rules.append(r_f)
+            else:
+                facts.append(r_f)
+        
+        used_path = []
+        used_path = self.solve_rule(rules, facts, query, used_path)
+
+        if used_path:
+            for s in used_path:
+                if s in proof_divided_steps:
+                    proof_divided_steps.remove(s)
+        
+        if used_path == False:
+            self.not_coherent.append(index) 
+        else:
+            self.coherent.append(index)
+    
+
+
+    def solve_rule(self, rules, facts, pred, used_path):
+        """ Tries to solve the proof generated by the model.
+        If the proof is coherent the function will return the
+        list of rules and facts that it used to solve the 
+        problem. The function is recursive and ends if the 
+        proof is coherent and can be used to solve the predicate 
+        in the problem or if the proof is not solvable and the 
+        function will then return False.
+
+        ARGS:
+            rules: [list] over all the rules in the proof
+            facts: [list] over all the facts in the proof
+            pred : str of the predicate that the function 
+                should find a rule or fact to solve
+            used_path: [list] a empty list that will be 
+                filled with the facts and rules that is 
+                needed to solve the predicate.
+
+        RETURN:
+            used_path [list] if the proof is cohersive.
+                bool if it is not cohersive   
+        """
+
+        if pred[-1] == "0" or pred[-1] == "1":
+            pred = pred[:-1]
+
+        p_r = self.check_rules(pred, rules)
+        p_f = self.check_facts(pred, facts)
+
+        if p_f:
+            used_path.append(p_f[0][0])
+        
+        elif p_r:
+            rule = p_r[0]
+            reformat_rule = ", ".join(x for x in rule)
+            
+            for s_p in rule[:-1]:
+                new_rule = self.solve_rule(rules, facts, s_p, used_path)
+                if new_rule == False:
+                    return False
+            used_path.append(reformat_rule)
+        
+        else:
+            return False 
+
+        return used_path
 
 
 
@@ -381,5 +547,3 @@ class Proof_Checker():
 
             self.num_ex +=1
         self.print_result()
-
-
