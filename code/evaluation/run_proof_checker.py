@@ -25,6 +25,7 @@ def main(pred_path, target_path, input_path, save_stats_file):
     pf.divide_data_into_depths(input_dicts,predicted_strings, target_dicts)
     
     
+    
     # ground_truth_bools = [ target_d['label'] for target_d in target_dicts ]
 
     # confusion_matrix = pf.create_confusion_matrix(predicted_strings, ground_truth_bools)
