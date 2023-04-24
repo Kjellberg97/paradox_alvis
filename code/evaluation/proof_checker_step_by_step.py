@@ -3,6 +3,7 @@ from sklearn.metrics import confusion_matrix, accuracy_score, f1_score
 import json
 import numpy as np
 import re
+import pickle
 
 
 
@@ -48,35 +49,37 @@ class Proof_Checker_Step(Proof_Checker):
         RETURN:
             None
         """
-        data_rules = [ text["input"].count(":") for text in input_data ]
-        max_rules = max(data_rules)
-        preds_rules = [ [] * max_rules ]
-        ground_truth_rules = [ [] * max_rules ]
-        pred_proof = [ [] * max_rules ]
+        data_rules = [ data["input"].count(":") for data in input_data ]
+        max_rules = max(data_rules) + 1
+        preds_rules = [ [] for _ in range(max_rules) ]
+        ground_truth_rules = [ [] for _ in range(max_rules) ]
+        pred_proof = [ [] for _ in range(max_rules) ]
 
-        for n_rules in data_rules:
+        for i, data in enumerate(input_data):
+            n_rules = data["input"].count(":")
             pred = self.find_binary_label(predictions[i])
             preds_rules[n_rules].append(pred)
             ground_truth_rules[n_rules].append(ground_truth[i])
-            pred_proof[n_rules].append(predictions[i])
-
-
-        '
-        ## FORTSÄTT HÄR
+            pred_proof[n_rules].append(predictions)
         
-        for n_rules in range(7):
+        acc_list = []
+        for n_rules in range(max_rules):
             print()
             print("RULES: ", n_rules)
             print("NR. SAMPLES: ", len(ground_truth_rules[n_rules]))
             ground_truth_bools = [ self.find_binary_label(target_d) for target_d in ground_truth_rules[n_rules] ]
             confusion_matrix = self.create_confusion_matrix(preds_rules[n_rules], ground_truth_bools)
             accuracy = self.label_accuracy(confusion_matrix)
+            acc_list.append(accuracy)
             with open(self.save_stats_file, "a") as file:
                 file.write("\n#############################################################################")
                 file.write("\nRULES: " + str(n_rules))
-            self.stat_over_generated_data(preds_rules[n_rules] ,ground_truth_rules[n_rules] ,data_rules[n_rules],pred_proof[n_rules])
+            #self.stat_over_generated_data(preds_rules[n_rules] ,ground_truth_rules[n_rules] ,data_rules[n_rules],pred_proof[n_rules])
             print("Rates: TP, FP, TN, FN\n", np.round(np.sum(confusion_matrix, axis=0) / confusion_matrix.shape[0], 3))
             print("acc", accuracy)
+        
+        return acc_list
+    
 
     def divide_data_into_depths(self,input_data, predictions, ground_truth):
         """Divides the input data dependeing on the depths of each input data and 
@@ -268,41 +271,48 @@ def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=False
         
         
 def main():
-
-
     rule_sampling = True
     checkpoint = "checkpoint-7500"
-    model = "RP_10X"
-    test_on = "RP_10X"
+
+    models = ["RP", "RP_10X"]
+    test_ons = ["LP", "RP", "RP_10X"]
     type_of_data = "val"
 
-    test_preds_path, test_truth_path, input_data_path, save_stats_file = reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling)
+    for model in models:
+        for test_on in test_ons:
+            test_preds_path, test_truth_path, input_data_path, save_stats_file = reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling)
 
 
-    PC = Proof_Checker_Step(save_stats_file)
-    input_data = PC.read_file_lines(input_data_path)
-    preds_data = PC.read_file_lines(test_preds_path)
-    truth_data = PC.read_file_lines(test_truth_path)
-    pred_bools = PC.create_list_of_bool_labels(preds_data)
-    truth_bools = PC.create_list_of_bool_labels(truth_data)
+            PC = Proof_Checker_Step(save_stats_file)
+            input_data = PC.read_file_lines(input_data_path)
+            preds_data = PC.read_file_lines(test_preds_path)
+            truth_data = PC.read_file_lines(test_truth_path)
+            pred_bools = PC.create_list_of_bool_labels(preds_data)
+            truth_bools = PC.create_list_of_bool_labels(truth_data)
 
-    print("\nPROOF CHECKED DATA: ",  test_preds_path)
+            print("\nPROOF CHECKED DATA: ",  test_preds_path)
 
-    cm_indices = PC.get_index_matrix(PC.create_confusion_matrix(pred_bools, truth_bools))
+            cm_indices = PC.get_index_matrix(PC.create_confusion_matrix(pred_bools, truth_bools))
 
-    cm = confusion_matrix(truth_bools, pred_bools)
-    acc = accuracy_score(truth_bools, pred_bools)
-    f1 = f1_score(truth_bools, pred_bools, average='binary')
-    #f1 = f1_score(truth_bools, pred_bools, average='micro')
+            cm = confusion_matrix(truth_bools, pred_bools)
+            acc = accuracy_score(truth_bools, pred_bools)
+            f1 = f1_score(truth_bools, pred_bools, average='binary')
+            #f1 = f1_score(truth_bools, pred_bools, average='micro')
 
-    print("\nConfusion matrix:\n", cm)
-    print("\nAccuracy:", acc)
-    print("F1-score:", f1)
-        
-    PC.divide_data_into_depths(input_data, preds_data, truth_data)
-    #PC.find_non_bools(preds_data)
-    
-    #PC.check_proof_for_errors(preds_data, input_data)
+            print("\nConfusion matrix:\n", cm)
+            print("\nAccuracy:", acc)
+            print("F1-score:", f1)
+                
+            #PC.divide_data_into_depths(input_data, preds_data, truth_data)
+            acc_list = PC.divide_data_into_rules(input_data, preds_data, truth_data)
+            #PC.find_non_bools(preds_data)
+
+            print("Saving accuracies with pickle.")
+            pkl_name = "accs_by_rules/rule_accs_" + model + "_" + test_on + "_" + type_of_data + ".pkl"
+            with open(pkl_name, "wb") as f:
+                pickle.dump(acc_list, f)
+
+            #PC.check_proof_for_errors(preds_data, input_data)
 
 if __name__ == "__main__":
     main()

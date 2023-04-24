@@ -1,0 +1,4395 @@
+This job can be monitored from: https://scruffy.c3se.chalmers.se/d/alvis-job/alvis-job?var-jobid=983019&from=1682340987000
+INFO:    underlay of /etc/localtime required more than 50 (94) bind mounts
+INFO:    underlay of /usr/share/lmod/lmod required more than 50 (59) bind mounts
+
+PROOF CHECKED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_LP_VAL_output.txt
+
+Confusion matrix:
+ [[14130    20]
+ [  159 13691]]
+
+Accuracy: 0.9936071428571429
+F1-score: 0.9935053154820218
+
+RULES:  0
+NR. SAMPLES:  86
+Rates: TP, FP, TN, FN
+ [0.57 0.   0.43 0.  ]
+acc 1.0
+
+RULES:  1
+NR. SAMPLES:  77
+Rates: TP, FP, TN, FN
+ [0.571 0.    0.429 0.   ]
+acc 1.0
+
+RULES:  2
+NR. SAMPLES:  105
+Rates: TP, FP, TN, FN
+ [0.495 0.    0.505 0.   ]
+acc 1.0
+
+RULES:  3
+NR. SAMPLES:  126
+Rates: TP, FP, TN, FN
+ [0.54 0.   0.46 0.  ]
+acc 1.0
+
+RULES:  4
+NR. SAMPLES:  178
+Rates: TP, FP, TN, FN
+ [0.472 0.    0.528 0.   ]
+acc 1.0
+
+RULES:  5
+NR. SAMPLES:  196
+Rates: TP, FP, TN, FN
+ [0.423 0.    0.577 0.   ]
+acc 1.0
+
+RULES:  6
+NR. SAMPLES:  266
+Rates: TP, FP, TN, FN
+ [0.417 0.    0.583 0.   ]
+acc 1.0
+
+RULES:  7
+NR. SAMPLES:  277
+Rates: TP, FP, TN, FN
+ [0.462 0.    0.534 0.004]
+acc 0.9963898916967509
+
+RULES:  8
+NR. SAMPLES:  313
+Rates: TP, FP, TN, FN
+ [0.447 0.    0.55  0.003]
+acc 0.9968051118210862
+
+RULES:  9
+NR. SAMPLES:  332
+Rates: TP, FP, TN, FN
+ [0.434 0.    0.563 0.003]
+acc 0.9969879518072289
+
+RULES:  10
+NR. SAMPLES:  423
+Rates: TP, FP, TN, FN
+ [0.392 0.    0.605 0.002]
+acc 0.9976359338061466
+
+RULES:  11
+NR. SAMPLES:  421
+Rates: TP, FP, TN, FN
+ [0.406 0.    0.594 0.   ]
+acc 1.0
+
+RULES:  12
+NR. SAMPLES:  484
+Rates: TP, FP, TN, FN
+ [0.444 0.    0.55  0.006]
+acc 0.993801652892562
+
+RULES:  13
+NR. SAMPLES:  510
+Rates: TP, FP, TN, FN
+ [0.396 0.    0.602 0.002]
+acc 0.9980392156862745
+
+RULES:  14
+NR. SAMPLES:  525
+Rates: TP, FP, TN, FN
+ [0.434 0.002 0.56  0.004]
+acc 0.9942857142857143
+
+RULES:  15
+NR. SAMPLES:  516
+Rates: TP, FP, TN, FN
+ [0.415 0.    0.574 0.012]
+acc 0.9883720930232558
+
+RULES:  16
+NR. SAMPLES:  530
+Rates: TP, FP, TN, FN
+ [0.408 0.    0.579 0.013]
+acc 0.9867924528301887
+
+RULES:  17
+NR. SAMPLES:  586
+Rates: TP, FP, TN, FN
+ [0.384 0.002 0.613 0.002]
+acc 0.9965870307167235
+
+RULES:  18
+NR. SAMPLES:  540
+Rates: TP, FP, TN, FN
+ [0.381 0.    0.607 0.011]
+acc 0.9888888888888889
+
+RULES:  19
+NR. SAMPLES:  556
+Rates: TP, FP, TN, FN
+ [0.394 0.    0.599 0.007]
+acc 0.9928057553956835
+
+RULES:  20
+NR. SAMPLES:  591
+Rates: TP, FP, TN, FN
+ [0.411 0.    0.584 0.005]
+acc 0.9949238578680203
+
+RULES:  21
+NR. SAMPLES:  601
+Rates: TP, FP, TN, FN
+ [0.408 0.    0.591 0.002]
+acc 0.9983361064891847
+
+RULES:  22
+NR. SAMPLES:  529
+Rates: TP, FP, TN, FN
+ [0.399 0.002 0.59  0.009]
+acc 0.9886578449905482
+
+RULES:  23
+NR. SAMPLES:  551
+Rates: TP, FP, TN, FN
+ [0.387 0.004 0.603 0.007]
+acc 0.9891107078039928
+
+RULES:  24
+NR. SAMPLES:  608
+Rates: TP, FP, TN, FN
+ [0.382 0.003 0.602 0.013]
+acc 0.9835526315789473
+
+RULES:  25
+NR. SAMPLES:  614
+Rates: TP, FP, TN, FN
+ [0.407 0.    0.588 0.005]
+acc 0.995114006514658
+
+RULES:  26
+NR. SAMPLES:  600
+Rates: TP, FP, TN, FN
+ [0.407 0.003 0.588 0.002]
+acc 0.995
+
+RULES:  27
+NR. SAMPLES:  556
+Rates: TP, FP, TN, FN
+ [0.383 0.    0.608 0.009]
+acc 0.9910071942446043
+
+RULES:  28
+NR. SAMPLES:  541
+Rates: TP, FP, TN, FN
+ [0.407 0.    0.584 0.009]
+acc 0.9907578558225508
+
+RULES:  29
+NR. SAMPLES:  568
+Rates: TP, FP, TN, FN
+ [0.408 0.002 0.586 0.004]
+acc 0.9947183098591549
+
+RULES:  30
+NR. SAMPLES:  591
+Rates: TP, FP, TN, FN
+ [0.386 0.002 0.606 0.007]
+acc 0.9915397631133672
+
+RULES:  31
+NR. SAMPLES:  529
+Rates: TP, FP, TN, FN
+ [0.393 0.002 0.601 0.004]
+acc 0.994328922495274
+
+RULES:  32
+NR. SAMPLES:  533
+Rates: TP, FP, TN, FN
+ [0.388 0.002 0.6   0.009]
+acc 0.9887429643527205
+
+RULES:  33
+NR. SAMPLES:  516
+Rates: TP, FP, TN, FN
+ [0.405 0.004 0.591 0.   ]
+acc 0.9961240310077519
+
+RULES:  34
+NR. SAMPLES:  555
+Rates: TP, FP, TN, FN
+ [0.391 0.    0.598 0.011]
+acc 0.9891891891891892
+
+RULES:  35
+NR. SAMPLES:  486
+Rates: TP, FP, TN, FN
+ [0.368 0.    0.63  0.002]
+acc 0.9979423868312757
+
+RULES:  36
+NR. SAMPLES:  494
+Rates: TP, FP, TN, FN
+ [0.421 0.004 0.571 0.004]
+acc 0.9919028340080972
+
+RULES:  37
+NR. SAMPLES:  493
+Rates: TP, FP, TN, FN
+ [0.416 0.    0.578 0.006]
+acc 0.9939148073022313
+
+RULES:  38
+NR. SAMPLES:  488
+Rates: TP, FP, TN, FN
+ [0.408 0.    0.586 0.006]
+acc 0.9938524590163934
+
+RULES:  39
+NR. SAMPLES:  441
+Rates: TP, FP, TN, FN
+ [0.422 0.    0.578 0.   ]
+acc 1.0
+
+RULES:  40
+NR. SAMPLES:  422
+Rates: TP, FP, TN, FN
+ [0.391 0.    0.604 0.005]
+acc 0.995260663507109
+
+RULES:  41
+NR. SAMPLES:  422
+Rates: TP, FP, TN, FN
+ [0.408 0.    0.583 0.009]
+acc 0.990521327014218
+
+RULES:  42
+NR. SAMPLES:  409
+Rates: TP, FP, TN, FN
+ [0.413 0.    0.582 0.005]
+acc 0.9951100244498777
+
+RULES:  43
+NR. SAMPLES:  418
+Rates: TP, FP, TN, FN
+ [0.433 0.002 0.55  0.014]
+acc 0.9832535885167464
+
+RULES:  44
+NR. SAMPLES:  385
+Rates: TP, FP, TN, FN
+ [0.431 0.    0.564 0.005]
+acc 0.9948051948051948
+
+RULES:  45
+NR. SAMPLES:  391
+Rates: TP, FP, TN, FN
+ [0.458 0.    0.537 0.005]
+acc 0.9948849104859335
+
+RULES:  46
+NR. SAMPLES:  304
+Rates: TP, FP, TN, FN
+ [0.48  0.    0.513 0.007]
+acc 0.993421052631579
+
+RULES:  47
+NR. SAMPLES:  352
+Rates: TP, FP, TN, FN
+ [0.486 0.    0.506 0.009]
+acc 0.9914772727272727
+
+RULES:  48
+NR. SAMPLES:  347
+Rates: TP, FP, TN, FN
+ [0.548 0.    0.447 0.006]
+acc 0.9942363112391931
+
+RULES:  49
+NR. SAMPLES:  306
+Rates: TP, FP, TN, FN
+ [0.487 0.003 0.493 0.016]
+acc 0.9803921568627451
+
+RULES:  50
+NR. SAMPLES:  284
+Rates: TP, FP, TN, FN
+ [0.507 0.    0.489 0.004]
+acc 0.9964788732394366
+
+RULES:  51
+NR. SAMPLES:  301
+Rates: TP, FP, TN, FN
+ [0.555 0.003 0.435 0.007]
+acc 0.9900332225913622
+
+RULES:  52
+NR. SAMPLES:  240
+Rates: TP, FP, TN, FN
+ [0.579 0.    0.421 0.   ]
+acc 1.0
+
+RULES:  53
+NR. SAMPLES:  249
+Rates: TP, FP, TN, FN
+ [0.635 0.    0.357 0.008]
+acc 0.9919678714859438
+
+RULES:  54
+NR. SAMPLES:  226
+Rates: TP, FP, TN, FN
+ [0.619 0.    0.376 0.004]
+acc 0.995575221238938
+
+RULES:  55
+NR. SAMPLES:  202
+Rates: TP, FP, TN, FN
+ [0.564 0.    0.426 0.01 ]
+acc 0.9900990099009901
+
+RULES:  56
+NR. SAMPLES:  222
+Rates: TP, FP, TN, FN
+ [0.604 0.    0.392 0.005]
+acc 0.9954954954954955
+
+RULES:  57
+NR. SAMPLES:  214
+Rates: TP, FP, TN, FN
+ [0.687 0.    0.313 0.   ]
+acc 1.0
+
+RULES:  58
+NR. SAMPLES:  213
+Rates: TP, FP, TN, FN
+ [0.634 0.    0.366 0.   ]
+acc 1.0
+
+RULES:  59
+NR. SAMPLES:  194
+Rates: TP, FP, TN, FN
+ [0.701 0.    0.299 0.   ]
+acc 1.0
+
+RULES:  60
+NR. SAMPLES:  185
+Rates: TP, FP, TN, FN
+ [0.595 0.    0.405 0.   ]
+acc 1.0
+
+RULES:  61
+NR. SAMPLES:  173
+Rates: TP, FP, TN, FN
+ [0.728 0.    0.266 0.006]
+acc 0.9942196531791907
+
+RULES:  62
+NR. SAMPLES:  160
+Rates: TP, FP, TN, FN
+ [0.656 0.    0.325 0.019]
+acc 0.98125
+
+RULES:  63
+NR. SAMPLES:  172
+Rates: TP, FP, TN, FN
+ [0.68  0.    0.308 0.012]
+acc 0.9883720930232558
+
+RULES:  64
+NR. SAMPLES:  146
+Rates: TP, FP, TN, FN
+ [0.712 0.    0.288 0.   ]
+acc 1.0
+
+RULES:  65
+NR. SAMPLES:  170
+Rates: TP, FP, TN, FN
+ [0.735 0.    0.265 0.   ]
+acc 1.0
+
+RULES:  66
+NR. SAMPLES:  147
+Rates: TP, FP, TN, FN
+ [0.741 0.    0.252 0.007]
+acc 0.9931972789115646
+
+RULES:  67
+NR. SAMPLES:  143
+Rates: TP, FP, TN, FN
+ [0.748 0.    0.245 0.007]
+acc 0.993006993006993
+
+RULES:  68
+NR. SAMPLES:  129
+Rates: TP, FP, TN, FN
+ [0.814 0.    0.178 0.008]
+acc 0.9922480620155039
+
+RULES:  69
+NR. SAMPLES:  120
+Rates: TP, FP, TN, FN
+ [0.75  0.    0.233 0.017]
+acc 0.9833333333333333
+
+RULES:  70
+NR. SAMPLES:  125
+Rates: TP, FP, TN, FN
+ [0.808 0.    0.184 0.008]
+acc 0.992
+
+RULES:  71
+NR. SAMPLES:  119
+Rates: TP, FP, TN, FN
+ [0.748 0.    0.244 0.008]
+acc 0.9915966386554622
+
+RULES:  72
+NR. SAMPLES:  109
+Rates: TP, FP, TN, FN
+ [0.798 0.    0.193 0.009]
+acc 0.9908256880733946
+
+RULES:  73
+NR. SAMPLES:  91
+Rates: TP, FP, TN, FN
+ [0.813 0.    0.187 0.   ]
+acc 1.0
+
+RULES:  74
+NR. SAMPLES:  99
+Rates: TP, FP, TN, FN
+ [0.879 0.    0.121 0.   ]
+acc 1.0
+
+RULES:  75
+NR. SAMPLES:  98
+Rates: TP, FP, TN, FN
+ [0.806 0.    0.194 0.   ]
+acc 1.0
+
+RULES:  76
+NR. SAMPLES:  93
+Rates: TP, FP, TN, FN
+ [0.86 0.   0.14 0.  ]
+acc 1.0
+
+RULES:  77
+NR. SAMPLES:  103
+Rates: TP, FP, TN, FN
+ [0.854 0.    0.146 0.   ]
+acc 1.0
+
+RULES:  78
+NR. SAMPLES:  100
+Rates: TP, FP, TN, FN
+ [0.91 0.   0.08 0.01]
+acc 0.99
+
+RULES:  79
+NR. SAMPLES:  76
+Rates: TP, FP, TN, FN
+ [0.908 0.    0.079 0.013]
+acc 0.9868421052631579
+
+RULES:  80
+NR. SAMPLES:  86
+Rates: TP, FP, TN, FN
+ [0.907 0.    0.093 0.   ]
+acc 1.0
+
+RULES:  81
+NR. SAMPLES:  72
+Rates: TP, FP, TN, FN
+ [0.917 0.    0.069 0.014]
+acc 0.9861111111111112
+
+RULES:  82
+NR. SAMPLES:  65
+Rates: TP, FP, TN, FN
+ [0.877 0.    0.123 0.   ]
+acc 1.0
+
+RULES:  83
+NR. SAMPLES:  59
+Rates: TP, FP, TN, FN
+ [0.932 0.    0.068 0.   ]
+acc 1.0
+
+RULES:  84
+NR. SAMPLES:  66
+Rates: TP, FP, TN, FN
+ [0.924 0.    0.076 0.   ]
+acc 1.0
+
+RULES:  85
+NR. SAMPLES:  78
+Rates: TP, FP, TN, FN
+ [0.897 0.    0.09  0.013]
+acc 0.9871794871794872
+
+RULES:  86
+NR. SAMPLES:  64
+Rates: TP, FP, TN, FN
+ [0.922 0.    0.062 0.016]
+acc 0.984375
+
+RULES:  87
+NR. SAMPLES:  67
+Rates: TP, FP, TN, FN
+ [0.866 0.    0.134 0.   ]
+acc 1.0
+
+RULES:  88
+NR. SAMPLES:  56
+Rates: TP, FP, TN, FN
+ [0.911 0.    0.054 0.036]
+acc 0.9642857142857143
+
+RULES:  89
+NR. SAMPLES:  70
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  90
+NR. SAMPLES:  55
+Rates: TP, FP, TN, FN
+ [0.982 0.    0.    0.018]
+acc 0.9818181818181818
+
+RULES:  91
+NR. SAMPLES:  43
+Rates: TP, FP, TN, FN
+ [0.953 0.    0.047 0.   ]
+acc 1.0
+
+RULES:  92
+NR. SAMPLES:  46
+Rates: TP, FP, TN, FN
+ [0.913 0.    0.087 0.   ]
+acc 1.0
+
+RULES:  93
+NR. SAMPLES:  59
+Rates: TP, FP, TN, FN
+ [0.966 0.    0.034 0.   ]
+acc 1.0
+
+RULES:  94
+NR. SAMPLES:  46
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  95
+NR. SAMPLES:  39
+Rates: TP, FP, TN, FN
+ [0.923 0.    0.077 0.   ]
+acc 1.0
+
+RULES:  96
+NR. SAMPLES:  36
+Rates: TP, FP, TN, FN
+ [0.917 0.    0.056 0.028]
+acc 0.9722222222222222
+
+RULES:  97
+NR. SAMPLES:  40
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  98
+NR. SAMPLES:  40
+Rates: TP, FP, TN, FN
+ [0.975 0.    0.025 0.   ]
+acc 1.0
+
+RULES:  99
+NR. SAMPLES:  29
+Rates: TP, FP, TN, FN
+ [0.966 0.    0.034 0.   ]
+acc 1.0
+
+RULES:  100
+NR. SAMPLES:  36
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  101
+NR. SAMPLES:  29
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  102
+NR. SAMPLES:  28
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  103
+NR. SAMPLES:  26
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  104
+NR. SAMPLES:  15
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  105
+NR. SAMPLES:  30
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  106
+NR. SAMPLES:  12
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  107
+NR. SAMPLES:  23
+Rates: TP, FP, TN, FN
+ [0.957 0.    0.043 0.   ]
+acc 1.0
+
+RULES:  108
+NR. SAMPLES:  13
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  109
+NR. SAMPLES:  13
+Rates: TP, FP, TN, FN
+ [0.923 0.    0.077 0.   ]
+acc 1.0
+
+RULES:  110
+NR. SAMPLES:  13
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  111
+NR. SAMPLES:  6
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  112
+NR. SAMPLES:  10
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  113
+NR. SAMPLES:  9
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  114
+NR. SAMPLES:  12
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  115
+NR. SAMPLES:  7
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  116
+NR. SAMPLES:  5
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  117
+NR. SAMPLES:  4
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  118
+NR. SAMPLES:  2
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+Saving accuracies with pickle.
+
+PROOF CHECKED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_RP_VAL_output.txt
+
+Confusion matrix:
+ [[13374     6]
+ [   54 14566]]
+
+Accuracy: 0.9978571428571429
+F1-score: 0.997944642367772
+
+RULES:  0
+NR. SAMPLES:  112
+Rates: TP, FP, TN, FN
+ [0.446 0.    0.554 0.   ]
+acc 1.0
+
+RULES:  1
+NR. SAMPLES:  133
+Rates: TP, FP, TN, FN
+ [0.406 0.    0.594 0.   ]
+acc 1.0
+
+RULES:  2
+NR. SAMPLES:  149
+Rates: TP, FP, TN, FN
+ [0.463 0.    0.537 0.   ]
+acc 1.0
+
+RULES:  3
+NR. SAMPLES:  162
+Rates: TP, FP, TN, FN
+ [0.469 0.    0.531 0.   ]
+acc 1.0
+
+RULES:  4
+NR. SAMPLES:  186
+Rates: TP, FP, TN, FN
+ [0.398 0.    0.602 0.   ]
+acc 1.0
+
+RULES:  5
+NR. SAMPLES:  214
+Rates: TP, FP, TN, FN
+ [0.393 0.    0.607 0.   ]
+acc 1.0
+
+RULES:  6
+NR. SAMPLES:  220
+Rates: TP, FP, TN, FN
+ [0.409 0.    0.591 0.   ]
+acc 1.0
+
+RULES:  7
+NR. SAMPLES:  242
+Rates: TP, FP, TN, FN
+ [0.405 0.    0.595 0.   ]
+acc 1.0
+
+RULES:  8
+NR. SAMPLES:  258
+Rates: TP, FP, TN, FN
+ [0.411 0.    0.589 0.   ]
+acc 1.0
+
+RULES:  9
+NR. SAMPLES:  269
+Rates: TP, FP, TN, FN
+ [0.312 0.    0.68  0.007]
+acc 0.9925650557620818
+
+RULES:  10
+NR. SAMPLES:  275
+Rates: TP, FP, TN, FN
+ [0.404 0.    0.596 0.   ]
+acc 1.0
+
+RULES:  11
+NR. SAMPLES:  328
+Rates: TP, FP, TN, FN
+ [0.409 0.    0.591 0.   ]
+acc 1.0
+
+RULES:  12
+NR. SAMPLES:  351
+Rates: TP, FP, TN, FN
+ [0.385 0.    0.613 0.003]
+acc 0.9971509971509972
+
+RULES:  13
+NR. SAMPLES:  388
+Rates: TP, FP, TN, FN
+ [0.348 0.    0.652 0.   ]
+acc 1.0
+
+RULES:  14
+NR. SAMPLES:  444
+Rates: TP, FP, TN, FN
+ [0.378 0.002 0.617 0.002]
+acc 0.9954954954954955
+
+RULES:  15
+NR. SAMPLES:  451
+Rates: TP, FP, TN, FN
+ [0.377 0.004 0.619 0.   ]
+acc 0.9955654101995566
+
+RULES:  16
+NR. SAMPLES:  478
+Rates: TP, FP, TN, FN
+ [0.4 0.  0.6 0. ]
+acc 1.0
+
+RULES:  17
+NR. SAMPLES:  475
+Rates: TP, FP, TN, FN
+ [0.335 0.    0.665 0.   ]
+acc 1.0
+
+RULES:  18
+NR. SAMPLES:  471
+Rates: TP, FP, TN, FN
+ [0.344 0.    0.654 0.002]
+acc 0.9978768577494692
+
+RULES:  19
+NR. SAMPLES:  539
+Rates: TP, FP, TN, FN
+ [0.373 0.    0.623 0.004]
+acc 0.9962894248608535
+
+RULES:  20
+NR. SAMPLES:  574
+Rates: TP, FP, TN, FN
+ [0.348 0.    0.652 0.   ]
+acc 1.0
+
+RULES:  21
+NR. SAMPLES:  517
+Rates: TP, FP, TN, FN
+ [0.368 0.002 0.629 0.002]
+acc 0.9961315280464217
+
+RULES:  22
+NR. SAMPLES:  506
+Rates: TP, FP, TN, FN
+ [0.368 0.    0.625 0.008]
+acc 0.9920948616600791
+
+RULES:  23
+NR. SAMPLES:  516
+Rates: TP, FP, TN, FN
+ [0.391 0.    0.605 0.004]
+acc 0.9961240310077519
+
+RULES:  24
+NR. SAMPLES:  565
+Rates: TP, FP, TN, FN
+ [0.365 0.    0.635 0.   ]
+acc 1.0
+
+RULES:  25
+NR. SAMPLES:  538
+Rates: TP, FP, TN, FN
+ [0.37 0.   0.63 0.  ]
+acc 1.0
+
+RULES:  26
+NR. SAMPLES:  528
+Rates: TP, FP, TN, FN
+ [0.367 0.    0.633 0.   ]
+acc 1.0
+
+RULES:  27
+NR. SAMPLES:  536
+Rates: TP, FP, TN, FN
+ [0.388 0.    0.61  0.002]
+acc 0.9981343283582089
+
+RULES:  28
+NR. SAMPLES:  494
+Rates: TP, FP, TN, FN
+ [0.344 0.    0.656 0.   ]
+acc 1.0
+
+RULES:  29
+NR. SAMPLES:  456
+Rates: TP, FP, TN, FN
+ [0.349 0.    0.651 0.   ]
+acc 1.0
+
+RULES:  30
+NR. SAMPLES:  497
+Rates: TP, FP, TN, FN
+ [0.376 0.    0.624 0.   ]
+acc 1.0
+
+RULES:  31
+NR. SAMPLES:  538
+Rates: TP, FP, TN, FN
+ [0.409 0.    0.589 0.002]
+acc 0.9981412639405205
+
+RULES:  32
+NR. SAMPLES:  466
+Rates: TP, FP, TN, FN
+ [0.337 0.    0.661 0.002]
+acc 0.9978540772532188
+
+RULES:  33
+NR. SAMPLES:  447
+Rates: TP, FP, TN, FN
+ [0.398 0.    0.597 0.004]
+acc 0.9955257270693513
+
+RULES:  34
+NR. SAMPLES:  478
+Rates: TP, FP, TN, FN
+ [0.395 0.    0.603 0.002]
+acc 0.997907949790795
+
+RULES:  35
+NR. SAMPLES:  491
+Rates: TP, FP, TN, FN
+ [0.363 0.    0.633 0.004]
+acc 0.9959266802443992
+
+RULES:  36
+NR. SAMPLES:  491
+Rates: TP, FP, TN, FN
+ [0.45  0.    0.546 0.004]
+acc 0.9959266802443992
+
+RULES:  37
+NR. SAMPLES:  393
+Rates: TP, FP, TN, FN
+ [0.412 0.    0.588 0.   ]
+acc 1.0
+
+RULES:  38
+NR. SAMPLES:  437
+Rates: TP, FP, TN, FN
+ [0.439 0.    0.551 0.009]
+acc 0.9908466819221968
+
+RULES:  39
+NR. SAMPLES:  406
+Rates: TP, FP, TN, FN
+ [0.48  0.    0.515 0.005]
+acc 0.9950738916256158
+
+RULES:  40
+NR. SAMPLES:  427
+Rates: TP, FP, TN, FN
+ [0.459 0.    0.536 0.005]
+acc 0.9953161592505855
+
+RULES:  41
+NR. SAMPLES:  382
+Rates: TP, FP, TN, FN
+ [0.448 0.    0.552 0.   ]
+acc 1.0
+
+RULES:  42
+NR. SAMPLES:  407
+Rates: TP, FP, TN, FN
+ [0.484 0.    0.516 0.   ]
+acc 1.0
+
+RULES:  43
+NR. SAMPLES:  402
+Rates: TP, FP, TN, FN
+ [0.488 0.    0.512 0.   ]
+acc 1.0
+
+RULES:  44
+NR. SAMPLES:  362
+Rates: TP, FP, TN, FN
+ [0.492 0.003 0.506 0.   ]
+acc 0.9972375690607734
+
+RULES:  45
+NR. SAMPLES:  372
+Rates: TP, FP, TN, FN
+ [0.519 0.    0.478 0.003]
+acc 0.9973118279569892
+
+RULES:  46
+NR. SAMPLES:  337
+Rates: TP, FP, TN, FN
+ [0.493 0.    0.507 0.   ]
+acc 1.0
+
+RULES:  47
+NR. SAMPLES:  330
+Rates: TP, FP, TN, FN
+ [0.512 0.    0.488 0.   ]
+acc 1.0
+
+RULES:  48
+NR. SAMPLES:  336
+Rates: TP, FP, TN, FN
+ [0.574 0.    0.426 0.   ]
+acc 1.0
+
+RULES:  49
+NR. SAMPLES:  301
+Rates: TP, FP, TN, FN
+ [0.588 0.    0.412 0.   ]
+acc 1.0
+
+RULES:  50
+NR. SAMPLES:  276
+Rates: TP, FP, TN, FN
+ [0.576 0.004 0.42  0.   ]
+acc 0.9963768115942029
+
+RULES:  51
+NR. SAMPLES:  327
+Rates: TP, FP, TN, FN
+ [0.535 0.    0.462 0.003]
+acc 0.9969418960244648
+
+RULES:  52
+NR. SAMPLES:  298
+Rates: TP, FP, TN, FN
+ [0.634 0.    0.359 0.007]
+acc 0.9932885906040269
+
+RULES:  53
+NR. SAMPLES:  284
+Rates: TP, FP, TN, FN
+ [0.585 0.    0.415 0.   ]
+acc 1.0
+
+RULES:  54
+NR. SAMPLES:  270
+Rates: TP, FP, TN, FN
+ [0.641 0.    0.356 0.004]
+acc 0.9962962962962963
+
+RULES:  55
+NR. SAMPLES:  273
+Rates: TP, FP, TN, FN
+ [0.637 0.    0.359 0.004]
+acc 0.9963369963369964
+
+RULES:  56
+NR. SAMPLES:  253
+Rates: TP, FP, TN, FN
+ [0.644 0.    0.348 0.008]
+acc 0.9920948616600791
+
+RULES:  57
+NR. SAMPLES:  250
+Rates: TP, FP, TN, FN
+ [0.676 0.    0.324 0.   ]
+acc 1.0
+
+RULES:  58
+NR. SAMPLES:  252
+Rates: TP, FP, TN, FN
+ [0.687 0.    0.313 0.   ]
+acc 1.0
+
+RULES:  59
+NR. SAMPLES:  235
+Rates: TP, FP, TN, FN
+ [0.732 0.    0.268 0.   ]
+acc 1.0
+
+RULES:  60
+NR. SAMPLES:  201
+Rates: TP, FP, TN, FN
+ [0.731 0.    0.259 0.01 ]
+acc 0.9900497512437811
+
+RULES:  61
+NR. SAMPLES:  200
+Rates: TP, FP, TN, FN
+ [0.735 0.    0.26  0.005]
+acc 0.995
+
+RULES:  62
+NR. SAMPLES:  172
+Rates: TP, FP, TN, FN
+ [0.657 0.    0.343 0.   ]
+acc 1.0
+
+RULES:  63
+NR. SAMPLES:  198
+Rates: TP, FP, TN, FN
+ [0.778 0.    0.222 0.   ]
+acc 1.0
+
+RULES:  64
+NR. SAMPLES:  189
+Rates: TP, FP, TN, FN
+ [0.783 0.    0.206 0.011]
+acc 0.9894179894179894
+
+RULES:  65
+NR. SAMPLES:  174
+Rates: TP, FP, TN, FN
+ [0.77 0.   0.23 0.  ]
+acc 1.0
+
+RULES:  66
+NR. SAMPLES:  180
+Rates: TP, FP, TN, FN
+ [0.733 0.    0.256 0.011]
+acc 0.9888888888888889
+
+RULES:  67
+NR. SAMPLES:  158
+Rates: TP, FP, TN, FN
+ [0.791 0.    0.209 0.   ]
+acc 1.0
+
+RULES:  68
+NR. SAMPLES:  188
+Rates: TP, FP, TN, FN
+ [0.798 0.    0.202 0.   ]
+acc 1.0
+
+RULES:  69
+NR. SAMPLES:  143
+Rates: TP, FP, TN, FN
+ [0.783 0.    0.217 0.   ]
+acc 1.0
+
+RULES:  70
+NR. SAMPLES:  161
+Rates: TP, FP, TN, FN
+ [0.814 0.    0.18  0.006]
+acc 0.9937888198757764
+
+RULES:  71
+NR. SAMPLES:  150
+Rates: TP, FP, TN, FN
+ [0.873 0.    0.127 0.   ]
+acc 1.0
+
+RULES:  72
+NR. SAMPLES:  163
+Rates: TP, FP, TN, FN
+ [0.865 0.    0.129 0.006]
+acc 0.9938650306748467
+
+RULES:  73
+NR. SAMPLES:  140
+Rates: TP, FP, TN, FN
+ [0.829 0.    0.171 0.   ]
+acc 1.0
+
+RULES:  74
+NR. SAMPLES:  149
+Rates: TP, FP, TN, FN
+ [0.812 0.    0.188 0.   ]
+acc 1.0
+
+RULES:  75
+NR. SAMPLES:  130
+Rates: TP, FP, TN, FN
+ [0.846 0.    0.154 0.   ]
+acc 1.0
+
+RULES:  76
+NR. SAMPLES:  140
+Rates: TP, FP, TN, FN
+ [0.836 0.    0.164 0.   ]
+acc 1.0
+
+RULES:  77
+NR. SAMPLES:  133
+Rates: TP, FP, TN, FN
+ [0.91 0.   0.09 0.  ]
+acc 1.0
+
+RULES:  78
+NR. SAMPLES:  136
+Rates: TP, FP, TN, FN
+ [0.846 0.    0.147 0.007]
+acc 0.9926470588235294
+
+RULES:  79
+NR. SAMPLES:  126
+Rates: TP, FP, TN, FN
+ [0.921 0.    0.079 0.   ]
+acc 1.0
+
+RULES:  80
+NR. SAMPLES:  99
+Rates: TP, FP, TN, FN
+ [0.909 0.    0.091 0.   ]
+acc 1.0
+
+RULES:  81
+NR. SAMPLES:  109
+Rates: TP, FP, TN, FN
+ [0.945 0.    0.055 0.   ]
+acc 1.0
+
+RULES:  82
+NR. SAMPLES:  120
+Rates: TP, FP, TN, FN
+ [0.925 0.    0.075 0.   ]
+acc 1.0
+
+RULES:  83
+NR. SAMPLES:  116
+Rates: TP, FP, TN, FN
+ [0.966 0.    0.034 0.   ]
+acc 1.0
+
+RULES:  84
+NR. SAMPLES:  117
+Rates: TP, FP, TN, FN
+ [0.915 0.    0.085 0.   ]
+acc 1.0
+
+RULES:  85
+NR. SAMPLES:  92
+Rates: TP, FP, TN, FN
+ [0.913 0.    0.076 0.011]
+acc 0.9891304347826086
+
+RULES:  86
+NR. SAMPLES:  109
+Rates: TP, FP, TN, FN
+ [0.991 0.    0.009 0.   ]
+acc 1.0
+
+RULES:  87
+NR. SAMPLES:  123
+Rates: TP, FP, TN, FN
+ [0.951 0.    0.049 0.   ]
+acc 1.0
+
+RULES:  88
+NR. SAMPLES:  102
+Rates: TP, FP, TN, FN
+ [0.961 0.    0.039 0.   ]
+acc 1.0
+
+RULES:  89
+NR. SAMPLES:  72
+Rates: TP, FP, TN, FN
+ [0.986 0.    0.014 0.   ]
+acc 1.0
+
+RULES:  90
+NR. SAMPLES:  72
+Rates: TP, FP, TN, FN
+ [0.972 0.    0.028 0.   ]
+acc 1.0
+
+RULES:  91
+NR. SAMPLES:  89
+Rates: TP, FP, TN, FN
+ [0.978 0.    0.022 0.   ]
+acc 1.0
+
+RULES:  92
+NR. SAMPLES:  86
+Rates: TP, FP, TN, FN
+ [0.953 0.    0.047 0.   ]
+acc 1.0
+
+RULES:  93
+NR. SAMPLES:  53
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  94
+NR. SAMPLES:  70
+Rates: TP, FP, TN, FN
+ [0.986 0.    0.014 0.   ]
+acc 1.0
+
+RULES:  95
+NR. SAMPLES:  72
+Rates: TP, FP, TN, FN
+ [0.972 0.    0.014 0.014]
+acc 0.9861111111111112
+
+RULES:  96
+NR. SAMPLES:  69
+Rates: TP, FP, TN, FN
+ [0.971 0.    0.014 0.014]
+acc 0.9855072463768116
+
+RULES:  97
+NR. SAMPLES:  55
+Rates: TP, FP, TN, FN
+ [0.964 0.    0.036 0.   ]
+acc 1.0
+
+RULES:  98
+NR. SAMPLES:  55
+Rates: TP, FP, TN, FN
+ [0.982 0.    0.018 0.   ]
+acc 1.0
+
+RULES:  99
+NR. SAMPLES:  58
+Rates: TP, FP, TN, FN
+ [0.966 0.    0.017 0.017]
+acc 0.9827586206896551
+
+RULES:  100
+NR. SAMPLES:  52
+Rates: TP, FP, TN, FN
+ [0.962 0.    0.038 0.   ]
+acc 1.0
+
+RULES:  101
+NR. SAMPLES:  48
+Rates: TP, FP, TN, FN
+ [0.958 0.    0.042 0.   ]
+acc 1.0
+
+RULES:  102
+NR. SAMPLES:  50
+Rates: TP, FP, TN, FN
+ [0.98 0.   0.02 0.  ]
+acc 1.0
+
+RULES:  103
+NR. SAMPLES:  54
+Rates: TP, FP, TN, FN
+ [0.944 0.    0.056 0.   ]
+acc 1.0
+
+RULES:  104
+NR. SAMPLES:  49
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  105
+NR. SAMPLES:  41
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  106
+NR. SAMPLES:  42
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  107
+NR. SAMPLES:  35
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  108
+NR. SAMPLES:  38
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  109
+NR. SAMPLES:  27
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  110
+NR. SAMPLES:  30
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  111
+NR. SAMPLES:  29
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  112
+NR. SAMPLES:  19
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  113
+NR. SAMPLES:  18
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  114
+NR. SAMPLES:  20
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  115
+NR. SAMPLES:  22
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  116
+NR. SAMPLES:  21
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  117
+NR. SAMPLES:  11
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  118
+NR. SAMPLES:  12
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  119
+NR. SAMPLES:  9
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  120
+NR. SAMPLES:  11
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+Saving accuracies with pickle.
+
+PROOF CHECKED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_RP_10X_VAL_output.txt
+
+Confusion matrix:
+ [[13483    10]
+ [   58 14449]]
+
+Accuracy: 0.9975714285714286
+F1-score: 0.997652420078713
+
+RULES:  0
+NR. SAMPLES:  118
+Rates: TP, FP, TN, FN
+ [0.542 0.    0.458 0.   ]
+acc 1.0
+
+RULES:  1
+NR. SAMPLES:  143
+Rates: TP, FP, TN, FN
+ [0.427 0.    0.573 0.   ]
+acc 1.0
+
+RULES:  2
+NR. SAMPLES:  129
+Rates: TP, FP, TN, FN
+ [0.45 0.   0.55 0.  ]
+acc 1.0
+
+RULES:  3
+NR. SAMPLES:  183
+Rates: TP, FP, TN, FN
+ [0.454 0.    0.546 0.   ]
+acc 1.0
+
+RULES:  4
+NR. SAMPLES:  183
+Rates: TP, FP, TN, FN
+ [0.443 0.    0.557 0.   ]
+acc 1.0
+
+RULES:  5
+NR. SAMPLES:  223
+Rates: TP, FP, TN, FN
+ [0.502 0.004 0.493 0.   ]
+acc 0.9955156950672646
+
+RULES:  6
+NR. SAMPLES:  224
+Rates: TP, FP, TN, FN
+ [0.504 0.    0.496 0.   ]
+acc 1.0
+
+RULES:  7
+NR. SAMPLES:  246
+Rates: TP, FP, TN, FN
+ [0.52 0.   0.48 0.  ]
+acc 1.0
+
+RULES:  8
+NR. SAMPLES:  263
+Rates: TP, FP, TN, FN
+ [0.513 0.    0.487 0.   ]
+acc 1.0
+
+RULES:  9
+NR. SAMPLES:  280
+Rates: TP, FP, TN, FN
+ [0.479 0.    0.518 0.004]
+acc 0.9964285714285714
+
+RULES:  10
+NR. SAMPLES:  320
+Rates: TP, FP, TN, FN
+ [0.484 0.    0.512 0.003]
+acc 0.996875
+
+RULES:  11
+NR. SAMPLES:  312
+Rates: TP, FP, TN, FN
+ [0.516 0.    0.481 0.003]
+acc 0.9967948717948718
+
+RULES:  12
+NR. SAMPLES:  370
+Rates: TP, FP, TN, FN
+ [0.5   0.    0.497 0.003]
+acc 0.9972972972972973
+
+RULES:  13
+NR. SAMPLES:  399
+Rates: TP, FP, TN, FN
+ [0.511 0.    0.484 0.005]
+acc 0.9949874686716792
+
+RULES:  14
+NR. SAMPLES:  431
+Rates: TP, FP, TN, FN
+ [0.51  0.    0.487 0.002]
+acc 0.9976798143851509
+
+RULES:  15
+NR. SAMPLES:  419
+Rates: TP, FP, TN, FN
+ [0.484 0.    0.511 0.005]
+acc 0.9952267303102625
+
+RULES:  16
+NR. SAMPLES:  463
+Rates: TP, FP, TN, FN
+ [0.512 0.    0.486 0.002]
+acc 0.9978401727861771
+
+RULES:  17
+NR. SAMPLES:  433
+Rates: TP, FP, TN, FN
+ [0.48  0.    0.517 0.002]
+acc 0.9976905311778291
+
+RULES:  18
+NR. SAMPLES:  475
+Rates: TP, FP, TN, FN
+ [0.478 0.    0.522 0.   ]
+acc 1.0
+
+RULES:  19
+NR. SAMPLES:  526
+Rates: TP, FP, TN, FN
+ [0.519 0.    0.481 0.   ]
+acc 1.0
+
+RULES:  20
+NR. SAMPLES:  509
+Rates: TP, FP, TN, FN
+ [0.495 0.    0.503 0.002]
+acc 0.9980353634577603
+
+RULES:  21
+NR. SAMPLES:  495
+Rates: TP, FP, TN, FN
+ [0.434 0.    0.566 0.   ]
+acc 1.0
+
+RULES:  22
+NR. SAMPLES:  509
+Rates: TP, FP, TN, FN
+ [0.509 0.    0.485 0.006]
+acc 0.9941060903732809
+
+RULES:  23
+NR. SAMPLES:  567
+Rates: TP, FP, TN, FN
+ [0.506 0.    0.492 0.002]
+acc 0.9982363315696648
+
+RULES:  24
+NR. SAMPLES:  549
+Rates: TP, FP, TN, FN
+ [0.501 0.    0.492 0.007]
+acc 0.9927140255009107
+
+RULES:  25
+NR. SAMPLES:  479
+Rates: TP, FP, TN, FN
+ [0.526 0.    0.474 0.   ]
+acc 1.0
+
+RULES:  26
+NR. SAMPLES:  521
+Rates: TP, FP, TN, FN
+ [0.495 0.    0.497 0.008]
+acc 0.9923224568138196
+
+RULES:  27
+NR. SAMPLES:  502
+Rates: TP, FP, TN, FN
+ [0.488 0.002 0.508 0.002]
+acc 0.9960159362549801
+
+RULES:  28
+NR. SAMPLES:  518
+Rates: TP, FP, TN, FN
+ [0.51  0.    0.485 0.006]
+acc 0.9942084942084942
+
+RULES:  29
+NR. SAMPLES:  495
+Rates: TP, FP, TN, FN
+ [0.485 0.002 0.511 0.002]
+acc 0.9959595959595959
+
+RULES:  30
+NR. SAMPLES:  509
+Rates: TP, FP, TN, FN
+ [0.503 0.    0.497 0.   ]
+acc 1.0
+
+RULES:  31
+NR. SAMPLES:  528
+Rates: TP, FP, TN, FN
+ [0.492 0.    0.504 0.004]
+acc 0.9962121212121212
+
+RULES:  32
+NR. SAMPLES:  485
+Rates: TP, FP, TN, FN
+ [0.474 0.    0.52  0.006]
+acc 0.9938144329896907
+
+RULES:  33
+NR. SAMPLES:  426
+Rates: TP, FP, TN, FN
+ [0.493 0.    0.505 0.002]
+acc 0.9976525821596244
+
+RULES:  34
+NR. SAMPLES:  460
+Rates: TP, FP, TN, FN
+ [0.509 0.    0.489 0.002]
+acc 0.9978260869565218
+
+RULES:  35
+NR. SAMPLES:  485
+Rates: TP, FP, TN, FN
+ [0.485 0.    0.515 0.   ]
+acc 1.0
+
+RULES:  36
+NR. SAMPLES:  450
+Rates: TP, FP, TN, FN
+ [0.464 0.    0.533 0.002]
+acc 0.9977777777777778
+
+RULES:  37
+NR. SAMPLES:  436
+Rates: TP, FP, TN, FN
+ [0.477 0.    0.516 0.007]
+acc 0.9931192660550459
+
+RULES:  38
+NR. SAMPLES:  370
+Rates: TP, FP, TN, FN
+ [0.497 0.    0.503 0.   ]
+acc 1.0
+
+RULES:  39
+NR. SAMPLES:  421
+Rates: TP, FP, TN, FN
+ [0.458 0.002 0.532 0.007]
+acc 0.9904988123515439
+
+RULES:  40
+NR. SAMPLES:  408
+Rates: TP, FP, TN, FN
+ [0.502 0.    0.493 0.005]
+acc 0.9950980392156863
+
+RULES:  41
+NR. SAMPLES:  403
+Rates: TP, FP, TN, FN
+ [0.471 0.005 0.524 0.   ]
+acc 0.9950372208436724
+
+RULES:  42
+NR. SAMPLES:  386
+Rates: TP, FP, TN, FN
+ [0.495 0.    0.505 0.   ]
+acc 1.0
+
+RULES:  43
+NR. SAMPLES:  366
+Rates: TP, FP, TN, FN
+ [0.5   0.    0.497 0.003]
+acc 0.9972677595628415
+
+RULES:  44
+NR. SAMPLES:  389
+Rates: TP, FP, TN, FN
+ [0.494 0.    0.506 0.   ]
+acc 1.0
+
+RULES:  45
+NR. SAMPLES:  381
+Rates: TP, FP, TN, FN
+ [0.478 0.    0.522 0.   ]
+acc 1.0
+
+RULES:  46
+NR. SAMPLES:  340
+Rates: TP, FP, TN, FN
+ [0.45  0.003 0.544 0.003]
+acc 0.9941176470588236
+
+RULES:  47
+NR. SAMPLES:  349
+Rates: TP, FP, TN, FN
+ [0.504 0.    0.496 0.   ]
+acc 1.0
+
+RULES:  48
+NR. SAMPLES:  299
+Rates: TP, FP, TN, FN
+ [0.498 0.003 0.498 0.   ]
+acc 0.9966555183946488
+
+RULES:  49
+NR. SAMPLES:  307
+Rates: TP, FP, TN, FN
+ [0.518 0.003 0.479 0.   ]
+acc 0.996742671009772
+
+RULES:  50
+NR. SAMPLES:  285
+Rates: TP, FP, TN, FN
+ [0.481 0.    0.519 0.   ]
+acc 1.0
+
+RULES:  51
+NR. SAMPLES:  284
+Rates: TP, FP, TN, FN
+ [0.521 0.    0.479 0.   ]
+acc 1.0
+
+RULES:  52
+NR. SAMPLES:  292
+Rates: TP, FP, TN, FN
+ [0.503 0.    0.493 0.003]
+acc 0.9965753424657534
+
+RULES:  53
+NR. SAMPLES:  273
+Rates: TP, FP, TN, FN
+ [0.473 0.    0.527 0.   ]
+acc 1.0
+
+RULES:  54
+NR. SAMPLES:  264
+Rates: TP, FP, TN, FN
+ [0.511 0.    0.489 0.   ]
+acc 1.0
+
+RULES:  55
+NR. SAMPLES:  243
+Rates: TP, FP, TN, FN
+ [0.469 0.    0.527 0.004]
+acc 0.9958847736625515
+
+RULES:  56
+NR. SAMPLES:  264
+Rates: TP, FP, TN, FN
+ [0.428 0.    0.572 0.   ]
+acc 1.0
+
+RULES:  57
+NR. SAMPLES:  257
+Rates: TP, FP, TN, FN
+ [0.498 0.    0.502 0.   ]
+acc 1.0
+
+RULES:  58
+NR. SAMPLES:  246
+Rates: TP, FP, TN, FN
+ [0.5 0.  0.5 0. ]
+acc 1.0
+
+RULES:  59
+NR. SAMPLES:  223
+Rates: TP, FP, TN, FN
+ [0.489 0.    0.507 0.004]
+acc 0.9955156950672646
+
+RULES:  60
+NR. SAMPLES:  257
+Rates: TP, FP, TN, FN
+ [0.475 0.    0.525 0.   ]
+acc 1.0
+
+RULES:  61
+NR. SAMPLES:  199
+Rates: TP, FP, TN, FN
+ [0.497 0.    0.503 0.   ]
+acc 1.0
+
+RULES:  62
+NR. SAMPLES:  205
+Rates: TP, FP, TN, FN
+ [0.522 0.    0.473 0.005]
+acc 0.9951219512195122
+
+RULES:  63
+NR. SAMPLES:  236
+Rates: TP, FP, TN, FN
+ [0.513 0.    0.483 0.004]
+acc 0.9957627118644068
+
+RULES:  64
+NR. SAMPLES:  213
+Rates: TP, FP, TN, FN
+ [0.451 0.    0.549 0.   ]
+acc 1.0
+
+RULES:  65
+NR. SAMPLES:  167
+Rates: TP, FP, TN, FN
+ [0.455 0.    0.539 0.006]
+acc 0.9940119760479041
+
+RULES:  66
+NR. SAMPLES:  195
+Rates: TP, FP, TN, FN
+ [0.554 0.005 0.441 0.   ]
+acc 0.9948717948717949
+
+RULES:  67
+NR. SAMPLES:  173
+Rates: TP, FP, TN, FN
+ [0.468 0.    0.52  0.012]
+acc 0.9884393063583815
+
+RULES:  68
+NR. SAMPLES:  195
+Rates: TP, FP, TN, FN
+ [0.492 0.    0.503 0.005]
+acc 0.9948717948717949
+
+RULES:  69
+NR. SAMPLES:  165
+Rates: TP, FP, TN, FN
+ [0.473 0.    0.527 0.   ]
+acc 1.0
+
+RULES:  70
+NR. SAMPLES:  183
+Rates: TP, FP, TN, FN
+ [0.432 0.    0.568 0.   ]
+acc 1.0
+
+RULES:  71
+NR. SAMPLES:  163
+Rates: TP, FP, TN, FN
+ [0.46 0.   0.54 0.  ]
+acc 1.0
+
+RULES:  72
+NR. SAMPLES:  163
+Rates: TP, FP, TN, FN
+ [0.509 0.    0.491 0.   ]
+acc 1.0
+
+RULES:  73
+NR. SAMPLES:  142
+Rates: TP, FP, TN, FN
+ [0.521 0.    0.479 0.   ]
+acc 1.0
+
+RULES:  74
+NR. SAMPLES:  145
+Rates: TP, FP, TN, FN
+ [0.517 0.    0.483 0.   ]
+acc 1.0
+
+RULES:  75
+NR. SAMPLES:  147
+Rates: TP, FP, TN, FN
+ [0.469 0.    0.531 0.   ]
+acc 1.0
+
+RULES:  76
+NR. SAMPLES:  142
+Rates: TP, FP, TN, FN
+ [0.486 0.    0.514 0.   ]
+acc 1.0
+
+RULES:  77
+NR. SAMPLES:  130
+Rates: TP, FP, TN, FN
+ [0.477 0.    0.523 0.   ]
+acc 1.0
+
+RULES:  78
+NR. SAMPLES:  132
+Rates: TP, FP, TN, FN
+ [0.515 0.    0.485 0.   ]
+acc 1.0
+
+RULES:  79
+NR. SAMPLES:  125
+Rates: TP, FP, TN, FN
+ [0.456 0.    0.544 0.   ]
+acc 1.0
+
+RULES:  80
+NR. SAMPLES:  120
+Rates: TP, FP, TN, FN
+ [0.475 0.    0.525 0.   ]
+acc 1.0
+
+RULES:  81
+NR. SAMPLES:  114
+Rates: TP, FP, TN, FN
+ [0.535 0.    0.465 0.   ]
+acc 1.0
+
+RULES:  82
+NR. SAMPLES:  107
+Rates: TP, FP, TN, FN
+ [0.645 0.    0.355 0.   ]
+acc 1.0
+
+RULES:  83
+NR. SAMPLES:  110
+Rates: TP, FP, TN, FN
+ [0.627 0.    0.373 0.   ]
+acc 1.0
+
+RULES:  84
+NR. SAMPLES:  98
+Rates: TP, FP, TN, FN
+ [0.765 0.    0.235 0.   ]
+acc 1.0
+
+RULES:  85
+NR. SAMPLES:  91
+Rates: TP, FP, TN, FN
+ [0.626 0.    0.363 0.011]
+acc 0.989010989010989
+
+RULES:  86
+NR. SAMPLES:  104
+Rates: TP, FP, TN, FN
+ [0.654 0.    0.346 0.   ]
+acc 1.0
+
+RULES:  87
+NR. SAMPLES:  94
+Rates: TP, FP, TN, FN
+ [0.691 0.    0.309 0.   ]
+acc 1.0
+
+RULES:  88
+NR. SAMPLES:  92
+Rates: TP, FP, TN, FN
+ [0.717 0.    0.283 0.   ]
+acc 1.0
+
+RULES:  89
+NR. SAMPLES:  88
+Rates: TP, FP, TN, FN
+ [0.727 0.    0.273 0.   ]
+acc 1.0
+
+RULES:  90
+NR. SAMPLES:  89
+Rates: TP, FP, TN, FN
+ [0.798 0.    0.202 0.   ]
+acc 1.0
+
+RULES:  91
+NR. SAMPLES:  85
+Rates: TP, FP, TN, FN
+ [0.812 0.    0.188 0.   ]
+acc 1.0
+
+RULES:  92
+NR. SAMPLES:  91
+Rates: TP, FP, TN, FN
+ [0.835 0.    0.165 0.   ]
+acc 1.0
+
+RULES:  93
+NR. SAMPLES:  53
+Rates: TP, FP, TN, FN
+ [0.868 0.    0.132 0.   ]
+acc 1.0
+
+RULES:  94
+NR. SAMPLES:  70
+Rates: TP, FP, TN, FN
+ [0.829 0.    0.171 0.   ]
+acc 1.0
+
+RULES:  95
+NR. SAMPLES:  65
+Rates: TP, FP, TN, FN
+ [0.8 0.  0.2 0. ]
+acc 1.0
+
+RULES:  96
+NR. SAMPLES:  64
+Rates: TP, FP, TN, FN
+ [0.891 0.    0.109 0.   ]
+acc 1.0
+
+RULES:  97
+NR. SAMPLES:  55
+Rates: TP, FP, TN, FN
+ [0.782 0.    0.218 0.   ]
+acc 1.0
+
+RULES:  98
+NR. SAMPLES:  65
+Rates: TP, FP, TN, FN
+ [0.923 0.    0.077 0.   ]
+acc 1.0
+
+RULES:  99
+NR. SAMPLES:  66
+Rates: TP, FP, TN, FN
+ [0.909 0.    0.091 0.   ]
+acc 1.0
+
+RULES:  100
+NR. SAMPLES:  65
+Rates: TP, FP, TN, FN
+ [0.938 0.    0.062 0.   ]
+acc 1.0
+
+RULES:  101
+NR. SAMPLES:  55
+Rates: TP, FP, TN, FN
+ [0.891 0.    0.091 0.018]
+acc 0.9818181818181818
+
+RULES:  102
+NR. SAMPLES:  50
+Rates: TP, FP, TN, FN
+ [0.86 0.   0.14 0.  ]
+acc 1.0
+
+RULES:  103
+NR. SAMPLES:  47
+Rates: TP, FP, TN, FN
+ [0.915 0.    0.085 0.   ]
+acc 1.0
+
+RULES:  104
+NR. SAMPLES:  62
+Rates: TP, FP, TN, FN
+ [0.871 0.    0.129 0.   ]
+acc 1.0
+
+RULES:  105
+NR. SAMPLES:  47
+Rates: TP, FP, TN, FN
+ [0.936 0.    0.064 0.   ]
+acc 1.0
+
+RULES:  106
+NR. SAMPLES:  36
+Rates: TP, FP, TN, FN
+ [0.917 0.    0.083 0.   ]
+acc 1.0
+
+RULES:  107
+NR. SAMPLES:  49
+Rates: TP, FP, TN, FN
+ [0.98 0.   0.02 0.  ]
+acc 1.0
+
+RULES:  108
+NR. SAMPLES:  42
+Rates: TP, FP, TN, FN
+ [0.929 0.    0.071 0.   ]
+acc 1.0
+
+RULES:  109
+NR. SAMPLES:  35
+Rates: TP, FP, TN, FN
+ [0.914 0.    0.086 0.   ]
+acc 1.0
+
+RULES:  110
+NR. SAMPLES:  35
+Rates: TP, FP, TN, FN
+ [0.914 0.    0.086 0.   ]
+acc 1.0
+
+RULES:  111
+NR. SAMPLES:  23
+Rates: TP, FP, TN, FN
+ [0.957 0.    0.043 0.   ]
+acc 1.0
+
+RULES:  112
+NR. SAMPLES:  23
+Rates: TP, FP, TN, FN
+ [0.913 0.    0.087 0.   ]
+acc 1.0
+
+RULES:  113
+NR. SAMPLES:  18
+Rates: TP, FP, TN, FN
+ [0.944 0.    0.056 0.   ]
+acc 1.0
+
+RULES:  114
+NR. SAMPLES:  21
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  115
+NR. SAMPLES:  15
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  116
+NR. SAMPLES:  16
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  117
+NR. SAMPLES:  8
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  118
+NR. SAMPLES:  19
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  119
+NR. SAMPLES:  13
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  120
+NR. SAMPLES:  10
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+Saving accuracies with pickle.
+
+PROOF CHECKED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_10X_LP_VAL_output.txt
+
+Confusion matrix:
+ [[14126    24]
+ [  132 13718]]
+
+Accuracy: 0.9944285714285714
+F1-score: 0.9943461873006669
+
+RULES:  0
+NR. SAMPLES:  86
+Rates: TP, FP, TN, FN
+ [0.57 0.   0.43 0.  ]
+acc 1.0
+
+RULES:  1
+NR. SAMPLES:  77
+Rates: TP, FP, TN, FN
+ [0.571 0.    0.429 0.   ]
+acc 1.0
+
+RULES:  2
+NR. SAMPLES:  105
+Rates: TP, FP, TN, FN
+ [0.495 0.    0.505 0.   ]
+acc 1.0
+
+RULES:  3
+NR. SAMPLES:  126
+Rates: TP, FP, TN, FN
+ [0.54 0.   0.46 0.  ]
+acc 1.0
+
+RULES:  4
+NR. SAMPLES:  178
+Rates: TP, FP, TN, FN
+ [0.472 0.    0.528 0.   ]
+acc 1.0
+
+RULES:  5
+NR. SAMPLES:  196
+Rates: TP, FP, TN, FN
+ [0.423 0.    0.577 0.   ]
+acc 1.0
+
+RULES:  6
+NR. SAMPLES:  266
+Rates: TP, FP, TN, FN
+ [0.417 0.    0.583 0.   ]
+acc 1.0
+
+RULES:  7
+NR. SAMPLES:  277
+Rates: TP, FP, TN, FN
+ [0.458 0.    0.534 0.007]
+acc 0.9927797833935018
+
+RULES:  8
+NR. SAMPLES:  313
+Rates: TP, FP, TN, FN
+ [0.45  0.003 0.546 0.   ]
+acc 0.9968051118210862
+
+RULES:  9
+NR. SAMPLES:  332
+Rates: TP, FP, TN, FN
+ [0.431 0.    0.563 0.006]
+acc 0.9939759036144579
+
+RULES:  10
+NR. SAMPLES:  423
+Rates: TP, FP, TN, FN
+ [0.39  0.    0.605 0.005]
+acc 0.9952718676122931
+
+RULES:  11
+NR. SAMPLES:  421
+Rates: TP, FP, TN, FN
+ [0.406 0.    0.594 0.   ]
+acc 1.0
+
+RULES:  12
+NR. SAMPLES:  484
+Rates: TP, FP, TN, FN
+ [0.446 0.    0.55  0.004]
+acc 0.9958677685950413
+
+RULES:  13
+NR. SAMPLES:  510
+Rates: TP, FP, TN, FN
+ [0.396 0.    0.602 0.002]
+acc 0.9980392156862745
+
+RULES:  14
+NR. SAMPLES:  525
+Rates: TP, FP, TN, FN
+ [0.436 0.002 0.56  0.002]
+acc 0.9961904761904762
+
+RULES:  15
+NR. SAMPLES:  516
+Rates: TP, FP, TN, FN
+ [0.417 0.    0.574 0.01 ]
+acc 0.9903100775193798
+
+RULES:  16
+NR. SAMPLES:  530
+Rates: TP, FP, TN, FN
+ [0.408 0.004 0.575 0.013]
+acc 0.9830188679245283
+
+RULES:  17
+NR. SAMPLES:  586
+Rates: TP, FP, TN, FN
+ [0.384 0.002 0.613 0.002]
+acc 0.9965870307167235
+
+RULES:  18
+NR. SAMPLES:  540
+Rates: TP, FP, TN, FN
+ [0.38  0.    0.607 0.013]
+acc 0.987037037037037
+
+RULES:  19
+NR. SAMPLES:  556
+Rates: TP, FP, TN, FN
+ [0.396 0.    0.599 0.005]
+acc 0.9946043165467626
+
+RULES:  20
+NR. SAMPLES:  591
+Rates: TP, FP, TN, FN
+ [0.413 0.    0.584 0.003]
+acc 0.9966159052453468
+
+RULES:  21
+NR. SAMPLES:  601
+Rates: TP, FP, TN, FN
+ [0.408 0.    0.591 0.002]
+acc 0.9983361064891847
+
+RULES:  22
+NR. SAMPLES:  529
+Rates: TP, FP, TN, FN
+ [0.405 0.002 0.59  0.004]
+acc 0.994328922495274
+
+RULES:  23
+NR. SAMPLES:  551
+Rates: TP, FP, TN, FN
+ [0.387 0.004 0.603 0.007]
+acc 0.9891107078039928
+
+RULES:  24
+NR. SAMPLES:  608
+Rates: TP, FP, TN, FN
+ [0.383 0.003 0.602 0.012]
+acc 0.9851973684210527
+
+RULES:  25
+NR. SAMPLES:  614
+Rates: TP, FP, TN, FN
+ [0.406 0.    0.588 0.007]
+acc 0.993485342019544
+
+RULES:  26
+NR. SAMPLES:  600
+Rates: TP, FP, TN, FN
+ [0.403 0.002 0.59  0.005]
+acc 0.9933333333333333
+
+RULES:  27
+NR. SAMPLES:  556
+Rates: TP, FP, TN, FN
+ [0.387 0.    0.608 0.005]
+acc 0.9946043165467626
+
+RULES:  28
+NR. SAMPLES:  541
+Rates: TP, FP, TN, FN
+ [0.412 0.    0.584 0.004]
+acc 0.9963031423290203
+
+RULES:  29
+NR. SAMPLES:  568
+Rates: TP, FP, TN, FN
+ [0.41  0.002 0.586 0.002]
+acc 0.9964788732394366
+
+RULES:  30
+NR. SAMPLES:  591
+Rates: TP, FP, TN, FN
+ [0.389 0.003 0.604 0.003]
+acc 0.9932318104906938
+
+RULES:  31
+NR. SAMPLES:  529
+Rates: TP, FP, TN, FN
+ [0.389 0.004 0.599 0.008]
+acc 0.9886578449905482
+
+RULES:  32
+NR. SAMPLES:  533
+Rates: TP, FP, TN, FN
+ [0.396 0.002 0.6   0.002]
+acc 0.9962476547842402
+
+RULES:  33
+NR. SAMPLES:  516
+Rates: TP, FP, TN, FN
+ [0.401 0.004 0.591 0.004]
+acc 0.9922480620155039
+
+RULES:  34
+NR. SAMPLES:  555
+Rates: TP, FP, TN, FN
+ [0.395 0.    0.598 0.007]
+acc 0.9927927927927928
+
+RULES:  35
+NR. SAMPLES:  486
+Rates: TP, FP, TN, FN
+ [0.366 0.    0.63  0.004]
+acc 0.9958847736625515
+
+RULES:  36
+NR. SAMPLES:  494
+Rates: TP, FP, TN, FN
+ [0.423 0.006 0.569 0.002]
+acc 0.9919028340080972
+
+RULES:  37
+NR. SAMPLES:  493
+Rates: TP, FP, TN, FN
+ [0.42  0.    0.578 0.002]
+acc 0.9979716024340771
+
+RULES:  38
+NR. SAMPLES:  488
+Rates: TP, FP, TN, FN
+ [0.408 0.    0.586 0.006]
+acc 0.9938524590163934
+
+RULES:  39
+NR. SAMPLES:  441
+Rates: TP, FP, TN, FN
+ [0.42  0.    0.578 0.002]
+acc 0.9977324263038548
+
+RULES:  40
+NR. SAMPLES:  422
+Rates: TP, FP, TN, FN
+ [0.396 0.    0.604 0.   ]
+acc 1.0
+
+RULES:  41
+NR. SAMPLES:  422
+Rates: TP, FP, TN, FN
+ [0.412 0.    0.583 0.005]
+acc 0.995260663507109
+
+RULES:  42
+NR. SAMPLES:  409
+Rates: TP, FP, TN, FN
+ [0.416 0.    0.582 0.002]
+acc 0.9975550122249389
+
+RULES:  43
+NR. SAMPLES:  418
+Rates: TP, FP, TN, FN
+ [0.435 0.002 0.55  0.012]
+acc 0.9856459330143541
+
+RULES:  44
+NR. SAMPLES:  385
+Rates: TP, FP, TN, FN
+ [0.434 0.    0.564 0.003]
+acc 0.9974025974025974
+
+RULES:  45
+NR. SAMPLES:  391
+Rates: TP, FP, TN, FN
+ [0.458 0.    0.537 0.005]
+acc 0.9948849104859335
+
+RULES:  46
+NR. SAMPLES:  304
+Rates: TP, FP, TN, FN
+ [0.48  0.    0.513 0.007]
+acc 0.993421052631579
+
+RULES:  47
+NR. SAMPLES:  352
+Rates: TP, FP, TN, FN
+ [0.486 0.    0.506 0.009]
+acc 0.9914772727272727
+
+RULES:  48
+NR. SAMPLES:  347
+Rates: TP, FP, TN, FN
+ [0.545 0.    0.447 0.009]
+acc 0.9913544668587896
+
+RULES:  49
+NR. SAMPLES:  306
+Rates: TP, FP, TN, FN
+ [0.497 0.    0.497 0.007]
+acc 0.9934640522875817
+
+RULES:  50
+NR. SAMPLES:  284
+Rates: TP, FP, TN, FN
+ [0.504 0.    0.489 0.007]
+acc 0.9929577464788732
+
+RULES:  51
+NR. SAMPLES:  301
+Rates: TP, FP, TN, FN
+ [0.561 0.003 0.435 0.   ]
+acc 0.9966777408637874
+
+RULES:  52
+NR. SAMPLES:  240
+Rates: TP, FP, TN, FN
+ [0.575 0.    0.421 0.004]
+acc 0.9958333333333333
+
+RULES:  53
+NR. SAMPLES:  249
+Rates: TP, FP, TN, FN
+ [0.639 0.    0.357 0.004]
+acc 0.9959839357429718
+
+RULES:  54
+NR. SAMPLES:  226
+Rates: TP, FP, TN, FN
+ [0.624 0.    0.376 0.   ]
+acc 1.0
+
+RULES:  55
+NR. SAMPLES:  202
+Rates: TP, FP, TN, FN
+ [0.564 0.    0.426 0.01 ]
+acc 0.9900990099009901
+
+RULES:  56
+NR. SAMPLES:  222
+Rates: TP, FP, TN, FN
+ [0.604 0.    0.392 0.005]
+acc 0.9954954954954955
+
+RULES:  57
+NR. SAMPLES:  214
+Rates: TP, FP, TN, FN
+ [0.687 0.    0.313 0.   ]
+acc 1.0
+
+RULES:  58
+NR. SAMPLES:  213
+Rates: TP, FP, TN, FN
+ [0.634 0.    0.366 0.   ]
+acc 1.0
+
+RULES:  59
+NR. SAMPLES:  194
+Rates: TP, FP, TN, FN
+ [0.701 0.    0.299 0.   ]
+acc 1.0
+
+RULES:  60
+NR. SAMPLES:  185
+Rates: TP, FP, TN, FN
+ [0.595 0.    0.405 0.   ]
+acc 1.0
+
+RULES:  61
+NR. SAMPLES:  173
+Rates: TP, FP, TN, FN
+ [0.734 0.    0.266 0.   ]
+acc 1.0
+
+RULES:  62
+NR. SAMPLES:  160
+Rates: TP, FP, TN, FN
+ [0.669 0.    0.325 0.006]
+acc 0.99375
+
+RULES:  63
+NR. SAMPLES:  172
+Rates: TP, FP, TN, FN
+ [0.68  0.    0.308 0.012]
+acc 0.9883720930232558
+
+RULES:  64
+NR. SAMPLES:  146
+Rates: TP, FP, TN, FN
+ [0.705 0.    0.288 0.007]
+acc 0.9931506849315068
+
+RULES:  65
+NR. SAMPLES:  170
+Rates: TP, FP, TN, FN
+ [0.735 0.    0.265 0.   ]
+acc 1.0
+
+RULES:  66
+NR. SAMPLES:  147
+Rates: TP, FP, TN, FN
+ [0.741 0.    0.252 0.007]
+acc 0.9931972789115646
+
+RULES:  67
+NR. SAMPLES:  143
+Rates: TP, FP, TN, FN
+ [0.755 0.    0.245 0.   ]
+acc 1.0
+
+RULES:  68
+NR. SAMPLES:  129
+Rates: TP, FP, TN, FN
+ [0.814 0.    0.178 0.008]
+acc 0.9922480620155039
+
+RULES:  69
+NR. SAMPLES:  120
+Rates: TP, FP, TN, FN
+ [0.758 0.    0.233 0.008]
+acc 0.9916666666666667
+
+RULES:  70
+NR. SAMPLES:  125
+Rates: TP, FP, TN, FN
+ [0.816 0.    0.184 0.   ]
+acc 1.0
+
+RULES:  71
+NR. SAMPLES:  119
+Rates: TP, FP, TN, FN
+ [0.756 0.    0.244 0.   ]
+acc 1.0
+
+RULES:  72
+NR. SAMPLES:  109
+Rates: TP, FP, TN, FN
+ [0.807 0.    0.193 0.   ]
+acc 1.0
+
+RULES:  73
+NR. SAMPLES:  91
+Rates: TP, FP, TN, FN
+ [0.813 0.    0.187 0.   ]
+acc 1.0
+
+RULES:  74
+NR. SAMPLES:  99
+Rates: TP, FP, TN, FN
+ [0.879 0.    0.121 0.   ]
+acc 1.0
+
+RULES:  75
+NR. SAMPLES:  98
+Rates: TP, FP, TN, FN
+ [0.806 0.    0.194 0.   ]
+acc 1.0
+
+RULES:  76
+NR. SAMPLES:  93
+Rates: TP, FP, TN, FN
+ [0.86 0.   0.14 0.  ]
+acc 1.0
+
+RULES:  77
+NR. SAMPLES:  103
+Rates: TP, FP, TN, FN
+ [0.854 0.    0.146 0.   ]
+acc 1.0
+
+RULES:  78
+NR. SAMPLES:  100
+Rates: TP, FP, TN, FN
+ [0.92 0.   0.08 0.  ]
+acc 1.0
+
+RULES:  79
+NR. SAMPLES:  76
+Rates: TP, FP, TN, FN
+ [0.908 0.    0.079 0.013]
+acc 0.9868421052631579
+
+RULES:  80
+NR. SAMPLES:  86
+Rates: TP, FP, TN, FN
+ [0.907 0.    0.093 0.   ]
+acc 1.0
+
+RULES:  81
+NR. SAMPLES:  72
+Rates: TP, FP, TN, FN
+ [0.903 0.    0.069 0.028]
+acc 0.9722222222222222
+
+RULES:  82
+NR. SAMPLES:  65
+Rates: TP, FP, TN, FN
+ [0.877 0.    0.123 0.   ]
+acc 1.0
+
+RULES:  83
+NR. SAMPLES:  59
+Rates: TP, FP, TN, FN
+ [0.932 0.    0.068 0.   ]
+acc 1.0
+
+RULES:  84
+NR. SAMPLES:  66
+Rates: TP, FP, TN, FN
+ [0.909 0.    0.076 0.015]
+acc 0.9848484848484849
+
+RULES:  85
+NR. SAMPLES:  78
+Rates: TP, FP, TN, FN
+ [0.897 0.    0.09  0.013]
+acc 0.9871794871794872
+
+RULES:  86
+NR. SAMPLES:  64
+Rates: TP, FP, TN, FN
+ [0.938 0.    0.062 0.   ]
+acc 1.0
+
+RULES:  87
+NR. SAMPLES:  67
+Rates: TP, FP, TN, FN
+ [0.836 0.    0.134 0.03 ]
+acc 0.9701492537313433
+
+RULES:  88
+NR. SAMPLES:  56
+Rates: TP, FP, TN, FN
+ [0.911 0.    0.054 0.036]
+acc 0.9642857142857143
+
+RULES:  89
+NR. SAMPLES:  70
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  90
+NR. SAMPLES:  55
+Rates: TP, FP, TN, FN
+ [0.964 0.    0.    0.036]
+acc 0.9636363636363636
+
+RULES:  91
+NR. SAMPLES:  43
+Rates: TP, FP, TN, FN
+ [0.953 0.    0.047 0.   ]
+acc 1.0
+
+RULES:  92
+NR. SAMPLES:  46
+Rates: TP, FP, TN, FN
+ [0.913 0.    0.087 0.   ]
+acc 1.0
+
+RULES:  93
+NR. SAMPLES:  59
+Rates: TP, FP, TN, FN
+ [0.966 0.    0.034 0.   ]
+acc 1.0
+
+RULES:  94
+NR. SAMPLES:  46
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  95
+NR. SAMPLES:  39
+Rates: TP, FP, TN, FN
+ [0.923 0.    0.077 0.   ]
+acc 1.0
+
+RULES:  96
+NR. SAMPLES:  36
+Rates: TP, FP, TN, FN
+ [0.944 0.    0.056 0.   ]
+acc 1.0
+
+RULES:  97
+NR. SAMPLES:  40
+Rates: TP, FP, TN, FN
+ [0.975 0.    0.    0.025]
+acc 0.975
+
+RULES:  98
+NR. SAMPLES:  40
+Rates: TP, FP, TN, FN
+ [0.975 0.    0.025 0.   ]
+acc 1.0
+
+RULES:  99
+NR. SAMPLES:  29
+Rates: TP, FP, TN, FN
+ [0.966 0.    0.034 0.   ]
+acc 1.0
+
+RULES:  100
+NR. SAMPLES:  36
+Rates: TP, FP, TN, FN
+ [0.972 0.    0.    0.028]
+acc 0.9722222222222222
+
+RULES:  101
+NR. SAMPLES:  29
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  102
+NR. SAMPLES:  28
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  103
+NR. SAMPLES:  26
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  104
+NR. SAMPLES:  15
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  105
+NR. SAMPLES:  30
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  106
+NR. SAMPLES:  12
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  107
+NR. SAMPLES:  23
+Rates: TP, FP, TN, FN
+ [0.957 0.    0.043 0.   ]
+acc 1.0
+
+RULES:  108
+NR. SAMPLES:  13
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  109
+NR. SAMPLES:  13
+Rates: TP, FP, TN, FN
+ [0.923 0.    0.077 0.   ]
+acc 1.0
+
+RULES:  110
+NR. SAMPLES:  13
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  111
+NR. SAMPLES:  6
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  112
+NR. SAMPLES:  10
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  113
+NR. SAMPLES:  9
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  114
+NR. SAMPLES:  12
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  115
+NR. SAMPLES:  7
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  116
+NR. SAMPLES:  5
+Rates: TP, FP, TN, FN
+ [0.8 0.  0.  0.2]
+acc 0.8
+
+RULES:  117
+NR. SAMPLES:  4
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  118
+NR. SAMPLES:  2
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+Saving accuracies with pickle.
+
+PROOF CHECKED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_10X_RP_VAL_output.txt
+
+Confusion matrix:
+ [[13376     4]
+ [   53 14567]]
+
+Accuracy: 0.9979642857142857
+F1-score: 0.9980473433592545
+
+RULES:  0
+NR. SAMPLES:  112
+Rates: TP, FP, TN, FN
+ [0.446 0.    0.554 0.   ]
+acc 1.0
+
+RULES:  1
+NR. SAMPLES:  133
+Rates: TP, FP, TN, FN
+ [0.406 0.008 0.586 0.   ]
+acc 0.9924812030075187
+
+RULES:  2
+NR. SAMPLES:  149
+Rates: TP, FP, TN, FN
+ [0.463 0.    0.537 0.   ]
+acc 1.0
+
+RULES:  3
+NR. SAMPLES:  162
+Rates: TP, FP, TN, FN
+ [0.469 0.    0.531 0.   ]
+acc 1.0
+
+RULES:  4
+NR. SAMPLES:  186
+Rates: TP, FP, TN, FN
+ [0.398 0.    0.602 0.   ]
+acc 1.0
+
+RULES:  5
+NR. SAMPLES:  214
+Rates: TP, FP, TN, FN
+ [0.393 0.    0.607 0.   ]
+acc 1.0
+
+RULES:  6
+NR. SAMPLES:  220
+Rates: TP, FP, TN, FN
+ [0.409 0.    0.591 0.   ]
+acc 1.0
+
+RULES:  7
+NR. SAMPLES:  242
+Rates: TP, FP, TN, FN
+ [0.405 0.    0.595 0.   ]
+acc 1.0
+
+RULES:  8
+NR. SAMPLES:  258
+Rates: TP, FP, TN, FN
+ [0.411 0.    0.589 0.   ]
+acc 1.0
+
+RULES:  9
+NR. SAMPLES:  269
+Rates: TP, FP, TN, FN
+ [0.312 0.    0.68  0.007]
+acc 0.9925650557620818
+
+RULES:  10
+NR. SAMPLES:  275
+Rates: TP, FP, TN, FN
+ [0.404 0.    0.596 0.   ]
+acc 1.0
+
+RULES:  11
+NR. SAMPLES:  328
+Rates: TP, FP, TN, FN
+ [0.409 0.    0.591 0.   ]
+acc 1.0
+
+RULES:  12
+NR. SAMPLES:  351
+Rates: TP, FP, TN, FN
+ [0.385 0.    0.613 0.003]
+acc 0.9971509971509972
+
+RULES:  13
+NR. SAMPLES:  388
+Rates: TP, FP, TN, FN
+ [0.348 0.    0.652 0.   ]
+acc 1.0
+
+RULES:  14
+NR. SAMPLES:  444
+Rates: TP, FP, TN, FN
+ [0.378 0.    0.619 0.002]
+acc 0.9977477477477478
+
+RULES:  15
+NR. SAMPLES:  451
+Rates: TP, FP, TN, FN
+ [0.377 0.004 0.619 0.   ]
+acc 0.9955654101995566
+
+RULES:  16
+NR. SAMPLES:  478
+Rates: TP, FP, TN, FN
+ [0.4 0.  0.6 0. ]
+acc 1.0
+
+RULES:  17
+NR. SAMPLES:  475
+Rates: TP, FP, TN, FN
+ [0.335 0.    0.665 0.   ]
+acc 1.0
+
+RULES:  18
+NR. SAMPLES:  471
+Rates: TP, FP, TN, FN
+ [0.342 0.    0.654 0.004]
+acc 0.9957537154989384
+
+RULES:  19
+NR. SAMPLES:  539
+Rates: TP, FP, TN, FN
+ [0.373 0.    0.623 0.004]
+acc 0.9962894248608535
+
+RULES:  20
+NR. SAMPLES:  574
+Rates: TP, FP, TN, FN
+ [0.347 0.    0.652 0.002]
+acc 0.9982578397212544
+
+RULES:  21
+NR. SAMPLES:  517
+Rates: TP, FP, TN, FN
+ [0.368 0.    0.631 0.002]
+acc 0.9980657640232108
+
+RULES:  22
+NR. SAMPLES:  506
+Rates: TP, FP, TN, FN
+ [0.368 0.    0.625 0.008]
+acc 0.9920948616600791
+
+RULES:  23
+NR. SAMPLES:  516
+Rates: TP, FP, TN, FN
+ [0.391 0.    0.605 0.004]
+acc 0.9961240310077519
+
+RULES:  24
+NR. SAMPLES:  565
+Rates: TP, FP, TN, FN
+ [0.365 0.    0.635 0.   ]
+acc 1.0
+
+RULES:  25
+NR. SAMPLES:  538
+Rates: TP, FP, TN, FN
+ [0.368 0.    0.63  0.002]
+acc 0.9981412639405205
+
+RULES:  26
+NR. SAMPLES:  528
+Rates: TP, FP, TN, FN
+ [0.367 0.    0.633 0.   ]
+acc 1.0
+
+RULES:  27
+NR. SAMPLES:  536
+Rates: TP, FP, TN, FN
+ [0.388 0.    0.61  0.002]
+acc 0.9981343283582089
+
+RULES:  28
+NR. SAMPLES:  494
+Rates: TP, FP, TN, FN
+ [0.344 0.    0.656 0.   ]
+acc 1.0
+
+RULES:  29
+NR. SAMPLES:  456
+Rates: TP, FP, TN, FN
+ [0.344 0.    0.651 0.004]
+acc 0.9956140350877193
+
+RULES:  30
+NR. SAMPLES:  497
+Rates: TP, FP, TN, FN
+ [0.372 0.    0.624 0.004]
+acc 0.9959758551307847
+
+RULES:  31
+NR. SAMPLES:  538
+Rates: TP, FP, TN, FN
+ [0.409 0.    0.589 0.002]
+acc 0.9981412639405205
+
+RULES:  32
+NR. SAMPLES:  466
+Rates: TP, FP, TN, FN
+ [0.339 0.    0.661 0.   ]
+acc 1.0
+
+RULES:  33
+NR. SAMPLES:  447
+Rates: TP, FP, TN, FN
+ [0.398 0.    0.597 0.004]
+acc 0.9955257270693513
+
+RULES:  34
+NR. SAMPLES:  478
+Rates: TP, FP, TN, FN
+ [0.395 0.    0.603 0.002]
+acc 0.997907949790795
+
+RULES:  35
+NR. SAMPLES:  491
+Rates: TP, FP, TN, FN
+ [0.365 0.    0.633 0.002]
+acc 0.9979633401221996
+
+RULES:  36
+NR. SAMPLES:  491
+Rates: TP, FP, TN, FN
+ [0.45  0.    0.546 0.004]
+acc 0.9959266802443992
+
+RULES:  37
+NR. SAMPLES:  393
+Rates: TP, FP, TN, FN
+ [0.412 0.    0.588 0.   ]
+acc 1.0
+
+RULES:  38
+NR. SAMPLES:  437
+Rates: TP, FP, TN, FN
+ [0.446 0.    0.551 0.002]
+acc 0.9977116704805492
+
+RULES:  39
+NR. SAMPLES:  406
+Rates: TP, FP, TN, FN
+ [0.48  0.    0.515 0.005]
+acc 0.9950738916256158
+
+RULES:  40
+NR. SAMPLES:  427
+Rates: TP, FP, TN, FN
+ [0.459 0.    0.536 0.005]
+acc 0.9953161592505855
+
+RULES:  41
+NR. SAMPLES:  382
+Rates: TP, FP, TN, FN
+ [0.448 0.    0.552 0.   ]
+acc 1.0
+
+RULES:  42
+NR. SAMPLES:  407
+Rates: TP, FP, TN, FN
+ [0.484 0.    0.516 0.   ]
+acc 1.0
+
+RULES:  43
+NR. SAMPLES:  402
+Rates: TP, FP, TN, FN
+ [0.488 0.    0.512 0.   ]
+acc 1.0
+
+RULES:  44
+NR. SAMPLES:  362
+Rates: TP, FP, TN, FN
+ [0.492 0.003 0.506 0.   ]
+acc 0.9972375690607734
+
+RULES:  45
+NR. SAMPLES:  372
+Rates: TP, FP, TN, FN
+ [0.519 0.    0.478 0.003]
+acc 0.9973118279569892
+
+RULES:  46
+NR. SAMPLES:  337
+Rates: TP, FP, TN, FN
+ [0.493 0.    0.507 0.   ]
+acc 1.0
+
+RULES:  47
+NR. SAMPLES:  330
+Rates: TP, FP, TN, FN
+ [0.512 0.    0.488 0.   ]
+acc 1.0
+
+RULES:  48
+NR. SAMPLES:  336
+Rates: TP, FP, TN, FN
+ [0.574 0.    0.426 0.   ]
+acc 1.0
+
+RULES:  49
+NR. SAMPLES:  301
+Rates: TP, FP, TN, FN
+ [0.588 0.    0.412 0.   ]
+acc 1.0
+
+RULES:  50
+NR. SAMPLES:  276
+Rates: TP, FP, TN, FN
+ [0.569 0.    0.424 0.007]
+acc 0.9927536231884058
+
+RULES:  51
+NR. SAMPLES:  327
+Rates: TP, FP, TN, FN
+ [0.535 0.    0.462 0.003]
+acc 0.9969418960244648
+
+RULES:  52
+NR. SAMPLES:  298
+Rates: TP, FP, TN, FN
+ [0.638 0.    0.359 0.003]
+acc 0.9966442953020134
+
+RULES:  53
+NR. SAMPLES:  284
+Rates: TP, FP, TN, FN
+ [0.585 0.    0.415 0.   ]
+acc 1.0
+
+RULES:  54
+NR. SAMPLES:  270
+Rates: TP, FP, TN, FN
+ [0.637 0.    0.356 0.007]
+acc 0.9925925925925926
+
+RULES:  55
+NR. SAMPLES:  273
+Rates: TP, FP, TN, FN
+ [0.641 0.    0.359 0.   ]
+acc 1.0
+
+RULES:  56
+NR. SAMPLES:  253
+Rates: TP, FP, TN, FN
+ [0.648 0.    0.348 0.004]
+acc 0.9960474308300395
+
+RULES:  57
+NR. SAMPLES:  250
+Rates: TP, FP, TN, FN
+ [0.676 0.    0.324 0.   ]
+acc 1.0
+
+RULES:  58
+NR. SAMPLES:  252
+Rates: TP, FP, TN, FN
+ [0.687 0.    0.313 0.   ]
+acc 1.0
+
+RULES:  59
+NR. SAMPLES:  235
+Rates: TP, FP, TN, FN
+ [0.732 0.    0.268 0.   ]
+acc 1.0
+
+RULES:  60
+NR. SAMPLES:  201
+Rates: TP, FP, TN, FN
+ [0.731 0.    0.259 0.01 ]
+acc 0.9900497512437811
+
+RULES:  61
+NR. SAMPLES:  200
+Rates: TP, FP, TN, FN
+ [0.735 0.    0.26  0.005]
+acc 0.995
+
+RULES:  62
+NR. SAMPLES:  172
+Rates: TP, FP, TN, FN
+ [0.657 0.    0.343 0.   ]
+acc 1.0
+
+RULES:  63
+NR. SAMPLES:  198
+Rates: TP, FP, TN, FN
+ [0.778 0.    0.222 0.   ]
+acc 1.0
+
+RULES:  64
+NR. SAMPLES:  189
+Rates: TP, FP, TN, FN
+ [0.788 0.    0.206 0.005]
+acc 0.9947089947089947
+
+RULES:  65
+NR. SAMPLES:  174
+Rates: TP, FP, TN, FN
+ [0.77 0.   0.23 0.  ]
+acc 1.0
+
+RULES:  66
+NR. SAMPLES:  180
+Rates: TP, FP, TN, FN
+ [0.739 0.    0.256 0.006]
+acc 0.9944444444444445
+
+RULES:  67
+NR. SAMPLES:  158
+Rates: TP, FP, TN, FN
+ [0.791 0.    0.209 0.   ]
+acc 1.0
+
+RULES:  68
+NR. SAMPLES:  188
+Rates: TP, FP, TN, FN
+ [0.798 0.    0.202 0.   ]
+acc 1.0
+
+RULES:  69
+NR. SAMPLES:  143
+Rates: TP, FP, TN, FN
+ [0.783 0.    0.217 0.   ]
+acc 1.0
+
+RULES:  70
+NR. SAMPLES:  161
+Rates: TP, FP, TN, FN
+ [0.814 0.    0.18  0.006]
+acc 0.9937888198757764
+
+RULES:  71
+NR. SAMPLES:  150
+Rates: TP, FP, TN, FN
+ [0.867 0.    0.127 0.007]
+acc 0.9933333333333333
+
+RULES:  72
+NR. SAMPLES:  163
+Rates: TP, FP, TN, FN
+ [0.865 0.    0.129 0.006]
+acc 0.9938650306748467
+
+RULES:  73
+NR. SAMPLES:  140
+Rates: TP, FP, TN, FN
+ [0.829 0.    0.171 0.   ]
+acc 1.0
+
+RULES:  74
+NR. SAMPLES:  149
+Rates: TP, FP, TN, FN
+ [0.812 0.    0.188 0.   ]
+acc 1.0
+
+RULES:  75
+NR. SAMPLES:  130
+Rates: TP, FP, TN, FN
+ [0.846 0.    0.154 0.   ]
+acc 1.0
+
+RULES:  76
+NR. SAMPLES:  140
+Rates: TP, FP, TN, FN
+ [0.836 0.    0.164 0.   ]
+acc 1.0
+
+RULES:  77
+NR. SAMPLES:  133
+Rates: TP, FP, TN, FN
+ [0.91 0.   0.09 0.  ]
+acc 1.0
+
+RULES:  78
+NR. SAMPLES:  136
+Rates: TP, FP, TN, FN
+ [0.853 0.    0.147 0.   ]
+acc 1.0
+
+RULES:  79
+NR. SAMPLES:  126
+Rates: TP, FP, TN, FN
+ [0.921 0.    0.079 0.   ]
+acc 1.0
+
+RULES:  80
+NR. SAMPLES:  99
+Rates: TP, FP, TN, FN
+ [0.899 0.    0.091 0.01 ]
+acc 0.98989898989899
+
+RULES:  81
+NR. SAMPLES:  109
+Rates: TP, FP, TN, FN
+ [0.945 0.    0.055 0.   ]
+acc 1.0
+
+RULES:  82
+NR. SAMPLES:  120
+Rates: TP, FP, TN, FN
+ [0.925 0.    0.075 0.   ]
+acc 1.0
+
+RULES:  83
+NR. SAMPLES:  116
+Rates: TP, FP, TN, FN
+ [0.966 0.    0.034 0.   ]
+acc 1.0
+
+RULES:  84
+NR. SAMPLES:  117
+Rates: TP, FP, TN, FN
+ [0.915 0.    0.085 0.   ]
+acc 1.0
+
+RULES:  85
+NR. SAMPLES:  92
+Rates: TP, FP, TN, FN
+ [0.924 0.    0.076 0.   ]
+acc 1.0
+
+RULES:  86
+NR. SAMPLES:  109
+Rates: TP, FP, TN, FN
+ [0.991 0.    0.009 0.   ]
+acc 1.0
+
+RULES:  87
+NR. SAMPLES:  123
+Rates: TP, FP, TN, FN
+ [0.951 0.    0.049 0.   ]
+acc 1.0
+
+RULES:  88
+NR. SAMPLES:  102
+Rates: TP, FP, TN, FN
+ [0.961 0.    0.039 0.   ]
+acc 1.0
+
+RULES:  89
+NR. SAMPLES:  72
+Rates: TP, FP, TN, FN
+ [0.986 0.    0.014 0.   ]
+acc 1.0
+
+RULES:  90
+NR. SAMPLES:  72
+Rates: TP, FP, TN, FN
+ [0.972 0.    0.028 0.   ]
+acc 1.0
+
+RULES:  91
+NR. SAMPLES:  89
+Rates: TP, FP, TN, FN
+ [0.978 0.    0.022 0.   ]
+acc 1.0
+
+RULES:  92
+NR. SAMPLES:  86
+Rates: TP, FP, TN, FN
+ [0.953 0.    0.047 0.   ]
+acc 1.0
+
+RULES:  93
+NR. SAMPLES:  53
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  94
+NR. SAMPLES:  70
+Rates: TP, FP, TN, FN
+ [0.986 0.    0.014 0.   ]
+acc 1.0
+
+RULES:  95
+NR. SAMPLES:  72
+Rates: TP, FP, TN, FN
+ [0.972 0.    0.014 0.014]
+acc 0.9861111111111112
+
+RULES:  96
+NR. SAMPLES:  69
+Rates: TP, FP, TN, FN
+ [0.971 0.    0.014 0.014]
+acc 0.9855072463768116
+
+RULES:  97
+NR. SAMPLES:  55
+Rates: TP, FP, TN, FN
+ [0.964 0.    0.036 0.   ]
+acc 1.0
+
+RULES:  98
+NR. SAMPLES:  55
+Rates: TP, FP, TN, FN
+ [0.982 0.    0.018 0.   ]
+acc 1.0
+
+RULES:  99
+NR. SAMPLES:  58
+Rates: TP, FP, TN, FN
+ [0.983 0.    0.017 0.   ]
+acc 1.0
+
+RULES:  100
+NR. SAMPLES:  52
+Rates: TP, FP, TN, FN
+ [0.962 0.    0.038 0.   ]
+acc 1.0
+
+RULES:  101
+NR. SAMPLES:  48
+Rates: TP, FP, TN, FN
+ [0.958 0.    0.042 0.   ]
+acc 1.0
+
+RULES:  102
+NR. SAMPLES:  50
+Rates: TP, FP, TN, FN
+ [0.98 0.   0.02 0.  ]
+acc 1.0
+
+RULES:  103
+NR. SAMPLES:  54
+Rates: TP, FP, TN, FN
+ [0.944 0.    0.056 0.   ]
+acc 1.0
+
+RULES:  104
+NR. SAMPLES:  49
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  105
+NR. SAMPLES:  41
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  106
+NR. SAMPLES:  42
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  107
+NR. SAMPLES:  35
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  108
+NR. SAMPLES:  38
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  109
+NR. SAMPLES:  27
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  110
+NR. SAMPLES:  30
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  111
+NR. SAMPLES:  29
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  112
+NR. SAMPLES:  19
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  113
+NR. SAMPLES:  18
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  114
+NR. SAMPLES:  20
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  115
+NR. SAMPLES:  22
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  116
+NR. SAMPLES:  21
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  117
+NR. SAMPLES:  11
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  118
+NR. SAMPLES:  12
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  119
+NR. SAMPLES:  9
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  120
+NR. SAMPLES:  11
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+Saving accuracies with pickle.
+
+PROOF CHECKED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_10X_RP_10X_VAL_output.txt
+
+Confusion matrix:
+ [[13486     7]
+ [   61 14446]]
+
+Accuracy: 0.9975714285714286
+F1-score: 0.9976519337016574
+
+RULES:  0
+NR. SAMPLES:  118
+Rates: TP, FP, TN, FN
+ [0.542 0.    0.458 0.   ]
+acc 1.0
+
+RULES:  1
+NR. SAMPLES:  143
+Rates: TP, FP, TN, FN
+ [0.427 0.    0.573 0.   ]
+acc 1.0
+
+RULES:  2
+NR. SAMPLES:  129
+Rates: TP, FP, TN, FN
+ [0.45 0.   0.55 0.  ]
+acc 1.0
+
+RULES:  3
+NR. SAMPLES:  183
+Rates: TP, FP, TN, FN
+ [0.454 0.    0.546 0.   ]
+acc 1.0
+
+RULES:  4
+NR. SAMPLES:  183
+Rates: TP, FP, TN, FN
+ [0.443 0.    0.557 0.   ]
+acc 1.0
+
+RULES:  5
+NR. SAMPLES:  223
+Rates: TP, FP, TN, FN
+ [0.502 0.    0.498 0.   ]
+acc 1.0
+
+RULES:  6
+NR. SAMPLES:  224
+Rates: TP, FP, TN, FN
+ [0.504 0.    0.496 0.   ]
+acc 1.0
+
+RULES:  7
+NR. SAMPLES:  246
+Rates: TP, FP, TN, FN
+ [0.52 0.   0.48 0.  ]
+acc 1.0
+
+RULES:  8
+NR. SAMPLES:  263
+Rates: TP, FP, TN, FN
+ [0.513 0.    0.487 0.   ]
+acc 1.0
+
+RULES:  9
+NR. SAMPLES:  280
+Rates: TP, FP, TN, FN
+ [0.479 0.    0.518 0.004]
+acc 0.9964285714285714
+
+RULES:  10
+NR. SAMPLES:  320
+Rates: TP, FP, TN, FN
+ [0.484 0.    0.512 0.003]
+acc 0.996875
+
+RULES:  11
+NR. SAMPLES:  312
+Rates: TP, FP, TN, FN
+ [0.516 0.    0.481 0.003]
+acc 0.9967948717948718
+
+RULES:  12
+NR. SAMPLES:  370
+Rates: TP, FP, TN, FN
+ [0.497 0.    0.497 0.005]
+acc 0.9945945945945946
+
+RULES:  13
+NR. SAMPLES:  399
+Rates: TP, FP, TN, FN
+ [0.511 0.    0.484 0.005]
+acc 0.9949874686716792
+
+RULES:  14
+NR. SAMPLES:  431
+Rates: TP, FP, TN, FN
+ [0.506 0.    0.487 0.007]
+acc 0.9930394431554525
+
+RULES:  15
+NR. SAMPLES:  419
+Rates: TP, FP, TN, FN
+ [0.484 0.    0.511 0.005]
+acc 0.9952267303102625
+
+RULES:  16
+NR. SAMPLES:  463
+Rates: TP, FP, TN, FN
+ [0.514 0.    0.486 0.   ]
+acc 1.0
+
+RULES:  17
+NR. SAMPLES:  433
+Rates: TP, FP, TN, FN
+ [0.478 0.    0.517 0.005]
+acc 0.9953810623556582
+
+RULES:  18
+NR. SAMPLES:  475
+Rates: TP, FP, TN, FN
+ [0.476 0.    0.522 0.002]
+acc 0.9978947368421053
+
+RULES:  19
+NR. SAMPLES:  526
+Rates: TP, FP, TN, FN
+ [0.517 0.    0.481 0.002]
+acc 0.9980988593155894
+
+RULES:  20
+NR. SAMPLES:  509
+Rates: TP, FP, TN, FN
+ [0.491 0.    0.503 0.006]
+acc 0.9941060903732809
+
+RULES:  21
+NR. SAMPLES:  495
+Rates: TP, FP, TN, FN
+ [0.434 0.    0.566 0.   ]
+acc 1.0
+
+RULES:  22
+NR. SAMPLES:  509
+Rates: TP, FP, TN, FN
+ [0.513 0.    0.485 0.002]
+acc 0.9980353634577603
+
+RULES:  23
+NR. SAMPLES:  567
+Rates: TP, FP, TN, FN
+ [0.504 0.    0.492 0.004]
+acc 0.9964726631393298
+
+RULES:  24
+NR. SAMPLES:  549
+Rates: TP, FP, TN, FN
+ [0.501 0.002 0.49  0.007]
+acc 0.9908925318761385
+
+RULES:  25
+NR. SAMPLES:  479
+Rates: TP, FP, TN, FN
+ [0.526 0.    0.474 0.   ]
+acc 1.0
+
+RULES:  26
+NR. SAMPLES:  521
+Rates: TP, FP, TN, FN
+ [0.497 0.    0.497 0.006]
+acc 0.9942418426103646
+
+RULES:  27
+NR. SAMPLES:  502
+Rates: TP, FP, TN, FN
+ [0.488 0.002 0.508 0.002]
+acc 0.9960159362549801
+
+RULES:  28
+NR. SAMPLES:  518
+Rates: TP, FP, TN, FN
+ [0.51  0.    0.485 0.006]
+acc 0.9942084942084942
+
+RULES:  29
+NR. SAMPLES:  495
+Rates: TP, FP, TN, FN
+ [0.487 0.002 0.511 0.   ]
+acc 0.997979797979798
+
+RULES:  30
+NR. SAMPLES:  509
+Rates: TP, FP, TN, FN
+ [0.503 0.    0.497 0.   ]
+acc 1.0
+
+RULES:  31
+NR. SAMPLES:  528
+Rates: TP, FP, TN, FN
+ [0.492 0.    0.504 0.004]
+acc 0.9962121212121212
+
+RULES:  32
+NR. SAMPLES:  485
+Rates: TP, FP, TN, FN
+ [0.474 0.    0.52  0.006]
+acc 0.9938144329896907
+
+RULES:  33
+NR. SAMPLES:  426
+Rates: TP, FP, TN, FN
+ [0.495 0.    0.505 0.   ]
+acc 1.0
+
+RULES:  34
+NR. SAMPLES:  460
+Rates: TP, FP, TN, FN
+ [0.511 0.    0.489 0.   ]
+acc 1.0
+
+RULES:  35
+NR. SAMPLES:  485
+Rates: TP, FP, TN, FN
+ [0.485 0.    0.515 0.   ]
+acc 1.0
+
+RULES:  36
+NR. SAMPLES:  450
+Rates: TP, FP, TN, FN
+ [0.464 0.    0.533 0.002]
+acc 0.9977777777777778
+
+RULES:  37
+NR. SAMPLES:  436
+Rates: TP, FP, TN, FN
+ [0.475 0.    0.516 0.009]
+acc 0.9908256880733946
+
+RULES:  38
+NR. SAMPLES:  370
+Rates: TP, FP, TN, FN
+ [0.497 0.    0.503 0.   ]
+acc 1.0
+
+RULES:  39
+NR. SAMPLES:  421
+Rates: TP, FP, TN, FN
+ [0.454 0.002 0.532 0.012]
+acc 0.9857482185273159
+
+RULES:  40
+NR. SAMPLES:  408
+Rates: TP, FP, TN, FN
+ [0.507 0.    0.493 0.   ]
+acc 1.0
+
+RULES:  41
+NR. SAMPLES:  403
+Rates: TP, FP, TN, FN
+ [0.471 0.002 0.526 0.   ]
+acc 0.9975186104218362
+
+RULES:  42
+NR. SAMPLES:  386
+Rates: TP, FP, TN, FN
+ [0.495 0.    0.505 0.   ]
+acc 1.0
+
+RULES:  43
+NR. SAMPLES:  366
+Rates: TP, FP, TN, FN
+ [0.503 0.    0.497 0.   ]
+acc 1.0
+
+RULES:  44
+NR. SAMPLES:  389
+Rates: TP, FP, TN, FN
+ [0.494 0.    0.506 0.   ]
+acc 1.0
+
+RULES:  45
+NR. SAMPLES:  381
+Rates: TP, FP, TN, FN
+ [0.478 0.    0.522 0.   ]
+acc 1.0
+
+RULES:  46
+NR. SAMPLES:  340
+Rates: TP, FP, TN, FN
+ [0.45  0.003 0.544 0.003]
+acc 0.9941176470588236
+
+RULES:  47
+NR. SAMPLES:  349
+Rates: TP, FP, TN, FN
+ [0.504 0.    0.496 0.   ]
+acc 1.0
+
+RULES:  48
+NR. SAMPLES:  299
+Rates: TP, FP, TN, FN
+ [0.498 0.003 0.498 0.   ]
+acc 0.9966555183946488
+
+RULES:  49
+NR. SAMPLES:  307
+Rates: TP, FP, TN, FN
+ [0.518 0.    0.482 0.   ]
+acc 1.0
+
+RULES:  50
+NR. SAMPLES:  285
+Rates: TP, FP, TN, FN
+ [0.477 0.    0.519 0.004]
+acc 0.9964912280701754
+
+RULES:  51
+NR. SAMPLES:  284
+Rates: TP, FP, TN, FN
+ [0.521 0.    0.479 0.   ]
+acc 1.0
+
+RULES:  52
+NR. SAMPLES:  292
+Rates: TP, FP, TN, FN
+ [0.5   0.    0.493 0.007]
+acc 0.9931506849315068
+
+RULES:  53
+NR. SAMPLES:  273
+Rates: TP, FP, TN, FN
+ [0.469 0.    0.527 0.004]
+acc 0.9963369963369964
+
+RULES:  54
+NR. SAMPLES:  264
+Rates: TP, FP, TN, FN
+ [0.511 0.    0.489 0.   ]
+acc 1.0
+
+RULES:  55
+NR. SAMPLES:  243
+Rates: TP, FP, TN, FN
+ [0.469 0.    0.527 0.004]
+acc 0.9958847736625515
+
+RULES:  56
+NR. SAMPLES:  264
+Rates: TP, FP, TN, FN
+ [0.428 0.    0.572 0.   ]
+acc 1.0
+
+RULES:  57
+NR. SAMPLES:  257
+Rates: TP, FP, TN, FN
+ [0.498 0.    0.502 0.   ]
+acc 1.0
+
+RULES:  58
+NR. SAMPLES:  246
+Rates: TP, FP, TN, FN
+ [0.5 0.  0.5 0. ]
+acc 1.0
+
+RULES:  59
+NR. SAMPLES:  223
+Rates: TP, FP, TN, FN
+ [0.489 0.    0.507 0.004]
+acc 0.9955156950672646
+
+RULES:  60
+NR. SAMPLES:  257
+Rates: TP, FP, TN, FN
+ [0.475 0.    0.525 0.   ]
+acc 1.0
+
+RULES:  61
+NR. SAMPLES:  199
+Rates: TP, FP, TN, FN
+ [0.497 0.    0.503 0.   ]
+acc 1.0
+
+RULES:  62
+NR. SAMPLES:  205
+Rates: TP, FP, TN, FN
+ [0.527 0.    0.473 0.   ]
+acc 1.0
+
+RULES:  63
+NR. SAMPLES:  236
+Rates: TP, FP, TN, FN
+ [0.513 0.    0.483 0.004]
+acc 0.9957627118644068
+
+RULES:  64
+NR. SAMPLES:  213
+Rates: TP, FP, TN, FN
+ [0.451 0.    0.549 0.   ]
+acc 1.0
+
+RULES:  65
+NR. SAMPLES:  167
+Rates: TP, FP, TN, FN
+ [0.455 0.    0.539 0.006]
+acc 0.9940119760479041
+
+RULES:  66
+NR. SAMPLES:  195
+Rates: TP, FP, TN, FN
+ [0.554 0.    0.446 0.   ]
+acc 1.0
+
+RULES:  67
+NR. SAMPLES:  173
+Rates: TP, FP, TN, FN
+ [0.48 0.   0.52 0.  ]
+acc 1.0
+
+RULES:  68
+NR. SAMPLES:  195
+Rates: TP, FP, TN, FN
+ [0.492 0.    0.503 0.005]
+acc 0.9948717948717949
+
+RULES:  69
+NR. SAMPLES:  165
+Rates: TP, FP, TN, FN
+ [0.473 0.    0.527 0.   ]
+acc 1.0
+
+RULES:  70
+NR. SAMPLES:  183
+Rates: TP, FP, TN, FN
+ [0.432 0.    0.568 0.   ]
+acc 1.0
+
+RULES:  71
+NR. SAMPLES:  163
+Rates: TP, FP, TN, FN
+ [0.46 0.   0.54 0.  ]
+acc 1.0
+
+RULES:  72
+NR. SAMPLES:  163
+Rates: TP, FP, TN, FN
+ [0.509 0.    0.491 0.   ]
+acc 1.0
+
+RULES:  73
+NR. SAMPLES:  142
+Rates: TP, FP, TN, FN
+ [0.521 0.    0.479 0.   ]
+acc 1.0
+
+RULES:  74
+NR. SAMPLES:  145
+Rates: TP, FP, TN, FN
+ [0.51  0.    0.483 0.007]
+acc 0.993103448275862
+
+RULES:  75
+NR. SAMPLES:  147
+Rates: TP, FP, TN, FN
+ [0.469 0.    0.531 0.   ]
+acc 1.0
+
+RULES:  76
+NR. SAMPLES:  142
+Rates: TP, FP, TN, FN
+ [0.486 0.    0.514 0.   ]
+acc 1.0
+
+RULES:  77
+NR. SAMPLES:  130
+Rates: TP, FP, TN, FN
+ [0.477 0.    0.523 0.   ]
+acc 1.0
+
+RULES:  78
+NR. SAMPLES:  132
+Rates: TP, FP, TN, FN
+ [0.515 0.    0.485 0.   ]
+acc 1.0
+
+RULES:  79
+NR. SAMPLES:  125
+Rates: TP, FP, TN, FN
+ [0.456 0.    0.544 0.   ]
+acc 1.0
+
+RULES:  80
+NR. SAMPLES:  120
+Rates: TP, FP, TN, FN
+ [0.475 0.    0.525 0.   ]
+acc 1.0
+
+RULES:  81
+NR. SAMPLES:  114
+Rates: TP, FP, TN, FN
+ [0.535 0.    0.465 0.   ]
+acc 1.0
+
+RULES:  82
+NR. SAMPLES:  107
+Rates: TP, FP, TN, FN
+ [0.645 0.    0.355 0.   ]
+acc 1.0
+
+RULES:  83
+NR. SAMPLES:  110
+Rates: TP, FP, TN, FN
+ [0.627 0.    0.373 0.   ]
+acc 1.0
+
+RULES:  84
+NR. SAMPLES:  98
+Rates: TP, FP, TN, FN
+ [0.765 0.    0.235 0.   ]
+acc 1.0
+
+RULES:  85
+NR. SAMPLES:  91
+Rates: TP, FP, TN, FN
+ [0.626 0.    0.363 0.011]
+acc 0.989010989010989
+
+RULES:  86
+NR. SAMPLES:  104
+Rates: TP, FP, TN, FN
+ [0.654 0.    0.346 0.   ]
+acc 1.0
+
+RULES:  87
+NR. SAMPLES:  94
+Rates: TP, FP, TN, FN
+ [0.691 0.    0.309 0.   ]
+acc 1.0
+
+RULES:  88
+NR. SAMPLES:  92
+Rates: TP, FP, TN, FN
+ [0.717 0.    0.283 0.   ]
+acc 1.0
+
+RULES:  89
+NR. SAMPLES:  88
+Rates: TP, FP, TN, FN
+ [0.727 0.    0.273 0.   ]
+acc 1.0
+
+RULES:  90
+NR. SAMPLES:  89
+Rates: TP, FP, TN, FN
+ [0.798 0.    0.202 0.   ]
+acc 1.0
+
+RULES:  91
+NR. SAMPLES:  85
+Rates: TP, FP, TN, FN
+ [0.812 0.    0.188 0.   ]
+acc 1.0
+
+RULES:  92
+NR. SAMPLES:  91
+Rates: TP, FP, TN, FN
+ [0.835 0.    0.165 0.   ]
+acc 1.0
+
+RULES:  93
+NR. SAMPLES:  53
+Rates: TP, FP, TN, FN
+ [0.868 0.    0.132 0.   ]
+acc 1.0
+
+RULES:  94
+NR. SAMPLES:  70
+Rates: TP, FP, TN, FN
+ [0.829 0.    0.171 0.   ]
+acc 1.0
+
+RULES:  95
+NR. SAMPLES:  65
+Rates: TP, FP, TN, FN
+ [0.8 0.  0.2 0. ]
+acc 1.0
+
+RULES:  96
+NR. SAMPLES:  64
+Rates: TP, FP, TN, FN
+ [0.891 0.    0.109 0.   ]
+acc 1.0
+
+RULES:  97
+NR. SAMPLES:  55
+Rates: TP, FP, TN, FN
+ [0.782 0.    0.218 0.   ]
+acc 1.0
+
+RULES:  98
+NR. SAMPLES:  65
+Rates: TP, FP, TN, FN
+ [0.923 0.    0.077 0.   ]
+acc 1.0
+
+RULES:  99
+NR. SAMPLES:  66
+Rates: TP, FP, TN, FN
+ [0.909 0.    0.091 0.   ]
+acc 1.0
+
+RULES:  100
+NR. SAMPLES:  65
+Rates: TP, FP, TN, FN
+ [0.938 0.    0.062 0.   ]
+acc 1.0
+
+RULES:  101
+NR. SAMPLES:  55
+Rates: TP, FP, TN, FN
+ [0.909 0.    0.091 0.   ]
+acc 1.0
+
+RULES:  102
+NR. SAMPLES:  50
+Rates: TP, FP, TN, FN
+ [0.86 0.   0.14 0.  ]
+acc 1.0
+
+RULES:  103
+NR. SAMPLES:  47
+Rates: TP, FP, TN, FN
+ [0.915 0.    0.085 0.   ]
+acc 1.0
+
+RULES:  104
+NR. SAMPLES:  62
+Rates: TP, FP, TN, FN
+ [0.871 0.    0.129 0.   ]
+acc 1.0
+
+RULES:  105
+NR. SAMPLES:  47
+Rates: TP, FP, TN, FN
+ [0.936 0.    0.064 0.   ]
+acc 1.0
+
+RULES:  106
+NR. SAMPLES:  36
+Rates: TP, FP, TN, FN
+ [0.917 0.    0.083 0.   ]
+acc 1.0
+
+RULES:  107
+NR. SAMPLES:  49
+Rates: TP, FP, TN, FN
+ [0.98 0.   0.02 0.  ]
+acc 1.0
+
+RULES:  108
+NR. SAMPLES:  42
+Rates: TP, FP, TN, FN
+ [0.929 0.    0.071 0.   ]
+acc 1.0
+
+RULES:  109
+NR. SAMPLES:  35
+Rates: TP, FP, TN, FN
+ [0.914 0.    0.086 0.   ]
+acc 1.0
+
+RULES:  110
+NR. SAMPLES:  35
+Rates: TP, FP, TN, FN
+ [0.914 0.    0.086 0.   ]
+acc 1.0
+
+RULES:  111
+NR. SAMPLES:  23
+Rates: TP, FP, TN, FN
+ [0.957 0.    0.043 0.   ]
+acc 1.0
+
+RULES:  112
+NR. SAMPLES:  23
+Rates: TP, FP, TN, FN
+ [0.913 0.    0.087 0.   ]
+acc 1.0
+
+RULES:  113
+NR. SAMPLES:  18
+Rates: TP, FP, TN, FN
+ [0.944 0.    0.056 0.   ]
+acc 1.0
+
+RULES:  114
+NR. SAMPLES:  21
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  115
+NR. SAMPLES:  15
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  116
+NR. SAMPLES:  16
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  117
+NR. SAMPLES:  8
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  118
+NR. SAMPLES:  19
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  119
+NR. SAMPLES:  13
+Rates: TP, FP, TN, FN
+ [1. 0. 0. 0.]
+acc 1.0
+
+RULES:  120
+NR. SAMPLES:  10
+Rates: TP, FP, TN, FN
+ [0.9 0.  0.  0.1]
+acc 0.9
+Saving accuracies with pickle.

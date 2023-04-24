@@ -1,0 +1,8 @@
+This job can be monitored from: https://scruffy.c3se.chalmers.se/d/alvis-job/alvis-job?var-jobid=930079&from=1681301741000
+INFO:    underlay of /etc/localtime required more than 50 (94) bind mounts
+INFO:    underlay of /usr/share/lmod/lmod required more than 50 (59) bind mounts
+Python version
+3.8.13 | packaged by conda-forge | (default, Mar 25 2022, 06:04:10) 
+[GCC 10.3.0]
+Version info.
+sys.version_info(major=3, minor=8, micro=13, releaselevel='final', serial=0)
