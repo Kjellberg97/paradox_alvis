@@ -111,6 +111,7 @@ class Proof_Checker_Step(Proof_Checker):
             ground_truth_depths[depths].append(ground_truth[i])
             pred_proof[depths].append(predictions[i])
 
+        acc_list = []
         for depth in range(7):
             print()
             print("DEPTH: ",depth)
@@ -123,8 +124,10 @@ class Proof_Checker_Step(Proof_Checker):
                 file.write("\nDEPTH: " + str(depth))
             self.stat_over_generated_data(preds_depths[depth] ,ground_truth_depths[depth] ,data_depths[depth],pred_proof[depth])
             print("Rates: TP, FP, TN, FN\n", np.round(np.sum(confusion_matrix, axis=0) / confusion_matrix.shape[0], 3))
-            print("acc", accuracy)
-
+            print("Accuracy:", round(accuracy * 100, 1))
+            acc_list.append(accuracy)
+        
+        print("Mean accuracy across depths:", round(np.mean(acc_list) * 100, 1))
 
     def find_binary_label(self, list_input):
         # Find the last occurence of False or True in the string, convert into corresponding int 0 or 1
@@ -271,15 +274,23 @@ def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=False
         
         
 def main():
+    acc_by_rules = False
     rule_sampling = True
-    checkpoint = "checkpoint-7500"
+    #checkpoint = "checkpoint-7500"
 
-    models = ["RP", "RP_10X"]
+    models = ["LP", "RP", "RP_10X"]
     test_ons = ["LP", "RP", "RP_10X"]
     type_of_data = "val"
 
     for model in models:
+        if model == "LP":
+            checkpoint = "checkpoint-9328"
+        else:
+            checkpoint = "checkpoint-7500"
         for test_on in test_ons:
+            print("\n\n\n##########################################################################")
+            print(f"TRAIN DIST: {model}", f"{type_of_data.upper()} DIST: {test_on}", sep="\n")
+
             test_preds_path, test_truth_path, input_data_path, save_stats_file = reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling)
 
 
@@ -300,17 +311,19 @@ def main():
             #f1 = f1_score(truth_bools, pred_bools, average='micro')
 
             print("\nConfusion matrix:\n", cm)
-            print("\nAccuracy:", acc)
-            print("F1-score:", f1)
+            print("\nAccuracy:", round(acc * 100, 1))
+            print("F1-score:", round(f1 * 100, 1))
                 
-            #PC.divide_data_into_depths(input_data, preds_data, truth_data)
-            acc_list = PC.divide_data_into_rules(input_data, preds_data, truth_data)
+            PC.divide_data_into_depths(input_data, preds_data, truth_data)
+            
             #PC.find_non_bools(preds_data)
 
-            print("Saving accuracies with pickle.")
-            pkl_name = "accs_by_rules/rule_accs_" + model + "_" + test_on + "_" + type_of_data + ".pkl"
-            with open(pkl_name, "wb") as f:
-                pickle.dump(acc_list, f)
+            if acc_by_rules:
+                acc_list = PC.divide_data_into_rules(input_data, preds_data, truth_data)
+                print("Saving accuracies with pickle.")
+                pkl_name = "accs_by_rules/ex3_rule_accs_" + model + "_" + test_on + "_" + type_of_data + ".pkl"
+                with open(pkl_name, "wb") as f:
+                    pickle.dump(acc_list, f)
 
             #PC.check_proof_for_errors(preds_data, input_data)
 

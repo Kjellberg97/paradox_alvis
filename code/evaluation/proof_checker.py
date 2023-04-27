@@ -43,6 +43,49 @@ class Proof_Checker():
         binary_digit = int(eval(match.group())) if match else 0 # Convert into int if a False or True is returned else convert to 0
         return binary_digit
 
+    def divide_data_into_rules(self, input_data, predictions, ground_truth):
+        """Divides the input data dependeing on the rules of each input data and 
+        creates the confucion matrix and calculate basic stats about the lenght 
+        of the rules in each group.
+
+        ARGS:
+            input_data (list) : all input data
+            predictions (list) : the generated proofs and labels 
+            ground_truth (list) : the true labels for each input
+        
+        RETURN:
+            None
+        """
+        data_rules = [ data["input"].count(":") for data in input_data ]
+        max_rules = max(data_rules) + 1
+        preds_rules = [ [] for _ in range(max_rules) ]
+        ground_truth_rules = [ [] for _ in range(max_rules) ]
+        pred_proof = [ [] for _ in range(max_rules) ]
+
+        for i, data in enumerate(input_data):
+            n_rules = data["input"].count(":")
+            pred = self.find_binary_label(predictions[i])
+            preds_rules[n_rules].append(pred)
+            ground_truth_rules[n_rules].append(ground_truth[i])
+            pred_proof[n_rules].append(predictions)
+        
+        acc_list = []
+        for n_rules in range(max_rules):
+            print()
+            print("RULES: ", n_rules)
+            print("NR. SAMPLES: ", len(ground_truth_rules[n_rules]))
+            ground_truth_bools = [ self.find_binary_label(target_d) for target_d in ground_truth_rules[n_rules] ]
+            confusion_matrix = self.create_confusion_matrix(preds_rules[n_rules], ground_truth_bools)
+            accuracy = self.label_accuracy(confusion_matrix)
+            acc_list.append(accuracy)
+            with open(self.save_stats_file, "a") as file:
+                file.write("\n#############################################################################")
+                file.write("\nRULES: " + str(n_rules))
+            #self.stat_over_generated_data(preds_rules[n_rules] ,ground_truth_rules[n_rules] ,data_rules[n_rules],pred_proof[n_rules])
+            print("Rates: TP, FP, TN, FN\n", np.round(np.sum(confusion_matrix, axis=0) / confusion_matrix.shape[0], 3))
+            print("acc", accuracy)
+        
+        return acc_list
 
     def divide_data_into_depths(self,input_data, predictions, ground_truth):
         """Divides the input data dependeing on the depths of each input data and 
@@ -223,10 +266,6 @@ class Proof_Checker():
 
 
 
-
-
-
-
     def label_accuracy(self, confusion_matrix):
         """
         Calculates the label accuracy based on a given confusion matrix.
@@ -260,12 +299,8 @@ class Proof_Checker():
         for step in gen_proof_divided:
 
             if not step in input_data:
-                
+                pass
 
-
-
-        pass
-    
 
     def divide_into_steps(self, gen_proof):
 
