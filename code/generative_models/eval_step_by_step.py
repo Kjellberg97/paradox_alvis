@@ -5,15 +5,15 @@ from finetune_BART_step_by_step import StepsGenerationModel
 # checkpoint = "checkpoint-22392"
 # data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all"
 
-model_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/"
+model_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP/"
 model_name = "gen_step_by_step"
-rule_sampling = True
+rule_sampling = False 
 model_name += "_rule_sampling" if rule_sampling else ""
-checkpoint = "checkpoint-7500"
-#data_path ="/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small_cleaned"
-#data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned"
-data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned"
-#data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced"
+checkpoint = "checkpoint-22392"
+
+data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned"
+#data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned"
+#data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned"
 
 SGM = StepsGenerationModel(model_path, model_name, checkpoint)
 print("Loading data...")
@@ -23,6 +23,7 @@ print("Running inference...")
 # BEAM SEARCH: beams > 1
 # GREEDY SEARCH: only data 
 # SAMPLE: sample = True
+
 
 """
 THE ARGS FOR GENERATE

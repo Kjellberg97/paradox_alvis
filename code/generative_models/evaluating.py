@@ -8,7 +8,10 @@ from finetune_BART import ProofGenerationModel
 model_path = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/"
 model_name = "pretrained_BART"
 checkpoint = "checkpoint-22392"
-data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned"
+
+#data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned"
+data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned"
+#data_path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned"
 
 PGM = ProofGenerationModel(model_path, model_name, checkpoint)
 print("Loading data...")
@@ -33,7 +36,7 @@ diverse beam-search decoding by calling group_beam_search(), if num_beams>1 and 
 constrained beam-search decoding by calling constrained_beam_search(), if constraints!=None or force_words_ids!=None
 """
 
-predictions = PGM.run_inference(data_path, generate_on="test")
+predictions = PGM.run_inference(data_path, generate_on="val")
 print("Saving output...")
 PGM.save_output(predictions)
 
