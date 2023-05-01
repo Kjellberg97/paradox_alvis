@@ -141,6 +141,9 @@ class Proof_Checker_Step(Proof_Checker):
         pred_true_but_q_not_in_fact = 0
         
         for pred_proof, in_data in zip(predicted_proofs, input_data):
+            
+            #print(in_data["input"])
+
             self.input = in_data["input"]
             # Remove all 1s that stands alone
             
@@ -153,8 +156,14 @@ class Proof_Checker_Step(Proof_Checker):
                 print("True/false not existing on", pred_proof[-1])
                 pred_label = True if not in_data["label"] else False
             label_is_correct = int(pred_label) == in_data["label"]
-            proof_is_correct, inx, updated_input = self.coherence_of_proof(pred_proof, in_data["input"])
-                      
+
+            try:
+                proof_is_correct, inx, updated_input = self.cosistency_of_proof(pred_proof, in_data["input"])
+            except:
+                proof_is_correct = False
+                inx = 0
+                updated_input = in_data["input"]
+            #proof_is_correct = self.cosistency_of_proof(pred_proof, in_data["input"])
             pred_true_but_q_not_in_fact += 1 if pred_label and not self.query_in_facts(updated_input) else 0
                 
 
@@ -180,26 +189,126 @@ class Proof_Checker_Step(Proof_Checker):
         #print("Num of unfufilled rules:", self.hall_rule)
         #print("Num of proofs ended too early:", self.ended_too_early)
 
+    def check_consistency(self, pred_proof, input_data_whole, pred_bool, truth_bool, ground_proof):
+        """Check that there are no missing rules in the predicted proof,
+            and that all tules in proof exist in the original input."""
+        
+        # 0. Check true pred label, if true != pred, then mark as inconsistent
+        # 1. Take the original input
 
-    def coherence_of_proof(self, pred_proof, inp):
-        """Check the coherence of the generated proofs"""
-        # Loop through the predicted proof to see if the rules exist
+        # if True = True:
+        # Solve the problem with forward chaining using only the rules provided in the proof
+        # 2. Check that all rules in pred-proof exist in original input /done
+        # 3. Remove all rules from original input
+        # 4. Add the generated rules from the pred-proof to the original input
+        # 5. Solve with forward chaining, if solvable then mark as consistent
+
+        # If FALSE = False:
+        # 6. Solve original proof with forward chaining
+        # 7. Compare so exactly the same rules are used in both pred and ground truth proof, if so mark as consistent
+
+        input_data = input_data_whole["input"]
+
+        if pred_bool != truth_bool:
+            return False
+
+        elif pred_bool:
+            for step in pred_proof[:-1]:
+                if step not in input_data:
+                    return False 
+            
+            solvable = self.solve_problem_with_gen_rules(pred_proof, input_data_whole)
+
+            return solvable
+
+        else: 
+            
+            for step in pred_proof[:-1]:
+                if step in ground_proof:
+                    ground_proof.remove(step)
+                else:
+                    return False
+            return True
+
+
+    
+    def solve_problem_with_gen_rules(self, pred_proof, input_d):
+        
+        query = input_d["query"]
+        facts = input_d["input"].split(":")[-1]
+
+        facts = facts.split(" ")
+        facts_reformat =[]
+        for f in facts:
+            f = f.replace("1","")
+            f = f.replace(" ","")
+            if f != "":
+                facts_reformat.append(f)
+
+        solvable_proof = self.forward_chain(pred_proof, facts_reformat, query)
+
+        return solvable_proof
+
+
+    def forward_chain(self, pred_proof, facts, query):
+        
+        for step in pred_proof:
+            if query in facts:
+                return True
+
+            step_div = step.split(", ")[:-1]
+            conclusion = step.split(", ")[-1][:-1]
+
+            for req in step_div:
+                if not req in facts:
+                    return False
+            
+            facts.append(conclusion)
+
+        if query in facts:
+            return True
+        else:
+            return False
+
+
+    def all_consistency(self, pred_data, input_data, pred_labels, truth_labels, ground_proofs):
+        consistent = []
+        for i, pred_d in enumerate(pred_data):
+            con=self.check_consistency(pred_d, input_data[i], pred_labels[i], truth_labels[i], ground_proofs[i])
+            consistent.append(con)
+
+        return consistent.count(True)/len(consistent) 
+
+        
+
+
+
+
+    def check_hallucination(self, pred_proof, inp):
+        """Check if the generator hallucinates rules"""
+        # Loop throsugh the predicted proof to see if the rules exist
+
         for i, pred_step in enumerate(pred_proof):
             if pred_step == "True" or pred_step == "False":
                 return True, i, inp
+                #return True
 
             # Find fact
             fact = pred_step.split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
             # Remove rule from input and add fact
             self.last_fact = 'None'
-            if pred_step in inp: 
+            if pred_step in inp:
+                
+                # Check if the rule can be applied with the facts 
+
+
                 inp = inp.replace(pred_step, '')
                 inp = inp + ' ' + fact + '1'
                 self.last_fact = fact
             else: # KONTROLLERA SÅ ATT DEN HAR TAGIT BORT NÅNTING??
-                print("Pred step not in input:", pred_step)
+                #print("Pred step not in input:", pred_step)
                 return False, i, inp
-
+                #return False
 
             
     def query_in_facts(self, string):
@@ -214,9 +323,9 @@ class Proof_Checker_Step(Proof_Checker):
         if query in facts_list:
             return True
         else:
-            print(query)
-            print(string)
-            print(facts_list)
+            #print(query)
+            #print(string)
+            #print(facts_list)
             #print("Last fact", self.last_fact)
             #print("Original input", self.input)
             return False
@@ -280,7 +389,7 @@ def main():
 
     models = ["LP", "RP", "RP_10X"]
     test_ons = ["LP", "RP", "RP_10X"]
-    type_of_data = "val"
+    type_of_data = "test"
 
     for model in models:
         if model == "LP":
@@ -301,7 +410,7 @@ def main():
             pred_bools = PC.create_list_of_bool_labels(preds_data)
             truth_bools = PC.create_list_of_bool_labels(truth_data)
 
-            print("\nPROOF CHECKED DATA: ",  test_preds_path)
+            #print("\nPROOF CHECKED DATA: ",  test_preds_path)
 
             cm_indices = PC.get_index_matrix(PC.create_confusion_matrix(pred_bools, truth_bools))
 
@@ -325,7 +434,7 @@ def main():
                 with open(pkl_name, "wb") as f:
                     pickle.dump(acc_list, f)
 
-            #PC.check_proof_for_errors(preds_data, input_data)
+            PC.check_proof_for_errors(preds_data, input_data)
 
 if __name__ == "__main__":
     main()

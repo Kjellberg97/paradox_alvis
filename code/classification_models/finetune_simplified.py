@@ -46,7 +46,7 @@ from transformers import (
 import pdb
 from transformers import BertForSequenceClassification
 from helpers import *
-
+import pickle
 from dataset import LogicDataset
 
 logger = logging.getLogger(__name__)
@@ -548,7 +548,7 @@ def main():
     parser.add_argument("--skip_long_examples", action="store_true")
     parser.add_argument("--limit_example_num", default=-1, type=int)
     parser.add_argument("--resume_dir", default=None)
-
+    parser.add_argument("--save_file_acc_evaluation", default="temp.pkl", type=str, help="The name of the file to save the acc at")
 
     args = parser.parse_args()
 
@@ -746,12 +746,17 @@ def main():
                 result = evaluate(args, model, tokenizer, eval_dataset=datasets[len_r])
                 results_string[len_r] = "Acc: {} ; Percentage {}".format(result["acc"], len(datasets[len_r]) / total_example)
                 
-                
+            
                 all_kinds_of_results.append(result["acc"])
-                if len_r >= args.limit_report_depth and len_r <= args.limit_report_max_depth:
-                    results.append(result['acc'])
+                #if len_r >= args.limit_report_depth and len_r <= args.limit_report_max_depth:
+                results.append(result['acc'])
 
-
+            file_name_save_acc = "/cephyr/users/viktorkj/Alvis/paradox_alvis/accs_by_rules/" + args.save_file_acc_evaluation
+            save_file = open(file_name_save_acc, 'wb')
+            print("\nLen of result:",len(results))
+            result_np_array = np.array(results)
+            pickle.dump(result_np_array, save_file)
+            save_file.close() 
             pprint.pprint(results_string)
             results_string_final += val_file + "\n\n"
             results_string_final += pprint.pformat(results_string)

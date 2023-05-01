@@ -3,8 +3,10 @@ import os
 #LP
 
 os.system("bash /cephyr/users/viktorkj/Alvis/paradox_alvis/code/classification_models/scripts/6_eval_bert.bash 0 \
-    --val_file_path /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_brackets_test.txt \
+    --val_file_path /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_brackets_test.txt \
     --custom_weight /mimer/NOBACKUP/groups/snic2022-22-744/OUTPUT/LP/BERT1/checkpoint-19/pytorch_model.bin")
+
+    #/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_brackets_test.txt
 
 # os.system("bash scripts/6_eval_bert.bash 0 \
 #     --val_file_path /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_test.txt \
