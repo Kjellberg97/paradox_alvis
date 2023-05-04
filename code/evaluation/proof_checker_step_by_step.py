@@ -283,9 +283,7 @@ def main():
     #checkpoint = "checkpoint-7500"
 
     models = ["LP", "RP", "RP_10X"]
-    models = ["LP"]
     test_ons = ["LP", "RP", "RP_10X"]
-    test_ons = ["LP", "RP"]
     type_of_data = "test"
 
     latex_output = []
