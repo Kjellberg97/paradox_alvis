@@ -233,6 +233,29 @@ class LogicDataset(Dataset):
         
         return examples_by_depth
 
+
+    @classmethod
+    def initialize_from_file_by_rule_len(cls, file, args):
+    
+        examples_by_len_rule = cls.load_examples_by_rule_len(file)
+
+        datasets_by_len_rules = {}
+        for len_r, _data in examples_by_len_rule.items():
+            datasets_by_len_rules[len_r] = cls(_data, args)
+
+        return datasets_by_len_rules
+    
+    @staticmethod
+    def load_examples_by_rule_len(file, len_rule = "len_rules"):
+        with open(file) as f:
+            examples = json.load(f)
+
+        examples_by_len_rules = defaultdict(list)
+        for example in examples:
+            examples_by_len_rules[len(example["rules"])].append(example)
+        
+        return examples_by_len_rules
+
 def limit_examples(examples_by_depth, max_depth_during_train, control_num = 2000):
 
     for key in list(examples_by_depth.keys()):

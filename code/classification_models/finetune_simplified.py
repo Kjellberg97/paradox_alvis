@@ -46,7 +46,7 @@ from transformers import (
 import pdb
 from transformers import BertForSequenceClassification
 from helpers import *
-
+import pickle
 from dataset import LogicDataset
 
 logger = logging.getLogger(__name__)
@@ -548,7 +548,7 @@ def main():
     parser.add_argument("--skip_long_examples", action="store_true")
     parser.add_argument("--limit_example_num", default=-1, type=int)
     parser.add_argument("--resume_dir", default=None)
-
+    parser.add_argument("--save_file_acc_evaluation", default="temp.pkl", type=str, help="The name of the file to save the acc at")
 
     args = parser.parse_args()
 
@@ -723,19 +723,40 @@ def main():
             val_dataset = LogicDataset.initialze_from_file(val_file, args)
             val_dataset.report_allkinds_of_stats()
 
-            datasets = LogicDataset.initialize_from_file_by_depth(val_file, args)
-            depths = list(datasets.keys())
-            depths.sort()
-            total_example = sum([len(datasets[i]) for i in datasets])
-            for depth in depths:
-                print("\n\n")
-                print("Evaluating examples of depth ", depth)
-                result = evaluate(args, model, tokenizer, eval_dataset=datasets[depth])
-                results_string[depth] = "Acc: {} ; Percentage {}".format(result["acc"], len(datasets[depth]) / total_example)
-                all_kinds_of_results.append(result["acc"])
-                if depth >= args.limit_report_depth and depth <= args.limit_report_max_depth:
-                    results.append(result['acc'])
+            # datasets = LogicDataset.initialize_from_file_by_depth(val_file, args)
+            # depths = list(datasets.keys())
+            # depths.sort()
+            # total_example = sum([len(datasets[i]) for i in datasets])
+            # for depth in depths:
+            #     print("\n\n")
+            #     print("Evaluating examples of depth ", depth)
+            #     result = evaluate(args, model, tokenizer, eval_dataset=datasets[depth])
+            #     results_string[depth] = "Acc: {} ; Percentage {}".format(result["acc"], len(datasets[depth]) / total_example)
+            #     all_kinds_of_results.append(result["acc"])
+            #     if depth >= args.limit_report_depth and depth <= args.limit_report_max_depth:
+            #         results.append(result['acc'])
             
+            datasets = LogicDataset.initialize_from_file_by_rule_len(val_file, args)
+            len_rules = list(datasets.keys())
+            len_rules.sort()
+            total_example = sum([len(datasets[i]) for i in datasets])
+            for len_r in len_rules:
+                print("\n\n")
+                print("Evaluating examples of depth ", len_r)
+                result = evaluate(args, model, tokenizer, eval_dataset=datasets[len_r])
+                results_string[len_r] = "Acc: {} ; Percentage {}".format(result["acc"], len(datasets[len_r]) / total_example)
+                
+            
+                all_kinds_of_results.append(result["acc"])
+                #if len_r >= args.limit_report_depth and len_r <= args.limit_report_max_depth:
+                results.append(result['acc'])
+
+            file_name_save_acc = "/cephyr/users/viktorkj/Alvis/paradox_alvis/accs_by_rules/" + args.save_file_acc_evaluation
+            save_file = open(file_name_save_acc, 'wb')
+            print("\nLen of result:",len(results))
+            result_np_array = np.array(results)
+            pickle.dump(result_np_array, save_file)
+            save_file.close() 
             pprint.pprint(results_string)
             results_string_final += val_file + "\n\n"
             results_string_final += pprint.pformat(results_string)
@@ -745,6 +766,8 @@ def main():
         
             all_results[val_file] = "{:.3f}".format((sum(results) / len(results)) * 100)
             all_kinds_of_results.insert(1, sum(results) / len(results))
+
+
         print("Final Reporting")
 
         for key in sorted(list(all_results.keys())):
@@ -756,10 +779,7 @@ def main():
         pprint.pprint(all_results)
 
         with open("eval_result.txt", "a+") as f:
-            if args.custom_weight != None:
-                f.write(args.custom_weight)
-            else:
-                f.write("custom_weight: None")
+            f.write(args.custom_weight)
             f.write("\n\n")
             f.write(results_string_final)
             f.write("\n\n\n\n\n")
