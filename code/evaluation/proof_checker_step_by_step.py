@@ -4,6 +4,7 @@ import json
 import numpy as np
 import re
 import pickle
+from collections import Counter
 
 
 
@@ -87,7 +88,6 @@ class Proof_Checker_Step(Proof_Checker):
         """Divides the input data dependeing on the depths of each input data and 
         creates the confucion matrix and calculate basic stats about the lenght 
         of the rules in each group.
-
         ARGS:
             input_data (list) : all input data
             predictions (list) : the generated proofs and labels 
@@ -104,9 +104,7 @@ class Proof_Checker_Step(Proof_Checker):
         for i,data in enumerate(input_data):
 
             depths = int(data["depth"])
-
             pred = self.find_binary_label(predictions[i])
-
             data_depths[depths].append(data)
             preds_depths[depths].append(pred)
             ground_truth_depths[depths].append(ground_truth[i])
@@ -132,11 +130,16 @@ class Proof_Checker_Step(Proof_Checker):
             print("Accuracy:", acc_round)
             acc_str_list.append(str(acc_round))
             acc_list.append(accuracy)
+            frac_consistent_proofs = self.all_consistency(pred_proof[depth], data_depths[depth], preds_depths[depth], ground_truth_bools, ground_truth_depths[depth])
+            print("Fractions of consistent chains of inference steps:", frac_consistent_proofs)
         mean_acc = round(np.mean(acc_list) * 100, 1)
         acc_str_list.append(str(mean_acc))
         print("Mean accuracy across depths:", mean_acc)
+        
 
         return acc_str_list
+
+
 
     def find_binary_label(self, list_input):
         # Find the last occurence of False or True in the string, convert into corresponding int 0 or 1
@@ -210,6 +213,122 @@ class Proof_Checker_Step(Proof_Checker):
                 return False, i, inp
 
 
+    def check_consistency(self, pred_proof, input_data_whole, pred_bool, truth_bool, ground_proof):
+        
+        """Check that there are no missing rules in the predicted proof,
+            and that all tules in proof exist in the original input."""
+        
+        # 0. Check true pred label, if true != pred, then mark as inconsistent
+        # 1. Take the original input
+
+        # if True = True:
+        # Solve the problem with forward chaining using only the rules provided in the proof
+        # 2. Check that all rules in pred-proof exist in original input /done
+        # 3. Remove all rules from original input
+        # 4. Add the generated rules from the pred-proof to the original input
+        # 5. Solve with forward chaining, if solvable then mark as consistent
+
+        # If FALSE = False:
+        # 6. Solve original proof with forward chaining
+        # 7. Compare so exactly the same rules are used in both pred and ground truth proof, if so mark as consistent
+
+        input_data = input_data_whole["input"]
+
+        if pred_bool:
+            for step in pred_proof[:-1]:
+                # check if pred step is hallucinated by comp against input data
+                if step not in input_data:
+                    return False
+            
+            # See if problem is solvable with forward chaining using only pred proof
+            solvable = self.solve_problem_with_gen_rules(pred_proof, input_data_whole)
+
+            return solvable
+
+        else: 
+            g_p = Counter(ground_proof[:-1])
+            p_p = Counter(pred_proof[:-1])
+            
+            if g_p == p_p:
+                return True
+            else:
+                return False
+    
+
+
+    def check_hallucination(self, pred_proof, inp):
+        """Check if the generator hallucinates rules"""
+        # Loop throsugh the predicted proof to see if the rules exist
+
+        for i, pred_step in enumerate(pred_proof):
+            if pred_step == "True" or pred_step == "False":
+                return True, i, inp
+                #return True
+
+            # Find fact
+            fact = pred_step.split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
+            # Remove rule from input and add fact
+            self.last_fact = 'None'
+            if pred_step in inp:
+                
+                # Check if the rule can be applied with the facts 
+
+
+                inp = inp.replace(pred_step, '')
+                inp = inp + ' ' + fact + '1'
+                self.last_fact = fact
+            else: # KONTROLLERA SÅ ATT DEN HAR TAGIT BORT NÅNTING??
+                #print("Pred step not in input:", pred_step)
+                return False, i, inp
+                #return False
+    
+
+
+    def solve_problem_with_gen_rules(self, pred_proof, input_d):
+        
+        query = input_d["query"]
+        facts = input_d["input"].split(":")[-1]
+
+        facts = facts.split(" ")
+        facts_reformat =[]
+        for f in facts:
+            f = f.replace("1","")
+            f = f.replace(" ","")
+            if f != "":
+                facts_reformat.append(f)
+
+        solvable_proof = self.forward_chain(pred_proof, facts_reformat, query)
+
+        return solvable_proof
+
+
+    def forward_chain(self, pred_proof, facts, query):
+        
+        for step in pred_proof:
+            if query in facts:
+                return True
+
+            step_div = step.split(", ")[:-1]
+            conclusion = step.split(", ")[-1][:-1]
+
+            for req in step_div:
+                if not req in facts:
+                    return False
+            facts.append(conclusion)
+
+        if query in facts:
+            return True
+        else:
+            return False
+
+    
+    def all_consistency(self, pred_data, input_data, pred_labels, truth_labels, ground_proofs):
+        consistent = []
+
+        for i, pred_d in enumerate(pred_data):
+            con = self.check_consistency(pred_d, input_data[i], pred_labels[i], truth_labels[i], ground_proofs[i])
+            consistent.append(con)
+        return consistent.count(True)/len(pred_data)
             
     def query_in_facts(self, string):
         # Find query in string
@@ -243,7 +362,7 @@ class Proof_Checker_Step(Proof_Checker):
 
 
 
-def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=False):
+def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=True):
 
     path = "/mimer/NOBACKUP/groups/snic2022-22-744/"
 
@@ -279,12 +398,14 @@ def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=False
         
 def main():
     acc_by_rules = False
-    rule_sampling = False
+    rule_sampling = True
     #checkpoint = "checkpoint-7500"
 
     models = ["LP", "RP", "RP_10X"]
     test_ons = ["LP", "RP", "RP_10X"]
     type_of_data = "test"
+
+    proof_coherent = []
 
     latex_output = []
     for model in models:
@@ -312,6 +433,9 @@ def main():
             print("\nPRED DATA: ",  test_preds_path)
             print("\nGROUND TRUTH: ",  test_truth_path)
 
+
+
+
             cm_indices = PC.get_index_matrix(PC.create_confusion_matrix(pred_bools, truth_bools))
 
             cm = confusion_matrix(truth_bools, pred_bools)
@@ -322,6 +446,11 @@ def main():
             print("\nConfusion matrix:\n", cm)
             print("\nAccuracy:", round(acc * 100, 1))
             print("F1-score:", round(f1 * 100, 1))
+
+            part_right = PC.all_consistency(preds_data, input_data, pred_bools, truth_bools, truth_data)
+            print("\nTotal Fraction of consistent inference steps: ", part_right)
+
+            proof_coherent.append({"Model":model, "Data":test_on, "Consistent proofs": part_right})
                 
             acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
             
@@ -336,10 +465,17 @@ def main():
                 with open(pkl_name, "wb") as f:
                     pickle.dump(acc_list, f)
 
+    
+
             #PC.check_proof_for_errors(preds_data, input_data)
+
+    
 
     print("\nLATEX FORMATTING")
     [ print(x) for x in latex_output ]
+
+    for i in proof_coherent:
+        print(i)
 
 if __name__ == "__main__":
     main()
