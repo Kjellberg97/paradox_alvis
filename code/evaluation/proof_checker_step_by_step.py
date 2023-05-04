@@ -27,7 +27,7 @@ class Proof_Checker_Step(Proof_Checker):
 
 
     def create_list_of_bool_labels(self, list_of_lists):
-        return [ int(eval(x[-1])) if x[-1] in ["True", "False"] else 0 for x in list_of_lists ]
+        return [ int(eval(x[-1])) if x[-1] in ["True", "False"] else -1 for x in list_of_lists ]
 
     
     def find_non_bools(self, list_of_lists):
@@ -67,15 +67,17 @@ class Proof_Checker_Step(Proof_Checker):
             print()
             print("RULES: ", n_rules)
             print("NR. SAMPLES: ", len(ground_truth_rules[n_rules]))
-            ground_truth_bools = [ self.find_binary_label(target_d) for target_d in ground_truth_rules[n_rules] ]
-            confusion_matrix = self.create_confusion_matrix(preds_rules[n_rules], ground_truth_bools)
-            accuracy = self.label_accuracy(confusion_matrix)
+            ground_truth_bools = [ self.find_binary_label(target_d) for target_d in ground_truth_depths[depth] ]
+            #confusion_matrix = self.create_confusion_matrix(preds_depths[depth], ground_truth_bools)
+            cm = confusion_matrix(ground_truth_bools, preds_depths[depth])
+            #accuracy = self.label_accuracy(confusion_matrix)
+            accuracy = accuracy_score(ground_truth_bools, preds_depths[depth])
             acc_list.append(accuracy)
             with open(self.save_stats_file, "a") as file:
                 file.write("\n#############################################################################")
                 file.write("\nRULES: " + str(n_rules))
             #self.stat_over_generated_data(preds_rules[n_rules] ,ground_truth_rules[n_rules] ,data_rules[n_rules],pred_proof[n_rules])
-            print("Rates: TP, FP, TN, FN\n", np.round(np.sum(confusion_matrix, axis=0) / confusion_matrix.shape[0], 3))
+            print("Rates: TP, FP, TN, FN\n", np.round(np.sum(cm, axis=0) / cm.shape[0], 3))
             print("acc", accuracy)
         
         return acc_list
@@ -104,7 +106,6 @@ class Proof_Checker_Step(Proof_Checker):
             depths = int(data["depth"])
 
             pred = self.find_binary_label(predictions[i])
-    
 
             data_depths[depths].append(data)
             preds_depths[depths].append(pred)
@@ -112,26 +113,34 @@ class Proof_Checker_Step(Proof_Checker):
             pred_proof[depths].append(predictions[i])
 
         acc_list = []
+        acc_str_list = []
         for depth in range(7):
             print()
             print("DEPTH: ",depth)
             print("NR. SAMPLES: ", len(ground_truth_depths[depth]))
             ground_truth_bools = [ self.find_binary_label(target_d) for target_d in ground_truth_depths[depth] ]
-            confusion_matrix = self.create_confusion_matrix(preds_depths[depth], ground_truth_bools)
-            accuracy = self.label_accuracy(confusion_matrix)
+            #confusion_matrix = self.create_confusion_matrix(preds_depths[depth], ground_truth_bools)
+            cm = confusion_matrix(ground_truth_bools, preds_depths[depth])
+            #accuracy = self.label_accuracy(confusion_matrix)
+            accuracy = accuracy_score(ground_truth_bools, preds_depths[depth])
             with open(self.save_stats_file, "a") as file:
                 file.write("\n#############################################################################")
                 file.write("\nDEPTH: " + str(depth))
-            self.stat_over_generated_data(preds_depths[depth] ,ground_truth_depths[depth] ,data_depths[depth],pred_proof[depth])
-            print("Rates: TP, FP, TN, FN\n", np.round(np.sum(confusion_matrix, axis=0) / confusion_matrix.shape[0], 3))
-            print("Accuracy:", round(accuracy * 100, 1))
+            self.stat_over_generated_data(preds_depths[depth], ground_truth_depths[depth], data_depths[depth], pred_proof[depth])
+            print("Rates: TP, FP, TN, FN\n", np.round(np.sum(cm, axis=0) / cm.shape[0], 3))
+            acc_round = str(round(accuracy * 100, 1))
+            print("Accuracy:", acc_round)
+            acc_str_list.append(str(acc_round))
             acc_list.append(accuracy)
-        
-        print("Mean accuracy across depths:", round(np.mean(acc_list) * 100, 1))
+        mean_acc = round(np.mean(acc_list) * 100, 1)
+        acc_str_list.append(str(mean_acc))
+        print("Mean accuracy across depths:", mean_acc)
+
+        return acc_str_list
 
     def find_binary_label(self, list_input):
         # Find the last occurence of False or True in the string, convert into corresponding int 0 or 1
-        binary_digit = int(eval(list_input[-1])) if list_input[-1] in ["True", "False"] else 0 # Convert into int if a False or True is returned else convert to 0
+        binary_digit = int(eval(list_input[-1])) if list_input[-1] in ["True", "False"] else -1 # Convert into int if a False or True is returned else convert to 0
         return binary_digit
 
 
@@ -234,11 +243,6 @@ class Proof_Checker_Step(Proof_Checker):
 
 
 
-    def evaluate_error(self, pred_proof, inx, in_data):
-        pass
-
-
-
 def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=False):
 
     path = "/mimer/NOBACKUP/groups/snic2022-22-744/"
@@ -275,16 +279,21 @@ def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=False
         
 def main():
     acc_by_rules = False
-    rule_sampling = True
+    rule_sampling = False
     #checkpoint = "checkpoint-7500"
 
     models = ["LP", "RP", "RP_10X"]
+    models = ["LP"]
     test_ons = ["LP", "RP", "RP_10X"]
-    type_of_data = "val"
+    test_ons = ["LP", "RP"]
+    type_of_data = "test"
 
+    latex_output = []
     for model in models:
         if model == "LP":
             checkpoint = "checkpoint-9328"
+            if not rule_sampling:
+                checkpoint = "checkpoint-8500"
         else:
             checkpoint = "checkpoint-7500"
         for test_on in test_ons:
@@ -301,20 +310,24 @@ def main():
             pred_bools = PC.create_list_of_bool_labels(preds_data)
             truth_bools = PC.create_list_of_bool_labels(truth_data)
 
-            print("\nPROOF CHECKED DATA: ",  test_preds_path)
+            print("\nINPUT DATA: ",  input_data_path)
+            print("\nPRED DATA: ",  test_preds_path)
+            print("\nGROUND TRUTH: ",  test_truth_path)
 
             cm_indices = PC.get_index_matrix(PC.create_confusion_matrix(pred_bools, truth_bools))
 
             cm = confusion_matrix(truth_bools, pred_bools)
             acc = accuracy_score(truth_bools, pred_bools)
-            f1 = f1_score(truth_bools, pred_bools, average='binary')
-            #f1 = f1_score(truth_bools, pred_bools, average='micro')
+            #f1 = f1_score(truth_bools, pred_bools, average='binary')
+            f1 = f1_score(truth_bools, pred_bools, average='micro')
 
             print("\nConfusion matrix:\n", cm)
             print("\nAccuracy:", round(acc * 100, 1))
             print("F1-score:", round(f1 * 100, 1))
                 
-            PC.divide_data_into_depths(input_data, preds_data, truth_data)
+            acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
+            
+            latex_output.append(str(f'{model} & {test_on} & {" & ".join(acc_str_list)} \\\\ \\hline'))
             
             #PC.find_non_bools(preds_data)
 
@@ -326,6 +339,9 @@ def main():
                     pickle.dump(acc_list, f)
 
             #PC.check_proof_for_errors(preds_data, input_data)
+
+    print("\nLATEX FORMATTING")
+    [ print(x) for x in latex_output ]
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,830 @@
+This job can be monitored from: https://scruffy.c3se.chalmers.se/d/alvis-job/alvis-job?var-jobid=1009795&from=1683201685000
+INFO:    underlay of /etc/localtime required more than 50 (94) bind mounts
+INFO:    underlay of /usr/bin/nvidia-smi required more than 50 (470) bind mounts
+INFO:    underlay of /usr/share/lmod/lmod required more than 50 (59) bind mounts
+
+
+
+##########################################################################
+TRAIN DIST: LP
+TEST DIST: LP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step_rule_sampling/evaluation/checkpoint-9328_LP_LP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[    0     0     0]
+ [    2 14218     2]
+ [    1    73 13704]]
+
+Accuracy: 99.7
+F1-score: 99.7
+
+DEPTH:  0
+NR. SAMPLES:  3945
+TP:  (28.66, 0, 113)
+FP:  (16.5, 10, 23)
+TN:  (17.5, 0, 95)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 414.  1558.5]
+Accuracy: 99.9
+
+DEPTH:  1
+NR. SAMPLES:  4054
+TP:  (37.11, 3, 112)
+FP:  (0, inf, 0)
+TN:  (17.79, 1, 89)
+FN:  (22.25, 13, 33)
+Rates: TP, FP, TN, FN
+ [ 458. 1569.]
+Accuracy: 99.9
+
+DEPTH:  2
+NR. SAMPLES:  3973
+TP:  (43.82, 4, 118)
+FP:  (0, inf, 0)
+TN:  (19.19, 2, 72)
+FN:  (39.5, 15, 117)
+Rates: TP, FP, TN, FN
+ [ 799.5 1187. ]
+Accuracy: 99.8
+
+DEPTH:  3
+NR. SAMPLES:  4042
+TP:  (47.84, 6, 116)
+FP:  (0, inf, 0)
+TN:  (22.27, 4, 86)
+FN:  (34.6, 19, 46)
+Rates: TP, FP, TN, FN
+ [3.33000e-01 7.53667e+02 5.93333e+02]
+Accuracy: 99.9
+
+DEPTH:  4
+NR. SAMPLES:  4007
+TP:  (51.74, 8, 118)
+FP:  (0, inf, 0)
+TN:  (29.21, 5, 95)
+FN:  (46.25, 15, 80)
+Rates: TP, FP, TN, FN
+ [1294.5  709. ]
+Accuracy: 99.5
+
+DEPTH:  5
+NR. SAMPLES:  3959
+TP:  (53.52, 12, 118)
+FP:  (0, inf, 0)
+TN:  (36.01, 9, 93)
+FN:  (51.56, 21, 116)
+Rates: TP, FP, TN, FN
+ [1445.5  534. ]
+Accuracy: 99.6
+
+DEPTH:  6
+NR. SAMPLES:  4020
+TP:  (55.21, 13, 118)
+FP:  (0, inf, 0)
+TN:  (42.81, 12, 103)
+FN:  (52.75, 15, 96)
+Rates: TP, FP, TN, FN
+ [6.67000e-01 1.06900e+03 2.70333e+02]
+Accuracy: 99.5
+Mean accuracy across depths: 99.7
+
+
+
+##########################################################################
+TRAIN DIST: LP
+TEST DIST: RP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step_rule_sampling/evaluation/checkpoint-9328_LP_RP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[    0     0     0]
+ [    0 13263    25]
+ [    1   139 14572]]
+
+Accuracy: 99.4
+F1-score: 99.4
+
+DEPTH:  0
+NR. SAMPLES:  3947
+TP:  (35.15, 0, 120)
+FP:  (2.0, 2, 2)
+TN:  (15.41, 0, 105)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 403.5 1570. ]
+Accuracy: 100.0
+
+DEPTH:  1
+NR. SAMPLES:  4018
+TP:  (45.13, 1, 120)
+FP:  (27.0, 27, 27)
+TN:  (18.54, 1, 78)
+FN:  (39.0, 14, 89)
+Rates: TP, FP, TN, FN
+ [ 495.5 1513.5]
+Accuracy: 99.9
+
+DEPTH:  2
+NR. SAMPLES:  3986
+TP:  (48.61, 2, 120)
+FP:  (0, inf, 0)
+TN:  (21.09, 2, 94)
+FN:  (33.08, 11, 90)
+Rates: TP, FP, TN, FN
+ [ 699. 1294.]
+Accuracy: 99.7
+
+DEPTH:  3
+NR. SAMPLES:  4065
+TP:  (53.2, 4, 120)
+FP:  (52.0, 52, 52)
+TN:  (25.08, 4, 100)
+FN:  (41.03, 10, 119)
+Rates: TP, FP, TN, FN
+ [ 953.5 1079. ]
+Accuracy: 99.2
+
+DEPTH:  4
+NR. SAMPLES:  4073
+TP:  (56.72, 6, 118)
+FP:  (32.33, 23, 39)
+TN:  (29.09, 5, 107)
+FN:  (38.7, 14, 120)
+Rates: TP, FP, TN, FN
+ [3.33000e-01 8.24000e+02 5.33333e+02]
+Accuracy: 99.1
+
+DEPTH:  5
+NR. SAMPLES:  3918
+TP:  (60.67, 10, 119)
+FP:  (49.67, 46, 56)
+TN:  (34.94, 8, 100)
+FN:  (51.92, 16, 119)
+Rates: TP, FP, TN, FN
+ [1385.5  573.5]
+Accuracy: 99.3
+
+DEPTH:  6
+NR. SAMPLES:  3993
+TP:  (64.31, 9, 118)
+FP:  (57.31, 29, 88)
+TN:  (42.11, 11, 110)
+FN:  (52.89, 15, 115)
+Rates: TP, FP, TN, FN
+ [1528.   468.5]
+Accuracy: 98.7
+Mean accuracy across depths: 99.4
+
+
+
+##########################################################################
+TRAIN DIST: LP
+TEST DIST: RP_10X
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step_rule_sampling/evaluation/checkpoint-9328_LP_RP_10X_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[13244    38]
+ [  117 14601]]
+
+Accuracy: 99.4
+F1-score: 99.4
+
+DEPTH:  0
+NR. SAMPLES:  4267
+TP:  (30.38, 0, 118)
+FP:  (0, inf, 0)
+TN:  (22.06, 0, 118)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 349.5 1784. ]
+Accuracy: 100.0
+
+DEPTH:  1
+NR. SAMPLES:  3979
+TP:  (39.38, 1, 120)
+FP:  (0, inf, 0)
+TN:  (22.64, 1, 115)
+FN:  (44.33, 19, 119)
+Rates: TP, FP, TN, FN
+ [ 452.5 1537. ]
+Accuracy: 99.8
+
+DEPTH:  2
+NR. SAMPLES:  3946
+TP:  (43.31, 2, 120)
+FP:  (0, inf, 0)
+TN:  (26.87, 2, 113)
+FN:  (31.54, 18, 49)
+Rates: TP, FP, TN, FN
+ [ 638.5 1334.5]
+Accuracy: 99.7
+
+DEPTH:  3
+NR. SAMPLES:  3721
+TP:  (48.07, 3, 120)
+FP:  (81.67, 63, 100)
+TN:  (29.35, 3, 107)
+FN:  (30.18, 5, 113)
+Rates: TP, FP, TN, FN
+ [866.  994.5]
+Accuracy: 99.0
+
+DEPTH:  4
+NR. SAMPLES:  3761
+TP:  (51.43, 4, 120)
+FP:  (79.5, 77, 82)
+TN:  (34.28, 4, 114)
+FN:  (30.83, 6, 81)
+Rates: TP, FP, TN, FN
+ [1137.5  743. ]
+Accuracy: 99.2
+
+DEPTH:  5
+NR. SAMPLES:  3886
+TP:  (55.76, 11, 118)
+FP:  (59.14, 48, 76)
+TN:  (41.23, 8, 111)
+FN:  (40.95, 8, 118)
+Rates: TP, FP, TN, FN
+ [1412.5  530.5]
+Accuracy: 99.3
+
+DEPTH:  6
+NR. SAMPLES:  4440
+TP:  (61.66, 14, 119)
+FP:  (58.85, 36, 85)
+TN:  (49.79, 13, 111)
+FN:  (54.27, 17, 119)
+Rates: TP, FP, TN, FN
+ [1824.  396.]
+Accuracy: 99.2
+Mean accuracy across depths: 99.4
+
+
+
+##########################################################################
+TRAIN DIST: RP
+TEST DIST: LP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_LP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[    0     0     0]
+ [    1 14192    29]
+ [    0   170 13608]]
+
+Accuracy: 99.3
+F1-score: 99.3
+
+DEPTH:  0
+NR. SAMPLES:  3945
+TP:  (28.66, 0, 113)
+FP:  (0, inf, 0)
+TN:  (17.49, 0, 95)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 415.  1557.5]
+Accuracy: 100.0
+
+DEPTH:  1
+NR. SAMPLES:  4054
+TP:  (37.11, 3, 112)
+FP:  (0, inf, 0)
+TN:  (17.79, 1, 89)
+FN:  (27.38, 15, 44)
+Rates: TP, FP, TN, FN
+ [ 460. 1567.]
+Accuracy: 99.8
+
+DEPTH:  2
+NR. SAMPLES:  3973
+TP:  (43.82, 4, 118)
+FP:  (14.5, 10, 19)
+TN:  (19.2, 2, 72)
+FN:  (41.7, 15, 117)
+Rates: TP, FP, TN, FN
+ [ 799.5 1187. ]
+Accuracy: 99.7
+
+DEPTH:  3
+NR. SAMPLES:  4042
+TP:  (47.98, 6, 116)
+FP:  (18.67, 16, 22)
+TN:  (22.27, 4, 86)
+FN:  (34.45, 11, 71)
+Rates: TP, FP, TN, FN
+ [1137.5  883.5]
+Accuracy: 99.4
+
+DEPTH:  4
+NR. SAMPLES:  4007
+TP:  (52.07, 8, 118)
+FP:  (29.4, 19, 46)
+TN:  (29.21, 5, 95)
+FN:  (38.49, 9, 77)
+Rates: TP, FP, TN, FN
+ [1303.5  700. ]
+Accuracy: 98.8
+
+DEPTH:  5
+NR. SAMPLES:  3959
+TP:  (54.02, 12, 118)
+FP:  (38.22, 18, 72)
+TN:  (36.0, 9, 93)
+FN:  (40.98, 15, 116)
+Rates: TP, FP, TN, FN
+ [1455.   524.5]
+Accuracy: 98.7
+
+DEPTH:  6
+NR. SAMPLES:  4020
+TP:  (55.85, 13, 118)
+FP:  (41.8, 25, 68)
+TN:  (42.81, 12, 103)
+FN:  (42.35, 15, 96)
+Rates: TP, FP, TN, FN
+ [3.330000e-01 1.073667e+03 2.660000e+02]
+Accuracy: 98.7
+Mean accuracy across depths: 99.3
+
+
+
+##########################################################################
+TRAIN DIST: RP
+TEST DIST: RP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_RP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[13282     6]
+ [   67 14645]]
+
+Accuracy: 99.7
+F1-score: 99.7
+
+DEPTH:  0
+NR. SAMPLES:  3947
+TP:  (35.15, 0, 120)
+FP:  (0, inf, 0)
+TN:  (15.4, 0, 105)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 404.  1569.5]
+Accuracy: 100.0
+
+DEPTH:  1
+NR. SAMPLES:  4018
+TP:  (45.14, 1, 120)
+FP:  (0, inf, 0)
+TN:  (18.55, 1, 78)
+FN:  (24.0, 23, 25)
+Rates: TP, FP, TN, FN
+ [ 495. 1514.]
+Accuracy: 100.0
+
+DEPTH:  2
+NR. SAMPLES:  3986
+TP:  (48.56, 2, 120)
+FP:  (0, inf, 0)
+TN:  (21.09, 2, 94)
+FN:  (33.0, 16, 62)
+Rates: TP, FP, TN, FN
+ [ 695. 1298.]
+Accuracy: 99.9
+
+DEPTH:  3
+NR. SAMPLES:  4065
+TP:  (53.18, 4, 120)
+FP:  (24.0, 24, 24)
+TN:  (25.09, 4, 100)
+FN:  (33.44, 10, 66)
+Rates: TP, FP, TN, FN
+ [ 946.5 1086. ]
+Accuracy: 99.6
+
+DEPTH:  4
+NR. SAMPLES:  4073
+TP:  (56.56, 6, 118)
+FP:  (44.0, 23, 65)
+TN:  (29.08, 5, 107)
+FN:  (35.94, 14, 120)
+Rates: TP, FP, TN, FN
+ [1228.   808.5]
+Accuracy: 99.6
+
+DEPTH:  5
+NR. SAMPLES:  3918
+TP:  (60.73, 10, 119)
+FP:  (34.0, 34, 34)
+TN:  (34.96, 8, 100)
+FN:  (37.67, 16, 82)
+Rates: TP, FP, TN, FN
+ [1380.5  578.5]
+Accuracy: 99.7
+
+DEPTH:  6
+NR. SAMPLES:  3993
+TP:  (64.09, 9, 118)
+FP:  (57.5, 36, 79)
+TN:  (42.18, 11, 110)
+FN:  (52.29, 15, 115)
+Rates: TP, FP, TN, FN
+ [1525.5  471. ]
+Accuracy: 99.5
+Mean accuracy across depths: 99.7
+
+
+
+##########################################################################
+TRAIN DIST: RP
+TEST DIST: RP_10X
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_RP_10X_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[    0     0     0]
+ [    0 13277     5]
+ [    1    67 14650]]
+
+Accuracy: 99.7
+F1-score: 99.7
+
+DEPTH:  0
+NR. SAMPLES:  4267
+TP:  (30.38, 0, 118)
+FP:  (0, inf, 0)
+TN:  (22.06, 0, 118)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 349.5 1784. ]
+Accuracy: 100.0
+
+DEPTH:  1
+NR. SAMPLES:  3979
+TP:  (39.39, 1, 120)
+FP:  (0, inf, 0)
+TN:  (22.64, 1, 115)
+FN:  (49.0, 49, 49)
+Rates: TP, FP, TN, FN
+ [ 448.5 1541. ]
+Accuracy: 100.0
+
+DEPTH:  2
+NR. SAMPLES:  3946
+TP:  (43.28, 2, 120)
+FP:  (0, inf, 0)
+TN:  (26.87, 2, 113)
+FN:  (31.57, 16, 57)
+Rates: TP, FP, TN, FN
+ [ 635.5 1337.5]
+Accuracy: 99.8
+
+DEPTH:  3
+NR. SAMPLES:  3721
+TP:  (47.91, 3, 120)
+FP:  (0, inf, 0)
+TN:  (29.45, 3, 107)
+FN:  (29.14, 5, 106)
+Rates: TP, FP, TN, FN
+ [ 858.  1002.5]
+Accuracy: 99.6
+
+DEPTH:  4
+NR. SAMPLES:  3761
+TP:  (51.32, 4, 120)
+FP:  (0, inf, 0)
+TN:  (34.32, 4, 114)
+FN:  (32.48, 6, 57)
+Rates: TP, FP, TN, FN
+ [1135.5  745. ]
+Accuracy: 99.4
+
+DEPTH:  5
+NR. SAMPLES:  3886
+TP:  (55.58, 8, 118)
+FP:  (66.0, 66, 66)
+TN:  (41.26, 8, 111)
+FN:  (40.58, 12, 73)
+Rates: TP, FP, TN, FN
+ [3.33000e-01 9.40333e+02 3.54667e+02]
+Accuracy: 99.6
+
+DEPTH:  6
+NR. SAMPLES:  4440
+TP:  (61.74, 14, 119)
+FP:  (42.5, 30, 52)
+TN:  (49.86, 13, 111)
+FN:  (47.5, 22, 98)
+Rates: TP, FP, TN, FN
+ [1834.5  385.5]
+Accuracy: 99.7
+Mean accuracy across depths: 99.7
+
+
+
+##########################################################################
+TRAIN DIST: RP_10X
+TEST DIST: LP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_10X_LP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[    0     0     0]
+ [    1 14195    26]
+ [    0   153 13625]]
+
+Accuracy: 99.4
+F1-score: 99.4
+
+DEPTH:  0
+NR. SAMPLES:  3945
+TP:  (28.66, 0, 113)
+FP:  (0, inf, 0)
+TN:  (17.49, 0, 95)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 415.  1557.5]
+Accuracy: 100.0
+
+DEPTH:  1
+NR. SAMPLES:  4054
+TP:  (37.13, 3, 112)
+FP:  (0, inf, 0)
+TN:  (17.79, 1, 89)
+FN:  (21.5, 8, 44)
+Rates: TP, FP, TN, FN
+ [ 460. 1567.]
+Accuracy: 99.8
+
+DEPTH:  2
+NR. SAMPLES:  3973
+TP:  (43.83, 4, 118)
+FP:  (14.5, 10, 19)
+TN:  (19.2, 2, 72)
+FN:  (37.62, 11, 117)
+Rates: TP, FP, TN, FN
+ [ 798.5 1188. ]
+Accuracy: 99.7
+
+DEPTH:  3
+NR. SAMPLES:  4042
+TP:  (48.01, 6, 116)
+FP:  (20.0, 18, 22)
+TN:  (22.27, 4, 86)
+FN:  (33.04, 11, 96)
+Rates: TP, FP, TN, FN
+ [1138.  883.]
+Accuracy: 99.4
+
+DEPTH:  4
+NR. SAMPLES:  4007
+TP:  (52.05, 8, 118)
+FP:  (26.0, 22, 35)
+TN:  (29.21, 5, 95)
+FN:  (36.53, 9, 77)
+Rates: TP, FP, TN, FN
+ [1300.5  703. ]
+Accuracy: 99.0
+
+DEPTH:  5
+NR. SAMPLES:  3959
+TP:  (53.99, 12, 118)
+FP:  (31.57, 18, 41)
+TN:  (36.02, 9, 93)
+FN:  (39.84, 13, 116)
+Rates: TP, FP, TN, FN
+ [1453.   526.5]
+Accuracy: 98.9
+
+DEPTH:  6
+NR. SAMPLES:  4020
+TP:  (55.58, 13, 118)
+FP:  (43.4, 25, 68)
+TN:  (42.8, 12, 103)
+FN:  (46.7, 15, 103)
+Rates: TP, FP, TN, FN
+ [3.330000e-01 1.072667e+03 2.670000e+02]
+Accuracy: 98.7
+Mean accuracy across depths: 99.4
+
+
+
+##########################################################################
+TRAIN DIST: RP_10X
+TEST DIST: RP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_10X_RP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[13279     9]
+ [   59 14653]]
+
+Accuracy: 99.8
+F1-score: 99.8
+
+DEPTH:  0
+NR. SAMPLES:  3947
+TP:  (35.15, 0, 120)
+FP:  (2.0, 2, 2)
+TN:  (15.43, 0, 105)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 403.  1570.5]
+Accuracy: 99.9
+
+DEPTH:  1
+NR. SAMPLES:  4018
+TP:  (45.13, 1, 120)
+FP:  (0, inf, 0)
+TN:  (18.55, 1, 78)
+FN:  (31.0, 23, 39)
+Rates: TP, FP, TN, FN
+ [ 495. 1514.]
+Accuracy: 100.0
+
+DEPTH:  2
+NR. SAMPLES:  3986
+TP:  (48.56, 2, 120)
+FP:  (0, inf, 0)
+TN:  (21.09, 2, 94)
+FN:  (34.25, 16, 62)
+Rates: TP, FP, TN, FN
+ [ 695. 1298.]
+Accuracy: 99.9
+
+DEPTH:  3
+NR. SAMPLES:  4065
+TP:  (53.18, 4, 120)
+FP:  (24.0, 24, 24)
+TN:  (25.09, 4, 100)
+FN:  (30.0, 10, 66)
+Rates: TP, FP, TN, FN
+ [ 945.5 1087. ]
+Accuracy: 99.6
+
+DEPTH:  4
+NR. SAMPLES:  4073
+TP:  (56.51, 6, 118)
+FP:  (23.0, 23, 23)
+TN:  (29.1, 5, 107)
+FN:  (37.31, 14, 120)
+Rates: TP, FP, TN, FN
+ [1227.   809.5]
+Accuracy: 99.7
+
+DEPTH:  5
+NR. SAMPLES:  3918
+TP:  (60.59, 10, 119)
+FP:  (39.0, 34, 47)
+TN:  (34.95, 8, 100)
+FN:  (51.92, 16, 116)
+Rates: TP, FP, TN, FN
+ [1380.  579.]
+Accuracy: 99.6
+
+DEPTH:  6
+NR. SAMPLES:  3993
+TP:  (64.15, 9, 118)
+FP:  (50.5, 22, 79)
+TN:  (42.18, 11, 110)
+FN:  (44.15, 15, 68)
+Rates: TP, FP, TN, FN
+ [1523.5  473. ]
+Accuracy: 99.6
+Mean accuracy across depths: 99.8
+
+
+
+##########################################################################
+TRAIN DIST: RP_10X
+TEST DIST: RP_10X
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_10X_RP_10X_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[13278     4]
+ [   66 14652]]
+
+Accuracy: 99.8
+F1-score: 99.8
+
+DEPTH:  0
+NR. SAMPLES:  4267
+TP:  (30.38, 0, 118)
+FP:  (0, inf, 0)
+TN:  (22.06, 0, 118)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 349.5 1784. ]
+Accuracy: 100.0
+
+DEPTH:  1
+NR. SAMPLES:  3979
+TP:  (39.4, 1, 120)
+FP:  (0, inf, 0)
+TN:  (22.64, 1, 115)
+FN:  (37.0, 37, 37)
+Rates: TP, FP, TN, FN
+ [ 448.5 1541. ]
+Accuracy: 100.0
+
+DEPTH:  2
+NR. SAMPLES:  3946
+TP:  (43.29, 2, 120)
+FP:  (0, inf, 0)
+TN:  (26.87, 2, 113)
+FN:  (29.57, 16, 49)
+Rates: TP, FP, TN, FN
+ [ 635.5 1337.5]
+Accuracy: 99.8
+
+DEPTH:  3
+NR. SAMPLES:  3721
+TP:  (47.95, 3, 120)
+FP:  (54.5, 16, 93)
+TN:  (29.42, 3, 107)
+FN:  (24.6, 5, 45)
+Rates: TP, FP, TN, FN
+ [ 857.5 1003. ]
+Accuracy: 99.5
+
+DEPTH:  4
+NR. SAMPLES:  3761
+TP:  (51.32, 4, 120)
+FP:  (0, inf, 0)
+TN:  (34.32, 4, 114)
+FN:  (29.8, 6, 57)
+Rates: TP, FP, TN, FN
+ [1134.   746.5]
+Accuracy: 99.5
+
+DEPTH:  5
+NR. SAMPLES:  3886
+TP:  (55.55, 8, 118)
+FP:  (40.0, 40, 40)
+TN:  (41.27, 8, 111)
+FN:  (47.67, 12, 118)
+Rates: TP, FP, TN, FN
+ [1410.5  532.5]
+Accuracy: 99.7
+
+DEPTH:  6
+NR. SAMPLES:  4440
+TP:  (61.86, 14, 119)
+FP:  (66.0, 66, 66)
+TN:  (49.85, 13, 111)
+FN:  (40.27, 18, 75)
+Rates: TP, FP, TN, FN
+ [1836.5  383.5]
+Accuracy: 99.7
+Mean accuracy across depths: 99.7
+
+LATEX FORMATTING
+LP & LP & 99.9 & 99.9 & 99.8 & 99.9 & 99.5 & 99.6 & 99.5 & 99.7 \\ \hline
+LP & RP & 100.0 & 99.9 & 99.7 & 99.2 & 99.1 & 99.3 & 98.7 & 99.4 \\ \hline
+LP & RP_10X & 100.0 & 99.8 & 99.7 & 99.0 & 99.2 & 99.3 & 99.2 & 99.4 \\ \hline
+RP & LP & 100.0 & 99.8 & 99.7 & 99.4 & 98.8 & 98.7 & 98.7 & 99.3 \\ \hline
+RP & RP & 100.0 & 100.0 & 99.9 & 99.6 & 99.6 & 99.7 & 99.5 & 99.7 \\ \hline
+RP & RP_10X & 100.0 & 100.0 & 99.8 & 99.6 & 99.4 & 99.6 & 99.7 & 99.7 \\ \hline
+RP_10X & LP & 100.0 & 99.8 & 99.7 & 99.4 & 99.0 & 98.9 & 98.7 & 99.4 \\ \hline
+RP_10X & RP & 99.9 & 100.0 & 99.9 & 99.6 & 99.7 & 99.6 & 99.6 & 99.8 \\ \hline
+RP_10X & RP_10X & 100.0 & 100.0 & 99.8 & 99.5 & 99.5 & 99.7 & 99.7 & 99.7 \\ \hline
