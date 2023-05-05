@@ -130,7 +130,7 @@ class Proof_Checker_Step(Proof_Checker):
             print("Accuracy:", acc_round)
             acc_str_list.append(str(acc_round))
             acc_list.append(accuracy)
-            frac_consistent_proofs = self.all_consistency(pred_proof[depth], data_depths[depth], preds_depths[depth], ground_truth_bools, ground_truth_depths[depth])
+            frac_consistent_proofs, _ = self.all_consistency(pred_proof[depth], data_depths[depth], preds_depths[depth], ground_truth_bools, ground_truth_depths[depth])
             print("Fractions of consistent chains of inference steps:", frac_consistent_proofs)
         mean_acc = round(np.mean(acc_list) * 100, 1)
         acc_str_list.append(str(mean_acc))
@@ -238,21 +238,23 @@ class Proof_Checker_Step(Proof_Checker):
             for step in pred_proof[:-1]:
                 # check if pred step is hallucinated by comp against input data
                 if step not in input_data:
-                    return False
+                    return False, "True"
             
             # See if problem is solvable with forward chaining using only pred proof
             solvable = self.solve_problem_with_gen_rules(pred_proof, input_data_whole)
-
-            return solvable
+            if solvable:
+                return solvable , " "
+            else:
+                return solvable, "True"
 
         else: 
             g_p = Counter(ground_proof[:-1])
             p_p = Counter(pred_proof[:-1])
             
             if g_p == p_p:
-                return True
+                return True, ""
             else:
-                return False
+                return False, "False"
     
 
 
@@ -262,25 +264,40 @@ class Proof_Checker_Step(Proof_Checker):
 
         for i, pred_step in enumerate(pred_proof):
             if pred_step == "True" or pred_step == "False":
-                return True, i, inp
-                #return True
+                return True, pred_step, inp
 
             # Find fact
             fact = pred_step.split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
             # Remove rule from input and add fact
             self.last_fact = 'None'
-            if pred_step in inp:
-                
+            if pred_step in inp and not pred_step == '':
+
                 # Check if the rule can be applied with the facts 
-
-
                 inp = inp.replace(pred_step, '')
                 inp = inp + ' ' + fact + '1'
                 self.last_fact = fact
             else: # KONTROLLERA SÅ ATT DEN HAR TAGIT BORT NÅNTING??
                 #print("Pred step not in input:", pred_step)
-                return False, i, inp
-                #return False
+                return False, pred_step, inp
+
+
+
+    def check_hallucination_batch(self, pred_proofs, inputs):
+        """Finds hallucinations and returns the index, the hallucinated step and the updated input
+        for that step. The step is the first hallucinated step in the pred"""
+
+        all_hall_not_found = []
+        index=0
+        for pred, inp in zip(pred_proofs, inputs):
+            
+            hall_not_found, step, updated_input = self.check_hallucination(pred, inp["input"])
+            
+            if not hall_not_found:
+                print(step)
+                all_hall_not_found.append({"Index":index, "Step": step, "Updated input": updated_input})
+            index +=1
+            
+        return all_hall_not_found
     
 
 
@@ -324,11 +341,13 @@ class Proof_Checker_Step(Proof_Checker):
     
     def all_consistency(self, pred_data, input_data, pred_labels, truth_labels, ground_proofs):
         consistent = []
+        on_true_or_false = []
 
         for i, pred_d in enumerate(pred_data):
-            con = self.check_consistency(pred_d, input_data[i], pred_labels[i], truth_labels[i], ground_proofs[i])
+            con, type_of_error = self.check_consistency(pred_d, input_data[i], pred_labels[i], truth_labels[i], ground_proofs[i])
             consistent.append(con)
-        return consistent.count(True)/len(pred_data)
+            on_true_or_false.append(type_of_error)
+        return consistent.count(True)/len(pred_data), on_true_or_false
             
     def query_in_facts(self, string):
         # Find query in string
@@ -433,9 +452,6 @@ def main():
             print("\nPRED DATA: ",  test_preds_path)
             print("\nGROUND TRUTH: ",  test_truth_path)
 
-
-
-
             cm_indices = PC.get_index_matrix(PC.create_confusion_matrix(pred_bools, truth_bools))
 
             cm = confusion_matrix(truth_bools, pred_bools)
@@ -447,16 +463,14 @@ def main():
             print("\nAccuracy:", round(acc * 100, 1))
             print("F1-score:", round(f1 * 100, 1))
 
-            part_right = PC.all_consistency(preds_data, input_data, pred_bools, truth_bools, truth_data)
+            part_right, on_true_or_false = PC.all_consistency(preds_data, input_data, pred_bools, truth_bools, truth_data)
             print("\nTotal Fraction of consistent inference steps: ", part_right)
+            print(Counter(on_true_or_false))
 
             proof_coherent.append({"Model":model, "Data":test_on, "Consistent proofs": part_right})
-                
             acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
-            
             latex_output.append(str(f'{model} & {test_on} & {" & ".join(acc_str_list)} \\\\ \\hline'))
             
-            #PC.find_non_bools(preds_data)
 
             if acc_by_rules:
                 acc_list = PC.divide_data_into_rules(input_data, preds_data, truth_data)
