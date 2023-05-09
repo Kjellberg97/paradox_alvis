@@ -47,15 +47,22 @@ def main():
     #checkpoint = "checkpoint-????"
 
     models = ["LP", "RP", "RP_10X"]
+    #marks = ["square", "triangle", "circle"]
+    marks = ["line", "line", "line"]
+
     test_ons = ["LP", "RP", "RP_10X"]
+    colors = ["blue", "red", "brown"]
+    
     type_of_data = "test"
 
-    for model in models:
+    latex_output_accs = []
+    latex_output_rules = ['\\begin{axis}[xlabel={Rules}, ylabel={Accuracy}]']
+    for model, mark in zip(models, marks):
         if model == "LP":
             checkpoint = "checkpoint-22392"
         else:
             checkpoint = "checkpoint-8750"
-        for test_on in test_ons:
+        for test_on, color in zip(test_ons, colors):
             print("\n\n\n##########################################################################")
             print(f"TRAIN DIST: {model}", f"{type_of_data.upper()} DIST: {test_on}", sep="\n")
 
@@ -66,16 +73,28 @@ def main():
             input_data = read_file_lines(input_data_path)
             preds_data = read_file_lines(test_preds_path)
             truth_data = read_file_lines(test_truth_path)
-            #PC.divide_data_into_depths(input_data, preds_data, truth_data)
 
-            if acc_by_rules:
-                acc_list = PC.divide_data_into_rules(input_data, preds_data, truth_data)
-                print("Saving accuracies with pickle.")
-                pkl_name = "accs_by_rules/ex2_rule_accs_" + model + "_" + test_on + "_" + type_of_data + ".pkl"
-                with open(pkl_name, "wb") as f:
-                    pickle.dump(acc_list, f)
+            # For latex
+            acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
+            acc_str_list[-1] = '\\textbf{' + acc_str_list[-1] + '}'
+            latex_output_accs.append(str(f'{model} & {test_on} & {" & ".join(acc_str_list)} \\\\ \\hline'))
+
+            if acc_by_rules and model == "RP":
+                acc_rule_list = PC.divide_data_into_rules(input_data, preds_data, truth_data)
+                latex_output_rules.append(f'\\addplot[color={color}, mark={mark}] coordinates' + ' {')
+                latex_output_rules.append(" ".join(acc_rule_list) + '\n};')
+                # print("Saving accuracies with pickle.")
+                # pkl_name = "accs_by_rules/ex2_rule_accs_" + model + "_" + test_on + "_" + type_of_data + ".pkl"
+                # with open(pkl_name, "wb") as f:
+                #     pickle.dump(acc_list, f)
+                
 
             #PC.check_proof_for_errors(preds_data, input_data)
+    print("\nLATEX FORMATTING RULES")
+    [ print(x) for x in latex_output_rules ]
+
+    print("\nLATEX FORMATTING ACCURACIES")
+    [ print(x) for x in latex_output_accs ]
 
 if __name__ == "__main__":
     main()
