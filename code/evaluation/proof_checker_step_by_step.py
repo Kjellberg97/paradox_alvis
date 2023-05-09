@@ -216,7 +216,7 @@ class Proof_Checker_Step(Proof_Checker):
     def check_consistency(self, pred_proof, input_data_whole, pred_bool, truth_bool, ground_proof):
         
         """Check that there are no missing rules in the predicted proof,
-            and that all tules in proof exist in the original input."""
+        and that all tules in proof exist in the original input."""
         
         # 0. Check true pred label, if true != pred, then mark as inconsistent
         # 1. Take the original input
@@ -232,7 +232,9 @@ class Proof_Checker_Step(Proof_Checker):
         # 6. Solve original proof with forward chaining
         # 7. Compare so exactly the same rules are used in both pred and ground truth proof, if so mark as consistent
 
-        input_data = input_data_whole["input"]
+        input_raw = input_data_whole.copy()
+
+        input_data = input_raw["input"]
 
         if pred_bool:
             for step in pred_proof[:-1]:
@@ -248,22 +250,62 @@ class Proof_Checker_Step(Proof_Checker):
                 return solvable, "True"
 
         else: 
-            g_p = Counter(ground_proof[:-1])
-            p_p = Counter(pred_proof[:-1])
-            
-            if g_p == p_p:
-                return True, ""
+
+            # Remove predicted rules from input
+            # Try to find applicable rules that can lead to new facts
+            # If new facts can be found, then return False
+
+            input_copy = (input_data_whole["input"]+ '.')[:-1]
+
+            no_found_hall, hall_step, updated_input = self.check_hallucination(pred_proof, input_copy)
+
+            if no_found_hall:
+                if self.no_more_new_fact(updated_input):
+                    return True, " "
+                else:
+                    return False, "False"
+                
             else:
-                return False, "False"
+                return False, "False" 
     
+
+
+    def no_more_new_fact(self, inp):
+        
+        # Try to find a new rule that is solvable and that leads to a new fact.
+        # Use same function as from generate proof label
+        facts = inp.split(":")[-1]
+        facts = facts.split(" ")
+        
+        rules = inp.split("? ")[-1]
+        rules = rules.split(":")[:-1]
+
+        for i in range(len(rules)):
+            if rules[i][-1] == ":":
+                rules[i] = rules[i][:-1]
+            
+            rule = rules[i].split(", ")
+
+            conditions = rule[:-1]
+            concusion = rule[-1]
+
+            if not concusion+"1" in facts:
+
+                if all(condition+"1" in facts for condition in conditions):
+                    return False
+            
+        return True
+
 
 
     def check_hallucination(self, pred_proof, inp):
         """Check if the generator hallucinates rules"""
         # Loop throsugh the predicted proof to see if the rules exist
+        inp = (inp+'.')[:-1]
 
         for i, pred_step in enumerate(pred_proof):
             if pred_step == "True" or pred_step == "False":
+                #print("All steps in ground_proof")
                 return True, pred_step, inp
 
             # Find fact
@@ -271,6 +313,11 @@ class Proof_Checker_Step(Proof_Checker):
             # Remove rule from input and add fact
             self.last_fact = 'None'
             if pred_step in inp and not pred_step == '':
+                
+                for req in pred_step.split()[:-1]:
+                    req= req[:-1]+"1"
+                    if not req[:-1]+"1" in inp:
+                        return False, pred_step, inp
 
                 # Check if the rule can be applied with the facts 
                 inp = inp.replace(pred_step, '')
@@ -287,16 +334,18 @@ class Proof_Checker_Step(Proof_Checker):
         for that step. The step is the first hallucinated step in the pred"""
 
         all_hall_not_found = []
+        num_hall = 0
         index=0
         for pred, inp in zip(pred_proofs, inputs):
             
             hall_not_found, step, updated_input = self.check_hallucination(pred, inp["input"])
             
             if not hall_not_found:
-                print(step)
                 all_hall_not_found.append({"Index":index, "Step": step, "Updated input": updated_input})
+                num_hall+=1
             index +=1
-            
+        
+        print("Fraction of examples with hallucinations: ", round(num_hall/len(pred_proofs)*100, 4), "%" )
         return all_hall_not_found
     
 
@@ -470,7 +519,11 @@ def main():
             proof_coherent.append({"Model":model, "Data":test_on, "Consistent proofs": part_right})
             acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
             latex_output.append(str(f'{model} & {test_on} & {" & ".join(acc_str_list)} \\\\ \\hline'))
-            
+
+            wrong_examples = PC.check_hallucination_batch(preds_data, input_data)
+
+            for ex in wrong_examples:
+                print(ex)        
 
             if acc_by_rules:
                 acc_list = PC.divide_data_into_rules(input_data, preds_data, truth_data)
@@ -483,6 +536,7 @@ def main():
 
             #PC.check_proof_for_errors(preds_data, input_data)
 
+            break
     
 
     print("\nLATEX FORMATTING")
