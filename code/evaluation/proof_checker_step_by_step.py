@@ -84,7 +84,7 @@ class Proof_Checker_Step(Proof_Checker):
         return acc_list
     
 
-def divide_data_into_depths(self,input_data, predictions, ground_truth):
+    def divide_data_into_depths(self,input_data, predictions, ground_truth):
         """Divides the input data dependeing on the depths of each input data and 
         creates the confucion matrix and calculate basic stats about the lenght 
         of the rules in each group.
@@ -232,18 +232,24 @@ def divide_data_into_depths(self,input_data, predictions, ground_truth):
         # 6. Solve original proof with forward chaining
         # 7. Compare so exactly the same rules are used in both pred and ground truth proof, if so mark as consistent
 
+        if pred_bool != truth_bool and pred_bool==1:
+            print()
+
+
         input_raw = input_data_whole.copy()
 
         input_data = input_raw["input"]
 
+        query, rules, facts = self.reformat_input_into_lists(input_data)
+
         if pred_bool:
             for step in pred_proof[:-1]:
                 # check if pred step is hallucinated by comp against input data
-                if step not in input_data:
+                if step not in rules:
                     return False, "True"
             
             # See if problem is solvable with forward chaining using only pred proof
-            solvable = self.solve_problem_with_gen_rules(pred_proof, input_data_whole)
+            solvable = self.forward_chain(pred_proof, facts, query)
             if solvable:
                 return solvable , " "
             else:
@@ -257,10 +263,10 @@ def divide_data_into_depths(self,input_data, predictions, ground_truth):
 
             input_copy = (input_data_whole["input"]+ '.')[:-1]
 
-            no_found_hall, hall_step, updated_input = self.check_hallucination(pred_proof, input_copy)
+            no_hallucination, hall_step, updated_rules, updated_facts = self.check_hallucination(pred_proof, query, rules, facts)
 
-            if no_found_hall:
-                if self.no_more_new_fact(updated_input):
+            if no_hallucination:
+                if self.no_more_satisfiable_rules(updated_rules, updated_facts):
                     return True, " "
                 else:
                     return False, "False"
@@ -270,62 +276,52 @@ def divide_data_into_depths(self,input_data, predictions, ground_truth):
     
 
 
-    def no_more_new_fact(self, inp):
-        
+    def no_more_satisfiable_rules(self, final_rules, final_facts):
+        # For False
         # Try to find a new rule that is solvable and that leads to a new fact.
         # Use same function as from generate proof label
-        facts = inp.split(":")[-1]
-        facts = facts.split(" ")
-        
-        rules = inp.split("? ")[-1]
-        rules = rules.split(":")[:-1]
+        for rule in final_rules:
+            conditions = rule.split(", ")[:-1]
+            concusion = rule.split(", ")[-1].replace(":", "1")
 
-        for i in range(len(rules)):
-            if rules[i][-1] == ":":
-                rules[i] = rules[i][:-1]
-            
-            rule = rules[i].split(", ")
-
-            conditions = rule[:-1]
-            concusion = rule[-1]
-
-            if not concusion+"1" in facts:
-
-                if all(condition+"1" in facts for condition in conditions):
+            if not concusion in final_facts:
+                if all(condition+"1" in final_facts for condition in conditions):
                     return False
             
         return True
 
 
 
-    def check_hallucination(self, pred_proof, inp):
+    def check_hallucination(self, pred_proof, query, rules, facts):
         """Check if the generator hallucinates rules"""
         # Loop throsugh the predicted proof to see if the rules exist
-        inp = (inp+'.')[:-1]
+        updated_rules = rules.copy()
+        updated_facts = facts.copy()
 
         for i, pred_step in enumerate(pred_proof):
             if pred_step == "True" or pred_step == "False":
                 #print("All steps in ground_proof")
-                return True, pred_step, inp
+                return True, pred_step, updated_rules, updated_facts
 
             # Find fact
-            fact = pred_step.split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
             # Remove rule from input and add fact
-            self.last_fact = 'None'
-            if pred_step in inp and not pred_step == '':
-                
-                for req in pred_step.split()[:-1]:
-                    req= req[:-1]+"1"
-                    if not req[:-1]+"1" in inp:
-                        return False, pred_step, inp
 
-                # Check if the rule can be applied with the facts 
-                inp = inp.replace(pred_step, '')
-                inp = inp + ' ' + fact + '1'
-                self.last_fact = fact
+            if pred_step in updated_rules and not pred_step == '':
+
+                conditions = pred_step.split(", ")[:-1]
+                new_fact = pred_step.split(", ")[-1].replace(":", "1")
+                
+                for req in conditions:
+                    req = req + "1"
+                    if not req in updated_facts:
+                        return False, pred_step, updated_rules, updated_facts
+
+                # Check if the rule can be applied with the facts
+                updated_rules.remove(pred_step) 
+                updated_facts.append(new_fact)
             else: # KONTROLLERA SÅ ATT DEN HAR TAGIT BORT NÅNTING??
                 #print("Pred step not in input:", pred_step)
-                return False, pred_step, inp
+                return False, pred_step, updated_rules, updated_facts
 
 
 
@@ -350,35 +346,17 @@ def divide_data_into_depths(self,input_data, predictions, ground_truth):
     
 
 
-    def solve_problem_with_gen_rules(self, pred_proof, input_d):
-        
-        query = input_d["query"]
-        facts = input_d["input"].split(":")[-1]
-
-        facts = facts.split(" ")
-        facts_reformat =[]
-        for f in facts:
-            f = f.replace("1","")
-            f = f.replace(" ","")
-            if f != "":
-                facts_reformat.append(f)
-
-        solvable_proof = self.forward_chain(pred_proof, facts_reformat, query)
-
-        return solvable_proof
-
-
     def forward_chain(self, pred_proof, facts, query):
-        
+        query = query + '1'
         for step in pred_proof:
-            if query in facts:
-                return True
+            if step == "True" or step == "False":
+                continue
 
-            step_div = step.split(", ")[:-1]
-            conclusion = step.split(", ")[-1][:-1]
+            conditions = step.split(", ")[:-1] # Take everything except conclusion
+            conclusion = step.split(", ")[-1].replace(":", "1") # Take conclusion but change so ex. "happy1"
 
-            for req in step_div:
-                if not req in facts:
+            for req in conditions:
+                if not req + "1" in facts:
                     return False
             facts.append(conclusion)
 
@@ -397,7 +375,8 @@ def divide_data_into_depths(self,input_data, predictions, ground_truth):
             consistent.append(con)
             on_true_or_false.append(type_of_error)
         return consistent.count(True)/len(pred_data), on_true_or_false
-            
+
+
     def query_in_facts(self, string):
         # Find query in string
         match = re.search(r"\b\S*\?", string)
@@ -429,10 +408,32 @@ def divide_data_into_depths(self,input_data, predictions, ground_truth):
         return found_fact
 
 
+    def reformat_input_into_lists(self, input_str):
+        """Extract rules and facts from the input string and
+        return them as seperated lists. The returning lists 
+        will be nested lists were the elements are either single
+        rules of facts.
+
+        ARGS:
+            input_string "str": The input string with all rules and facts 
+
+        RETURN:
+            rules [list]: a list of all rules
+            facts [list]: a list of all facts
+        """
+        query, rules_facts_str = input_str.split('? ') # queryt är utan '?' så t.ex. 'old'
+
+        facts = re.findall(r'\b\w+1\b', rules_facts_str) # [apple1', 'banana1', 'orange1']
+
+        rules = re.findall(r'(\w+[^:]*:)', rules_facts_str) # ['helpful, fearful, happy:', 'good, bad, ugly:']
+
+        return query, rules, facts
+
 
 def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=True):
 
-    path = "/mimer/NOBACKUP/groups/snic2022-22-744/"
+    path = "C:/Users/vikto/OneDrive/Dokument/kurser/MASTERTHESIS/Data/"
+    #path = "/mimer/NOBACKUP/groups/snic2022-22-744/"
 
     if rule_sampling:
         type_of_model = "/gen_step_by_step_rule_sampling/evaluation/"
@@ -464,35 +465,114 @@ def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=True)
     return test_preds_path, test_truth_path, input_data_path, save_stats_file        
         
         
+# def main():
+#     acc_by_rules = False
+#     rule_sampling = True
+#     #checkpoint = "checkpoint-7500"
+
+#     models = ["LP", "RP", "RP_10X"]
+#     test_ons = ["LP", "RP", "RP_10X"]
+#     type_of_data = "test"
+
+#     proof_coherent = []
+
+#     latex_output = []
+#     for model in models:
+#         if model == "LP":
+#             checkpoint = "checkpoint-9328"
+#             if not rule_sampling:
+#                 checkpoint = "checkpoint-8500"
+#         else:
+#             checkpoint = "checkpoint-7500"
+#         for test_on in test_ons:
+#             print("\n\n\n##########################################################################")
+#             print(f"TRAIN DIST: {model}", f"{type_of_data.upper()} DIST: {test_on}", sep="\n")
+
+#             test_preds_path, test_truth_path, input_data_path, save_stats_file = reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling)
+
+
+#             PC = Proof_Checker_Step(save_stats_file)
+#             input_data = PC.read_file_lines(input_data_path)
+#             preds_data = PC.read_file_lines(test_preds_path)
+#             truth_data = PC.read_file_lines(test_truth_path)
+#             pred_bools = PC.create_list_of_bool_labels(preds_data)
+#             truth_bools = PC.create_list_of_bool_labels(truth_data)
+
+#             print("\nINPUT DATA: ",  input_data_path)
+#             print("\nPRED DATA: ",  test_preds_path)
+#             print("\nGROUND TRUTH: ",  test_truth_path)
+
+#             cm_indices = PC.get_index_matrix(PC.create_confusion_matrix(pred_bools, truth_bools))
+
+#             cm = confusion_matrix(truth_bools, pred_bools)
+#             acc = accuracy_score(truth_bools, pred_bools)
+#             #f1 = f1_score(truth_bools, pred_bools, average='binary')
+#             f1 = f1_score(truth_bools, pred_bools, average='micro')
+
+#             print("\nConfusion matrix:\n", cm)
+#             print("\nAccuracy:", round(acc * 100, 1))
+#             print("F1-score:", round(f1 * 100, 1))
+
+#             part_right, on_true_or_false = PC.all_consistency(preds_data, input_data, pred_bools, truth_bools, truth_data)
+#             print("\nTotal Fraction of consistent inference steps: ", part_right)
+#             print(Counter(on_true_or_false))
+
+#             proof_coherent.append({"Model":model, "Data":test_on, "Consistent proofs": part_right})
+#             acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
+#             latex_output.append(str(f'{model} & {test_on} & {" & ".join(acc_str_list)} \\\\ \\hline'))
+
+#             wrong_examples = PC.check_hallucination_batch(preds_data, input_data)
+
+#             for ex in wrong_examples:
+#                 print(ex)        
+
+#             if acc_by_rules:
+#                 acc_list = PC.divide_data_into_rules(input_data, preds_data, truth_data)
+#                 print("Saving accuracies with pickle.")
+#                 pkl_name = "accs_by_rules/ex3_rule_accs_" + model + "_" + test_on + "_" + type_of_data + ".pkl"
+#                 with open(pkl_name, "wb") as f:
+#                     pickle.dump(acc_list, f)
+
+    
+
+#             #PC.check_proof_for_errors(preds_data, input_data)
+
+    
+
+#     print("\nLATEX FORMATTING")
+#     [ print(x) for x in latex_output ]
+
+#     for i in proof_coherent:
+#         print(i)
+
+# if __name__ == "__main__":
+#     main()
+
+
 def main():
-    acc_by_rules = True
+    acc_by_rules = False
     rule_sampling = True
     #checkpoint = "checkpoint-7500"
 
-    models = ["LP", "RP", "RP_10X"]
-    #marks = ["square", "triangle", "circle"]
-    marks = ["line", "line", "line"]
-
-    test_ons = ["LP", "RP", "RP_10X"]
-    colors = ["blue", "red", "brown"]
-    
+    models = ["LP"]
+    test_ons = ["LP"]
     type_of_data = "test"
+
     proof_coherent = []
-    latex_output_accs = []
-    latex_output_rules = ['\\begin{axis}[xlabel={Rules}, ylabel={Accuracy}]']
-    for model, mark in zip(models, marks):
+
+    latex_output = []
+    for model in models:
         if model == "LP":
             checkpoint = "checkpoint-9328"
             if not rule_sampling:
                 checkpoint = "checkpoint-8500"
         else:
             checkpoint = "checkpoint-7500"
-        for test_on, color in zip(test_ons, colors):
+        for test_on in test_ons:
             print("\n\n\n##########################################################################")
             print(f"TRAIN DIST: {model}", f"{type_of_data.upper()} DIST: {test_on}", sep="\n")
 
             test_preds_path, test_truth_path, input_data_path, save_stats_file = reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling)
-
 
             PC = Proof_Checker_Step(save_stats_file)
             input_data = PC.read_file_lines(input_data_path)
@@ -504,6 +584,8 @@ def main():
             print("\nINPUT DATA: ",  input_data_path)
             print("\nPRED DATA: ",  test_preds_path)
             print("\nGROUND TRUTH: ",  test_truth_path)
+
+         
 
             cm_indices = PC.get_index_matrix(PC.create_confusion_matrix(pred_bools, truth_bools))
 
@@ -520,41 +602,29 @@ def main():
             print("\nTotal Fraction of consistent inference steps: ", part_right)
             print(Counter(on_true_or_false))
 
-            proof_coherent.append({"Model":model, "Data":test_on, "Consistent proofs": part_right})
-            wrong_examples = PC.check_hallucination_batch(preds_data, input_data)
-            for ex in wrong_examples:
-                print(ex)        
+            # proof_coherent.append({"Model":model, "Data":test_on, "Consistent proofs": part_right})
+            # acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
+            # latex_output.append(str(f'{model} & {test_on} & {" & ".join(acc_str_list)} \\\\ \\hline'))
 
-            # For latex
-            acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
-            acc_str_list[-1] = '\\textbf{' + acc_str_list[-1] + '}'
-            latex_output_accs.append(str(f'{model} & {test_on} & {" & ".join(acc_str_list)} \\\\ \\hline'))
+            # PC.check_hallucination_batch(preds_data, input_data)        
 
-
-            if acc_by_rules and model == "RP":
-                acc_rule_list = PC.divide_data_into_rules(input_data, preds_data, truth_data)
-                latex_output_rules.append(f'\\addplot[color={color}, mark={mark}] coordinates' + ' {')
-                latex_output_rules.append(" ".join(acc_rule_list) + '\n};')
-                # print("Saving accuracies with pickle.")
-                # pkl_name = "accs_by_rules/ex3_rule_accs_" + model + "_" + test_on + "_" + type_of_data + ".pkl"
-                # with open(pkl_name, "wb") as f:
-                #     pickle.dump(acc_list, f)
-
-    
+            # if acc_by_rules:
+            #     acc_list = PC.divide_data_into_rules(input_data, preds_data, truth_data)
+            #     print("Saving accuracies with pickle.")
+            #     pkl_name = "accs_by_rules/ex3_rule_accs_" + model + "_" + test_on + "_" + type_of_data + ".pkl"
+            #     with open(pkl_name, "wb") as f:
+            #         pickle.dump(acc_list, f)
 
             #PC.check_proof_for_errors(preds_data, input_data)
 
             break
     
 
-    print("\nLATEX FORMATTING RULES")
-    [ print(x) for x in latex_output_rules ]
+    print("\nLATEX FORMATTING")
+    [ print(x) for x in latex_output ]
 
-    print("\nLATEX FORMATTING ACCURACIES")
-    [ print(x) for x in latex_output_accs ]
-
-    for x in proof_coherent:
-        print(x)
+    for i in proof_coherent:
+        print(i)
 
 if __name__ == "__main__":
     main()
