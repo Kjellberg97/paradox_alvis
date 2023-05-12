@@ -19,6 +19,8 @@ class Proof_Checker():
         self.coherent = []
         self.halluzinations =0
 
+        self.errors = []
+
 
         # self.corr_proofs = 0
         # self.hall_rule = 0

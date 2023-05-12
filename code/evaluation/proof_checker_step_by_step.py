@@ -232,9 +232,6 @@ class Proof_Checker_Step(Proof_Checker):
         # 6. Solve original proof with forward chaining
         # 7. Compare so exactly the same rules are used in both pred and ground truth proof, if so mark as consistent
 
-        if pred_bool != truth_bool and pred_bool==0:
-            print()
-
         input_raw = input_data_whole.copy()
         input_data = input_raw["input"]
         query, rules, facts = self.reformat_input_into_lists(input_data)
@@ -243,14 +240,12 @@ class Proof_Checker_Step(Proof_Checker):
             for step in pred_proof[:-1]:
                 # check if pred step is hallucinated by comp against input data
                 if step not in rules:
-                    return False, "True"
+                    return False, "Hallucination"
             
             # See if problem is solvable with forward chaining using only pred proof
-            solvable = self.forward_chain(pred_proof, facts, query)
-            if solvable:
-                return solvable , " "
-            else:
-                return solvable, "True"
+            solvable, type_of_error = self.forward_chain(pred_proof, facts, query)
+            
+            return solvable, type_of_error
 
         else: 
 
@@ -264,11 +259,11 @@ class Proof_Checker_Step(Proof_Checker):
 
             if no_hallucination:
                 if self.no_more_satisfiable_rules(updated_rules, updated_facts):
-                    return True, " "
+                    return True, "None"
                 else:
-                    return False, "False"
+                    return False, "Exist More Applicable Rules"
             else:
-                return False, "False" 
+                return False, "Hallucination" 
     
 
 
@@ -353,13 +348,13 @@ class Proof_Checker_Step(Proof_Checker):
 
             for req in conditions:
                 if not req + "1" in facts:
-                    return False
+                    return False, "Not Applicable Rule"
             facts.append(conclusion)
 
         if query in facts:
-            return True
+            return True, "None"
         else:
-            return False
+            return False, "Query Not In Fact"
 
 
     
@@ -371,8 +366,40 @@ class Proof_Checker_Step(Proof_Checker):
             con, type_of_error = self.check_consistency(pred_d, input_data[i], pred_labels[i], truth_labels[i], ground_proofs[i])
             consistent.append(con)
             on_true_or_false.append(type_of_error)
+            self.save_label_consistency_errors(i, pred_d, ground_proofs[i], input_data[i], con, truth_labels[i], pred_labels[i], type_of_error )
+
         return consistent.count(True)/len(pred_data), on_true_or_false
 
+    def find_cm_value(self, pred_label, truth_label):
+        if pred_label == False:
+            if truth_label == True:
+                return "False Negative"
+            elif truth_label == False:
+                return "True Negative"
+        
+        elif pred_label == True:
+            if truth_label == True:
+                return "True Positive"
+            elif truth_label == False:
+                return "False Positive"
+        
+        else:
+            return "No Label"
+
+    def save_label_consistency_errors(self, index, pred_d, ground_proof, input_data, con, truth_label, pred_label, type_of_error):
+        if not con or truth_label != pred_label:
+            confusion_matrix_value = self.find_cm_value(pred_label, truth_label)
+
+
+            error_data= {"Index": index, 
+                        "Label error": confusion_matrix_value,
+                        "Consistency": con,
+                        "Type of consistency error": type_of_error,
+                        "Predicted proof": pred_d, 
+                        "Ground proof": ground_proof,
+                        "Input Sting": input_data["input"]}
+
+            self.errors.append(error_data)
 
 
     def query_in_facts(self, string):
@@ -423,13 +450,28 @@ class Proof_Checker_Step(Proof_Checker):
             facts [list]: a list of all facts
         """
         query, rules_facts_str = input_str.split('? ') # queryt är utan '?' så t.ex. 'old'
-
-        facts = re.findall(r'\b\w+1\b', rules_facts_str) # [apple1', 'banana1', 'orange1']
-
+        facts = re.findall(r'\b\w+-?\w*1\b', rules_facts_str) # [apple1', 'banana1', 'orange1']
         rules = re.findall(r'(\w+[^:]*:)', rules_facts_str) # ['helpful, fearful, happy:', 'good, bad, ugly:']
 
         return query, rules, facts
 
+
+
+    def save_errors(self, model, test_on, type_of_data):
+
+        file_name = "type_of_errors/error_type_" + model + "_" + test_on + "_" + type_of_data + ".txt"
+
+        sorted_errors = sorted(self.errors, key=lambda item: item["Label error"])
+        
+        cm_label = ""
+        with open(file_name, "w") as file:
+            for item in sorted_errors:
+                if item["Label error"] != cm_label:
+                    cm_label = item["Label error"]
+                    file.write(f"\n##################\n{cm_label.upper()}\n###################\n")
+                for key in item:
+                    file.write(f"{key}: {item[key]}\n")
+                file.write("\n")
 
 
 def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=True):
@@ -465,7 +507,7 @@ def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=True)
 
 
     return test_preds_path, test_truth_path, input_data_path, save_stats_file        
-        
+
         
 # def main():
 #     acc_by_rules = False
@@ -587,8 +629,6 @@ def main():
             print("\nPRED DATA: ",  test_preds_path)
             print("\nGROUND TRUTH: ",  test_truth_path)
 
-         
-
             cm_indices = PC.get_index_matrix(PC.create_confusion_matrix(pred_bools, truth_bools))
 
             cm = confusion_matrix(truth_bools, pred_bools)
@@ -603,6 +643,8 @@ def main():
             part_right, on_true_or_false = PC.all_consistency(preds_data, input_data, pred_bools, truth_bools, truth_data)
             print("\nTotal Fraction of consistent inference steps: ", part_right)
             print(Counter(on_true_or_false))
+
+            PC.save_errors(model, test_on, type_of_data)
 
             # proof_coherent.append({"Model":model, "Data":test_on, "Consistent proofs": part_right})
             # acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
