@@ -274,16 +274,13 @@ class StepsGenerationModel(ProofGenerationModel):
         
         # Divide input into a string query, list of rules, and list of facts
         query, rules, facts = self.reformat_input_into_lists(decoded_inp)
-        query = query + "?"
+        query_q = query + "?"
 
         rules = [r for r in rules if r != decoded_gen_step]
         facts.append(new_fact)
-        
-        # query + "?" + rules + facts
 
         # Format in the following way: bored? helpful, fearful, happy: good, bad, ugly: apple1 banana1 orange1
-        updated_input = (query + ' ' + ' '.join(rules) + ' ' +  ' '.join(facts)).strip()
+        updated_input = (query_q + ' ' + ' '.join(rules) + ' ' +  ' '.join(facts)).strip()
 
         return updated_input
 
-decoded_inp = bored? helpful, fearful, happy: good, bad, ugly: apple1 banana1 orange1"
