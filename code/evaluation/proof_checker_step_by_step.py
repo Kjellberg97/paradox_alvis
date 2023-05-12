@@ -232,14 +232,11 @@ class Proof_Checker_Step(Proof_Checker):
         # 6. Solve original proof with forward chaining
         # 7. Compare so exactly the same rules are used in both pred and ground truth proof, if so mark as consistent
 
-        if pred_bool != truth_bool and pred_bool==1:
+        if pred_bool != truth_bool and pred_bool==0:
             print()
 
-
         input_raw = input_data_whole.copy()
-
         input_data = input_raw["input"]
-
         query, rules, facts = self.reformat_input_into_lists(input_data)
 
         if pred_bool:
@@ -270,7 +267,6 @@ class Proof_Checker_Step(Proof_Checker):
                     return True, " "
                 else:
                     return False, "False"
-                
             else:
                 return False, "False" 
     
@@ -365,6 +361,7 @@ class Proof_Checker_Step(Proof_Checker):
         else:
             return False
 
+
     
     def all_consistency(self, pred_data, input_data, pred_labels, truth_labels, ground_proofs):
         consistent = []
@@ -375,6 +372,7 @@ class Proof_Checker_Step(Proof_Checker):
             consistent.append(con)
             on_true_or_false.append(type_of_error)
         return consistent.count(True)/len(pred_data), on_true_or_false
+
 
 
     def query_in_facts(self, string):
@@ -395,7 +393,9 @@ class Proof_Checker_Step(Proof_Checker):
             #print("Last fact", self.last_fact)
             #print("Original input", self.input)
             return False
-        
+
+
+
     def find_fact(self, rule, input_d):
         # Check if rule can be solved with facts
         statements = rule.split()[:-1]
@@ -406,6 +406,7 @@ class Proof_Checker_Step(Proof_Checker):
             if not st in input_d:
                 found_fact = False
         return found_fact
+
 
 
     def reformat_input_into_lists(self, input_str):
@@ -428,6 +429,7 @@ class Proof_Checker_Step(Proof_Checker):
         rules = re.findall(r'(\w+[^:]*:)', rules_facts_str) # ['helpful, fearful, happy:', 'good, bad, ugly:']
 
         return query, rules, facts
+
 
 
 def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=True):

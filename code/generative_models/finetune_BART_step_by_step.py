@@ -4,6 +4,7 @@ import numpy as np
 from time import time
 import torch
 from tqdm import tqdm
+import re
 
 
 class StepsGenerationModel(ProofGenerationModel):
@@ -34,7 +35,7 @@ class StepsGenerationModel(ProofGenerationModel):
 
         return new_inputs, new_labels
 
-
+    
     def format_data(self, raw_inputs_path, raw_labels_path):
         """ARGS:
         raw_inputs_path:
@@ -203,10 +204,6 @@ class StepsGenerationModel(ProofGenerationModel):
         self.model = self.model.to(device)
         print("Generating output...")
         outputs = []
-
-        times_gen=[]
-        times_tok_gen=[]
-        times_tok_input=[]
         
         for i in tqdm(range(1, inputs.shape[0]+1)):
             inp = inputs[i-1:i]
@@ -218,17 +215,13 @@ class StepsGenerationModel(ProofGenerationModel):
             while not complete_proof and ite < 100:
 
                 # Time for generating output
-                tgs = time()
                 gen_step = self.model.generate(inp, max_new_tokens=500, 
                                                 do_sample=sample, num_beams=beams, penalty_alpha=penalty_alpha, 
                                                 top_k=top_k, num_beam_groups=num_beam_groups, constraints=constraints, 
                                                 force_words_ids=force_words_ids)
-                times_gen.append(time() - tgs)
 
                 # Take time for decoding output
-                tgd = time()
                 decoded_gen_step = self.tokenizer.batch_decode(gen_step, skip_special_tokens=True)
-                times_tok_gen.append(time()-tgd)
 
                 # Remove leading and trailing whitespaces and multiple whitespaces in a row
                 decoded_gen_step[0] = ' '.join(decoded_gen_step[0].split())
@@ -237,32 +230,60 @@ class StepsGenerationModel(ProofGenerationModel):
 
                 if decoded_gen_step[0] == "True" or decoded_gen_step[0] == "False":
                     complete_proof = True
-                
-
-                fact = decoded_gen_step[0].split(", ")[-1][:-1] # take after last ',' but do not include ':' at end of rule
-                tdc_inp = time()
 
                 # Removes the generated rule and adds the fact to the input
                 decoded_inp = self.tokenizer.batch_decode(inp, skip_special_tokens=True)
-                decoded_inp[0] = decoded_inp[0].replace(decoded_gen_step[0], '')
-                decoded_inp[0] = decoded_inp[0] + ' ' + fact + '1'
+                updated_input = self.update_input(decoded_inp[0], decoded_gen_step[0])
+                inp = self.tokenizer.encode(updated_input, return_tensors="pt").to(device)
 
-                inp = self.tokenizer.encode(decoded_inp[0], return_tensors="pt").to(device)
-                times_tok_input.append(time()- tdc_inp)
-                
                 ite+=1
             
             outputs.append(gen_steps)
         
         #outputs = [item for sublist in outputs for item in sublist]
         
-        print("Avg times:")
-        print("\ttime generate output:          ", np.mean(times_gen))
-        print("\ttime to decode output:         ", np.mean(times_tok_gen))
-        print("\ttimes to decode and code input:", np.mean(times_tok_input))
-        
         print("Decoding")
         #raw_output_text_list = [ self.tokenizer.decode(out, skip_special_tokens=True) for out in outputs ] 
         return outputs
+    
+    def reformat_input_into_lists(self, input_str):
+        """Extract rules and facts from the input string and
+        return them as seperated lists. The returning lists 
+        will be nested lists were the elements are either single
+        rules of facts.
 
-   
+        ARGS:
+            input_string "str": The input string with all rules and facts 
+
+        RETURN:
+            rules [list]: a list of all rules
+            facts [list]: a list of all facts
+        """
+        query, rules_facts_str = input_str.split('? ') # queryt är utan '?' så t.ex. 'old'
+        facts = re.findall(r'\b\w+1\b', rules_facts_str) # [apple1', 'banana1', 'orange1']
+        rules = re.findall(r'(\w+[^:]*:)', rules_facts_str) # ['helpful, fearful, happy:', 'good, bad, ugly:']
+
+        return query, rules, facts
+    
+
+
+    def update_input(self, decoded_inp, decoded_gen_step):
+
+        # Retrieve new fact from generated output
+        new_fact = decoded_gen_step.split(", ")[-1].replace(":", "1") # take after last ',' and replace ':' with '1'
+        
+        # Divide input into a string query, list of rules, and list of facts
+        query, rules, facts = self.reformat_input_into_lists(decoded_inp)
+        query = query + "?"
+
+        rules = [r for r in rules if r != decoded_gen_step]
+        facts.append(new_fact)
+        
+        # query + "?" + rules + facts
+
+        # Format in the following way: bored? helpful, fearful, happy: good, bad, ugly: apple1 banana1 orange1
+        updated_input = (query + ' ' + ' '.join(rules) + ' ' +  ' '.join(facts)).strip()
+
+        return updated_input
+
+decoded_inp = bored? helpful, fearful, happy: good, bad, ugly: apple1 banana1 orange1"
