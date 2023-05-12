@@ -259,9 +259,13 @@ class StepsGenerationModel(ProofGenerationModel):
             rules [list]: a list of all rules
             facts [list]: a list of all facts
         """
-        query, rules_facts_str = input_str.split('? ') # queryt är utan '?' så t.ex. 'old'
-        facts = re.findall(r'\b\w+-?\w*1\b', rules_facts_str) # [apple1', 'banana1', 'orange1']
-        rules = re.findall(r'(\w+[^:]*:)', rules_facts_str) # ['helpful, fearful, happy:', 'good, bad, ugly:']
+
+        if input_str[-1] == '?': # special case where there are no rules or facts in input
+            query, rules, facts = input_str[:-1], [], []
+        else:
+            query, rules_facts_str = input_str.split('?').strip() # queryt är utan '?' så t.ex. 'old'
+            facts = re.findall(r'\b\w+-?\w*1\b', rules_facts_str) # [apple1', 'banana1', 'orange1']
+            rules = re.findall(r'(\w+[^:]*:)', rules_facts_str) # ['helpful, fearful, happy:', 'good, bad, ugly:']
 
         return query, rules, facts
     
