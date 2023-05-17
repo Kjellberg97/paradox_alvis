@@ -4,7 +4,8 @@ import json
 import numpy as np
 import re
 import pickle
-from collections import Counter
+from collections import Counter, OrderedDict
+from decimal import Decimal
 
 
 
@@ -254,15 +255,15 @@ class Proof_Checker_Step(Proof_Checker):
 
             input_copy = (input_data_whole["input"]+ '.')[:-1]
 
-            no_hallucination, hall_step, updated_rules, updated_facts = self.check_hallucination(pred_proof, query, rules, facts)
+            no_hallucination, hall_step, updated_rules, updated_facts, type_of_error = self.check_hallucination(pred_proof, query, rules, facts)
 
             if no_hallucination:
                 if self.no_more_satisfiable_rules(updated_rules, updated_facts):
                     return True, "None"
                 else:
-                    return False, "Exist More Applicable Rules"
+                    return False, "Unexhausted Search Space"
             else:
-                return False, "Hallucination" 
+                return False, type_of_error
     
 
 
@@ -291,7 +292,7 @@ class Proof_Checker_Step(Proof_Checker):
         for i, pred_step in enumerate(pred_proof):
             if pred_step == "True" or pred_step == "False":
                 #print("All steps in ground_proof")
-                return True, pred_step, updated_rules, updated_facts
+                return True, pred_step, updated_rules, updated_facts, "None"
 
             # Find fact
             # Remove rule from input and add fact
@@ -304,14 +305,14 @@ class Proof_Checker_Step(Proof_Checker):
                 for req in conditions:
                     req = req + "1"
                     if not req in updated_facts:
-                        return False, pred_step, updated_rules, updated_facts
+                        return False, pred_step, updated_rules, updated_facts, "Inapplicable Rule"
 
                 # Check if the rule can be applied with the facts
                 updated_rules.remove(pred_step) 
                 updated_facts.append(new_fact)
             else: # KONTROLLERA SÅ ATT DEN HAR TAGIT BORT NÅNTING??
                 #print("Pred step not in input:", pred_step)
-                return False, pred_step, updated_rules, updated_facts
+                return False, pred_step, updated_rules, updated_facts, "Hallucination"
 
 
 
@@ -347,13 +348,13 @@ class Proof_Checker_Step(Proof_Checker):
 
             for req in conditions:
                 if not req + "1" in facts:
-                    return False, "Not Applicable Rule"
+                    return False, "Inapplicable Rule"
             facts.append(conclusion)
 
         if query in facts:
             return True, "None"
         else:
-            return False, "Query Not In Fact"
+            return False, "Spurious Match"
 
 
     
@@ -600,7 +601,6 @@ def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=True)
 # if __name__ == "__main__":
 #     main()
 
-
 def main():
     acc_by_rules = False
     rule_sampling = True
@@ -613,9 +613,12 @@ def main():
     proof_coherent = []
 
     latex_output = []
+    latex_errors = []
+    max_len_error_keys = 0
+    
     for model in models:
         if model == "LP":
-            checkpoint = "checkpoint-9000"
+            checkpoint = "checkpoint-9000" #9328 if VK local
             if not rule_sampling:
                 checkpoint = "checkpoint-8500"
         else:
@@ -650,13 +653,19 @@ def main():
 
             part_right, on_true_or_false = PC.all_consistency(preds_data, input_data, pred_bools, truth_bools, truth_data)
             print("\nTotal Fraction of consistent inference steps: ", part_right)
+            percent_right = round(Decimal(part_right * 100), 2)
             print(Counter(on_true_or_false))
 
             PC.save_errors(model, test_on, type_of_data)
 
-            proof_coherent.append({"Model":model, "Data":test_on, "Consistent proofs": part_right})
+            # proof_coherent.append({"Model":model, "Data":test_on, "Consistent proofs": part_right})
+            if model == "RP_10X": model_str =  "RP\_b"
+            else: model_str = model
+            if test_on == "RP_10X": test_on_str =  "RP\_b"
+            else: test_on_str = test_on
+
             acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
-            latex_output.append(str(f'{model} & {test_on} & {" & ".join(acc_str_list)} \\\\ \\hline'))
+            latex_output.append(str(f'{model_str} & {test_on_str} & {" & ".join(acc_str_list)} & {percent_right} \\\\ \\hline'))
 
             # PC.check_hallucination_batch(preds_data, input_data)        
 
@@ -669,11 +678,33 @@ def main():
 
             #PC.check_proof_for_errors(preds_data, input_data)
 
+            # Count errors and create latex table rows
+            counts = Counter(d["Type of consistency error"] for d in PC.errors)
+            counts.pop("None")
+            counts["Consistency Errors"] = sum(counts.values())
+            N = len(preds_data)
             
+            # Construct percent list
+            headers = ["Hallucination", "Inapplicable Rule", "Spurious Match", "Unexhausted Search Space", "Consistency Errors"]
+            percent = OrderedDict((key, str(round(Decimal((counts.get(key, 0) / N) * 100), 4))) for key in headers)
+            
+            # First row
+            if not latex_errors:
+                header_contents = " & ".join(f"{key}" for key in percent.keys())
+                header_row = str(f'Train & Test & {header_contents} \\\\ \\hline')
+                latex_errors.append(header_row)
+
+            # All other rows
+            table_row = " & ".join(percent.values())
+            latex_errors.append(str(f'{model_str} & {test_on_str} & {table_row} \\\\ \\hline'))
+
     
 
-    print("\nLATEX FORMATTING")
+    print("\nLATEX ACCURACIES FORMATTING")
     [ print(x) for x in latex_output ]
+
+    print("\nLATEX ERRORS FORMATTING")
+    [ print(x) for x in latex_errors ]
 
     for i in proof_coherent:
         print(i)
