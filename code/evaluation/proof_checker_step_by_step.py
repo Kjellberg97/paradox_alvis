@@ -136,7 +136,6 @@ class Proof_Checker_Step(Proof_Checker):
         acc_str_list.append(str(mean_acc))
         print("Mean accuracy across depths:", mean_acc)
         
-
         return acc_str_list
 
 
@@ -342,7 +341,7 @@ class Proof_Checker_Step(Proof_Checker):
         for step in pred_proof:
             if step == "True" or step == "False":
                 continue
-
+            
             conditions = step.split(", ")[:-1] # Take everything except conclusion
             conclusion = step.split(", ")[-1].replace(":", "1") # Take conclusion but change so ex. "happy1"
 
@@ -370,6 +369,8 @@ class Proof_Checker_Step(Proof_Checker):
 
         return consistent.count(True)/len(pred_data), on_true_or_false
 
+
+
     def find_cm_value(self, pred_label, truth_label):
         if pred_label == False:
             if truth_label == True:
@@ -385,6 +386,8 @@ class Proof_Checker_Step(Proof_Checker):
         
         else:
             return "No Label"
+
+
 
     def save_label_consistency_errors(self, index, pred_d, ground_proof, input_data, con, truth_label, pred_label, type_of_error):
         if not con or truth_label != pred_label:
@@ -449,12 +452,17 @@ class Proof_Checker_Step(Proof_Checker):
             rules [list]: a list of all rules
             facts [list]: a list of all facts
         """
-        query, rules_facts_str = input_str.split('? ') # queryt är utan '?' så t.ex. 'old'
-        facts = re.findall(r'\b\w+-?\w*1\b', rules_facts_str) # [apple1', 'banana1', 'orange1']
-        rules = re.findall(r'(\w+[^:]*:)', rules_facts_str) # ['helpful, fearful, happy:', 'good, bad, ugly:']
+
+        if input_str[-1] == '?': # special case where there are no rules or facts in input
+            query, rules, facts = input_str[:-1], [], []
+        else:
+            query, rules_facts_str = input_str.split('?') # queryt är utan '?' så t.ex. 'old'
+            query = query.strip()
+            rules_facts_str = rules_facts_str.strip()
+            facts = re.findall(r'\b\w+-?\w*1\b', rules_facts_str) # [apple1', 'banana1', 'orange1']
+            rules = re.findall(r'(\w+[^:]*:)', rules_facts_str) # ['helpful, fearful, happy:', 'good, bad, ugly:']
 
         return query, rules, facts
-
 
 
     def save_errors(self, model, test_on, type_of_data):
@@ -476,8 +484,8 @@ class Proof_Checker_Step(Proof_Checker):
 
 def reformat_files(checkpoint, model, test_on, type_of_data, rule_sampling=True):
 
-    path = "C:/Users/vikto/OneDrive/Dokument/kurser/MASTERTHESIS/Data/"
-    #path = "/mimer/NOBACKUP/groups/snic2022-22-744/"
+    #path = "C:/Users/vikto/OneDrive/Dokument/kurser/MASTERTHESIS/Data/"
+    path = "/mimer/NOBACKUP/groups/snic2022-22-744/"
 
     if rule_sampling:
         type_of_model = "/gen_step_by_step_rule_sampling/evaluation/"
@@ -598,8 +606,8 @@ def main():
     rule_sampling = True
     #checkpoint = "checkpoint-7500"
 
-    models = ["LP"]
-    test_ons = ["LP"]
+    models = ["LP", "RP", "RP_10X"]
+    test_ons = ["LP", "RP", "RP_10X"]
     type_of_data = "test"
 
     proof_coherent = []
@@ -607,7 +615,7 @@ def main():
     latex_output = []
     for model in models:
         if model == "LP":
-            checkpoint = "checkpoint-9328"
+            checkpoint = "checkpoint-9000"
             if not rule_sampling:
                 checkpoint = "checkpoint-8500"
         else:
@@ -646,9 +654,9 @@ def main():
 
             PC.save_errors(model, test_on, type_of_data)
 
-            # proof_coherent.append({"Model":model, "Data":test_on, "Consistent proofs": part_right})
-            # acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
-            # latex_output.append(str(f'{model} & {test_on} & {" & ".join(acc_str_list)} \\\\ \\hline'))
+            proof_coherent.append({"Model":model, "Data":test_on, "Consistent proofs": part_right})
+            acc_str_list = PC.divide_data_into_depths(input_data, preds_data, truth_data)
+            latex_output.append(str(f'{model} & {test_on} & {" & ".join(acc_str_list)} \\\\ \\hline'))
 
             # PC.check_hallucination_batch(preds_data, input_data)        
 
@@ -661,7 +669,7 @@ def main():
 
             #PC.check_proof_for_errors(preds_data, input_data)
 
-            break
+            
     
 
     print("\nLATEX FORMATTING")
