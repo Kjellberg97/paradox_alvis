@@ -97,6 +97,7 @@ class Proof_Checker_Step(Proof_Checker):
         RETURN:
             None
         """
+        self.errors = []
         data_depths = [[],[],[],[],[],[],[]] 
         preds_depths = [[],[],[],[],[],[],[]] 
         ground_truth_depths = [[],[],[],[],[],[],[]] 
@@ -368,6 +369,11 @@ class Proof_Checker_Step(Proof_Checker):
             on_true_or_false.append(type_of_error)
             self.save_label_consistency_errors(i, pred_d, ground_proofs[i], input_data[i], con, truth_labels[i], pred_labels[i], type_of_error )
 
+        assert len(consistent) == len(pred_data)
+        assert on_true_or_false.count("None") == consistent.count(True)
+        print("ConsCount", consistent.count(True))
+        print("LenPred", len(pred_data))
+        print("LenTBools", len(truth_labels))
         return consistent.count(True)/len(pred_data), on_true_or_false
 
 
@@ -679,14 +685,19 @@ def main():
             #PC.check_proof_for_errors(preds_data, input_data)
 
             # Count errors and create latex table rows
-            counts = Counter(d["Type of consistency error"] for d in PC.errors)
-            counts.pop("None")
+            PC_error_counts = Counter(d["Type of consistency error"] for d in PC.errors)
+            counts = Counter(on_true_or_false)
+            #print("Ontruefalse", counts)
+            #print("PC", PC_error_counts)
+
+            # Set N and delete None from counts dict
+            N = sum(counts.values())
+            del counts["None"]
             counts["Consistency Errors"] = sum(counts.values())
-            N = len(preds_data)
-            
+
             # Construct percent list
             headers = ["Hallucination", "Inapplicable Rule", "Spurious Match", "Unexhausted Search Space", "Consistency Errors"]
-            percent = OrderedDict((key, str(round(Decimal((counts.get(key, 0) / N) * 100), 4))) for key in headers)
+            percent = OrderedDict((key, str(round(Decimal((counts.get(key, 0) / N) * 100), 3))) for key in headers)
             
             # First row
             if not latex_errors:
@@ -697,6 +708,7 @@ def main():
             # All other rows
             table_row = " & ".join(percent.values())
             latex_errors.append(str(f'{model_str} & {test_on_str} & {table_row} \\\\ \\hline'))
+
 
     
 
