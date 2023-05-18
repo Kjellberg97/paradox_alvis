@@ -1,0 +1,1144 @@
+This job can be monitored from: https://scruffy.c3se.chalmers.se/d/alvis-job/alvis-job?var-jobid=1073654&from=1684414567000
+INFO:    underlay of /etc/localtime required more than 50 (94) bind mounts
+INFO:    underlay of /usr/bin/nvidia-smi required more than 50 (470) bind mounts
+INFO:    underlay of /usr/share/lmod/lmod required more than 50 (59) bind mounts
+
+
+
+##########################################################################
+TRAIN DIST: LP
+TEST DIST: LP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step_rule_sampling/evaluation/checkpoint-9000_LP_LP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[14220     2]
+ [    1 13777]]
+
+Accuracy: 100.0
+F1-score: 100.0
+ConsCount 27987
+LenPred 28000
+LenTBools 28000
+
+Total Fraction of consistent inference steps:  0.9995357142857143
+Counter({'None': 27987, 'Hallucination': 10, 'Spurious Match': 2, 'Unexhausted Search Space': 1})
+
+DEPTH:  0
+NR. SAMPLES:  3945
+TP:  (28.66, 0, 113)
+FP:  (16.5, 10, 23)
+TN:  (17.5, 0, 95)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 414.  1558.5]
+Accuracy: 99.9
+ConsCount 3943
+LenPred 3945
+LenTBools 3945
+Fractions of consistent chains of inference steps: 0.9994930291508238
+
+DEPTH:  1
+NR. SAMPLES:  4054
+TP:  (37.09, 3, 112)
+FP:  (0, inf, 0)
+TN:  (17.79, 1, 89)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 456. 1571.]
+Accuracy: 100.0
+ConsCount 4053
+LenPred 4054
+LenTBools 4054
+Fractions of consistent chains of inference steps: 0.9997533300444006
+
+DEPTH:  2
+NR. SAMPLES:  3973
+TP:  (43.78, 4, 118)
+FP:  (0, inf, 0)
+TN:  (19.19, 2, 72)
+FN:  (117.0, 117, 117)
+Rates: TP, FP, TN, FN
+ [ 796.  1190.5]
+Accuracy: 100.0
+ConsCount 3971
+LenPred 3973
+LenTBools 3973
+Fractions of consistent chains of inference steps: 0.9994966020639315
+
+DEPTH:  3
+NR. SAMPLES:  4042
+TP:  (47.82, 6, 116)
+FP:  (0, inf, 0)
+TN:  (22.27, 4, 86)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1128.  893.]
+Accuracy: 100.0
+ConsCount 4041
+LenPred 4042
+LenTBools 4042
+Fractions of consistent chains of inference steps: 0.999752597723899
+
+DEPTH:  4
+NR. SAMPLES:  4007
+TP:  (51.66, 8, 118)
+FP:  (0, inf, 0)
+TN:  (29.21, 5, 95)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1284.5  719. ]
+Accuracy: 100.0
+ConsCount 4005
+LenPred 4007
+LenTBools 4007
+Fractions of consistent chains of inference steps: 0.999500873471425
+
+DEPTH:  5
+NR. SAMPLES:  3959
+TP:  (53.49, 12, 118)
+FP:  (0, inf, 0)
+TN:  (36.01, 9, 93)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1437.5  542. ]
+Accuracy: 100.0
+ConsCount 3957
+LenPred 3959
+LenTBools 3959
+Fractions of consistent chains of inference steps: 0.9994948219247285
+
+DEPTH:  6
+NR. SAMPLES:  4020
+TP:  (55.15, 13, 118)
+FP:  (0, inf, 0)
+TN:  (42.8, 12, 103)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1594.5  415.5]
+Accuracy: 100.0
+ConsCount 4017
+LenPred 4020
+LenTBools 4020
+Fractions of consistent chains of inference steps: 0.9992537313432835
+Mean accuracy across depths: 100.0
+
+
+
+##########################################################################
+TRAIN DIST: LP
+TEST DIST: RP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step_rule_sampling/evaluation/checkpoint-9000_LP_RP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[13260    28]
+ [    6 14706]]
+
+Accuracy: 99.9
+F1-score: 99.9
+ConsCount 27808
+LenPred 28000
+LenTBools 28000
+
+Total Fraction of consistent inference steps:  0.9931428571428571
+Counter({'None': 27808, 'Hallucination': 185, 'Unexhausted Search Space': 6, 'Spurious Match': 1})
+
+DEPTH:  0
+NR. SAMPLES:  3947
+TP:  (35.15, 0, 120)
+FP:  (2.0, 2, 2)
+TN:  (15.41, 0, 105)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 403.5 1570. ]
+Accuracy: 100.0
+ConsCount 3945
+LenPred 3947
+LenTBools 3947
+Fractions of consistent chains of inference steps: 0.9994932860400304
+
+DEPTH:  1
+NR. SAMPLES:  4018
+TP:  (45.12, 1, 120)
+FP:  (27.0, 27, 27)
+TN:  (18.54, 1, 78)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 493.5 1515.5]
+Accuracy: 100.0
+ConsCount 4013
+LenPred 4018
+LenTBools 4018
+Fractions of consistent chains of inference steps: 0.998755599800896
+
+DEPTH:  2
+NR. SAMPLES:  3986
+TP:  (48.54, 2, 120)
+FP:  (0, inf, 0)
+TN:  (21.09, 2, 94)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 693. 1300.]
+Accuracy: 100.0
+ConsCount 3971
+LenPred 3986
+LenTBools 3986
+Fractions of consistent chains of inference steps: 0.9962368289011541
+
+DEPTH:  3
+NR. SAMPLES:  4065
+TP:  (52.98, 4, 120)
+FP:  (52.0, 52, 52)
+TN:  (25.08, 4, 100)
+FN:  (117.5, 116, 119)
+Rates: TP, FP, TN, FN
+ [ 939.5 1093. ]
+Accuracy: 99.9
+ConsCount 4049
+LenPred 4065
+LenTBools 4065
+Fractions of consistent chains of inference steps: 0.9960639606396064
+
+DEPTH:  4
+NR. SAMPLES:  4073
+TP:  (56.32, 6, 118)
+FP:  (32.33, 23, 39)
+TN:  (29.09, 5, 107)
+FN:  (120.0, 120, 120)
+Rates: TP, FP, TN, FN
+ [1220.   816.5]
+Accuracy: 99.9
+ConsCount 4044
+LenPred 4073
+LenTBools 4073
+Fractions of consistent chains of inference steps: 0.9928799410753744
+
+DEPTH:  5
+NR. SAMPLES:  3918
+TP:  (60.39, 10, 119)
+FP:  (49.67, 46, 56)
+TN:  (34.94, 8, 100)
+FN:  (117.5, 116, 119)
+Rates: TP, FP, TN, FN
+ [1374.5  584.5]
+Accuracy: 99.9
+ConsCount 3881
+LenPred 3918
+LenTBools 3918
+Fractions of consistent chains of inference steps: 0.99055640632976
+
+DEPTH:  6
+NR. SAMPLES:  3993
+TP:  (63.82, 9, 118)
+FP:  (54.89, 29, 88)
+TN:  (42.11, 11, 110)
+FN:  (115.0, 115, 115)
+Rates: TP, FP, TN, FN
+ [1509.   487.5]
+Accuracy: 99.5
+ConsCount 3905
+LenPred 3993
+LenTBools 3993
+Fractions of consistent chains of inference steps: 0.977961432506887
+Mean accuracy across depths: 99.9
+
+
+
+##########################################################################
+TRAIN DIST: LP
+TEST DIST: RP_10X
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/LP/gen_step_by_step_rule_sampling/evaluation/checkpoint-9000_LP_RP_10X_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[    0     0     0]
+ [    1 13237    44]
+ [    0     6 14712]]
+
+Accuracy: 99.8
+F1-score: 99.8
+ConsCount 27751
+LenPred 28000
+LenTBools 28000
+
+Total Fraction of consistent inference steps:  0.9911071428571429
+Counter({'None': 27751, 'Hallucination': 243, 'Unexhausted Search Space': 6})
+
+DEPTH:  0
+NR. SAMPLES:  4267
+TP:  (30.38, 0, 118)
+FP:  (0, inf, 0)
+TN:  (22.06, 0, 118)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 349.5 1784. ]
+Accuracy: 100.0
+ConsCount 4265
+LenPred 4267
+LenTBools 4267
+Fractions of consistent chains of inference steps: 0.999531286618233
+
+DEPTH:  1
+NR. SAMPLES:  3979
+TP:  (39.37, 1, 120)
+FP:  (0, inf, 0)
+TN:  (22.64, 1, 115)
+FN:  (119.0, 119, 119)
+Rates: TP, FP, TN, FN
+ [ 448.5 1541. ]
+Accuracy: 100.0
+ConsCount 3967
+LenPred 3979
+LenTBools 3979
+Fractions of consistent chains of inference steps: 0.9969841668760995
+
+DEPTH:  2
+NR. SAMPLES:  3946
+TP:  (43.25, 2, 120)
+FP:  (0, inf, 0)
+TN:  (26.86, 2, 113)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [3.33e-01 4.21e+02 8.94e+02]
+Accuracy: 100.0
+ConsCount 3939
+LenPred 3946
+LenTBools 3946
+Fractions of consistent chains of inference steps: 0.998226051697922
+
+DEPTH:  3
+NR. SAMPLES:  3721
+TP:  (47.75, 3, 120)
+FP:  (81.67, 63, 100)
+TN:  (29.35, 3, 107)
+FN:  (113.0, 113, 113)
+Rates: TP, FP, TN, FN
+ [ 850.  1010.5]
+Accuracy: 99.9
+ConsCount 3699
+LenPred 3721
+LenTBools 3721
+Fractions of consistent chains of inference steps: 0.9940876108572965
+
+DEPTH:  4
+NR. SAMPLES:  3761
+TP:  (51.04, 4, 120)
+FP:  (79.5, 77, 82)
+TN:  (34.28, 4, 114)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1123.   757.5]
+Accuracy: 99.9
+ConsCount 3730
+LenPred 3761
+LenTBools 3761
+Fractions of consistent chains of inference steps: 0.9917575113001861
+
+DEPTH:  5
+NR. SAMPLES:  3886
+TP:  (55.35, 8, 118)
+FP:  (62.38, 48, 76)
+TN:  (41.21, 8, 111)
+FN:  (115.0, 112, 118)
+Rates: TP, FP, TN, FN
+ [1402.  541.]
+Accuracy: 99.7
+ConsCount 3824
+LenPred 3886
+LenTBools 3886
+Fractions of consistent chains of inference steps: 0.9840452907874421
+
+DEPTH:  6
+NR. SAMPLES:  4440
+TP:  (61.41, 14, 119)
+FP:  (58.26, 36, 85)
+TN:  (49.78, 13, 111)
+FN:  (117.5, 116, 119)
+Rates: TP, FP, TN, FN
+ [1817.  403.]
+Accuracy: 99.3
+ConsCount 4327
+LenPred 4440
+LenTBools 4440
+Fractions of consistent chains of inference steps: 0.9745495495495495
+Mean accuracy across depths: 99.8
+
+
+
+##########################################################################
+TRAIN DIST: RP
+TEST DIST: LP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_LP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[14221     1]
+ [    0 13778]]
+
+Accuracy: 100.0
+F1-score: 100.0
+ConsCount 27993
+LenPred 28000
+LenTBools 28000
+
+Total Fraction of consistent inference steps:  0.99975
+Counter({'None': 27993, 'Hallucination': 5, 'Inapplicable Rule': 1, 'Spurious Match': 1})
+
+DEPTH:  0
+NR. SAMPLES:  3945
+TP:  (28.66, 0, 113)
+FP:  (23.0, 23, 23)
+TN:  (17.49, 0, 95)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 414.5 1558. ]
+Accuracy: 100.0
+ConsCount 3944
+LenPred 3945
+LenTBools 3945
+Fractions of consistent chains of inference steps: 0.9997465145754119
+
+DEPTH:  1
+NR. SAMPLES:  4054
+TP:  (37.09, 3, 112)
+FP:  (0, inf, 0)
+TN:  (17.79, 1, 89)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 456. 1571.]
+Accuracy: 100.0
+ConsCount 4050
+LenPred 4054
+LenTBools 4054
+Fractions of consistent chains of inference steps: 0.9990133201776024
+
+DEPTH:  2
+NR. SAMPLES:  3973
+TP:  (43.81, 4, 118)
+FP:  (0, inf, 0)
+TN:  (19.19, 2, 72)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 795.5 1191. ]
+Accuracy: 100.0
+ConsCount 3972
+LenPred 3973
+LenTBools 3973
+Fractions of consistent chains of inference steps: 0.9997483010319658
+
+DEPTH:  3
+NR. SAMPLES:  4042
+TP:  (47.82, 6, 116)
+FP:  (0, inf, 0)
+TN:  (22.27, 4, 86)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1128.  893.]
+Accuracy: 100.0
+ConsCount 4042
+LenPred 4042
+LenTBools 4042
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  4
+NR. SAMPLES:  4007
+TP:  (51.66, 8, 118)
+FP:  (0, inf, 0)
+TN:  (29.21, 5, 95)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1284.5  719. ]
+Accuracy: 100.0
+ConsCount 4007
+LenPred 4007
+LenTBools 4007
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  5
+NR. SAMPLES:  3959
+TP:  (53.49, 12, 118)
+FP:  (0, inf, 0)
+TN:  (36.01, 9, 93)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1437.5  542. ]
+Accuracy: 100.0
+ConsCount 3958
+LenPred 3959
+LenTBools 3959
+Fractions of consistent chains of inference steps: 0.9997474109623642
+
+DEPTH:  6
+NR. SAMPLES:  4020
+TP:  (55.15, 13, 118)
+FP:  (0, inf, 0)
+TN:  (42.8, 12, 103)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1594.5  415.5]
+Accuracy: 100.0
+ConsCount 4020
+LenPred 4020
+LenTBools 4020
+Fractions of consistent chains of inference steps: 1.0
+Mean accuracy across depths: 100.0
+
+
+
+##########################################################################
+TRAIN DIST: RP
+TEST DIST: RP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_RP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[13288     0]
+ [    1 14711]]
+
+Accuracy: 100.0
+F1-score: 100.0
+ConsCount 27992
+LenPred 28000
+LenTBools 28000
+
+Total Fraction of consistent inference steps:  0.9997142857142857
+Counter({'None': 27992, 'Inapplicable Rule': 5, 'Hallucination': 2, 'Unexhausted Search Space': 1})
+
+DEPTH:  0
+NR. SAMPLES:  3947
+TP:  (35.15, 0, 120)
+FP:  (0, inf, 0)
+TN:  (15.4, 0, 105)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 404.  1569.5]
+Accuracy: 100.0
+ConsCount 3947
+LenPred 3947
+LenTBools 3947
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  1
+NR. SAMPLES:  4018
+TP:  (45.12, 1, 120)
+FP:  (0, inf, 0)
+TN:  (18.55, 1, 78)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 494. 1515.]
+Accuracy: 100.0
+ConsCount 4018
+LenPred 4018
+LenTBools 4018
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  2
+NR. SAMPLES:  3986
+TP:  (48.54, 2, 120)
+FP:  (0, inf, 0)
+TN:  (21.09, 2, 94)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 693. 1300.]
+Accuracy: 100.0
+ConsCount 3986
+LenPred 3986
+LenTBools 3986
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  3
+NR. SAMPLES:  4065
+TP:  (53.04, 4, 120)
+FP:  (0, inf, 0)
+TN:  (25.09, 4, 100)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 939.  1093.5]
+Accuracy: 100.0
+ConsCount 4063
+LenPred 4065
+LenTBools 4065
+Fractions of consistent chains of inference steps: 0.9995079950799508
+
+DEPTH:  4
+NR. SAMPLES:  4073
+TP:  (56.35, 6, 120)
+FP:  (0, inf, 0)
+TN:  (29.1, 5, 107)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1221.   815.5]
+Accuracy: 100.0
+ConsCount 4071
+LenPred 4073
+LenTBools 4073
+Fractions of consistent chains of inference steps: 0.9995089614534741
+
+DEPTH:  5
+NR. SAMPLES:  3918
+TP:  (60.49, 10, 119)
+FP:  (0, inf, 0)
+TN:  (34.96, 8, 100)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1375.  584.]
+Accuracy: 100.0
+ConsCount 3915
+LenPred 3918
+LenTBools 3918
+Fractions of consistent chains of inference steps: 0.9992343032159265
+
+DEPTH:  6
+NR. SAMPLES:  3993
+TP:  (63.82, 9, 118)
+FP:  (0, inf, 0)
+TN:  (42.19, 11, 110)
+FN:  (115.0, 115, 115)
+Rates: TP, FP, TN, FN
+ [1518.5  478. ]
+Accuracy: 100.0
+ConsCount 3992
+LenPred 3993
+LenTBools 3993
+Fractions of consistent chains of inference steps: 0.9997495617330328
+Mean accuracy across depths: 100.0
+
+
+
+##########################################################################
+TRAIN DIST: RP
+TEST DIST: RP_10X
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_RP_10X_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[13282     0]
+ [    0 14718]]
+
+Accuracy: 100.0
+F1-score: 100.0
+ConsCount 27989
+LenPred 28000
+LenTBools 28000
+
+Total Fraction of consistent inference steps:  0.9996071428571428
+Counter({'None': 27989, 'Hallucination': 6, 'Inapplicable Rule': 4, 'Spurious Match': 1})
+
+DEPTH:  0
+NR. SAMPLES:  4267
+TP:  (30.38, 0, 118)
+FP:  (0, inf, 0)
+TN:  (22.06, 0, 118)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 349.5 1784. ]
+Accuracy: 100.0
+ConsCount 4267
+LenPred 4267
+LenTBools 4267
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  1
+NR. SAMPLES:  3979
+TP:  (39.39, 1, 120)
+FP:  (0, inf, 0)
+TN:  (22.64, 1, 115)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 448.  1541.5]
+Accuracy: 100.0
+ConsCount 3976
+LenPred 3979
+LenTBools 3979
+Fractions of consistent chains of inference steps: 0.9992460417190249
+
+DEPTH:  2
+NR. SAMPLES:  3946
+TP:  (43.25, 2, 120)
+FP:  (0, inf, 0)
+TN:  (26.87, 2, 113)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 632. 1341.]
+Accuracy: 100.0
+ConsCount 3944
+LenPred 3946
+LenTBools 3946
+Fractions of consistent chains of inference steps: 0.9994931576279777
+
+DEPTH:  3
+NR. SAMPLES:  3721
+TP:  (47.78, 3, 120)
+FP:  (0, inf, 0)
+TN:  (29.45, 3, 107)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 851.  1009.5]
+Accuracy: 100.0
+ConsCount 3718
+LenPred 3721
+LenTBools 3721
+Fractions of consistent chains of inference steps: 0.999193765116904
+
+DEPTH:  4
+NR. SAMPLES:  3761
+TP:  (51.04, 4, 120)
+FP:  (0, inf, 0)
+TN:  (34.32, 4, 114)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1124.   756.5]
+Accuracy: 100.0
+ConsCount 3760
+LenPred 3761
+LenTBools 3761
+Fractions of consistent chains of inference steps: 0.999734113267748
+
+DEPTH:  5
+NR. SAMPLES:  3886
+TP:  (55.46, 8, 118)
+FP:  (0, inf, 0)
+TN:  (41.27, 8, 111)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1405.  538.]
+Accuracy: 100.0
+ConsCount 3886
+LenPred 3886
+LenTBools 3886
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  6
+NR. SAMPLES:  4440
+TP:  (61.56, 14, 119)
+FP:  (0, inf, 0)
+TN:  (49.85, 13, 111)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1831.5  388.5]
+Accuracy: 100.0
+ConsCount 4438
+LenPred 4440
+LenTBools 4440
+Fractions of consistent chains of inference steps: 0.9995495495495496
+Mean accuracy across depths: 100.0
+
+
+
+##########################################################################
+TRAIN DIST: RP_10X
+TEST DIST: LP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_10X_LP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/LP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[14221     1]
+ [    1 13777]]
+
+Accuracy: 100.0
+F1-score: 100.0
+ConsCount 27995
+LenPred 28000
+LenTBools 28000
+
+Total Fraction of consistent inference steps:  0.9998214285714285
+Counter({'None': 27995, 'Hallucination': 3, 'Unexhausted Search Space': 1, 'Spurious Match': 1})
+
+DEPTH:  0
+NR. SAMPLES:  3945
+TP:  (28.66, 0, 113)
+FP:  (23.0, 23, 23)
+TN:  (17.49, 0, 95)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 414.5 1558. ]
+Accuracy: 100.0
+ConsCount 3944
+LenPred 3945
+LenTBools 3945
+Fractions of consistent chains of inference steps: 0.9997465145754119
+
+DEPTH:  1
+NR. SAMPLES:  4054
+TP:  (37.09, 3, 112)
+FP:  (0, inf, 0)
+TN:  (17.79, 1, 89)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 456. 1571.]
+Accuracy: 100.0
+ConsCount 4054
+LenPred 4054
+LenTBools 4054
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  2
+NR. SAMPLES:  3973
+TP:  (43.78, 4, 118)
+FP:  (0, inf, 0)
+TN:  (19.19, 2, 72)
+FN:  (117.0, 117, 117)
+Rates: TP, FP, TN, FN
+ [ 796.  1190.5]
+Accuracy: 100.0
+ConsCount 3971
+LenPred 3973
+LenTBools 3973
+Fractions of consistent chains of inference steps: 0.9994966020639315
+
+DEPTH:  3
+NR. SAMPLES:  4042
+TP:  (47.82, 6, 116)
+FP:  (0, inf, 0)
+TN:  (22.27, 4, 86)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1128.  893.]
+Accuracy: 100.0
+ConsCount 4042
+LenPred 4042
+LenTBools 4042
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  4
+NR. SAMPLES:  4007
+TP:  (51.66, 8, 118)
+FP:  (0, inf, 0)
+TN:  (29.21, 5, 95)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1284.5  719. ]
+Accuracy: 100.0
+ConsCount 4007
+LenPred 4007
+LenTBools 4007
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  5
+NR. SAMPLES:  3959
+TP:  (53.49, 12, 118)
+FP:  (0, inf, 0)
+TN:  (36.01, 9, 93)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1437.5  542. ]
+Accuracy: 100.0
+ConsCount 3957
+LenPred 3959
+LenTBools 3959
+Fractions of consistent chains of inference steps: 0.9994948219247285
+
+DEPTH:  6
+NR. SAMPLES:  4020
+TP:  (55.15, 13, 118)
+FP:  (0, inf, 0)
+TN:  (42.8, 12, 103)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1594.5  415.5]
+Accuracy: 100.0
+ConsCount 4020
+LenPred 4020
+LenTBools 4020
+Fractions of consistent chains of inference steps: 1.0
+Mean accuracy across depths: 100.0
+
+
+
+##########################################################################
+TRAIN DIST: RP_10X
+TEST DIST: RP
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_10X_RP_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[13286     2]
+ [    3 14709]]
+
+Accuracy: 100.0
+F1-score: 100.0
+ConsCount 27983
+LenPred 28000
+LenTBools 28000
+
+Total Fraction of consistent inference steps:  0.9993928571428572
+Counter({'None': 27983, 'Hallucination': 9, 'Unexhausted Search Space': 3, 'Inapplicable Rule': 3, 'Spurious Match': 2})
+
+DEPTH:  0
+NR. SAMPLES:  3947
+TP:  (35.15, 0, 120)
+FP:  (2.0, 2, 2)
+TN:  (15.43, 0, 105)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 403.  1570.5]
+Accuracy: 99.9
+ConsCount 3945
+LenPred 3947
+LenTBools 3947
+Fractions of consistent chains of inference steps: 0.9994932860400304
+
+DEPTH:  1
+NR. SAMPLES:  4018
+TP:  (45.12, 1, 120)
+FP:  (0, inf, 0)
+TN:  (18.55, 1, 78)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 494. 1515.]
+Accuracy: 100.0
+ConsCount 4017
+LenPred 4018
+LenTBools 4018
+Fractions of consistent chains of inference steps: 0.9997511199601792
+
+DEPTH:  2
+NR. SAMPLES:  3986
+TP:  (48.54, 2, 120)
+FP:  (0, inf, 0)
+TN:  (21.09, 2, 94)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 693. 1300.]
+Accuracy: 100.0
+ConsCount 3985
+LenPred 3986
+LenTBools 3986
+Fractions of consistent chains of inference steps: 0.9997491219267436
+
+DEPTH:  3
+NR. SAMPLES:  4065
+TP:  (53.04, 4, 120)
+FP:  (0, inf, 0)
+TN:  (25.09, 4, 100)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 939.  1093.5]
+Accuracy: 100.0
+ConsCount 4060
+LenPred 4065
+LenTBools 4065
+Fractions of consistent chains of inference steps: 0.998769987699877
+
+DEPTH:  4
+NR. SAMPLES:  4073
+TP:  (56.32, 6, 118)
+FP:  (0, inf, 0)
+TN:  (29.1, 5, 107)
+FN:  (120.0, 120, 120)
+Rates: TP, FP, TN, FN
+ [1221.5  815. ]
+Accuracy: 100.0
+ConsCount 4072
+LenPred 4073
+LenTBools 4073
+Fractions of consistent chains of inference steps: 0.999754480726737
+
+DEPTH:  5
+NR. SAMPLES:  3918
+TP:  (60.44, 10, 119)
+FP:  (0, inf, 0)
+TN:  (34.96, 8, 100)
+FN:  (116.0, 116, 116)
+Rates: TP, FP, TN, FN
+ [1375.5  583.5]
+Accuracy: 100.0
+ConsCount 3913
+LenPred 3918
+LenTBools 3918
+Fractions of consistent chains of inference steps: 0.9987238386932108
+
+DEPTH:  6
+NR. SAMPLES:  3993
+TP:  (63.82, 9, 118)
+FP:  (0, inf, 0)
+TN:  (42.19, 11, 110)
+FN:  (115.0, 115, 115)
+Rates: TP, FP, TN, FN
+ [1518.5  478. ]
+Accuracy: 100.0
+ConsCount 3991
+LenPred 3993
+LenTBools 3993
+Fractions of consistent chains of inference steps: 0.9994991234660656
+Mean accuracy across depths: 100.0
+
+
+
+##########################################################################
+TRAIN DIST: RP_10X
+TEST DIST: RP_10X
+
+INPUT DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt
+
+PRED DATA:  /mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/gen_step_by_step_rule_sampling/evaluation/checkpoint-7500_RP_10X_RP_10X_TEST_output.txt
+
+GROUND TRUTH:  /mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test_step_labels.txt
+
+Confusion matrix:
+ [[13282     0]
+ [    1 14717]]
+
+Accuracy: 100.0
+F1-score: 100.0
+ConsCount 27989
+LenPred 28000
+LenTBools 28000
+
+Total Fraction of consistent inference steps:  0.9996071428571428
+Counter({'None': 27989, 'Hallucination': 7, 'Inapplicable Rule': 2, 'Unexhausted Search Space': 1, 'Spurious Match': 1})
+
+DEPTH:  0
+NR. SAMPLES:  4267
+TP:  (30.38, 0, 118)
+FP:  (0, inf, 0)
+TN:  (22.06, 0, 118)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 349.5 1784. ]
+Accuracy: 100.0
+ConsCount 4267
+LenPred 4267
+LenTBools 4267
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  1
+NR. SAMPLES:  3979
+TP:  (39.39, 1, 120)
+FP:  (0, inf, 0)
+TN:  (22.64, 1, 115)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 448.  1541.5]
+Accuracy: 100.0
+ConsCount 3974
+LenPred 3979
+LenTBools 3979
+Fractions of consistent chains of inference steps: 0.9987434028650415
+
+DEPTH:  2
+NR. SAMPLES:  3946
+TP:  (43.25, 2, 120)
+FP:  (0, inf, 0)
+TN:  (26.87, 2, 113)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 632. 1341.]
+Accuracy: 100.0
+ConsCount 3945
+LenPred 3946
+LenTBools 3946
+Fractions of consistent chains of inference steps: 0.9997465788139889
+
+DEPTH:  3
+NR. SAMPLES:  3721
+TP:  (47.78, 3, 120)
+FP:  (0, inf, 0)
+TN:  (29.45, 3, 107)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [ 851.  1009.5]
+Accuracy: 100.0
+ConsCount 3721
+LenPred 3721
+LenTBools 3721
+Fractions of consistent chains of inference steps: 1.0
+
+DEPTH:  4
+NR. SAMPLES:  3761
+TP:  (51.04, 4, 120)
+FP:  (0, inf, 0)
+TN:  (34.32, 4, 114)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1124.   756.5]
+Accuracy: 100.0
+ConsCount 3759
+LenPred 3761
+LenTBools 3761
+Fractions of consistent chains of inference steps: 0.9994682265354958
+
+DEPTH:  5
+NR. SAMPLES:  3886
+TP:  (55.4, 8, 118)
+FP:  (0, inf, 0)
+TN:  (41.27, 8, 111)
+FN:  (118.0, 118, 118)
+Rates: TP, FP, TN, FN
+ [1405.5  537.5]
+Accuracy: 100.0
+ConsCount 3885
+LenPred 3886
+LenTBools 3886
+Fractions of consistent chains of inference steps: 0.9997426659804426
+
+DEPTH:  6
+NR. SAMPLES:  4440
+TP:  (61.56, 14, 119)
+FP:  (0, inf, 0)
+TN:  (49.85, 13, 111)
+FN:  (0, inf, 0)
+Rates: TP, FP, TN, FN
+ [1831.5  388.5]
+Accuracy: 100.0
+ConsCount 4438
+LenPred 4440
+LenTBools 4440
+Fractions of consistent chains of inference steps: 0.9995495495495496
+Mean accuracy across depths: 100.0
+
+LATEX ACCURACIES FORMATTING
+LP & LP & 99.9 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 99.95 \\ \hline
+LP & RP & 100.0 & 100.0 & 100.0 & 99.9 & 99.9 & 99.9 & 99.5 & 99.9 & 99.31 \\ \hline
+LP & RP\_b & 100.0 & 100.0 & 100.0 & 99.9 & 99.9 & 99.7 & 99.3 & 99.8 & 99.11 \\ \hline
+RP & LP & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 99.98 \\ \hline
+RP & RP & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 99.97 \\ \hline
+RP & RP\_b & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 99.96 \\ \hline
+RP\_b & LP & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 99.98 \\ \hline
+RP\_b & RP & 99.9 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 99.94 \\ \hline
+RP\_b & RP\_b & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 100.0 & 99.96 \\ \hline
+
+LATEX ERRORS FORMATTING
+Train & Test & Hallucination & Inapplicable Rule & Spurious Match & Unexhausted Search Space & Consistency Errors \\ \hline
+LP & LP & 0.036 & 0.000 & 0.007 & 0.004 & 0.046 \\ \hline
+LP & RP & 0.661 & 0.000 & 0.004 & 0.021 & 0.686 \\ \hline
+LP & RP\_b & 0.868 & 0.000 & 0.000 & 0.021 & 0.889 \\ \hline
+RP & LP & 0.018 & 0.004 & 0.004 & 0.000 & 0.025 \\ \hline
+RP & RP & 0.007 & 0.018 & 0.000 & 0.004 & 0.029 \\ \hline
+RP & RP\_b & 0.021 & 0.014 & 0.004 & 0.000 & 0.039 \\ \hline
+RP\_b & LP & 0.011 & 0.000 & 0.004 & 0.004 & 0.018 \\ \hline
+RP\_b & RP & 0.032 & 0.011 & 0.007 & 0.011 & 0.061 \\ \hline
+RP\_b & RP\_b & 0.025 & 0.007 & 0.004 & 0.004 & 0.039 \\ \hline
