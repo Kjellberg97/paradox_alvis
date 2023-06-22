@@ -30,7 +30,6 @@ def coding():
 def coding_nouns():
     nouns = read_words("code/word_coding/vocab_nouns.txt")
     nouns = [ w.replace("\n", "") for w in words]
-
     for c in nouns:
         yield c
 
