@@ -53,13 +53,16 @@ def coding_of_input(coded_dict, input_file):
     data = read_file_lines(input_file)
     all_coded_input =[]
 
+    new_data=[]
+
     for d in data:
         input_text = d["input"]
         coded_input = replace_all(input_text, coded_dict)
         
-        all_coded_input.append(coded_input)
-        
-    save_coding(all_coded_input, save_file_name= "coded_prop_examples_all_cleaned_test.txt")
+        d["input"] = coded_input
+        #all_coded_input.append(coded_input)
+        new_data.append(d)
+    save_coding(new_data, save_file_name= "coded_prop_examples_all_cleaned_test.txt")
 
         
 if __name__ == "__main__":
