@@ -186,6 +186,7 @@ class StepsGenerationModel(ProofGenerationModel):
         constrained beam-search decoding by calling constrained_beam_search(), if constraints!=None or force_words_ids!=None
         """
 
+
         data = self.load_all_data(data_path, generate_on)
 
         if generate_on == "test":
@@ -207,6 +208,8 @@ class StepsGenerationModel(ProofGenerationModel):
         
         for i in tqdm(range(1, inputs.shape[0]+1)):
             inp = inputs[i-1:i]
+
+
             gen_steps = []
             # Generate batch and add to list
             ite = 0
@@ -263,7 +266,9 @@ class StepsGenerationModel(ProofGenerationModel):
         if input_str[-1] == '?': # special case where there are no rules or facts in input
             query, rules, facts = input_str[:-1], [], []
         else:
-            query, rules_facts_str = input_str.split('?').strip() # queryt är utan '?' så t.ex. 'old'
+            query, rules_facts_str = input_str.split('?') # queryt är utan '?' så t.ex. 'old'
+            query = query.strip()
+            rules_facts_str = rules_facts_str.strip()
             facts = re.findall(r'\b\w+-?\w*1\b', rules_facts_str) # [apple1', 'banana1', 'orange1']
             rules = re.findall(r'(\w+[^:]*:)', rules_facts_str) # ['helpful, fearful, happy:', 'good, bad, ugly:']
 
