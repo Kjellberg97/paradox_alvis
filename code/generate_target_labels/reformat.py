@@ -76,38 +76,10 @@ def run_reformat(input_path, output_path, reformat_function):
 
 
 #THIS IS TO REFORMAT THE TARGET LABELS 
-#input_path_labels =  "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_brackets_test_labels.txt"
-#output_path_labels = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test_labels.txt"
 
-# For target labels
-#run_reformat(input_path_labels, output_path_labels, reformat_labels)
+input_path_inputs = ["/<path>/<to>/DATA/RP/prop_examples_all_test.txt"]
 
-
-
-# input_path_inputs =  ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt",
-#                       "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_train.txt",
-#                       "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_val.txt"]
-
-# output_path_inputs = ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_test.txt",
-#                       "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_train.txt",
-#                       "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP/prop_examples_all_cleaned_val.txt"]
-
-
-# input_path_inputs = ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt",
-#                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_train.txt",
-#                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_val.txt"]
-
-# output_path_inputs = ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt",
-#                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_train.txt",
-#                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_val.txt"]
-
-input_path_inputs = ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_test.txt",
-                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_train.txt",
-                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_val.txt"]
-
-output_path_inputs = ["/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_test.txt",
-                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_train.txt",
-                      "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/small1000_cleaned_reduced_val.txt"]
+output_path_inputs = ["/<path>/<to>/DATA/RP/prop_examples_all_test.txt"]
 # For input
 
 for inp, outp in zip(input_path_inputs, output_path_inputs):

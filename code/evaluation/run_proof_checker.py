@@ -1,4 +1,5 @@
-# Runs the proof checker
+"""Runs the proof checker for the whole-proof generated proofs. 
+""" 
 from proof_checker import Proof_Checker
 import json
 import numpy as np
@@ -14,7 +15,8 @@ def read_file_lines(file_path):
 
 def reformat_files(checkpoint, model, test_on, type_of_data):
 
-    path = "/mimer/NOBACKUP/groups/snic2022-22-744/"
+    path = "C:/Users/vikto/OneDrive/Dokument/kurser/MASTERTHESIS/Data/"
+    #path = "/mimer/NOBACKUP/groups/snic2022-22-744/"
 
     type_of_model = "/pretrained_BART/evaluation/" 
 
@@ -44,14 +46,12 @@ def reformat_files(checkpoint, model, test_on, type_of_data):
 
 def main():
     acc_by_rules = True
-    #checkpoint = "checkpoint-????"
 
-    models = ["LP", "RP", "RP_10X"]
-    #marks = ["square", "triangle", "circle"]
-    marks = ["line", "line", "line"]
+    models = ["LP"]
+    marks = ["line"]
 
-    test_ons = ["LP", "RP", "RP_10X"]
-    colors = ["blue", "red", "brown"]
+    test_ons = ["LP"]
+    colors = ["blue"]
     
     type_of_data = "test"
 
@@ -83,13 +83,7 @@ def main():
                 acc_rule_list = PC.divide_data_into_rules(input_data, preds_data, truth_data)
                 latex_output_rules.append(f'\\addplot[color={color}, mark={mark}] coordinates' + ' {')
                 latex_output_rules.append(" ".join(acc_rule_list) + '\n};')
-                # print("Saving accuracies with pickle.")
-                # pkl_name = "accs_by_rules/ex2_rule_accs_" + model + "_" + test_on + "_" + type_of_data + ".pkl"
-                # with open(pkl_name, "wb") as f:
-                #     pickle.dump(acc_list, f)
-                
 
-            #PC.check_proof_for_errors(preds_data, input_data)
     print("\nLATEX FORMATTING RULES")
     [ print(x) for x in latex_output_rules ]
 

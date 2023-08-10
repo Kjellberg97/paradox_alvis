@@ -209,7 +209,6 @@ class StepsGenerationModel(ProofGenerationModel):
         for i in tqdm(range(1, inputs.shape[0]+1)):
             inp = inputs[i-1:i]
 
-
             gen_steps = []
             # Generate batch and add to list
             ite = 0
@@ -249,6 +248,8 @@ class StepsGenerationModel(ProofGenerationModel):
         #raw_output_text_list = [ self.tokenizer.decode(out, skip_special_tokens=True) for out in outputs ] 
         return outputs
     
+
+
     def reformat_input_into_lists(self, input_str):
         """Extract rules and facts from the input string and
         return them as seperated lists. The returning lists 

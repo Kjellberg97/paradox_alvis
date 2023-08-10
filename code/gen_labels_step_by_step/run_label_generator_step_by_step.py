@@ -56,11 +56,12 @@ def main(home_path, dic_name, file_name, random=False):
 if __name__ == "__main__":
 
     # Define the path to the data
-    path = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA"
+    path = "/<path>/<to>/DATA"
 
-    paths_to_train = [["EXAMPLE", "small1000_cleaned_reduced_test"],
-                      ["EXAMPLE", "small1000_cleaned_reduced_train"],
-                      ["EXAMPLE", "small1000_cleaned_reduced_val"]]
+    # Each data 
+    paths_to_train = [["RP", "prop_examples_all_train"],
+                      ["RP", "prop_examples_all_test"],
+                      ["RP", "prop_examples_all_val"]]
 
     for p in paths_to_train:
         

@@ -45,8 +45,8 @@ from finetune_BART_step_by_step import StepsGenerationModel
 
 def model_data_checkpoint_names(list_of_models, list_of_data, rule_sampling=True ):
 
-    model_path_name = "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/"
-    data_path_name = "/mimer/NOBACKUP/groups/snic2022-22-744/DATA/"
+    model_path_name = "/MODELS/"
+    data_path_name = "/DATA/"
     args_list = []
     model_name = "gen_step_by_step"
     model_name += "_rule_sampling" if rule_sampling else ""
@@ -61,7 +61,9 @@ def model_data_checkpoint_names(list_of_models, list_of_data, rule_sampling=True
 
             if model == "LP":
                 args["Checkpoint"] = "checkpoint-9000"
-            elif model == "RP" or model == "RP_10X":
+            elif model == "RP":
+                args["Checkpoint"] = "checkpoint-7500"
+            elif model == "RP_10X":
                 args["Checkpoint"] = "checkpoint-7500"
             else:
                 raise ValueError
@@ -83,7 +85,12 @@ if __name__ == "__main__":
     args_list = model_data_checkpoint_names(list_of_models, list_of_data)
 
     for args in args_list:
-        print(args)
+        print()
+        for a in args:
+            print(a, args[a])
+        
+        print()
+
 
         SGM = StepsGenerationModel(args["Model path"], args["Model name"], args["Checkpoint"])
         print("Running inference...")

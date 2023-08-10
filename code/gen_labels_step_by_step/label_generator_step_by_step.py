@@ -1,3 +1,7 @@
+"""This file is used to generate proofs as the training data for the models 
+with the help of a forward-chaining algorihm. 
+"""
+
 import random
 random.seed(10) 
 

@@ -205,8 +205,7 @@ class Proof_Checker():
         print("FN: ", self.len_rules(input_dicts, index_FN))
 
         indexes = [index_TP, index_FP, index_TN, index_FN]
-        
-
+         
         self.save_proofs(pred_proof, ground_truth, indexes, input_dicts)
                 
 
