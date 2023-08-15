@@ -24,7 +24,7 @@ class Proof_Checker_Step(Proof_Checker):
  
     def read_file_lines(self, file_path):
         """
-        ARG: path (str) in the form of /mimer/NOBACKUP/groups/snic2022-22-744/DATA/EXAMPLE/prop_examples_train.txt
+        ARG: path (str) in the form of <path_to>/DATA/EXAMPLE/prop_examples_train.txt
         RETURN: list of dicts or strings dependring on the formmating of the file
         """
         with open(file_path) as f:

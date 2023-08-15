@@ -77,9 +77,28 @@ def run_reformat(input_path, output_path, reformat_function):
 
 #THIS IS TO REFORMAT THE TARGET LABELS 
 
-input_path_inputs = ["/<path>/<to>/DATA/RP/prop_examples_all_test.txt"]
-
-output_path_inputs = ["/<path>/<to>/DATA/RP/prop_examples_all_test.txt"]
+input_path_inputs = [
+        "DATA/LP/prop_examples_all_cleaned_train.txt", 
+        "DATA/LP/prop_examples_all_cleaned_test.txt", 
+        "DATA/LP/prop_examples_all_cleaned_val.txt",
+        "DATA/RP/prop_examples_all_cleaned_train.txt", 
+        "DATA/RP/prop_examples_all_cleaned_test.txt", 
+        "DATA/RP/prop_examples_all_cleaned_val.txt",
+        "DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_train.txt", 
+        "DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt", 
+        "DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_val.txt"
+        ]
+output_path_inputs = [
+        "DATA/LP/prop_examples_all_cleaned_train.txt", 
+        "DATA/LP/prop_examples_all_cleaned_test.txt", 
+        "DATA/LP/prop_examples_all_cleaned_val.txt",
+        "DATA/RP/prop_examples_all_cleaned_train.txt", 
+        "DATA/RP/prop_examples_all_cleaned_test.txt", 
+        "DATA/RP/prop_examples_all_cleaned_val.txt",
+        "DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_train.txt", 
+        "DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_test.txt", 
+        "DATA/RP_10X/prop_examples_all_balanced_rulenum_cleaned_val.txt"
+        ]
 # For input
 
 for inp, outp in zip(input_path_inputs, output_path_inputs):

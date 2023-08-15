@@ -56,12 +56,18 @@ def main(home_path, dic_name, file_name, random=False):
 if __name__ == "__main__":
 
     # Define the path to the data
-    path = "/<path>/<to>/DATA"
+    path = "DATA"
 
     # Each data 
-    paths_to_train = [["RP", "prop_examples_all_train"],
-                      ["RP", "prop_examples_all_test"],
-                      ["RP", "prop_examples_all_val"]]
+    paths_to_train = [["RP", "prop_examples_all_cleaned_train"],
+                  ["RP", "prop_examples_all_cleaned_test"],
+                  ["RP", "prop_examples_all_cleaned_val"],
+                  ["LP", "prop_examples_all_cleaned_train"],
+                  ["LP", "prop_examples_all_cleaned_test"],
+                  ["LP", "prop_examples_all_cleaned_val"],
+                  ["RP_10X", "prop_examples_all_balanced_rulenum_cleaned_test.txt"],
+                  ["RP_10X", "prop_examples_all_balanced_rulenum_cleaned_train.txt"],
+                  ["RP_10X", "prop_examples_all_balanced_rulenum_cleaned_val.txt"]]
 
     for p in paths_to_train:
         
