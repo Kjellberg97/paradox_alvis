@@ -1,0 +1,168 @@
+{
+  "best_metric": 0.11371059715747833,
+  "best_model_checkpoint": "/mimer/NOBACKUP/groups/snic2022-22-744/MODELS/RP_10X/pretrained_BART/OUTPUT/checkpoint-5250",
+  "epoch": 5.0,
+  "global_step": 8750,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 0.29,
+      "learning_rate": 1.930760233918129e-05,
+      "loss": 0.6232,
+      "step": 500
+    },
+    {
+      "epoch": 0.57,
+      "learning_rate": 1.8142690058479532e-05,
+      "loss": 0.1044,
+      "step": 1000
+    },
+    {
+      "epoch": 0.86,
+      "learning_rate": 1.697309941520468e-05,
+      "loss": 0.0644,
+      "step": 1500
+    },
+    {
+      "epoch": 1.0,
+      "eval_accuracy": 0.8768571428571429,
+      "eval_f1": 0.8657843518878942,
+      "eval_loss": 0.1338316947221756,
+      "eval_runtime": 4400.3155,
+      "eval_samples_per_second": 6.363,
+      "eval_steps_per_second": 0.199,
+      "step": 1750
+    },
+    {
+      "epoch": 1.14,
+      "learning_rate": 1.5803508771929826e-05,
+      "loss": 0.0468,
+      "step": 2000
+    },
+    {
+      "epoch": 1.43,
+      "learning_rate": 1.4633918128654972e-05,
+      "loss": 0.0373,
+      "step": 2500
+    },
+    {
+      "epoch": 1.71,
+      "learning_rate": 1.3464327485380118e-05,
+      "loss": 0.0319,
+      "step": 3000
+    },
+    {
+      "epoch": 2.0,
+      "learning_rate": 1.2294736842105263e-05,
+      "loss": 0.028,
+      "step": 3500
+    },
+    {
+      "epoch": 2.0,
+      "eval_accuracy": 0.8997857142857143,
+      "eval_f1": 0.8932998707126018,
+      "eval_loss": 0.13147686421871185,
+      "eval_runtime": 5055.5532,
+      "eval_samples_per_second": 5.538,
+      "eval_steps_per_second": 0.173,
+      "step": 3500
+    },
+    {
+      "epoch": 2.29,
+      "learning_rate": 1.112514619883041e-05,
+      "loss": 0.0233,
+      "step": 4000
+    },
+    {
+      "epoch": 2.57,
+      "learning_rate": 9.955555555555556e-06,
+      "loss": 0.0218,
+      "step": 4500
+    },
+    {
+      "epoch": 2.86,
+      "learning_rate": 8.785964912280702e-06,
+      "loss": 0.0205,
+      "step": 5000
+    },
+    {
+      "epoch": 3.0,
+      "eval_accuracy": 0.9112142857142858,
+      "eval_f1": 0.9066676678179907,
+      "eval_loss": 0.11371059715747833,
+      "eval_runtime": 4707.9056,
+      "eval_samples_per_second": 5.947,
+      "eval_steps_per_second": 0.186,
+      "step": 5250
+    },
+    {
+      "epoch": 3.14,
+      "learning_rate": 7.616374269005848e-06,
+      "loss": 0.0173,
+      "step": 5500
+    },
+    {
+      "epoch": 3.43,
+      "learning_rate": 6.4467836257309946e-06,
+      "loss": 0.016,
+      "step": 6000
+    },
+    {
+      "epoch": 3.71,
+      "learning_rate": 5.277192982456141e-06,
+      "loss": 0.0147,
+      "step": 6500
+    },
+    {
+      "epoch": 4.0,
+      "learning_rate": 4.107602339181287e-06,
+      "loss": 0.0133,
+      "step": 7000
+    },
+    {
+      "epoch": 4.0,
+      "eval_accuracy": 0.9255714285714286,
+      "eval_f1": 0.9228776552438753,
+      "eval_loss": 0.1274409294128418,
+      "eval_runtime": 4649.8974,
+      "eval_samples_per_second": 6.022,
+      "eval_steps_per_second": 0.188,
+      "step": 7000
+    },
+    {
+      "epoch": 4.29,
+      "learning_rate": 2.938011695906433e-06,
+      "loss": 0.0124,
+      "step": 7500
+    },
+    {
+      "epoch": 4.57,
+      "learning_rate": 1.768421052631579e-06,
+      "loss": 0.0122,
+      "step": 8000
+    },
+    {
+      "epoch": 4.86,
+      "learning_rate": 5.988304093567252e-07,
+      "loss": 0.0109,
+      "step": 8500
+    },
+    {
+      "epoch": 5.0,
+      "eval_accuracy": 0.9257857142857143,
+      "eval_f1": 0.9231110782209724,
+      "eval_loss": 0.152118518948555,
+      "eval_runtime": 4956.1886,
+      "eval_samples_per_second": 5.65,
+      "eval_steps_per_second": 0.177,
+      "step": 8750
+    }
+  ],
+  "max_steps": 8750,
+  "num_train_epochs": 5,
+  "total_flos": 1.7678419230381834e+18,
+  "trial_name": null,
+  "trial_params": null
+}
